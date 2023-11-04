@@ -10,6 +10,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 * **Integrante 2** - [Fabiola Romero](https://github.com/Fabivrp)
 * **Integrante 3** - [Hernán Fernández Brando](https://github.com/hernan-fb)
 * **Integrante 4** - [Franco de León](https://github.com/francodl20)
+* **Integrante 5** - [Gerónimo Fanti](https://github.com/Gero-F)
 
 Corrector: **{Corrector}**
 
