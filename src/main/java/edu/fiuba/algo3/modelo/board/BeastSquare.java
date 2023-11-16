@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.board;
+import edu.fiuba.algo3.modelo.Player;
 
-import edu.fiuba.algo3.modelo.Gladiator;
 
 public class BeastSquare implements Square {
     
@@ -8,8 +8,8 @@ public class BeastSquare implements Square {
         
     }
 
-    public void play(Gladiator gladiator) {
-        gladiator.fightAgainstWildBeast();
+    public void play(Player player) {
+        player.fightAgainstWildBeast();
         return;
     }
 }

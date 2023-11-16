@@ -10,4 +10,8 @@ public class Helpless implements Equipment {
     public Energy protectFromtWildBeast() {
         return new Energy(-20);
     }
+
+    public boolean arriveToPompeya() {
+        return false;
+    }
 }

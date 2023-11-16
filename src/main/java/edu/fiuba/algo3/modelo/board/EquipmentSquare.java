@@ -1,5 +1,5 @@
 package edu.fiuba.algo3.modelo.board;
-import edu.fiuba.algo3.modelo.Gladiator;
+import edu.fiuba.algo3.modelo.Player;
 
 public class EquipmentSquare implements Square {
     
@@ -7,8 +7,8 @@ public class EquipmentSquare implements Square {
         
     }
 
-    public void play(Gladiator gladiator) {
-        gladiator.enhanceArmour();
+    public void play(Player player) {
+        player.enhanceArmour();
         return;
     }
 }

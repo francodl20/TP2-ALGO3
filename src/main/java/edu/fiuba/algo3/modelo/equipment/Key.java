@@ -9,4 +9,8 @@ public class Key implements Equipment {
     public Energy protectFromtWildBeast() {
         return  new Energy(0); 
     }
+
+    public boolean arriveToPompeya() {
+        return true;
+    }
 }

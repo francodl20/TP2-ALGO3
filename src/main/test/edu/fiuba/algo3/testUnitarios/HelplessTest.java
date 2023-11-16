@@ -2,9 +2,11 @@ package edu.fiuba.algo3.testUnitarios;
 
 import edu.fiuba.algo3.modelo.equipment.Equipment;
 import edu.fiuba.algo3.modelo.equipment.Helpless;
+import edu.fiuba.algo3.modelo.attributes.Energy;
+
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class HelplessTest {
     public static final int ENERGY_LOST_BEING_HELPLESS = -20;
@@ -14,12 +16,13 @@ public class HelplessTest {
     public void Case01ByImprovingAHelplessGladiatorYouObtainAHelmet() {
         //Arrange
         Helpless helpless = new Helpless();
+        Energy expectedEnergy = new Energy(ENERGY_LOST_WITH_HELMET);
 
         //Act
         Equipment aux = helpless.enhance();
 
         //Assert
-        assertTrue(aux.protectFromtWildBeast().getEnergy() == ENERGY_LOST_WITH_HELMET);
+        assertEquals(aux.protectFromtWildBeast(), expectedEnergy);
     }
 
     @Test
@@ -27,9 +30,9 @@ public class HelplessTest {
         
         //Arrange
         Helpless helpless = new Helpless();
-
+        Energy expectedEnergy = new Energy(ENERGY_LOST_BEING_HELPLESS);
         //Assert
-        assertTrue(helpless.protectFromtWildBeast().getEnergy() == ENERGY_LOST_BEING_HELPLESS);
+        assertEquals(helpless.protectFromtWildBeast(),expectedEnergy);
     }
 
 }

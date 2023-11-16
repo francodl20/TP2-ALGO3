@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.board;
+import edu.fiuba.algo3.modelo.Player;
 
-import edu.fiuba.algo3.modelo.Gladiator;
 
 public class InjurySquare implements Square {
     
@@ -8,8 +8,8 @@ public class InjurySquare implements Square {
         
     }
 
-    public void play(Gladiator gladiator) {
-        gladiator.getInjured();
+    public void play(Player player) {
+        player.getInjured();
         return;
     }
 }

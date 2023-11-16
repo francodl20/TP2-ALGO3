@@ -10,4 +10,8 @@ public class SwordAndShield implements Equipment {
     public Energy protectFromtWildBeast() {
         return new Energy(-2);
     }
+
+    public boolean arriveToPompeya() {
+        return false;
+    }
 }

@@ -5,13 +5,13 @@ import edu.fiuba.algo3.modelo.attributes.Position;
 import edu.fiuba.algo3.modelo.attributes.seniority.Seniority;
 import edu.fiuba.algo3.modelo.equipment.Equipment;
 
-public class Gladiator {
+public class Gladiator implements Player {
     private Energy energy;
     private Seniority seniority;
     private Position position;
     private Equipment equipment;
     private int turns;
-
+    
     public Gladiator(Seniority seniority, Energy energy, Position position, Equipment equipment) {
         this.energy = energy;
         this.seniority = seniority;
@@ -20,29 +20,55 @@ public class Gladiator {
         this.turns = 0;
     }
 
-    public void fightAgainstWildBeast() {
-        this.energy = this.energy.add(this.equipment.protectFromtWildBeast());
-    }
+
+    //Methods related to the squares
+        public void eat(){
+
+        }
+
+        public void enhanceArmour(){
+                this.equipment.enhance();
+        }
+
+        public void enjoyBacchanalia(Integer howManyDrinks){
+            this.energy = this.energy.add(new Energy(howManyDrinks*(-4)));
+        }
+
+        public void getInjured(){
+            this.energy.getInjured();
+        }
+
+        public void fightAgainstWildBeast() {
+            this.energy = this.energy.add(this.equipment.protectFromtWildBeast());
+        }
+
+        public void arriveToPompeya() {
+
+        }
+    //
 
     public Energy getEnergy() {
         return energy;
     }
 
-    public void eat(){
-
+    public Position getCurrentPosition(){
+         return this.position;
     }
 
-    public void getInjured(){
-        
+    public Position moveFromCurrentPosition(Position howManySquaresToMove) {
+        position = position.add(howManySquaresToMove);
+        return position;
     }
 
-    public void enhanceArmour(){
-        this.equipment.enhance();
+    public boolean playTurn(Integer squaresToMove){
+        if (!energy.thereIsEnoughEnergyToPlay()) {
+            energy.getRecovered();
+            return false;
+        }
+        moveFromCurrentPosition(new Position(squaresToMove));
+        //Hacer lo que sea que debe hacer para jugar
+
+        return true;
     }
-
-    public void enjoyBacchanalia(){
-
-    }
-
 }
 

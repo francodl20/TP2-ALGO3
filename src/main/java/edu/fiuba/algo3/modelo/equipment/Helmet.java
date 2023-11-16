@@ -10,4 +10,8 @@ public class Helmet implements Equipment {
     public Energy protectFromtWildBeast() {
         return new Energy(-15);
     }
+
+    public boolean arriveToPompeya() {
+        return false;
+    }
 }
