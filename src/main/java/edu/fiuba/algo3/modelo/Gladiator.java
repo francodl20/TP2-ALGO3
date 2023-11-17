@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.attributes.seniority.Seniority;
 import edu.fiuba.algo3.modelo.equipment.Equipment;
 
 public class Gladiator implements Player {
+    public static final Integer ENERGY_RECOVERED_AFTER_MEAL = 10;
     private Energy energy;
     private Seniority seniority;
     private Position position;
@@ -23,11 +24,12 @@ public class Gladiator implements Player {
 
     //Methods related to the squares
         public void eat(){
+            this.energy = this.energy.add(new Energy(ENERGY_RECOVERED_AFTER_MEAL));
 
         }
 
         public void enhanceArmour(){
-                this.equipment.enhance();
+            this.equipment = this.equipment.enhance();
         }
 
         public void enjoyBacchanalia(Integer howManyDrinks){

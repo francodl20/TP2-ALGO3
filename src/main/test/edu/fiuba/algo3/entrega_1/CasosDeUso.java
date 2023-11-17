@@ -11,6 +11,7 @@ import edu.fiuba.algo3.modelo.attributes.seniority.Novice;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
@@ -105,12 +106,12 @@ public class CasosDeUso {
         //Arrange
         Gladiator gladiator = new Gladiator(new Novice(), new Energy(0), new Position(), new Helpless());
         Energy expectedEnergy = new Energy(ENERGY_LOST_WITH_HELMET);
-
+        
         //Act
         gladiator.enhanceArmour();
         gladiator.fightAgainstWildBeast();
-
-         //Assert
+        
+        //Assert
         assertEquals(gladiator.getEnergy(),expectedEnergy); 
     }
 
