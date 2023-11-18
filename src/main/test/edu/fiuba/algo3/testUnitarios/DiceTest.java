@@ -8,7 +8,7 @@ public class DiceTest {
 
     @Test
     public void diceReturnANumberBetween1And6() {
-        int diceRoll = Dice.rollDice();
+        int diceRoll = Dice.roll();
 
         assertTrue(diceRoll >= 1 && diceRoll <= 6);
     }
@@ -16,7 +16,7 @@ public class DiceTest {
     @Test
     public void multipleDiceRollsReturnNumbersBetween1And6() {
         for (int i = 0; i < 100; i++) {
-            int diceRoll = Dice.rollDice();
+            int diceRoll = Dice.roll();
             assertTrue(diceRoll >= 1 && diceRoll <= 6);
         }
     }

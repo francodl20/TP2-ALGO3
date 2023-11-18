@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Dice {
 
-    public static int rollDice() {
+    public static Integer roll() {
         
         Random dice = new Random();
         return dice.nextInt(6) + 1;

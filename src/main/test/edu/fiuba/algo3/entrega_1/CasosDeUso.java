@@ -19,13 +19,14 @@ import java.util.ArrayList;
 public class CasosDeUso {
     
     public static final Integer ENERGY_RECOVERED_AFTER_MEAL = 10;
-    public static final int ENERGY_LOST_WITH_SWORD_AND_SHIELD = -2;
-    public static final int ENERGY_LOST_WITH_HELMET = -15;
-    public static final int ENERGY_LOST_WITH_KEY = 0;
+    public static final Integer ENERGY_AFTER_FIGHTING_WITH_SWORD_AND_SHIELD_FROM_ZERO_ENERGY = -2;
+    public static final Integer ENERGY_AFTER_FIGHTING_WITH_HELMET_FROM_ZERO_ENERGY = -15;
+    public static final Integer ENERGY_AFTER_FIGHTING_WITH_KEY_FROM_ZERO_ENERGY = 0;
 
-
-    @Test   //Convertir en caso de uso real cuando hayaa tablero
-    public void CasoDeUso1() {
+    //Caso de uso 01
+    @Test   
+    //todo: preguntar si hay que usar tablero o no hace falta
+    public void gladiatorBeginsWithInitialEnergyAndEquipment() {
         //Arrange
 
         // Board boardMock = new BoardMock(test);
@@ -42,42 +43,41 @@ public class CasosDeUso {
         //game.play();
         
         //Assert
-            //Check de initial energy
+        //Check de initial energy
         assertEquals(gladiator1.getEnergy(), initialEnergy); 
         //todo: gladiator1.getEnergy() o game.getGladiator(1).getEnergy()?
         assertEquals(gladiator2.getEnergy(), initialEnergy);
 
-            //Energy after fighting the beast corresponds with the equipment
+        //Energy after fighting the beast corresponds with the equipment
         gladiator1.fightAgainstWildBeast();
         assertEquals(gladiator1.getEnergy(), zeroEnergy); 
 
     }
 
-    @Test   //Convertir en caso de uso real cuando haya tablero
-    public void CasoDeUso02() {
+    //Caso de Uso 02
+    @Test   
+    //todo: preguntar si hay que usar tablero o no hace falta
+    public void gladiatorIsAbleToMove() {
         //Arrange
         Gladiator gladiator = new Gladiator(new Novice(), new Energy(20), new Position(), new Helpless());
-      //  Position initialPosition = new Position();
-        Position finalPosition = new Position();
-        int squaresToMove = 5;
-        
-        finalPosition.update(squaresToMove);
-
+        //  Position initialPosition = new Position();
+        Integer squaresToMove = 5;
+        Position increment = new Position(squaresToMove);
+        Position finalPosition = new Position(2*squaresToMove);
         //Act
-        gladiator.playTurn(squaresToMove);
+        gladiator.moveFromCurrentPosition(increment);
+        gladiator.moveFromCurrentPosition(increment);
 
         //Assert
         assertEquals(finalPosition, gladiator.getCurrentPosition()); 
-
- 
     }
 
-    //Caso de uso 3
+    //Caso de uso 03
     @Test
-    public void gladiatorWithoutEnergyCantPlayTurn() {
+    public void gladiatorWithoutEnergyCannotPlayTurn() {
         //Arrange
         Gladiator gladiator = new Gladiator(new Novice(), new Energy(0), new Position(0), new Helpless());
-        int squaresToMove = 1;
+        Integer squaresToMove = 1;
 
         //Act
         boolean playedTurn = gladiator.playTurn(squaresToMove);
@@ -86,9 +86,9 @@ public class CasosDeUso {
         assertFalse(playedTurn); 
     }
 
-    //Caso de uso 4
+    //Caso de uso 04
     @Test
-    public void afterEatingAGladiatorRecievesTenPiecesOfEnergy() {
+    public void eatingIncreasesEnergyInTenUnits() {
         //Arrange
         Gladiator gladiator = new Gladiator(new Novice(), new Energy(0), new Position(), new Helpless());
         Energy expectedEnergy = new Energy(ENERGY_RECOVERED_AFTER_MEAL);
@@ -100,12 +100,12 @@ public class CasosDeUso {
         assertEquals(gladiator.getEnergy(),expectedEnergy); 
     }
 
-     //Caso de uso 5
+     //Caso de uso 05
     @Test
-    public void AfterImprovingEquipmentForTheFirstTimeGladiatorGetsAHelmet() {
+    public void improvingEquipmentForTheFirstTimeGivesAHelmet() {
         //Arrange
         Gladiator gladiator = new Gladiator(new Novice(), new Energy(0), new Position(), new Helpless());
-        Energy expectedEnergy = new Energy(ENERGY_LOST_WITH_HELMET);
+        Energy expectedEnergy = new Energy(ENERGY_AFTER_FIGHTING_WITH_HELMET_FROM_ZERO_ENERGY);
         
         //Act
         gladiator.enhanceArmour();
@@ -115,12 +115,12 @@ public class CasosDeUso {
         assertEquals(gladiator.getEnergy(),expectedEnergy); 
     }
 
-       //Caso de uso 6
+       //Caso de uso 06
     @Test
-    public void AfterImprovingEquipmentForTheThirdTimeGladiatorGetsSwordAndShield() {
+    public void improvingEquipmentForTheThirdTimeGivesASwordAndShield() {
         //Arrange
         Gladiator gladiator = new Gladiator(new Novice(), new Energy(0), new Position(), new Helpless());
-        Energy expectedEnergy = new Energy(ENERGY_LOST_WITH_SWORD_AND_SHIELD);
+        Energy expectedEnergy = new Energy(ENERGY_AFTER_FIGHTING_WITH_SWORD_AND_SHIELD_FROM_ZERO_ENERGY);
 
         //Act
         gladiator.enhanceArmour();
@@ -132,12 +132,12 @@ public class CasosDeUso {
         assertEquals(gladiator.getEnergy(),expectedEnergy); 
     }
 
-      //Caso de uso 7
+      //Caso de uso 07
       @Test
-    public void AfterFightingWithAWildBeastWearingAHelmetTheLostEnergyIsCorrect() {
+    public void fightingWithAWildBeastWearingAHelmet() {
         //Arrange
         Gladiator gladiator = new Gladiator(new Novice(), new Energy(0), new Position(), new Helmet());
-        Energy expectedEnergy = new Energy(ENERGY_LOST_WITH_HELMET);
+        Energy expectedEnergy = new Energy(ENERGY_AFTER_FIGHTING_WITH_HELMET_FROM_ZERO_ENERGY);
 
         //Act
         gladiator.fightAgainstWildBeast();
@@ -146,7 +146,7 @@ public class CasosDeUso {
         assertEquals(gladiator.getEnergy(),expectedEnergy); 
     }
 
-    //Caso de uso 8
+    //Caso de uso 08
     @Test
     public void afterEightTurnsNoviceBecomesSeniorAndHisEnergyIncreasesInTheNextMove(){
         //Arrange
@@ -169,13 +169,14 @@ public class CasosDeUso {
         gladiator.playTurn(1);
         finalEnergy = gladiator.getEnergy();   //si la energia se agrega cuando empieza el otro turno
                                               //hay que corregir lo q se pierde de energia en el ultimo turno
+                                              //todo: no se pierde energía en ningún momento. Chequear esta pregunta.
         //Assert
         assertEquals(finalEnergy, expectedEnergy);
     }
 
-    //Caso de uso 9
+    //Caso de uso 09
     @Test
-    public void CreoQueDependeDelMapa() { //No sabe no contesta
+    public void arrivingToTheGoalWithoutTheKeyMovesBackToTheMiddleOfTheBoard() { //todo:
         
         //Arrange
        
@@ -187,10 +188,10 @@ public class CasosDeUso {
 
     //Caso de uso 10
     @Test
-    public void GladiatorDoesNotReceiveDamageFromTheBeastWhileWearingAllTheEquipment() {
+    public void gladiatorDoesNotReceiveDamageFromTheBeastWhenWearingTheKey() {
         //Arrange
         Gladiator gladiator = new Gladiator(new Novice(), new Energy(0), new Position(), new Key());
-        Energy expectedEnergy = new Energy(ENERGY_LOST_WITH_KEY);
+        Energy expectedEnergy = new Energy(ENERGY_AFTER_FIGHTING_WITH_KEY_FROM_ZERO_ENERGY);
 
         //Act
         gladiator.fightAgainstWildBeast();
@@ -202,10 +203,10 @@ public class CasosDeUso {
 
     //Caso de uso 11
     @Test
-    public void WhenGladiatorHasTheKeyAndRecievesAPrizeHisProtectionFeaturesStayTheSame(){
+    public void receivingAPrizeWithTheKeyDoesNotChangeTheEquipment(){
         //Arrange
         Gladiator gladiator = new Gladiator(new Novice(), new Energy(0), new Position(), new Key());
-        Energy expectedEnergy = new Energy(ENERGY_LOST_WITH_KEY);
+        Energy expectedEnergy = new Energy(ENERGY_AFTER_FIGHTING_WITH_KEY_FROM_ZERO_ENERGY);
 
         //Act
         gladiator.enhanceArmour();
@@ -217,7 +218,7 @@ public class CasosDeUso {
 
     //Caso de uso 12
     @Test
-    public void WhenThirtyTurnsPassAndNoGladiatorCrossesTheFinishLineTheGameEnds(){//No sabe no contesta pt2
+    public void afterThirtyTurnsTheGameEnds(){//todo:
         
         //Arrange
        
