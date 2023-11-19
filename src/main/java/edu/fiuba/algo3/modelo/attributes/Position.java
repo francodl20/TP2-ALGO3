@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.attributes;
 
-public class Position {
+public class Position implements Comparable<Position>{
     Integer currentPosition;
 
     public Position() {
@@ -27,5 +27,9 @@ public class Position {
             return false;
         }
         return Integer.compare(currentPosition, ((Position) onePosition).getCurrentPosition())==0;
+    }
+    @Override
+    public int compareTo(Position onePosition) {
+        return this.currentPosition.compareTo(onePosition.getCurrentPosition());
     }
 }

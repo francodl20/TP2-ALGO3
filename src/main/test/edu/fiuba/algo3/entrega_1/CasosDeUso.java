@@ -62,11 +62,10 @@ public class CasosDeUso {
         Gladiator gladiator = new Gladiator(new Novice(), new Energy(20), new Position(), new Helpless());
         //  Position initialPosition = new Position();
         Integer squaresToMove = 5;
-        Position increment = new Position(squaresToMove);
         Position finalPosition = new Position(2*squaresToMove);
         //Act
-        gladiator.moveFromCurrentPosition(increment);
-        gladiator.moveFromCurrentPosition(increment);
+        gladiator.playTurn(squaresToMove);
+        gladiator.playTurn(squaresToMove);
 
         //Assert
         assertEquals(finalPosition, gladiator.getCurrentPosition()); 

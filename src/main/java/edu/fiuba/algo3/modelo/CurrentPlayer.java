@@ -17,10 +17,14 @@ public class CurrentPlayer {
     ListIterator<Gladiator> turnManager;
     Integer turns;
     Board gameBoard;
-    public CurrentPlayer() {
-        gladiators = new LinkedList<Gladiator>();
+    boolean gameFinished;
+    
+    public CurrentPlayer(List<Gladiator> listOfGladiators, Board board) {
+        gladiators = listOfGladiators;
         turnManager = gladiators.listIterator();
+        gameBoard = board;
         turns = 0;
+        gameFinished = false;
     }
 
     public CurrentPlayer(Integer amountOfPlayers, Board board) {
@@ -35,11 +39,14 @@ public class CurrentPlayer {
         turnManager = gladiators.listIterator();
         gameBoard = board;
         turns = 0;
+        gameFinished = false;
     }
 
     public void play() {
+        if (gameFinished) return;
         if (turns >= 30) {
-            finishGame();
+            finishGame(false);
+            return;
         }
         if (! turnManager.hasNext() ) {
             turnManager = gladiators.listIterator();
@@ -49,11 +56,14 @@ public class CurrentPlayer {
         if (currentPlayer.playTurn(Dice.roll())) {
             gameBoard.playAtCurrentPositionWith(currentPlayer);
         }
+        if (gameBoard.finishPlay(currentPlayer) ) {
+            finishGame(true);
+        }
     }
 
-    public void finishGame() {
-
+    public void finishGame(boolean winners) {
+        System.out.println("Game finished");
+        System.out.println(winners?"...and this is the winner!":"...No winners! :(");
+        gameFinished = true;
     }
-
-
 }

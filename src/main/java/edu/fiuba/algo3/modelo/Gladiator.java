@@ -11,14 +11,14 @@ public class Gladiator implements Player {
     private Seniority seniority;
     private Position position;
     private Equipment equipment;
-    private int turns;
+    //private int turns;
     
     public Gladiator(Seniority seniority, Energy energy, Position position, Equipment equipment) {
         this.energy = energy;
         this.seniority = seniority;
         this.position = position;
         this.equipment = equipment;
-        this.turns = 0;
+        // this.turns = 0;
     }
 
 
@@ -44,7 +44,10 @@ public class Gladiator implements Player {
         }
 
         public void arriveToPompeya() {
-
+            if (! equipment.arriveToPompeya()) {
+                position = new Position(position.getCurrentPosition()/2);
+                return;
+            }
         }
     //
 
@@ -56,7 +59,7 @@ public class Gladiator implements Player {
          return this.position;
     }
 
-    public Position moveFromCurrentPosition(Position howManySquaresToMove) {
+    private Position moveFromCurrentPosition(Position howManySquaresToMove) {
         position = position.add(howManySquaresToMove);
         return position;
     }
