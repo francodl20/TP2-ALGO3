@@ -18,13 +18,14 @@ public class CurrentPlayer {
     Integer turns;
     Board gameBoard;
     boolean gameFinished;
-    
+    Gladiator currentPlayer;
     public CurrentPlayer(List<Gladiator> listOfGladiators, Board board) {
         gladiators = listOfGladiators;
         turnManager = gladiators.listIterator();
         gameBoard = board;
         turns = 0;
         gameFinished = false;
+        currentPlayer = null;
     }
 
     public CurrentPlayer(Integer amountOfPlayers, Board board) {
@@ -40,6 +41,7 @@ public class CurrentPlayer {
         gameBoard = board;
         turns = 0;
         gameFinished = false;
+        currentPlayer = null;
     }
 
     public void play() {
@@ -52,11 +54,11 @@ public class CurrentPlayer {
             turnManager = gladiators.listIterator();
             turns++;
         }
-        Gladiator currentPlayer = turnManager.next();
+        currentPlayer = turnManager.next();
         if (currentPlayer.playTurn(Dice.roll())) {
             gameBoard.playAtCurrentPositionWith(currentPlayer);
         }
-        if (gameBoard.finishPlay(currentPlayer) ) {
+        if (gameBoard.finishCurrentPlay(currentPlayer) ) {
             finishGame(true);
         }
     }
@@ -65,5 +67,9 @@ public class CurrentPlayer {
         System.out.println("Game finished");
         System.out.println(winners?"...and this is the winner!":"...No winners! :(");
         gameFinished = true;
+    }
+
+    public Gladiator getCurrentPlayer() {
+        return currentPlayer;
     }
 }

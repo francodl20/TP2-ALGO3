@@ -15,7 +15,7 @@ public class Board {
         squareMap.get(currentPlayer.getCurrentPosition()).play(currentPlayer);
     }
 
-    public boolean finishPlay(Player currentPlayer) {
+    public boolean finishCurrentPlay(Player currentPlayer) {
         return false;
     }
 }

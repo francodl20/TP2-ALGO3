@@ -1,12 +1,15 @@
 package edu.fiuba.algo3.entrega_1;
 
+import edu.fiuba.algo3.modelo.CurrentPlayer;
 import edu.fiuba.algo3.modelo.Gladiator;
 import edu.fiuba.algo3.modelo.equipment.Helpless;
 import edu.fiuba.algo3.modelo.equipment.Helmet;
 import edu.fiuba.algo3.modelo.equipment.Key;
+import edu.fiuba.algo3.modelo.equipment.SwordAndShield;
 import edu.fiuba.algo3.modelo.attributes.Energy;
 import edu.fiuba.algo3.modelo.attributes.Position;
-import edu.fiuba.algo3.modelo.attributes.seniority.Novice;
+import edu.fiuba.algo3.modelo.attributes.seniority.*;
+import edu.fiuba.algo3.modelo.board.BoardMock;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -176,13 +179,21 @@ public class CasosDeUso {
     //Caso de uso 09
     @Test
     public void arrivingToTheGoalWithoutTheKeyMovesBackToTheMiddleOfTheBoard() { //todo:
-        
         //Arrange
-       
+        Gladiator gladiator1 = new Gladiator(new SemiSenior(), new Energy(20), new Position(27), new SwordAndShield());
+        Gladiator gladiator2 = new Gladiator(new Senior(), new Energy(20), new Position(28), new Key());
+        ArrayList<Gladiator> gladiators = new ArrayList<>(); 
+        gladiators.add(gladiator1);
+        gladiators.add(gladiator2);
+        CurrentPlayer game = new CurrentPlayer(gladiators, new BoardMock());    
         //Act
-         
+        game.play();
         //Assert
-        
+        assertEquals(game.getCurrentPlayer().getCurrentPosition(),new Position(27/2));
+        //Act
+        game.play();
+        //Assert
+        assertEquals(game.getCurrentPlayer().getCurrentPosition(),new Position(28));
     }
 
     //Caso de uso 10
