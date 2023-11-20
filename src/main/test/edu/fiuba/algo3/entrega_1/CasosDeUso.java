@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.modelo.CurrentPlayer;
+import edu.fiuba.algo3.modelo.TurnManager;
 import edu.fiuba.algo3.modelo.Gladiator;
 import edu.fiuba.algo3.modelo.equipment.Helpless;
 import edu.fiuba.algo3.modelo.equipment.Helmet;
@@ -180,20 +180,22 @@ public class CasosDeUso {
     @Test
     public void arrivingToTheGoalWithoutTheKeyMovesBackToTheMiddleOfTheBoard() { //todo:
         //Arrange
-        Gladiator gladiator1 = new Gladiator(new SemiSenior(), new Energy(20), new Position(27), new SwordAndShield());
-        Gladiator gladiator2 = new Gladiator(new Senior(), new Energy(20), new Position(28), new Key());
+        Gladiator gladiator1 = new Gladiator(new SemiSenior(), new Energy(20), new Position(24), new SwordAndShield());
+        Gladiator gladiator2 = new Gladiator(new Senior(), new Energy(20), new Position(24), new Key());
         ArrayList<Gladiator> gladiators = new ArrayList<>(); 
         gladiators.add(gladiator1);
         gladiators.add(gladiator2);
-        CurrentPlayer game = new CurrentPlayer(gladiators, new BoardMock());    
+        TurnManager game = new TurnManager(gladiators, new BoardMock()); 
+        Position targetPosition = new Position(24/2);
+        Integer diceRoll = 1;
         //Act
-        game.play();
+        game.play(diceRoll);
         //Assert
-        assertEquals(game.getCurrentPlayer().getCurrentPosition(),new Position(27/2));
+        assertEquals(game.getCurrentPlayer().getCurrentPosition(), targetPosition);
         //Act
-        game.play();
+        game.play(diceRoll);
         //Assert
-        assertEquals(game.getCurrentPlayer().getCurrentPosition(),new Position(28));
+        assertEquals(game.getCurrentPlayer().getCurrentPosition(), new Position(25));
     }
 
     //Caso de uso 10
@@ -231,10 +233,22 @@ public class CasosDeUso {
     public void afterThirtyTurnsTheGameEnds(){//todo:
         
         //Arrange
-       
+        Gladiator gladiator1 = new Gladiator(new SemiSenior(), new Energy(20), new Position(24), new SwordAndShield());
+        Gladiator gladiator2 = new Gladiator(new Senior(), new Energy(20), new Position(24), new Key());
+        ArrayList<Gladiator> gladiators = new ArrayList<>(); 
+        gladiators.add(gladiator1);
+        gladiators.add(gladiator2);
+        TurnManager game = new TurnManager(gladiators, new BoardMock()); 
+        Integer diceRoll = 0;
+        boolean theGameEnded = false;
         //Act
-         
+        for (int i = 0; i <= 60; i++) {
+
+            theGameEnded = game.play(diceRoll);
+        }
+        
         //Assert
+        assertTrue(theGameEnded);
     }
 
     

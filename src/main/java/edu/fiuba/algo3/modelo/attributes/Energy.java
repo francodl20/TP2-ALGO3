@@ -22,7 +22,7 @@ public class Energy {
         return new Energy(this.energy + anotherEnergy.getEnergy());
     }
     public boolean thereIsEnoughEnergyToPlay() {
-        return (this.energy > NO_ENERGY && injured);
+        return (this.energy > NO_ENERGY && !injured);
     } 
     public void getInjured() {
         this.injured = true;

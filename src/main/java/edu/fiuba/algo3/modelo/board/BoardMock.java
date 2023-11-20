@@ -37,11 +37,4 @@ public class BoardMock extends Board {
         }
         square.play(currentPlayer);
     }
-    @Override
-    public boolean finishCurrentPlay(Player current) {
-        if (current.getCurrentPosition().compareTo(new Position(25)) >= 0) {
-            return true;
-        }
-        return false;
-    }
 }

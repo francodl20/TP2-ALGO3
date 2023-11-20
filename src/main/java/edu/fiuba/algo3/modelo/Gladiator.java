@@ -44,7 +44,7 @@ public class Gladiator implements Player {
         }
 
         public void arriveToPompeya() {
-            if (! equipment.arriveToPompeya()) {
+            if (!equipment.arriveToPompeya()) {
                 position = new Position(position.getCurrentPosition()/2);
                 return;
             }

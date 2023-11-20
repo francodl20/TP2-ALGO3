@@ -28,6 +28,8 @@ public class Position implements Comparable<Position>{
         }
         return Integer.compare(currentPosition, ((Position) onePosition).getCurrentPosition())==0;
     }
+
+
     @Override
     public int compareTo(Position onePosition) {
         return this.currentPosition.compareTo(onePosition.getCurrentPosition());

@@ -12,23 +12,24 @@ import edu.fiuba.algo3.modelo.equipment.Helpless;
 import edu.fiuba.algo3.modelo.board.Board;
 import edu.fiuba.algo3.modelo.board.Square;
 
-public class CurrentPlayer {
+public class TurnManager {
+    public static final Integer FINAL_TURN = 30;
     List<Gladiator> gladiators;
     ListIterator<Gladiator> turnManager;
-    Integer turns;
-    Board gameBoard;
-    boolean gameFinished;
     Gladiator currentPlayer;
-    public CurrentPlayer(List<Gladiator> listOfGladiators, Board board) {
+    Integer turnCount;
+    Board gameBoard;
+    
+    
+    public TurnManager(List<Gladiator> listOfGladiators, Board board) {
         gladiators = listOfGladiators;
         turnManager = gladiators.listIterator();
         gameBoard = board;
-        turns = 0;
-        gameFinished = false;
+        turnCount = 1;
         currentPlayer = null;
     }
 
-    public CurrentPlayer(Integer amountOfPlayers, Board board) {
+    public TurnManager(Integer amountOfPlayers, Board board) {
         gladiators = new LinkedList<Gladiator>();
 
         for (int i = 0; i < amountOfPlayers; i++) {
@@ -39,34 +40,34 @@ public class CurrentPlayer {
         }
         turnManager = gladiators.listIterator();
         gameBoard = board;
-        turns = 0;
-        gameFinished = false;
+        turnCount = 1;
         currentPlayer = null;
     }
-
-    public void play() {
-        if (gameFinished) return;
-        if (turns >= 30) {
-            finishGame(false);
-            return;
-        }
-        if (! turnManager.hasNext() ) {
+    
+    /*  Returns bool indicating if game finished or not, can't differentiate 
+        between finish conditions
+    */
+    public boolean play(Integer diceRoll) {
+        if (!turnManager.hasNext() ) {
             turnManager = gladiators.listIterator();
-            turns++;
+            turnCount++;
         }
+
+        if (turnCount > FINAL_TURN) {;
+            return true;  
+        }
+
+        //Picks next gladiator and plays the turn
         currentPlayer = turnManager.next();
-        if (currentPlayer.playTurn(Dice.roll())) {
+        if (currentPlayer.playTurn(diceRoll)) {
             gameBoard.playAtCurrentPositionWith(currentPlayer);
         }
-        if (gameBoard.finishCurrentPlay(currentPlayer) ) {
-            finishGame(true);
-        }
-    }
 
-    public void finishGame(boolean winners) {
-        System.out.println("Game finished");
-        System.out.println(winners?"...and this is the winner!":"...No winners! :(");
-        gameFinished = true;
+        if (gameBoard.pompeyaWasReached(currentPlayer) ) {
+            return true;
+        }
+
+        return false;
     }
 
     public Gladiator getCurrentPlayer() {
