@@ -1,0 +1,76 @@
+package edu.fiuba.algo3.modelo;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
+
+import edu.fiuba.algo3.modelo.Dice;
+import edu.fiuba.algo3.modelo.Gladiator;
+import edu.fiuba.algo3.modelo.attributes.Energy;
+import edu.fiuba.algo3.modelo.attributes.Position;
+import edu.fiuba.algo3.modelo.attributes.seniority.Novice;
+import edu.fiuba.algo3.modelo.equipment.Helpless;
+import edu.fiuba.algo3.modelo.board.Board;
+import edu.fiuba.algo3.modelo.board.Square;
+
+public class TurnManager {
+    public static final Integer FINAL_TURN = 30;
+    List<Gladiator> gladiators;
+    ListIterator<Gladiator> turnManager;
+    Gladiator currentPlayer;
+    Integer turnCount;
+    Board gameBoard;
+    
+    
+    public TurnManager(List<Gladiator> listOfGladiators, Board board) {
+        gladiators = listOfGladiators;
+        turnManager = gladiators.listIterator();
+        gameBoard = board;
+        turnCount = 1;
+        currentPlayer = null;
+    }
+
+    public TurnManager(Integer amountOfPlayers, Board board) {
+        gladiators = new LinkedList<Gladiator>();
+
+        for (int i = 0; i < amountOfPlayers; i++) {
+            gladiators.add(new Gladiator(new Novice(), 
+                                        new Energy(), 
+                                        new Position(), 
+                                        new Helpless()));
+        }
+        turnManager = gladiators.listIterator();
+        gameBoard = board;
+        turnCount = 1;
+        currentPlayer = null;
+    }
+    
+    /*  Returns bool indicating if game finished or not, can't differentiate 
+        between finish conditions
+    */
+    public boolean play(Integer diceRoll) {
+        if (!turnManager.hasNext() ) {
+            turnManager = gladiators.listIterator();
+            turnCount++;
+        }
+
+        if (turnCount > FINAL_TURN) {;
+            return true;  
+        }
+
+        //Picks next gladiator and plays the turn
+        currentPlayer = turnManager.next();
+        if (currentPlayer.playTurn(diceRoll)) {
+            gameBoard.playAtCurrentPositionWith(currentPlayer);
+        }
+
+        if (gameBoard.pompeyaWasReached(currentPlayer) ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public Gladiator getCurrentPlayer() {
+        return currentPlayer;
+    }
+}
