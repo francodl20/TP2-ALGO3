@@ -8,7 +8,7 @@ public class BacchanaliaSquare implements Square {
     }
 
     public void play(Player player) {
-        player.enjoyBacchanalia(4);
+        player.enjoyBacchanalia(4); //la cantidad de bebidas no varía, por qué un parámetro?
         return;
     }
 }

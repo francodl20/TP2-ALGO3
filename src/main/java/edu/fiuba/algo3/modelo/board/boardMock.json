@@ -1,0 +1,113 @@
+{
+   "gameName": "GladiatorMania",
+   "Squares": [
+    {
+        "type": "Empty",
+        "position":"00"
+    },
+    {
+        "type": "Equipment",
+        "position": "01"
+    },
+    {
+        "type": "Equipment",
+        "position": "02"
+    },
+    {
+        "type": "Equipment",
+        "position": "03"
+    },
+    {
+        "type": "Equipment",
+        "position": "04"
+    },
+    {
+        "type": "Equipment",
+        "position": "05"
+    },
+    {
+        "type": "Beast",
+        "position": "06"
+    },
+    {
+        "type": "Beast",
+        "position": "07"
+    },
+    {
+        "type": "Beast",
+        "position": "08"
+    },
+    {
+        "type": "Beast",
+        "position": "09"
+    },
+    {
+        "type": "Beast",
+        "position": "10"
+    },
+    {
+        "type": "Fiesta",
+        "position": "11"
+    },
+    {
+        "type": "Fiesta",
+        "position": "12"
+    },
+    {
+        "type": "Fiesta",
+        "position": "13"
+    },
+    {
+        "type": "Fiesta",
+        "position": "14"
+    },
+    {
+        "type": "Fiesta",
+        "position": "15"
+    },
+    {
+        "type": "Food",
+        "position": "16"
+    },
+    {
+        "type": "Food",
+        "position": "17"
+    },
+    {
+        "type": "Food",
+        "position": "18"
+    },
+    {
+        "type": "Food",
+        "position": "19"
+    },
+    {
+        "type": "Food",
+        "position": "20"
+    },
+    {
+        "type": "Injured",
+        "position": "21"
+    },
+    {
+        "type": "Injured",
+        "position": "22"
+    },
+    {
+        "type": "Injured",
+        "position": "23"
+    }, 
+    {
+        "type": "Injured",
+        "position": "24"
+    },
+    {
+        "type": "Injured",
+        "position": "25"
+    },
+    {
+        "type": "Pompeii",
+        "position": "26"
+    }
+    ]
+}
