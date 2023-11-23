@@ -2,6 +2,8 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.attributes.Energy;
 import edu.fiuba.algo3.modelo.attributes.Position;
+import edu.fiuba.algo3.modelo.attributes.InjuredState.Healthy;
+import edu.fiuba.algo3.modelo.attributes.InjuredState.InjuredState;
 import edu.fiuba.algo3.modelo.attributes.seniority.Seniority;
 import edu.fiuba.algo3.modelo.equipment.Equipment;
 
@@ -11,6 +13,7 @@ public class Gladiator implements Player {
     private Seniority seniority;
     private Position position;
     private Equipment equipment;
+    private InjuredState injuries;
     //private int turns;
     
     public Gladiator(Seniority seniority, Energy energy, Position position, Equipment equipment) {
@@ -18,6 +21,7 @@ public class Gladiator implements Player {
         this.seniority = seniority;
         this.position = position;
         this.equipment = equipment;
+        this.injuries = new Healthy(this);
         // this.turns = 0;
     }
 
@@ -73,6 +77,10 @@ public class Gladiator implements Player {
         //Hacer lo que sea que debe hacer para jugar
 
         return true;
+    }
+
+    public void updateInjuries(InjuredState newState) {
+        this.injuries = newState;
     }
 }
 
