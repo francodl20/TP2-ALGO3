@@ -30,6 +30,11 @@ public class Energy {
     public void getRecovered() {
         // this.injured = false;
     }
+
+    public boolean isEmpty() {
+        return (energy <= 0);
+    }
+
     @Override
     public boolean equals(Object anEnergy) {
         if (anEnergy == this) {

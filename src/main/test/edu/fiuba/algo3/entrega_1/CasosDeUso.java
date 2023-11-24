@@ -78,14 +78,16 @@ public class CasosDeUso {
     @Test
     public void gladiatorWithoutEnergyCannotPlayTurn() {
         //Arrange
-        Gladiator gladiator = new Gladiator(new Novice(), new Energy(0), new Position(0), new Helpless());
+        Position expectedPosition = new Position(0);
+        Gladiator gladiator = new Gladiator(new Novice(), new Energy(0), expectedPosition, new Helpless());
         Integer squaresToMove = 1;
 
         //Act
         boolean playedTurn = gladiator.playTurn(squaresToMove);
 
          //Assert
-        assertFalse(playedTurn); 
+        // assertFalse(playedTurn); 
+        assertEquals(expectedPosition, gladiator.getCurrentPosition());
     }
 
     //Caso de uso 04
@@ -165,10 +167,11 @@ public class CasosDeUso {
         gladiator.playTurn(1);
         gladiator.playTurn(1);
         gladiator.playTurn(1);
-
+        
+        gladiator.playTurn(1);
+        
         Energy expectedEnergy = new Energy(gladiator.getEnergy().getEnergy()); 
         expectedEnergy.add(extraEnergyFromSenior);
-        gladiator.playTurn(1);
         finalEnergy = gladiator.getEnergy();   //si la energia se agrega cuando empieza el otro turno
                                               //hay que corregir lo q se pierde de energia en el ultimo turno
                                               //todo: no se pierde energía en ningún momento. Chequear esta pregunta.

@@ -13,4 +13,9 @@ public class Injured implements InjuredState {
     public void update() {
         gladiator.updateInjuries(new Healthy(gladiator));
     }
+
+    @Override
+    public void playTurn(Integer squaresToMove) {
+        this.update();
+    }
 }

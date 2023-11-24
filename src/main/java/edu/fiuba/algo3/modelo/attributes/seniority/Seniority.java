@@ -7,5 +7,5 @@ public interface Seniority {
     public Seniority addTurn();
 
     //Return corresponding amount of energy
-    public Energy energyPlus();
+    public Energy energyPlus(Energy energy);
 }

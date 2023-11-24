@@ -5,12 +5,12 @@ import edu.fiuba.algo3.modelo.attributes.Energy;
 public class Novice implements Seniority {
     int turns;
 
-    public Novice(){
+    public Novice() {
         turns = 0;
     }
 
     @Override
-    public Seniority addTurn(){
+    public Seniority addTurn() {
         turns++;
 
         if (turns == 8) {
@@ -21,7 +21,7 @@ public class Novice implements Seniority {
     }
 
     @Override
-    public Energy energyPlus(){
-        return new Energy(0);
+    public Energy energyPlus(Energy energy) {
+        return energy.add(new Energy(0));
     }
 }

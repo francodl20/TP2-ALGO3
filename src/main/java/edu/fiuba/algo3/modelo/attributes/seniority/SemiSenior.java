@@ -21,7 +21,7 @@ public class SemiSenior implements Seniority {
     }
 
     @Override
-    public Energy energyPlus(){
-        return new Energy(5);
+    public Energy energyPlus(Energy energy){
+        return energy.add(new Energy(5));
     }
 }

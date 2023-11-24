@@ -9,6 +9,8 @@ import edu.fiuba.algo3.modelo.equipment.Equipment;
 
 public class Gladiator implements Player {
     public static final Integer ENERGY_RECOVERED_AFTER_MEAL = 10;
+    public static final Integer TURN_ENERGY_COST = -1;
+    
     private Energy energy;
     private Seniority seniority;
     private Position position;
@@ -39,8 +41,9 @@ public class Gladiator implements Player {
             this.energy = this.energy.add(new Energy(howManyDrinks*(-4)));
         }
 
-        public void getInjured(){
-            this.energy.getInjured();
+        public void getInjured() {
+            // this.energy.getInjured();
+            this.injuries.update();
         }
 
         public void fightAgainstWildBeast() {
@@ -63,17 +66,26 @@ public class Gladiator implements Player {
          return this.position;
     }
 
-    private Position moveFromCurrentPosition(Position howManySquaresToMove) {
+    public Position moveFromCurrentPosition(Position howManySquaresToMove) {
         position = position.add(howManySquaresToMove);
         return position;
     }
 
     public boolean playTurn(Integer squaresToMove){
-        if (!energy.thereIsEnoughEnergyToPlay()) {
-            energy.getRecovered();
-            return false;
+        // if (!energy.thereIsEnoughEnergyToPlay()) {
+        //     energy.getRecovered();
+        //     return false;
+        // }
+        this.energy = this.seniority.energyPlus(this.energy);
+        // costo de jugar el turno
+        this.energy = this.energy.add(new Energy(TURN_ENERGY_COST));
+        if (!energy.isEmpty()) {
+            this.injuries.playTurn(squaresToMove);
+        } else {
+            this.energy.add(new Energy(5));
         }
-        moveFromCurrentPosition(new Position(squaresToMove));
+        this.seniority = this.seniority.addTurn();
+        // moveFromCurrentPosition(new Position(squaresToMove));
         //Hacer lo que sea que debe hacer para jugar
 
         return true;
