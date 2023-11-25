@@ -13,9 +13,9 @@ import java.io.FileReader;
 import java.util.Iterator; 
 import java.util.Map; 
   
-import edu.fiuba.algo3.org.json.simple.JSONArray; 
-import edu.fiuba.algo3.org.json.simple.JSONObject; 
-import edu.fiuba.algo3.org.json.simple.parser.*;
+import org.json.simple.JSONArray; 
+import org.json.simple.JSONObject; 
+import org.json.simple.parser.*;
 
 public class Board {
     LinkedList<Square> squareMap;
