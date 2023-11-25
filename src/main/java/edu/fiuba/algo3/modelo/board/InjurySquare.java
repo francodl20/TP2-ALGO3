@@ -1,15 +1,21 @@
 package edu.fiuba.algo3.modelo.board;
 import edu.fiuba.algo3.modelo.Player;
+import edu.fiuba.algo3.modelo.attributes.Position;
 
 
 public class InjurySquare implements Square {
-    
-    public InjurySquare() {
-        
+    Position position;
+
+    public InjurySquare(Position aPosition) {
+        position = aPosition;
     }
 
     public void play(Player player) {
         player.getInjured();
         return;
+    }
+
+    public boolean with(Position position){
+        return this.position.equals(position);
     }
 }

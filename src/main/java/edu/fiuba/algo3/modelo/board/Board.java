@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.Map;
 
 import edu.fiuba.algo3.modelo.attributes.Position;
+import edu.fiuba.algo3.modelo.board.EquipmentSquare;
 import edu.fiuba.algo3.modelo.Player;
 
 //For JSON
@@ -24,41 +25,55 @@ public class Board {
         squareMap = new LinkedList();
         //rellenar lista
     }
-
-    public void buildFromJson() {
+//Unhandled exception type IOExceptionJava(16777384)
+//Unhandled exception type ParseExceptionJava(16777384)
+    public void buildFromJson() throws Exception {
+        // parsing file "JSONExample.json" 
+        Object jsonObj = new JSONParser().parse(new FileReader("boardExample.json")); 
           
-        // iterating address Map 
-        Iterator<Map.Entry> itr1 = address.entrySet().iterator(); 
-        while (itr1.hasNext()) { 
-            Map.Entry pair = itr1.next(); 
-            System.out.println(pair.getKey() + " : " + pair.getValue()); 
-        } 
+        // typecasting obj to JSONObject 
+        JSONObject jsonFile = (JSONObject) jsonObj; 
           
-        // getting phoneNumbers 
-        JSONArray ja = (JSONArray) jo.get("phoneNumbers"); 
+        // getting squares 
+        JSONArray squares = (JSONArray) jsonFile.get("Squares"); 
           
-        // iterating phoneNumbers 
-        Iterator itr2 = ja.iterator(); 
-          
-        while (itr2.hasNext())  
+        // iterating squares 
+        Iterator<Map.Entry> squareAtributeIterator;
+        Iterator squareIterator = squares.iterator();
+        while (squareIterator.hasNext())  
         { 
-            itr1 = ((Map) itr2.next()).entrySet().iterator(); 
-            while (itr1.hasNext()) { 
-                Map.Entry pair = itr1.next(); 
-                System.out.println(pair.getKey() + " : " + pair.getValue()); 
-            } 
+            squareAtributeIterator = ((Map) squareIterator.next()).entrySet().iterator(); 
+            Object type = null;
+            Object position = null;
+            while (squareAtributeIterator.hasNext()) { 
+                Map.Entry pair = squareAtributeIterator.next();
+                if (pair.getKey().equals("Type")) {
+                    type = pair.getValue();
+                }
+                else if (pair.getKey().equals("position")){
+                    position = pair.getValue();
+                }
+            }
+            squareMap.add(SquareFactory.createSquare(type, position));
         } 
     }
-
+/*
+"phoneNumbers":[
+            {
+            "type":"home", "number":"212 555-1234"
+            },
+         {
+            "type":"fax", "number":"212 555-1234"
+         }
+    ],
+*/
     public void playAtCurrentPositionWith(Player currentPlayer) {
-        for (int i = 0; i < squareMap.size(); i++) {
+        for (Square square : squareMap) {
             
-            if(currentPlayer.in(square)):
-                square.play()
+            if(currentPlayer.in(square)){
+                square.play(currentPlayer);
+            }
         }
-            
-        //Square currentSquare = squareMap.get(currentPlayer.getCurrentPosition());
-        currentSquare.play(currentPlayer);
     }
 
     public boolean pompeyaWasReached(Player currentPlayer) {

@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.attributes.Position;
+import edu.fiuba.algo3.modelo.board.Square;
 
 public interface Player {
     public Position getCurrentPosition();
@@ -15,4 +16,6 @@ public interface Player {
     public void fightAgainstWildBeast();
 
     public void arriveToPompeya();
+
+    public boolean in(Square square);
 }

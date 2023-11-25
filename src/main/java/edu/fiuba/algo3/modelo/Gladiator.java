@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.attributes.Energy;
 import edu.fiuba.algo3.modelo.attributes.Position;
+import edu.fiuba.algo3.modelo.board.Square;
 import edu.fiuba.algo3.modelo.attributes.InjuredState.Healthy;
 import edu.fiuba.algo3.modelo.attributes.InjuredState.InjuredState;
 import edu.fiuba.algo3.modelo.attributes.seniority.Seniority;
@@ -94,5 +95,13 @@ public class Gladiator implements Player {
     public void updateInjuries(InjuredState newState) {
         this.injuries = newState;
     }
+
+    public boolean in(Square square){
+        return square.with(this.position);
+    }
 }
+
+
+
+
 

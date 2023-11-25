@@ -9,7 +9,6 @@ import edu.fiuba.algo3.modelo.equipment.SwordAndShield;
 import edu.fiuba.algo3.modelo.attributes.Energy;
 import edu.fiuba.algo3.modelo.attributes.Position;
 import edu.fiuba.algo3.modelo.attributes.seniority.*;
-import edu.fiuba.algo3.modelo.board.BoardMock;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
