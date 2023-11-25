@@ -28,7 +28,7 @@ public class Board {
 //Unhandled exception type IOExceptionJava(16777384)
 //Unhandled exception type ParseExceptionJava(16777384)
     public void buildFromJson() throws Exception {
-        // parsing file "JSONExample.json" 
+        // parsing file
         Object jsonObj = new JSONParser().parse(new FileReader("boardExample.json")); 
           
         // typecasting obj to JSONObject 
@@ -54,6 +54,7 @@ public class Board {
                     position = pair.getValue();
                 }
             }
+            //todo: if type or position are null, throw an exception InvalidJSONException
             squareMap.add(SquareFactory.createSquare(type, position));
         } 
     }
@@ -69,7 +70,6 @@ public class Board {
 */
     public void playAtCurrentPositionWith(Player currentPlayer) {
         for (Square square : squareMap) {
-            
             if(currentPlayer.in(square)){
                 square.play(currentPlayer);
             }
@@ -80,12 +80,6 @@ public class Board {
         Position currentPosition = currentPlayer.getCurrentPosition();
         return (currentPosition == new Position(25));
     }
-
-    /*
-    private Position getPompeya() {
-        //:)
-    }
-    */
 
 }
 

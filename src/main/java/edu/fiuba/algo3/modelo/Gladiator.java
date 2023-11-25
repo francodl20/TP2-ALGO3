@@ -9,9 +9,9 @@ import edu.fiuba.algo3.modelo.attributes.seniority.Seniority;
 import edu.fiuba.algo3.modelo.equipment.Equipment;
 
 public class Gladiator implements Player {
-    public static final Integer ENERGY_RECOVERED_AFTER_MEAL = 10;
-    public static final Integer TURN_ENERGY_COST = -1;
-    
+    private final Integer ENERGY_RECOVERED_AFTER_MEAL = 10;
+    private final Integer TURN_ENERGY_COST = -1;
+    private final Integer ENERGY_LOST_PER_ALCOHOLIC_DRINK = -4;
     private Energy energy;
     private Seniority seniority;
     private Position position;
@@ -39,7 +39,7 @@ public class Gladiator implements Player {
         }
 
         public void enjoyBacchanalia(Integer howManyDrinks){
-            this.energy = this.energy.add(new Energy(howManyDrinks*(-4)));
+            this.energy = this.energy.add(new Energy(howManyDrinks*ENERGY_LOST_PER_ALCOHOLIC_DRINK);
         }
 
         public void getInjured() {
@@ -54,7 +54,6 @@ public class Gladiator implements Player {
         public void arriveToPompeya() {
             if (!equipment.arriveToPompeya()) {
                 position = new Position(position.getCurrentPosition()/2);
-                return;
             }
         }
     //
@@ -73,10 +72,6 @@ public class Gladiator implements Player {
     }
 
     public boolean playTurn(Integer squaresToMove){
-        // if (!energy.thereIsEnoughEnergyToPlay()) {
-        //     energy.getRecovered();
-        //     return false;
-        // }
         this.energy = this.seniority.energyPlus(this.energy);
         // costo de jugar el turno
         this.energy = this.energy.add(new Energy(TURN_ENERGY_COST));
@@ -86,8 +81,6 @@ public class Gladiator implements Player {
             this.energy.add(new Energy(5));
         }
         this.seniority = this.seniority.addTurn();
-        // moveFromCurrentPosition(new Position(squaresToMove));
-        //Hacer lo que sea que debe hacer para jugar
 
         return true;
     }

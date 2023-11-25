@@ -9,7 +9,6 @@ public class EmptySquare implements Square {
         position = aPosition;
     }
     public void play(Player player) {
-        return;
     }
     public boolean with(Position position){
         return this.position.equals(position);

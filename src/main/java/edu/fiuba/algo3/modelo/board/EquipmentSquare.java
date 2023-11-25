@@ -11,7 +11,6 @@ public class EquipmentSquare implements Square {
 
     public void play(Player player) {
         player.enhanceArmour();
-        return;
     }
 
     public boolean with(Position position){

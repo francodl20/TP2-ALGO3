@@ -6,18 +6,23 @@ public class Position implements Comparable<Position>{
     public Position() {
         currentPosition = 0;
     }
+
     public Position(Integer aPosition) {
         currentPosition = aPosition;
     }
+
     public Integer getCurrentPosition() {
         return currentPosition;
     }
+
     public void update(Integer newPosition) {
         currentPosition = newPosition;
     }
+
     public Position add(Position anotherPosition) {
         return new Position(this.currentPosition + anotherPosition.getCurrentPosition());
     }
+    
     @Override
     public boolean equals(Object onePosition) {
         if (onePosition == this) {

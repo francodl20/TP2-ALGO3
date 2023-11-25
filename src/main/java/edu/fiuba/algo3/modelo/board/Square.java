@@ -6,10 +6,3 @@ public interface Square {
     public void play(Player player);
     public boolean with(Position position);
 }
-
-/*
-public Square(String type, String position)
-switch case type:
- case 'equipment':
-    return new Equipment(position)
- */

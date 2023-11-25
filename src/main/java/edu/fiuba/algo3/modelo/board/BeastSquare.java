@@ -12,7 +12,6 @@ public class BeastSquare implements Square {
 
     public void play(Player player) {
         player.fightAgainstWildBeast();
-        return;
     }
     
     public boolean with(Position position){

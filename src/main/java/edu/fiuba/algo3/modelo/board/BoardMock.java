@@ -15,25 +15,25 @@ public class BoardMock extends Board {
         Position position = currentPlayer.getCurrentPosition();
         Square square;
         if (position.equals(new Position(0))) {
-            square = new EmptySquare();
+            square = new EmptySquare(position);
         }
         else if (position.compareTo(new Position(0)) > 0 && position.compareTo(new Position(5)) < 0) {
-            square = new EquipmentSquare();
+            square = new EquipmentSquare(position);
         }
         else if (position.compareTo(new Position(5)) >= 0 && position.compareTo(new Position(10)) < 0) {
-            square = new BeastSquare();
+            square = new BeastSquare(position);
         }
         else if (position.compareTo(new Position(10)) >= 0 && position.compareTo(new Position(15)) < 0) {
-            square = new BacchanaliaSquare();
+            square = new BacchanaliaSquare(position);
         }
         else if (position.compareTo(new Position(15)) >= 0 && position.compareTo(new Position(20)) < 0) {
-            square = new FoodSquare();
+            square = new FoodSquare(position);
         }
         else if (position.compareTo(new Position(20)) >= 0 && position.compareTo(new Position(25)) < 0) {
-            square = new InjurySquare();
+            square = new InjurySquare(position);
         }        
         else {
-            square = new PompeyaSquare();
+            square = new PompeyaSquare(position);
         }
         square.play(currentPlayer);
     }

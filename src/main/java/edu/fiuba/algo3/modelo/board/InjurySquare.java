@@ -12,7 +12,6 @@ public class InjurySquare implements Square {
 
     public void play(Player player) {
         player.getInjured();
-        return;
     }
 
     public boolean with(Position position){
