@@ -1,5 +1,4 @@
 package edu.fiuba.algo3.modelo.equipment;
-import edu.fiuba.algo3.modelo.attributes.Energy;
 
 public class Armour implements Equipment {
 
@@ -7,8 +6,8 @@ public class Armour implements Equipment {
         return new SwordAndShield();
     }
 
-    public Energy protectFromtWildBeast() {
-        return new Energy(-10);    
+    public Integer protectFromtWildBeast() {
+        return -10;    
     }
 
     public boolean arriveToPompeya() {

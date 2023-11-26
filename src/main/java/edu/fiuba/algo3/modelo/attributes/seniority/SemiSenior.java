@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.attributes.seniority;
 
-import edu.fiuba.algo3.modelo.attributes.Energy;
+
 
 public class SemiSenior implements Seniority {
     int turns;
@@ -21,7 +21,7 @@ public class SemiSenior implements Seniority {
     }
 
     @Override
-    public Energy energyPlus(Energy energy){
-        return energy.add(new Energy(5));
+    public Integer energyPlus(Integer energy){
+        return (energy + (5)); //CAMBIAR NUMEROS MAGICOS
     }
 }

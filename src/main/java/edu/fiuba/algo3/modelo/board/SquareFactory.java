@@ -3,10 +3,8 @@ package edu.fiuba.algo3.modelo.board;
 import edu.fiuba.algo3.modelo.attributes.Position;
 
 public class SquareFactory {
-    public static Square createSquare(Object type, Object position){
+    public static Square createSquare(Position position, Object type, Object obstacle, Object price){
         String instanceType = (String)type;
-        Integer positionNumber = (Integer)position;
-        Position position = new Position(positionNumber);
 
         switch (instanceType) {
             case "Empty":
@@ -33,7 +31,6 @@ public class SquareFactory {
             default:
                 //se rompio todo
                 return new EmptySquare(position);
-        }    
-        
+        }  
     }
 }

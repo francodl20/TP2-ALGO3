@@ -1,5 +1,5 @@
 package edu.fiuba.algo3.modelo.attributes.seniority;
-import edu.fiuba.algo3.modelo.attributes.Energy;
+
 
 public interface Seniority {
 
@@ -7,5 +7,5 @@ public interface Seniority {
     public Seniority addTurn();
 
     //Return corresponding amount of energy
-    public Energy energyPlus(Energy energy);
+    public Integer energyPlus(Integer energy);
 }

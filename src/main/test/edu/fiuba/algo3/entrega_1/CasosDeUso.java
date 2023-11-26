@@ -2,17 +2,18 @@ package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.TurnManager;
 import edu.fiuba.algo3.modelo.Gladiator;
+import edu.fiuba.algo3.modelo.board.Board;
 import edu.fiuba.algo3.modelo.equipment.Helpless;
 import edu.fiuba.algo3.modelo.equipment.Helmet;
 import edu.fiuba.algo3.modelo.equipment.Key;
 import edu.fiuba.algo3.modelo.equipment.SwordAndShield;
-import edu.fiuba.algo3.modelo.attributes.Energy;
+
 import edu.fiuba.algo3.modelo.attributes.Position;
 import edu.fiuba.algo3.modelo.attributes.seniority.*;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+//import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
@@ -21,6 +22,8 @@ import java.util.ArrayList;
 public class CasosDeUso {
     
     public static final Integer ENERGY_RECOVERED_AFTER_MEAL = 10;
+    public static final Integer NO_ENERGY = 10;
+    public static final Integer INITIAL_ENERGY = 20;
     public static final Integer ENERGY_AFTER_FIGHTING_WITH_SWORD_AND_SHIELD_FROM_ZERO_ENERGY = -2;
     public static final Integer ENERGY_AFTER_FIGHTING_WITH_HELMET_FROM_ZERO_ENERGY = -15;
     public static final Integer ENERGY_AFTER_FIGHTING_WITH_KEY_FROM_ZERO_ENERGY = 0;
@@ -32,27 +35,25 @@ public class CasosDeUso {
         //Arrange
 
         // Board boardMock = new BoardMock(test);
-        Gladiator gladiator1 = new Gladiator(new Novice(), new Energy(20), new Position(), new Helpless());
-        Gladiator gladiator2 = new Gladiator(new Novice(), new Energy(20), new Position(), new Helpless());
+        Gladiator gladiator1 = new Gladiator(new Novice(), INITIAL_ENERGY, new Position(), new Helpless());
+        Gladiator gladiator2 = new Gladiator(new Novice(), INITIAL_ENERGY, new Position(), new Helpless());
         ArrayList<Gladiator> gladiators = new ArrayList<>(); 
         gladiators.add(gladiator1);
         gladiators.add(gladiator2);
         // GladiatorMania game = new GladiatorMania(boardMock, gladiators);    
-        Energy initialEnergy = new Energy(20);
-        Energy zeroEnergy = new Energy(0);
-
+    
         //Act
         //game.play();
         
         //Assert
         //Check de initial energy
-        assertEquals(gladiator1.getEnergy(), initialEnergy); 
+        assertEquals(gladiator1.getEnergy(), INITIAL_ENERGY); 
         //todo: gladiator1.getEnergy() o game.getGladiator(1).getEnergy()?
-        assertEquals(gladiator2.getEnergy(), initialEnergy);
+        assertEquals(gladiator2.getEnergy(), INITIAL_ENERGY);
 
         //Energy after fighting the beast corresponds with the equipment
         gladiator1.fightAgainstWildBeast();
-        assertEquals(gladiator1.getEnergy(), zeroEnergy); 
+        assertEquals(gladiator1.getEnergy(), NO_ENERGY); 
 
     }
 
@@ -61,7 +62,7 @@ public class CasosDeUso {
     //todo: preguntar si hay que usar tablero o no hace falta
     public void gladiatorIsAbleToMove() {
         //Arrange
-        Gladiator gladiator = new Gladiator(new Novice(), new Energy(20), new Position(), new Helpless());
+        Gladiator gladiator = new Gladiator(new Novice(), INITIAL_ENERGY, new Position(), new Helpless());
         //  Position initialPosition = new Position();
         Integer squaresToMove = 5;
         Position finalPosition = new Position(2*squaresToMove);
@@ -78,11 +79,12 @@ public class CasosDeUso {
     public void gladiatorWithoutEnergyCannotPlayTurn() {
         //Arrange
         Position expectedPosition = new Position(0);
-        Gladiator gladiator = new Gladiator(new Novice(), new Energy(0), expectedPosition, new Helpless());
+        Gladiator gladiator = new Gladiator(new Novice(), (0), expectedPosition, new Helpless());
         Integer squaresToMove = 1;
 
         //Act
-        boolean playedTurn = gladiator.playTurn(squaresToMove);
+        //boolean playedTurn = 
+        gladiator.playTurn(squaresToMove);
 
          //Assert
         // assertFalse(playedTurn); 
@@ -93,8 +95,8 @@ public class CasosDeUso {
     @Test
     public void eatingIncreasesEnergyInTenUnits() {
         //Arrange
-        Gladiator gladiator = new Gladiator(new Novice(), new Energy(0), new Position(), new Helpless());
-        Energy expectedEnergy = new Energy(ENERGY_RECOVERED_AFTER_MEAL);
+        Gladiator gladiator = new Gladiator(new Novice(), (0), new Position(), new Helpless());
+        Integer expectedEnergy = ENERGY_RECOVERED_AFTER_MEAL;
 
         //Act
         gladiator.eat();
@@ -107,8 +109,8 @@ public class CasosDeUso {
     @Test
     public void improvingEquipmentForTheFirstTimeGivesAHelmet() {
         //Arrange
-        Gladiator gladiator = new Gladiator(new Novice(), new Energy(0), new Position(), new Helpless());
-        Energy expectedEnergy = new Energy(ENERGY_AFTER_FIGHTING_WITH_HELMET_FROM_ZERO_ENERGY);
+        Gladiator gladiator = new Gladiator(new Novice(), (0), new Position(), new Helpless());
+        Integer expectedEnergy = (ENERGY_AFTER_FIGHTING_WITH_HELMET_FROM_ZERO_ENERGY);
         
         //Act
         gladiator.enhanceArmour();
@@ -122,8 +124,8 @@ public class CasosDeUso {
     @Test
     public void improvingEquipmentForTheThirdTimeGivesASwordAndShield() {
         //Arrange
-        Gladiator gladiator = new Gladiator(new Novice(), new Energy(0), new Position(), new Helpless());
-        Energy expectedEnergy = new Energy(ENERGY_AFTER_FIGHTING_WITH_SWORD_AND_SHIELD_FROM_ZERO_ENERGY);
+        Gladiator gladiator = new Gladiator(new Novice(), (0), new Position(), new Helpless());
+        Integer expectedEnergy = (ENERGY_AFTER_FIGHTING_WITH_SWORD_AND_SHIELD_FROM_ZERO_ENERGY);
 
         //Act
         gladiator.enhanceArmour();
@@ -139,8 +141,8 @@ public class CasosDeUso {
       @Test
     public void fightingWithAWildBeastWearingAHelmet() {
         //Arrange
-        Gladiator gladiator = new Gladiator(new Novice(), new Energy(0), new Position(), new Helmet());
-        Energy expectedEnergy = new Energy(ENERGY_AFTER_FIGHTING_WITH_HELMET_FROM_ZERO_ENERGY);
+        Gladiator gladiator = new Gladiator(new Novice(), (0), new Position(), new Helmet());
+        Integer expectedEnergy = (ENERGY_AFTER_FIGHTING_WITH_HELMET_FROM_ZERO_ENERGY);
 
         //Act
         gladiator.fightAgainstWildBeast();
@@ -153,9 +155,9 @@ public class CasosDeUso {
     @Test
     public void afterEightTurnsNoviceBecomesSeniorAndHisEnergyIncreasesInTheNextMove(){
         //Arrange
-        Gladiator gladiator = new Gladiator(new Novice(), new Energy(10), new Position(), new Helpless());
-        Energy finalEnergy = new Energy(0);
-        Energy extraEnergyFromSenior = new Energy(5);
+        Gladiator gladiator = new Gladiator(new Novice(), (10), new Position(), new Helpless());
+        Integer finalEnergy = NO_ENERGY;
+        Integer extraEnergyFromSenior = (5); //CAMBIAR NUMEROS MAGICOS
         
         //Act
         gladiator.playTurn(1);          
@@ -169,8 +171,8 @@ public class CasosDeUso {
         
         gladiator.playTurn(1);
         
-        Energy expectedEnergy = new Energy(gladiator.getEnergy().getEnergy()); 
-        expectedEnergy.add(extraEnergyFromSenior);
+        Integer expectedEnergy = (gladiator.getEnergy() + extraEnergyFromSenior); 
+       
         finalEnergy = gladiator.getEnergy();   //si la energia se agrega cuando empieza el otro turno
                                               //hay que corregir lo q se pierde de energia en el ultimo turno
                                               //todo: no se pierde energía en ningún momento. Chequear esta pregunta.
@@ -182,12 +184,12 @@ public class CasosDeUso {
     @Test
     public void arrivingToTheGoalWithoutTheKeyMovesBackToTheMiddleOfTheBoard() { //todo:
         //Arrange
-        Gladiator gladiator1 = new Gladiator(new SemiSenior(), new Energy(20), new Position(24), new SwordAndShield());
-        Gladiator gladiator2 = new Gladiator(new Senior(), new Energy(20), new Position(24), new Key());
+        Gladiator gladiator1 = new Gladiator(new SemiSenior(), INITIAL_ENERGY, new Position(24), new SwordAndShield());
+        Gladiator gladiator2 = new Gladiator(new Senior(), INITIAL_ENERGY, new Position(24), new Key());
         ArrayList<Gladiator> gladiators = new ArrayList<>(); 
         gladiators.add(gladiator1);
         gladiators.add(gladiator2);
-        TurnManager game = new TurnManager(gladiators, new BoardMock()); 
+        TurnManager game = new TurnManager(gladiators, new Board()); 
         Position targetPosition = new Position(24/2);
         Integer diceRoll = 1;
         //Act
@@ -204,8 +206,8 @@ public class CasosDeUso {
     @Test
     public void gladiatorDoesNotReceiveDamageFromTheBeastWhenWearingTheKey() {
         //Arrange
-        Gladiator gladiator = new Gladiator(new Novice(), new Energy(0), new Position(), new Key());
-        Energy expectedEnergy = new Energy(ENERGY_AFTER_FIGHTING_WITH_KEY_FROM_ZERO_ENERGY);
+        Gladiator gladiator = new Gladiator(new Novice(), (0), new Position(), new Key());
+        Integer expectedEnergy = (ENERGY_AFTER_FIGHTING_WITH_KEY_FROM_ZERO_ENERGY);
 
         //Act
         gladiator.fightAgainstWildBeast();
@@ -219,8 +221,8 @@ public class CasosDeUso {
     @Test
     public void receivingAPrizeWithTheKeyDoesNotChangeTheEquipment(){
         //Arrange
-        Gladiator gladiator = new Gladiator(new Novice(), new Energy(0), new Position(), new Key());
-        Energy expectedEnergy = new Energy(ENERGY_AFTER_FIGHTING_WITH_KEY_FROM_ZERO_ENERGY);
+        Gladiator gladiator = new Gladiator(new Novice(), (0), new Position(), new Key());
+        Integer expectedEnergy = (ENERGY_AFTER_FIGHTING_WITH_KEY_FROM_ZERO_ENERGY);
 
         //Act
         gladiator.enhanceArmour();
@@ -235,12 +237,12 @@ public class CasosDeUso {
     public void afterThirtyTurnsTheGameEnds(){//todo:
         
         //Arrange
-        Gladiator gladiator1 = new Gladiator(new SemiSenior(), new Energy(20), new Position(24), new SwordAndShield());
-        Gladiator gladiator2 = new Gladiator(new Senior(), new Energy(20), new Position(24), new Key());
+        Gladiator gladiator1 = new Gladiator(new SemiSenior(), INITIAL_ENERGY, new Position(24), new SwordAndShield());
+        Gladiator gladiator2 = new Gladiator(new Senior(), INITIAL_ENERGY, new Position(24), new Key());
         ArrayList<Gladiator> gladiators = new ArrayList<>(); 
         gladiators.add(gladiator1);
         gladiators.add(gladiator2);
-        TurnManager game = new TurnManager(gladiators, new BoardMock()); 
+        TurnManager game = new TurnManager(gladiators, new Board()); 
         Integer diceRoll = 0;
         boolean theGameEnded = false;
         //Act

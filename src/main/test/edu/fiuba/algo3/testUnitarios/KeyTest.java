@@ -2,7 +2,7 @@ package edu.fiuba.algo3.testUnitarios;
 
 import edu.fiuba.algo3.modelo.equipment.Equipment;
 import edu.fiuba.algo3.modelo.equipment.Key;
-import edu.fiuba.algo3.modelo.attributes.Energy;
+
 
 
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ public class KeyTest {
     public void Case01ByImprovingKeyYouObtainAKey() {
          //Arrange
         Key key = new Key();
-        Energy expectedEnergy = new Energy(ENERGY_LOST_WITH_KEY);
+        Integer expectedEnergy = (ENERGY_LOST_WITH_KEY);
 
         //Assert
         Equipment aux = key.enhance();
@@ -31,7 +31,7 @@ public class KeyTest {
         
         //Arrange
         Key key = new Key();
-        Energy expectedEnergy = new Energy(ENERGY_LOST_WITH_KEY);
+        Integer expectedEnergy = (ENERGY_LOST_WITH_KEY);
 
         //Assert
         assertEquals(key.protectFromtWildBeast(), expectedEnergy);

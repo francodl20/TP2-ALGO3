@@ -1,63 +1,79 @@
 package edu.fiuba.algo3.modelo.board;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-
+//Local clases
 import edu.fiuba.algo3.modelo.attributes.Position;
 import edu.fiuba.algo3.modelo.board.EquipmentSquare;
 import edu.fiuba.algo3.modelo.Player;
 
-//For JSON
+//Ext libraries
+import java.util.HashMap;
+import java.util.LinkedList;
+import org.apache.commons.lang3.tuple.Pair;
+import java.io.IOException;
 
+//For JSON
 import java.io.FileReader; 
 import java.util.Iterator; 
-import java.util.Map; 
+import java.util.Map;
   
 import org.json.simple.JSONArray; 
 import org.json.simple.JSONObject; 
 import org.json.simple.parser.*;
+//
 
 public class Board {
-    LinkedList<Square> squareMap;
-
-    public Board() {
-        squareMap = new LinkedList();
-        //rellenar lista
+    HashMap<Square, Pair<Integer, Integer>> map;
+    
+    public Board(){
+        map = new HashMap<>();
+        try {
+            this.buildFromJson();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-//Unhandled exception type IOExceptionJava(16777384)
-//Unhandled exception type ParseExceptionJava(16777384)
+
+
     public void buildFromJson() throws Exception {
-        // parsing file
-        Object jsonObj = new JSONParser().parse(new FileReader("boardExample.json")); 
-          
-        // typecasting obj to JSONObject 
+
+        Object jsonObj = new JSONParser().parse(new FileReader("mapa.json")); 
         JSONObject jsonFile = (JSONObject) jsonObj; 
-          
-        // getting squares 
         JSONArray squares = (JSONArray) jsonFile.get("Squares"); 
           
-        // iterating squares 
         Iterator<Map.Entry> squareAtributeIterator;
         Iterator squareIterator = squares.iterator();
-        while (squareIterator.hasNext())  
-        { 
+        Integer squareNumber = 0;
+
+        while (squareIterator.hasNext()) { 
             squareAtributeIterator = ((Map) squareIterator.next()).entrySet().iterator(); 
             Object type = null;
-            Object position = null;
+            Object obstacle = null;
+            Object prize = null;
+            Object x = null;
+            Object y = null;
+            squareNumber++;
             while (squareAtributeIterator.hasNext()) { 
                 Map.Entry pair = squareAtributeIterator.next();
-                if (pair.getKey().equals("Type")) {
+                if (pair.getKey().equals("tipo")) {
                     type = pair.getValue();
                 }
-                else if (pair.getKey().equals("position")){
-                    position = pair.getValue();
+                else if (pair.getKey().equals("obstaculo")){
+                    obstacle = pair.getValue();
+                } else if (pair.getKey().equals("premio")){
+                    prize = pair.getValue();
+                } else if (pair.getKey().equals("x")){
+                    x = pair.getValue();
+                } else if (pair.getKey().equals("y")){
+                    y = pair.getValue();
                 }
             }
             //todo: if type or position are null, throw an exception InvalidJSONException
-            squareMap.add(SquareFactory.createSquare(type, position));
+            map.put(SquareFactory.createSquare(new Position(squareNumber), type, obstacle, prize), 
+                    Pair.of((Integer)x,(Integer)y));
         } 
     }
+
+
 /*
 "phoneNumbers":[
             {
@@ -69,18 +85,19 @@ public class Board {
     ],
 */
     public void playAtCurrentPositionWith(Player currentPlayer) {
-        for (Square square : squareMap) {
+        for (Square square : map.keySet()) {
             if(currentPlayer.in(square)){
                 square.play(currentPlayer);
             }
         }
     }
 
+    //public Integer 
+
     public boolean pompeyaWasReached(Player currentPlayer) {
         Position currentPosition = currentPlayer.getCurrentPosition();
         return (currentPosition == new Position(25));
     }
-
 }
 
 /*

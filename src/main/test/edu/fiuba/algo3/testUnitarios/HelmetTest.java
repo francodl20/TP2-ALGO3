@@ -2,7 +2,7 @@ package edu.fiuba.algo3.testUnitarios;
 
 import edu.fiuba.algo3.modelo.equipment.Equipment;
 import edu.fiuba.algo3.modelo.equipment.Helmet;
-import edu.fiuba.algo3.modelo.attributes.Energy;
+
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,7 +18,7 @@ public class HelmetTest {
         
         //Arrange
         Helmet helmet = new Helmet();
-        Energy expectedEnergy = new Energy(ENERGY_LOST_WITH_ARMOUR);
+        Integer expectedEnergy = (ENERGY_LOST_WITH_ARMOUR);
 
         //Act
         Equipment aux = helmet.enhance();
@@ -32,7 +32,7 @@ public class HelmetTest {
         
         //Arrange
         Helmet helmet = new Helmet();
-        Energy expectedEnergy = new Energy(ENERGY_LOST_WITH_HELMET);
+        Integer expectedEnergy = (ENERGY_LOST_WITH_HELMET);
 
         //Assert
         assertEquals(helmet.protectFromtWildBeast(), expectedEnergy);

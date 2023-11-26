@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.modelo;
-
-import edu.fiuba.algo3.modelo.attributes.Energy;
+ 
 import edu.fiuba.algo3.modelo.attributes.Position;
 import edu.fiuba.algo3.modelo.board.Square;
 import edu.fiuba.algo3.modelo.attributes.InjuredState.Healthy;
@@ -12,14 +11,14 @@ public class Gladiator implements Player {
     private final Integer ENERGY_RECOVERED_AFTER_MEAL = 10;
     private final Integer TURN_ENERGY_COST = -1;
     private final Integer ENERGY_LOST_PER_ALCOHOLIC_DRINK = -4;
-    private Energy energy;
+    private Integer energy;
     private Seniority seniority;
     private Position position;
     private Equipment equipment;
     private InjuredState injuries;
     //private int turns;
     
-    public Gladiator(Seniority seniority, Energy energy, Position position, Equipment equipment) {
+    public Gladiator(Seniority seniority, Integer energy, Position position, Equipment equipment) {
         this.energy = energy;
         this.seniority = seniority;
         this.position = position;
@@ -31,7 +30,7 @@ public class Gladiator implements Player {
 
     //Methods related to the squares
         public void eat(){
-            this.energy = this.energy.add(new Energy(ENERGY_RECOVERED_AFTER_MEAL));
+            this.energy = (this.energy + ENERGY_RECOVERED_AFTER_MEAL);
         }
 
         public void enhanceArmour(){
@@ -39,7 +38,7 @@ public class Gladiator implements Player {
         }
 
         public void enjoyBacchanalia(Integer howManyDrinks){
-            this.energy = this.energy.add(new Energy(howManyDrinks*ENERGY_LOST_PER_ALCOHOLIC_DRINK);
+            this.energy = (this.energy + (howManyDrinks * ENERGY_LOST_PER_ALCOHOLIC_DRINK));
         }
 
         public void getInjured() {
@@ -48,7 +47,8 @@ public class Gladiator implements Player {
         }
 
         public void fightAgainstWildBeast() {
-            this.energy = this.energy.add(this.equipment.protectFromtWildBeast());
+
+            this.energy = this.energy + this.equipment.protectFromtWildBeast();
         }
 
         public void arriveToPompeya() {
@@ -58,27 +58,26 @@ public class Gladiator implements Player {
         }
     //
 
-    public Energy getEnergy() {
-        return energy;
+    public Integer getEnergy() {
+        return this.energy;
     }
 
     public Position getCurrentPosition(){
          return this.position;
     }
 
-    public Position moveFromCurrentPosition(Position howManySquaresToMove) {
-        position = position.add(howManySquaresToMove);
-        return position;
+    public void moveFromCurrentPosition(Position howManySquaresToMove) {
+        position.add(howManySquaresToMove);
     }
 
     public boolean playTurn(Integer squaresToMove){
         this.energy = this.seniority.energyPlus(this.energy);
         // costo de jugar el turno
-        this.energy = this.energy.add(new Energy(TURN_ENERGY_COST));
-        if (!energy.isEmpty()) {
+        this.energy = this.energy + TURN_ENERGY_COST;
+        if (this.energy != 0) {
             this.injuries.playTurn(squaresToMove);
         } else {
-            this.energy.add(new Energy(5));
+            this.energy = this.energy + 5; //CAMBIAR NUMERO MAGICO POR CONSTANTE
         }
         this.seniority = this.seniority.addTurn();
 
