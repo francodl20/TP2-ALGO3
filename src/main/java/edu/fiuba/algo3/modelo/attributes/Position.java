@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.attributes;
+ package edu.fiuba.algo3.modelo.attributes;
 
 public class Position implements Comparable<Position>{
     Integer currentPosition;

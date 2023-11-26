@@ -3,17 +3,22 @@ package edu.fiuba.algo3.modelo.attributes.seniority;
 
 
 public class Novice implements Seniority {
-    int turns;
+    Integer turns;
+    Integer SEMISENIORITY_THRESHOLD = 8;
+    Integer NOVICE_THRESHOLD = 0;
+    Integer NOVICE_BONUS = 0;
+
+    //todo crear clase de constantes de juego "GameConstants"
 
     public Novice() {
-        turns = 0;
+        turns = NOVICE_THRESHOLD;
     }
 
     @Override
     public Seniority addTurn() {
         turns++;
 
-        if (turns == 8) {
+        if (turns.equals(SEMISENIORITY_THRESHOLD)) {
             return new SemiSenior();
         } else {
             return this;
@@ -22,6 +27,6 @@ public class Novice implements Seniority {
 
     @Override
     public Integer energyPlus(Integer energy){
-        return energy;
+        return energy + NOVICE_BONUS;
     }
 }

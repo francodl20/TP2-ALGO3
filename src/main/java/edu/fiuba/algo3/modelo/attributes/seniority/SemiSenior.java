@@ -3,17 +3,21 @@ package edu.fiuba.algo3.modelo.attributes.seniority;
 
 
 public class SemiSenior implements Seniority {
-    int turns;
+    Integer turns;
+    Integer SEMISENIORITY_BONUS = 5;
+    Integer SENIORITY_THRESHOLD = 12;
+    Integer SEMISENIORITY_THRESHOLD = 8;
 
+    //todo crear clase de constantes de juego "GameConstants"
     public SemiSenior(){
-        turns = 8;
+        turns = SEMISENIORITY_THRESHOLD;
     }
 
     @Override
     public Seniority addTurn(){
         turns++;
 
-        if (turns == 12) {
+        if (turns.equals(SENIORITY_THRESHOLD)) {
             return new Senior();
         } else {
             return this;
@@ -22,6 +26,6 @@ public class SemiSenior implements Seniority {
 
     @Override
     public Integer energyPlus(Integer energy){
-        return (energy + (5)); //CAMBIAR NUMEROS MAGICOS
+        return (energy + SEMISENIORITY_BONUS);
     }
 }

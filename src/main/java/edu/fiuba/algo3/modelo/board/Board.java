@@ -6,16 +6,14 @@ import edu.fiuba.algo3.modelo.board.EquipmentSquare;
 import edu.fiuba.algo3.modelo.Player;
 
 //Ext libraries
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.*;
+
 import org.apache.commons.lang3.tuple.Pair;
 import java.io.IOException;
 
 //For JSON
-import java.io.FileReader; 
-import java.util.Iterator; 
-import java.util.Map;
-  
+import java.io.FileReader;
+
 import org.json.simple.JSONArray; 
 import org.json.simple.JSONObject; 
 import org.json.simple.parser.*;
@@ -24,19 +22,19 @@ import org.json.simple.parser.*;
 public class Board {
     HashMap<Square, Pair<Integer, Integer>> map;
     
-    public Board(){
+    public Board(String jsonFilePath){
         map = new HashMap<>();
         try {
-            this.buildFromJson();
+            this.buildFromJson(jsonFilePath);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+    public Board() {}
 
+    public void buildFromJson(String jsonFilePath) throws Exception {
 
-    public void buildFromJson() throws Exception {
-
-        Object jsonObj = new JSONParser().parse(new FileReader("mapa.json")); 
+        Object jsonObj = new JSONParser().parse(new FileReader(jsonFilePath));
         JSONObject jsonFile = (JSONObject) jsonObj; 
         JSONArray squares = (JSONArray) jsonFile.get("Squares"); 
           
@@ -96,7 +94,7 @@ public class Board {
 
     public boolean pompeyaWasReached(Player currentPlayer) {
         Position currentPosition = currentPlayer.getCurrentPosition();
-        return (currentPosition == new Position(25));
+        return (Objects.equals(currentPosition, new Position(25)));
     }
 }
 

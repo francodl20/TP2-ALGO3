@@ -3,10 +3,12 @@ package edu.fiuba.algo3.modelo.attributes.seniority;
 
 
 public class Senior implements Seniority {
-    int turns;
-
+    Integer turns;
+    Integer SENIORITY_BONUS = 10;
+    Integer SENIORITY_THRESHOLD = 12;
+    //todo crear clase de constantes de juego "GameConstants"
     public Senior() {
-        turns = 12;
+        turns = SENIORITY_THRESHOLD;
     }
 
     @Override
@@ -18,6 +20,6 @@ public class Senior implements Seniority {
     @Override
     public Integer energyPlus(Integer energy) {
         
-        return (energy + (10)); //CAMBIAR NUEMROS MAGICOS
+        return (energy + SENIORITY_BONUS);
     }
 }

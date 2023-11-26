@@ -13,7 +13,7 @@ import edu.fiuba.algo3.modelo.board.Board;
 import edu.fiuba.algo3.modelo.board.Square;
 
 public class TurnManager {
-    public static final Integer FINAL_TURN = 30;
+    public static final Integer MAX_ROUNDS = 30;
     List<Gladiator> gladiators;
     ListIterator<Gladiator> turnManager;
     Gladiator currentPlayer;
@@ -54,13 +54,13 @@ public class TurnManager {
             turnCount++;
         }
 
-        if (turnCount > FINAL_TURN) {;
+        if (turnCount > MAX_ROUNDS) {;
             return true;  
         }
 
         //Picks next gladiator and plays the turn
         currentPlayer = turnManager.next();
-        if (currentPlayer.playTurn(diceRoll)) {
+        if (currentPlayer.playTurn(diceRoll)) { //todo aca hay un error. Si está lesionado y no juega, se ejecuta igualment la linea siguiente
             gameBoard.playAtCurrentPositionWith(currentPlayer);
         }
 

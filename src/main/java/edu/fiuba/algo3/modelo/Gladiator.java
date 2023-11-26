@@ -9,7 +9,6 @@ import edu.fiuba.algo3.modelo.equipment.Equipment;
 
 public class Gladiator implements Player {
     private final Integer ENERGY_RECOVERED_AFTER_MEAL = 10;
-    private final Integer TURN_ENERGY_COST = -1;
     private final Integer ENERGY_LOST_PER_ALCOHOLIC_DRINK = -4;
     private Integer energy;
     private Seniority seniority;
@@ -67,14 +66,12 @@ public class Gladiator implements Player {
     }
 
     public void moveFromCurrentPosition(Position howManySquaresToMove) {
-        position.add(howManySquaresToMove);
+        position = position.add(howManySquaresToMove);
     }
 
     public boolean playTurn(Integer squaresToMove){
         this.energy = this.seniority.energyPlus(this.energy);
-        // costo de jugar el turno
-        this.energy = this.energy + TURN_ENERGY_COST;
-        if (this.energy != 0) {
+        if (this.energy > 0) {
             this.injuries.playTurn(squaresToMove);
         } else {
             this.energy = this.energy + 5; //CAMBIAR NUMERO MAGICO POR CONSTANTE
