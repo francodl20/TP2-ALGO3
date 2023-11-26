@@ -96,6 +96,10 @@ public class Board {
         Position currentPosition = currentPlayer.getCurrentPosition();
         return (Objects.equals(currentPosition, new Position(25)));
     }
+
+    public Square getToPompeii() {
+        return new PompeyaSquare(new Position(25)); // todo determinar bien cuál es el square de llegada
+    }
 }
 
 /*

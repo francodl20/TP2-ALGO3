@@ -2,19 +2,21 @@ package edu.fiuba.algo3.modelo;
  
 import edu.fiuba.algo3.modelo.attributes.Position;
 import edu.fiuba.algo3.modelo.board.Square;
-import edu.fiuba.algo3.modelo.attributes.InjuredState.Healthy;
-import edu.fiuba.algo3.modelo.attributes.InjuredState.InjuredState;
+import edu.fiuba.algo3.modelo.attributes.playerState.Healthy;
+import edu.fiuba.algo3.modelo.attributes.playerState.PlayerState;
 import edu.fiuba.algo3.modelo.attributes.seniority.Seniority;
 import edu.fiuba.algo3.modelo.equipment.Equipment;
 
 public class Gladiator implements Player {
     private final Integer ENERGY_RECOVERED_AFTER_MEAL = 10;
     private final Integer ENERGY_LOST_PER_ALCOHOLIC_DRINK = -4;
+
+    private final Integer RECHARGE_RATE_PER_ROUND = 5;
     private Integer energy;
     private Seniority seniority;
     private Position position;
     private Equipment equipment;
-    private InjuredState injuries;
+    private PlayerState playerState;
     //private int turns;
     
     public Gladiator(Seniority seniority, Integer energy, Position position, Equipment equipment) {
@@ -22,7 +24,7 @@ public class Gladiator implements Player {
         this.seniority = seniority;
         this.position = position;
         this.equipment = equipment;
-        this.injuries = new Healthy(this);
+        this.playerState = new Healthy(this);
         // this.turns = 0;
     }
 
@@ -42,7 +44,7 @@ public class Gladiator implements Player {
 
         public void getInjured() {
             // this.energy.getInjured();
-            this.injuries.update();
+            this.playerState.update();
         }
 
         public void fightAgainstWildBeast() {
@@ -70,19 +72,20 @@ public class Gladiator implements Player {
     }
 
     public boolean playTurn(Integer squaresToMove){
+        boolean played = false;
         this.energy = this.seniority.energyPlus(this.energy);
         if (this.energy > 0) {
-            this.injuries.playTurn(squaresToMove);
+            played = this.playerState.playTurn(squaresToMove);
         } else {
-            this.energy = this.energy + 5; //CAMBIAR NUMERO MAGICO POR CONSTANTE
+            this.energy = this.energy + RECHARGE_RATE_PER_ROUND;
         }
         this.seniority = this.seniority.addTurn();
 
-        return true;
+        return played;
     }
 
-    public void updateInjuries(InjuredState newState) {
-        this.injuries = newState;
+    public void updateStateOfInjuries(PlayerState newState) {
+        this.playerState = newState;
     }
 
     public boolean in(Square square){

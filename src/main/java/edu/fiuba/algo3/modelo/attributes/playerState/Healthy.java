@@ -1,9 +1,9 @@
-package edu.fiuba.algo3.modelo.attributes.InjuredState;
+package edu.fiuba.algo3.modelo.attributes.playerState;
 
 import edu.fiuba.algo3.modelo.Gladiator;
 import edu.fiuba.algo3.modelo.attributes.Position;
 
-public class Healthy implements InjuredState {
+public class Healthy implements PlayerState {
     private Gladiator gladiator;
 
     public Healthy(Gladiator gladiator) {
@@ -12,11 +12,12 @@ public class Healthy implements InjuredState {
 
     @Override
     public void update() {
-        gladiator.updateInjuries(new Injured(gladiator));
+        gladiator.updateStateOfInjuries(new Injured(gladiator));
     }
 
     @Override
-    public void playTurn(Integer squaresToMove) {
+    public boolean playTurn(Integer squaresToMove) {
         gladiator.moveFromCurrentPosition(new Position(squaresToMove));
+        return true;
     }
 }
