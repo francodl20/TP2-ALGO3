@@ -1,16 +1,15 @@
 package edu.fiuba.algo3.modelo;
  
 import edu.fiuba.algo3.modelo.attributes.Position;
-import edu.fiuba.algo3.modelo.board.Square;
+import edu.fiuba.algo3.modelo.board.ISquare;
 import edu.fiuba.algo3.modelo.attributes.playerState.Healthy;
 import edu.fiuba.algo3.modelo.attributes.playerState.PlayerState;
 import edu.fiuba.algo3.modelo.attributes.seniority.Seniority;
 import edu.fiuba.algo3.modelo.equipment.Equipment;
 
-public class Gladiator implements Player {
+public class Gladiator implements IPlayer {
     private final Integer ENERGY_RECOVERED_AFTER_MEAL = 10;
     private final Integer ENERGY_LOST_PER_ALCOHOLIC_DRINK = -4;
-
     private final Integer RECHARGE_RATE_PER_ROUND = 5;
     private Integer energy;
     private Seniority seniority;
@@ -30,33 +29,38 @@ public class Gladiator implements Player {
 
 
     //Methods related to the squares
-        public void eat(){
-            this.energy = (this.energy + ENERGY_RECOVERED_AFTER_MEAL);
-        }
+    public void eat(){
+        this.energy = (this.energy + ENERGY_RECOVERED_AFTER_MEAL);
+    }
 
-        public void enhanceArmour(){
-            this.equipment = this.equipment.enhance();
-        }
+    public void enhanceArmour(){
+        this.equipment = this.equipment.enhance();
+    }
 
-        public void enjoyBacchanalia(Integer howManyDrinks){
-            this.energy = (this.energy + (howManyDrinks * ENERGY_LOST_PER_ALCOHOLIC_DRINK));
-        }
+    public void enjoyBacchanalia(Integer howManyDrinks){
+        this.energy = (this.energy + (howManyDrinks * ENERGY_LOST_PER_ALCOHOLIC_DRINK));
+    }
 
-        public void getInjured() {
-            // this.energy.getInjured();
-            this.playerState.update();
-        }
+    public void getInjured() {
+        // this.energy.getInjured();
+        this.playerState.update();
+    }
 
-        public void fightAgainstWildBeast() {
+    public void fightAgainstWildBeast() {
+        Integer energyLost = this.equipment.protectFromtWildBeast();
+        this.energy = this.energy + energyLost;
+        //gamestate.beastSquare(energyLost)
+    }
 
-            this.energy = this.energy + this.equipment.protectFromtWildBeast();
+    public void arriveToPompeya() {
+        if (!equipment.arriveToPompeya()) {
+            position = new Position(position.getCurrentPosition()/2);
         }
+    }
 
-        public void arriveToPompeya() {
-            if (!equipment.arriveToPompeya()) {
-                position = new Position(position.getCurrentPosition()/2);
-            }
-        }
+    public boolean in(ISquare square){
+        return square.with(this.position);
+    }
     //
 
     public Integer getEnergy() {
@@ -71,11 +75,11 @@ public class Gladiator implements Player {
         position = position.add(howManySquaresToMove);
     }
 
-    public boolean playTurn(Integer squaresToMove){
+    public boolean playTurn(IDice dice){
         boolean played = false;
         this.energy = this.seniority.energyPlus(this.energy);
         if (this.energy > 0) {
-            played = this.playerState.playTurn(squaresToMove);
+            played = this.playerState.playTurn(dice.roll());
         } else {
             this.energy = this.energy + RECHARGE_RATE_PER_ROUND;
         }
@@ -88,9 +92,7 @@ public class Gladiator implements Player {
         this.playerState = newState;
     }
 
-    public boolean in(Square square){
-        return square.with(this.position);
-    }
+    
 }
 
 

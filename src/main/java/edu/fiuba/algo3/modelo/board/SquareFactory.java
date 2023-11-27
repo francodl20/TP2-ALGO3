@@ -3,7 +3,7 @@ package edu.fiuba.algo3.modelo.board;
 import edu.fiuba.algo3.modelo.attributes.Position;
 
 public class SquareFactory {
-    public static Square createSquare(Position position, Object type, Object obstacle, Object price){
+    public static ISquare createSquare(Position position, Object type, Object obstacle, Object price){
         String instanceType = (String)type;
 
         switch (instanceType) {
@@ -32,5 +32,19 @@ public class SquareFactory {
                 //se rompio todo
                 return new EmptySquare(position);
         }  
+
+        /*
+        PROPUESTA ALTERNATIVA PARA SQUARE FACTORY
+
+        squareTypes.put("Empty", new EmptySqure(position);
+        squareTypes.put("Equipment", new EquipmentSquare(position);
+        squareTypes.put("Food", new FoodSquare(position);
+        squareTypes.put("Beast", new BeastSquare(position);
+        squareTypes.put("Bachanalia", new BachanaliaSquare(position);
+        squareTypes.put("Injury", new InjurySquare(position);
+        squareTypes.put("Pompeii", new PompeyaSquare(position);
+
+        return (squareTypes.get(instanceType));
+         */
     }
 }

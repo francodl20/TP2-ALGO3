@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.attributes.Position;
-import edu.fiuba.algo3.modelo.board.Square;
+import edu.fiuba.algo3.modelo.board.ISquare;
 
 public interface IPlayer {
     public Position getCurrentPosition();
@@ -17,5 +17,5 @@ public interface IPlayer {
 
     public void arriveToPompeya();
 
-    public boolean in(Square square);
+    public boolean in(ISquare square);
 }

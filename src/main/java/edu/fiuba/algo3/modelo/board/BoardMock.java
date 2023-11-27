@@ -3,17 +3,17 @@ package edu.fiuba.algo3.modelo.board;
 import java.util.HashMap;
 
 import edu.fiuba.algo3.modelo.attributes.Position;
-import edu.fiuba.algo3.modelo.Player;
+import edu.fiuba.algo3.modelo.IPlayer;
 
 public class BoardMock extends Board {
-    HashMap<Position,Square> squareMap;
+    HashMap<Position,ISquare> squareMap;
 
     public BoardMock() {
     }
     @Override
-    public void playAtCurrentPositionWith(Player currentPlayer) {
+    public void playAtCurrentPositionWith(IPlayer currentPlayer) {
         Position position = currentPlayer.getCurrentPosition();
-        Square square;
+        ISquare square;
         if (position.equals(new Position(0))) {
             square = new EmptySquare(position);
         }

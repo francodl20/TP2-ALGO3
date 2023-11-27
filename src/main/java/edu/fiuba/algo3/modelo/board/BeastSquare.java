@@ -1,16 +1,16 @@
 package edu.fiuba.algo3.modelo.board;
-import edu.fiuba.algo3.modelo.Player;
+import edu.fiuba.algo3.modelo.IPlayer;
 import edu.fiuba.algo3.modelo.attributes.Position;
 
 
-public class BeastSquare implements Square {
+public class BeastSquare implements ISquare {
     Position position;
 
     public BeastSquare(Position aPosition) {
         position = aPosition;
     }
 
-    public void play(Player player) {
+    public void play(IPlayer player) {
         player.fightAgainstWildBeast();
     }
     

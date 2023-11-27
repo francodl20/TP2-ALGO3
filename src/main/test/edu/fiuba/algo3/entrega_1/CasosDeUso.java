@@ -1,15 +1,20 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.TurnManager;
+import edu.fiuba.algo3.modelo.IDice;
+import edu.fiuba.algo3.modelo.DiceMock;
 import edu.fiuba.algo3.modelo.Gladiator;
 import edu.fiuba.algo3.modelo.board.Board;
 import edu.fiuba.algo3.modelo.board.BoardMock;
+import edu.fiuba.algo3.modelo.board.ISquare;
+import edu.fiuba.algo3.modelo.board.SquareFactory;
 import edu.fiuba.algo3.modelo.equipment.Helpless;
 import edu.fiuba.algo3.modelo.equipment.Helmet;
 import edu.fiuba.algo3.modelo.equipment.Key;
 import edu.fiuba.algo3.modelo.equipment.SwordAndShield;
 
 import edu.fiuba.algo3.modelo.attributes.Position;
+import edu.fiuba.algo3.modelo.attributes.gameState.OngoingGame;
 import edu.fiuba.algo3.modelo.attributes.seniority.*;
 
 import org.junit.jupiter.api.Test;
@@ -29,31 +34,34 @@ public class CasosDeUso {
     private final Integer ENERGY_AFTER_FIGHTING_WITH_KEY_FROM_ZERO_ENERGY = 0;
 
     private final Integer SEMISENIOR_BONUS = 5;
+    private final Integer SEMISENIOR_THRESHOLD = 8;
     private final Integer SENIOR_BONUS = 10;
-    private final Integer SEMISENIORITY_THRESHOLD = 8;
+    
 
     private final Integer MAX_ROUNDS = 30;
     //Caso de uso 01
     @Test   
-    //todo: preguntar si hay que usar tablero o no hace falta
     public void gladiatorBeginsWithInitialEnergyAndEquipment() {
         //Arrange
 
-        // Board boardMock = new BoardMock(test);
+            //Gladiators
         Gladiator gladiator1 = new Gladiator(new Novice(), INITIAL_ENERGY, new Position(), new Helpless());
         Gladiator gladiator2 = new Gladiator(new Novice(), INITIAL_ENERGY, new Position(), new Helpless());
         ArrayList<Gladiator> gladiators = new ArrayList<>(); 
         gladiators.add(gladiator1);
-        gladiators.add(gladiator2);
-        // GladiatorMania game = new GladiatorMania(boardMock, gladiators);    
+        gladiators.add(gladiator2);  
+
+            //Game          -->modificar boardMock para que nos sirva bien
+        TurnManager game = new TurnManager(gladiators, new BoardMock(), new OngoingGame());
+        IDice dice = new DiceMock(1);
     
         //Act
-        //game.play();
+        game.play(dice);
         
         //Assert
-        //Check de initial energy
+        //BORRAR LOS GET ESTA EN PROCESO
+        //Initial energy is correct
         assertEquals(gladiator1.getEnergy(), INITIAL_ENERGY); 
-        //todo: gladiator1.getEnergy() o game.getGladiator(1).getEnergy()?
         assertEquals(gladiator2.getEnergy(), INITIAL_ENERGY);
 
         //Energy after fighting the beast corresponds with the equipment
@@ -67,13 +75,21 @@ public class CasosDeUso {
     //todo: preguntar si hay que usar tablero o no hace falta
     public void gladiatorIsAbleToMove() {
         //Arrange
-        Gladiator gladiator = new Gladiator(new Novice(), INITIAL_ENERGY, new Position(), new Helpless());
-        //  Position initialPosition = new Position();
-        Integer squaresToMove = 5;
+            //Gladiators
+        Gladiator gladiator1 = new Gladiator(new Novice(), INITIAL_ENERGY, new Position(), new Helpless());
+        Gladiator gladiator2 = new Gladiator(new Novice(), INITIAL_ENERGY, new Position(), new Helpless());
+        ArrayList<Gladiator> gladiators = new ArrayList<>(); 
+        gladiators.add(gladiator1);
+        gladiators.add(gladiator2);
+
+            //Game          -->modificar boardMock para que nos sirva bien
+        TurnManager game = new TurnManager(gladiators, new BoardMock(), new OngoingGame());
+        IDice dice = new DiceMock(5);
+
         Position finalPosition = new Position(2*squaresToMove);
         //Act
-        gladiator.playTurn(squaresToMove);
-        gladiator.playTurn(squaresToMove);
+        gladiator.playTurn(dice);
+        gladiator.playTurn(dice);
 
         //Assert
         assertEquals(finalPosition, gladiator.getCurrentPosition()); 
@@ -165,7 +181,7 @@ public class CasosDeUso {
         Integer expectedEnergy = (INITIAL_ENERGY + SEMISENIOR_BONUS);
 
         //Act
-        for (Integer i = 0; i<=SEMISENIORITY_THRESHOLD; i++) {
+        for (Integer i = 0; i<=SEMISENIOR_THRESHOLD; i++) {
             gladiator.playTurn(1);
         }
         //Assert
@@ -176,22 +192,37 @@ public class CasosDeUso {
     @Test
     public void arrivingToTheGoalWithoutTheKeyMovesBackToTheMiddleOfTheBoard() { //todo:
         //Arrange
+            //Gladiators
         Gladiator gladiator1 = new Gladiator(new SemiSenior(), INITIAL_ENERGY, new Position(24), new SwordAndShield());
         Gladiator gladiator2 = new Gladiator(new Senior(), INITIAL_ENERGY, new Position(24), new Key());
         ArrayList<Gladiator> gladiators = new ArrayList<>(); 
         gladiators.add(gladiator1);
         gladiators.add(gladiator2);
-        TurnManager game = new TurnManager(gladiators, new BoardMock());
-        Position targetPosition = new Position(24/2);
-        Integer diceRoll = 1;
+            //Game
+        TurnManager game = new TurnManager(gladiators, new BoardMock(), new OngoingGame());
+        IDice dice = new DiceMock(1);
+            //Objetive
+        Integer targetPosition = 24/2;
+        Object type = "Camino";
+        Object prize = "Camino";
+        Object obstacle = "Camino";
+        ISquare targetSquare = SquareFactory.createSquare(new Position(targetPosition), type, obstacle, prize);
+        Integer targetPosition2 = 25;
+        Object type2 = "Llegada";
+        Object prize2 = "";
+        Object obstacle2 = "";
+        ISquare targetSquare2 = SquareFactory.createSquare(new Position(targetPosition2), type2, obstacle2, prize2);
+
+        
         //Act
-        game.play(diceRoll);
+        game.play(dice);
+
         //Assert
-        assertEquals(game.getCurrentPlayer().getCurrentPosition(), targetPosition);
+        assertEquals(gladiator1.in(targetSquare), true);
         //Act
-        game.play(diceRoll);
+        game.play(dice);
         //Assert
-        assertEquals(game.getCurrentPlayer().getCurrentPosition(), new Position(25));
+        assertEquals(gladiator2.in(targetSquare2), true);
     }
 
     //Caso de uso 10
