@@ -76,17 +76,6 @@ Unhandled exception type ParseExceptionJava(16777384)
         } 
     }
 
-
-/*
-"phoneNumbers":[
-            {
-            "type":"home", "number":"212 555-1234"
-            },
-         {
-            "type":"fax", "number":"212 555-1234"
-         }
-    ],
-*/
     public void playAtCurrentPositionWith(IPlayer currentPlayer) {
         for (ISquare square : map.keySet()) {
             if(currentPlayer.in(square)){
@@ -96,7 +85,6 @@ Unhandled exception type ParseExceptionJava(16777384)
         }
     }
 
-    //public Integer 
 
     public boolean pompeyaWasReached(IPlayer currentPlayer) {
         Position currentPosition = currentPlayer.getCurrentPosition();
@@ -107,47 +95,3 @@ Unhandled exception type ParseExceptionJava(16777384)
         return new PompeyaSquare(new Position(25)); // todo determinar bien cuál es el square de llegada
     }
 }
-
-/*
-
-// Definir la estructura de datos (sd)
-class MiEstructuraDeDatos {
-    String nombre;
-    int edad;
-    String ciudad;
-
-    public MiEstructuraDeDatos(String nombre, int edad, String ciudad) {
-        this.nombre = nombre;
-        this.edad = edad;
-        this.ciudad = ciudad;
-    }
-}
-
-public class Main {
-    public static void main(String[] args) {
-        try {
-            // Leer el contenido del archivo JSON como una cadena
-            String contenidoJSON = new String(Files.readAllBytes(Paths.get("datos.json")));
-
-            // Crear un objeto JSON a partir de la cadena
-            JSONObject json = new JSONObject(contenidoJSON);
-
-            // Obtener la información del JSON
-            String nombre = json.getString("nombre");
-            int edad = json.getInt("edad");
-            String ciudad = json.getString("ciudad");
-
-            // Crear una instancia de la estructura de datos con la información del JSON
-            MiEstructuraDeDatos miSD = new MiEstructuraDeDatos(nombre, edad, ciudad);
-
-            // Acceder a la información
-            System.out.println("Nombre: " + miSD.nombre);
-            System.out.println("Edad: " + miSD.edad);
-            System.out.println("Ciudad: " + miSD.ciudad);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-}
- */

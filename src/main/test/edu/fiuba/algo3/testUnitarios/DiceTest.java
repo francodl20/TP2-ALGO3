@@ -8,15 +8,17 @@ public class DiceTest {
 
     @Test
     public void diceReturnANumberBetween1And6() {
-        int diceRoll = Dice.roll();
-
-        assertTrue(diceRoll >= 1 && diceRoll <= 6);
+        Dice dice = new Dice();
+        int result = dice.roll();
+        
+        assertTrue((result >= 1) && (result <= 6));
     }
-
+    
     @Test
     public void multipleDiceRollsReturnNumbersBetween1And6() {
+        Dice dice = new Dice();
         for (int i = 0; i < 100; i++) {
-            int diceRoll = Dice.roll();
+            int diceRoll = dice.roll();
             assertTrue(diceRoll >= 1 && diceRoll <= 6);
         }
     }

@@ -96,7 +96,7 @@ public class TestCasosDeUso {
         game.playOneTurn(dice);
 
         //Assert
-        assertEquals(finalPosition, gladiator.getCurrentPosition());
+        assertEquals(finalPosition, gladiator1.getCurrentPosition());
     }
 
     //Caso de uso 03
