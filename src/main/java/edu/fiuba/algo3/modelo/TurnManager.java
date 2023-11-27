@@ -1,7 +1,5 @@
 package edu.fiuba.algo3.modelo;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 
 import edu.fiuba.algo3.modelo.Dice;
@@ -23,10 +21,10 @@ public class TurnManager {
     private Iterator<Gladiator> turnManager;
     private Gladiator currentPlayer;
     private Integer turnCount;
-    private Board gameBoard;
+    private final Board gameBoard;
     private GameState gameState;
-    private Map<Gladiator,String> players;
-    
+    private final Map<Gladiator,String> players;
+
     public TurnManager(List<Gladiator> gladiators, List<String> listOfNames, Board board, GameState game) {
         players = new LinkedHashMap<>(); //map que guarda el orden de los elementos
         gameBoard = board;
@@ -41,11 +39,10 @@ public class TurnManager {
 
     public TurnManager(Integer amountOfPlayers, List<String> listOfNames, Board board) {
         players = new LinkedHashMap<>();
-        Integer initialEnergy = INITIAL_ENERGY;
 
         for (int i = 0; i < amountOfPlayers; i++) {
-            players.put(new Gladiator(new Novice(), 
-                                        initialEnergy, 
+            players.put(new Gladiator(new Novice(),
+                                        INITIAL_ENERGY,
                                         new Position(), 
                                         new Helpless()), listOfNames.get(i));
         }
@@ -55,13 +52,13 @@ public class TurnManager {
         currentPlayer = null;
     }
     
-    public GameState play(DiceInterface dice) {
+    public GameState play(IDice dice) {
         if (!turnManager.hasNext() ) {
             turnManager = players.keySet().iterator();
             turnCount++;
         }
 
-        updateGameState((Player)currentPlayer, gameBoard, turnCount);
+        updateGameState(currentPlayer, players.get(currentPlayer), gameBoard, turnCount);
 
         if (gameState.gameHasEnded()) {
             return gameState;
@@ -73,13 +70,13 @@ public class TurnManager {
             gameBoard.playAtCurrentPositionWith(currentPlayer);
         }
 
-        updateGameState((Player)currentPlayer, gameBoard, turnCount);
+        updateGameState(currentPlayer, players.get(currentPlayer), gameBoard, turnCount);
 
         return gameState;
     }
 
-    private void updateGameState(Player currentPlayer, Board board, Integer rounds) {
-        this.gameState = gameState.update(currentPlayer, board, rounds);
+    private void updateGameState(IPlayer currentPlayer, String playerName, Board board, Integer rounds) {
+        this.gameState = gameState.update(currentPlayer, playerName, board, rounds);
     }
 
     public Gladiator getCurrentPlayer() {
