@@ -2,18 +2,16 @@ package edu.fiuba.algo3.modelo.board;
 
 //Local clases
 import edu.fiuba.algo3.modelo.attributes.Position;
-import edu.fiuba.algo3.modelo.board.EquipmentSquare;
+import edu.fiuba.algo3.modelo.board.squares.SquareFactory;
+import edu.fiuba.algo3.modelo.board.squares.ISquare;
 import edu.fiuba.algo3.modelo.IPlayer;
 
 //Ext libraries
 import java.util.*;
-
 import org.apache.commons.lang3.tuple.Pair;
-import java.io.IOException;
 
 //For JSON
 import java.io.FileReader;
-
 import org.json.simple.JSONArray; 
 import org.json.simple.JSONObject; 
 import org.json.simple.parser.*;
@@ -21,6 +19,7 @@ import org.json.simple.parser.*;
 
 public class Board {
     HashMap<ISquare, Pair<Integer, Integer>> map;
+    Position pompeiiPosition;
     
     public Board(String jsonFilePath){
         map = new HashMap<>();
@@ -44,7 +43,7 @@ Unhandled exception type ParseExceptionJava(16777384)
         Iterator<Map.Entry> squareAtributeIterator;
         Iterator squareIterator = squares.iterator();
         Integer squareNumber = 0;
-
+        
         while (squareIterator.hasNext()) { 
             squareAtributeIterator = ((Map) squareIterator.next()).entrySet().iterator(); 
             Object type = null;
@@ -74,6 +73,7 @@ Unhandled exception type ParseExceptionJava(16777384)
             map.put(SquareFactory.createSquare(new Position(squareNumber), type, obstacle, prize), 
                     Pair.of((Integer)x,(Integer)y));
         } 
+        pompeiiPosition = new Position(squareNumber);
     }
 
     public void playAtCurrentPositionWith(IPlayer currentPlayer) {
@@ -85,13 +85,14 @@ Unhandled exception type ParseExceptionJava(16777384)
         }
     }
 
-
-    public boolean pompeyaWasReached(IPlayer currentPlayer) {
-        Position currentPosition = currentPlayer.getCurrentPosition();
-        return (Objects.equals(currentPosition, new Position(25)));
-    }
-
-    public ISquare getToPompeii() {
-        return new PompeyaSquare(new Position(25)); // todo determinar bien cuál es el square de llegada
+    public ISquare getPompeii() {
+        //Will never return null
+        ISquare pompeii = null;
+        for (ISquare square : map.keySet()) {
+            if (square.with(pompeiiPosition)){
+                pompeii = square;
+            }
+        }
+        return pompeii;
     }
 }

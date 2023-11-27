@@ -1,15 +1,13 @@
-package edu.fiuba.algo3.modelo.board;
+package edu.fiuba.algo3.modelo.board.obstacles;
 import edu.fiuba.algo3.modelo.IPlayer;
 import edu.fiuba.algo3.modelo.attributes.Position;
 
-public class BacchanaliaSquare implements ISquare {
+public class Bacchanalia implements IObstacle {
     Position position;
         
-    public BacchanaliaSquare(Position aPosition) {
-        position = aPosition;
-    }
+    public Bacchanalia() { }
 
-    public void play(IPlayer player) {
+    public void harm(IPlayer player) {
         player.enjoyBacchanalia(4);
     }
 

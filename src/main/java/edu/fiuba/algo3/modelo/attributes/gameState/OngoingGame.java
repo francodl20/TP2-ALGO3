@@ -16,7 +16,7 @@ public class OngoingGame implements GameState {
         if (rounds > MAX_ROUNDS) {
             return new TiedGameState();
         }
-        if (currentPlayer.in(board.getToPompeii())) {
+        if (currentPlayer.in(board.getPompeii())) {
             return new FinishedGameWithWinner(playerName);
         }
         return this;

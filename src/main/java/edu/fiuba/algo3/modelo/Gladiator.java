@@ -1,10 +1,10 @@
 package edu.fiuba.algo3.modelo;
  
 import edu.fiuba.algo3.modelo.attributes.Position;
-import edu.fiuba.algo3.modelo.board.ISquare;
 import edu.fiuba.algo3.modelo.attributes.playerState.Healthy;
 import edu.fiuba.algo3.modelo.attributes.playerState.PlayerState;
 import edu.fiuba.algo3.modelo.attributes.seniority.Seniority;
+import edu.fiuba.algo3.modelo.board.squares.ISquare;
 import edu.fiuba.algo3.modelo.equipment.Equipment;
 
 public class Gladiator implements IPlayer {

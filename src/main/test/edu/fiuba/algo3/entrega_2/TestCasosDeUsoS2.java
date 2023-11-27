@@ -15,21 +15,21 @@ public class TestCasosDeUsoS2 {
 
     //Caso de uso 13
     @Test   
-     public void CanNotReadAJsonWithWrongFormat()throws Exception{
-      
-        String path2="src/main/java/edu/fiuba/algo3/modelo/board/uselessJson.json";
-        Board board = new Board();
-       
-       assertThrows(Exception.class, () -> board.buildFromJson(path2));
-    }
+    public void CanNotReadAJsonWithWrongFormat()throws Exception{
+    
+    String path2="src/main/java/edu/fiuba/algo3/modelo/board/uselessJson.json";
+    Board board = new Board();
+    
+    assertThrows(Exception.class, () -> board.buildFromJson(path2));
+}
     //Caso de uso 14  ------ solo hay un Json :/ 
    
     //Caso de uso 15  ------- No hay Json de enemigos. No sabe, no responde
     @Test   
-     public void Camat(){
-      
-       
-       
+    public void Camat(){
+    
+    
+    
     }
 
 }

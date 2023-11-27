@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.attributes.Position;
-import edu.fiuba.algo3.modelo.board.ISquare;
+import edu.fiuba.algo3.modelo.board.squares.ISquare;
 
 public interface IPlayer {
     public Position getCurrentPosition();

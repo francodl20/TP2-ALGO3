@@ -1,15 +1,17 @@
-package edu.fiuba.algo3.modelo.board;
+package edu.fiuba.algo3.modelo.board.obstacles;
 import edu.fiuba.algo3.modelo.IPlayer;
 import edu.fiuba.algo3.modelo.attributes.Position;
 
-public class EmptySquare implements ISquare {
+
+public class Beast implements IObstacle {
     Position position;
 
-    public EmptySquare(Position aPosition) {
-        position = aPosition;
+    public Beast() { }
+
+    public void harm(IPlayer player) {
+        player.fightAgainstWildBeast();
     }
-    public void play(IPlayer player) {
-    }
+    
     public boolean with(Position position){
         return this.position.equals(position);
     }

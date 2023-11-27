@@ -9,7 +9,7 @@ import edu.fiuba.algo3.modelo.equipment.Helpless;
 import edu.fiuba.algo3.modelo.board.Board;
 
 public class TurnManager {
-    private final Integer MAX_ROUNDS = 30;
+   // private final Integer MAX_ROUNDS = 30;
     private final Integer INITIAL_ENERGY = 20;
     private Iterator<Gladiator> turnManager;
     private Gladiator currentPlayer;
@@ -45,7 +45,7 @@ public class TurnManager {
         currentPlayer = null;
     }
     
-    public GameState playOneTurn(IDice dice) {
+    public GameState playTurn(IDice dice) {
         if (!turnManager.hasNext() ) {
             turnManager = players.keySet().iterator();
             turnCount++;

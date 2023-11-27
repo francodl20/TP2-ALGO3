@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.board;
+package edu.fiuba.algo3.modelo.attributes;
 
 public class Coordinates {
     Integer x;

@@ -1,9 +1,9 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.modelo.board.BoardMock;
-import edu.fiuba.algo3.modelo.board.ISquare;
-import edu.fiuba.algo3.modelo.board.SquareFactory;
+import edu.fiuba.algo3.modelo.board.Board;
+import edu.fiuba.algo3.modelo.board.squares.ISquare;
+import edu.fiuba.algo3.modelo.board.squares.SquareFactory;
 import edu.fiuba.algo3.modelo.equipment.Helpless;
 import edu.fiuba.algo3.modelo.equipment.Helmet;
 import edu.fiuba.algo3.modelo.equipment.Key;
@@ -39,7 +39,6 @@ public class TestCasosDeUso {
     @Test   
     public void gladiatorBeginsWithInitialEnergyAndEquipment() {
         //Arrange
-
             //Gladiators
         Gladiator gladiator1 = new Gladiator(new Novice(), INITIAL_ENERGY, new Position(), new Helpless());
         Gladiator gladiator2 = new Gladiator(new Novice(), INITIAL_ENERGY, new Position(), new Helpless());
@@ -50,11 +49,12 @@ public class TestCasosDeUso {
         nameOfPlayers.add("Mockito");
         nameOfPlayers.add("HomeMadeMock");
             //Game          -->modificar boardMock para que nos sirva bien
-        TurnManager game = new TurnManager(gladiators, nameOfPlayers, new BoardMock(), new OngoingGame());
+        String json = "/src/main/java/edu/fiuba/algo3/modelo/board/mapa.json";
+        TurnManager game = new TurnManager(gladiators, nameOfPlayers, new Board(json), new OngoingGame());
         IDice dice = new DiceMock(1);
     
         //Act
-        game.playOneTurn(dice);
+        game.playTurn(dice);
         
         //Assert
         //BORRAR LOS GET ESTA EN PROCESO
@@ -84,7 +84,7 @@ public class TestCasosDeUso {
         nameOfPlayers.add("Comodus");
 
         //Game          -->modificar boardMock para que nos sirva bien
-        TurnManager game = new TurnManager(gladiators, nameOfPlayers, new BoardMock(), new OngoingGame());
+        TurnManager game = new TurnManager(gladiators, nameOfPlayers, new Board(), new OngoingGame());
         Integer squaresToMove = 5;
         IDice dice = new DiceMock(squaresToMove);
 
@@ -92,8 +92,8 @@ public class TestCasosDeUso {
 
         //Act
 
-        game.playOneTurn(dice);
-        game.playOneTurn(dice);
+        game.playTurn(dice);
+        game.playTurn(dice);
 
         //Assert
         assertEquals(finalPosition, gladiator1.getCurrentPosition());
@@ -207,9 +207,9 @@ public class TestCasosDeUso {
         nameOfPlayers.add("Comodus");
 
         //Game
-        TurnManager game = new TurnManager(gladiators, nameOfPlayers, new BoardMock(), new OngoingGame());
+        TurnManager game = new TurnManager(gladiators, nameOfPlayers, new Board(), new OngoingGame());
         IDice dice = new DiceMock(1);
-            //Objetive
+            //Objective
         Integer targetPosition = 24/2;
         Object type = "Camino";
         Object prize = "Camino";
@@ -223,12 +223,12 @@ public class TestCasosDeUso {
 
         
         //Act
-        game.playOneTurn(dice);
+        game.playTurn(dice);
 
         //Assert
         assertTrue(gladiator1.in(targetSquare));
         //Act
-        game.playOneTurn(dice);
+        game.playTurn(dice);
         //Assert
         assertTrue(gladiator2.in(targetSquare2));
     }
@@ -277,12 +277,12 @@ public class TestCasosDeUso {
         nameOfPlayers.add("Tito");
         nameOfPlayers.add("Comodus");
         GameState gameState = new OngoingGame();
-        TurnManager game = new TurnManager(gladiators, nameOfPlayers, new BoardMock(), gameState);
+        TurnManager game = new TurnManager(gladiators, nameOfPlayers, new Board(), gameState);
         DiceMock dice = new DiceMock(0);
         //Act
         for (int i = 0; i <= MAX_ROUNDS*2; i++) {
             assertFalse(gameState.gameHasEnded());
-            gameState = game.playOneTurn(dice);
+            gameState = game.playTurn(dice);
         }
         
         //Assert
