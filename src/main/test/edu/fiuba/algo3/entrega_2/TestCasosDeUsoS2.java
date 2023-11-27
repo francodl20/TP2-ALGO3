@@ -2,6 +2,8 @@ package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.board.Board;
 
+
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -27,9 +29,7 @@ public class TestCasosDeUsoS2 {
     //Caso de uso 15  ------- No hay Json de enemigos. No sabe, no responde
     @Test   
     public void Camat(){
-    
-    
-    
+
     }
 
 }

@@ -20,6 +20,6 @@ public class FinishSquare implements ISquare{
         //
     }
     public boolean with(Position position){
-        return (this.position == position);
+        return (this.position.equals(position));
     }
 }

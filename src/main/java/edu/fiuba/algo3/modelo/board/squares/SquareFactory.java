@@ -9,10 +9,10 @@ public class SquareFactory {
     public static ISquare createSquare(Position position, Object type, Object obstacle, Object prize){
         String instanceType = (String)type;
 
-        if (instanceType == "Salida"){
+        if (instanceType.equals("Salida")){
             return new StartSquare(position, PrizeFactory.createPrize(prize), 
                                             ObstacleFactory.createObstacle(obstacle));
-        } else if (instanceType == "Llegada"){
+        } else if (instanceType.equals("Llegada")){
             return new FinishSquare(position, PrizeFactory.createPrize(prize), 
                                             ObstacleFactory.createObstacle(obstacle));
         } else {

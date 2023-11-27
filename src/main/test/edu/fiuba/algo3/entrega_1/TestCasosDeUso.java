@@ -49,7 +49,7 @@ public class TestCasosDeUso {
         nameOfPlayers.add("Mockito");
         nameOfPlayers.add("HomeMadeMock");
             //Game          -->modificar boardMock para que nos sirva bien
-        String json = "/src/main/java/edu/fiuba/algo3/modelo/board/mapa.json";
+        String json = "src/main/java/edu/fiuba/algo3/modelo/board/mapa.json";
         TurnManager game = new TurnManager(gladiators, nameOfPlayers, new Board(json), new OngoingGame());
         IDice dice = new DiceMock(1);
     
@@ -84,9 +84,11 @@ public class TestCasosDeUso {
         nameOfPlayers.add("Comodus");
 
         //Game          -->modificar boardMock para que nos sirva bien
-        TurnManager game = new TurnManager(gladiators, nameOfPlayers, new Board(), new OngoingGame());
+        String json = "src/main/java/edu/fiuba/algo3/modelo/board/mapa.json";
+        TurnManager game = new TurnManager(gladiators, nameOfPlayers, new Board(json), new OngoingGame());
         Integer squaresToMove = 5;
         IDice dice = new DiceMock(squaresToMove);
+
 
         Position finalPosition = new Position(2*squaresToMove);
 
@@ -206,7 +208,8 @@ public class TestCasosDeUso {
         nameOfPlayers.add("Comodus");
 
         //Game
-        TurnManager game = new TurnManager(gladiators, nameOfPlayers, new Board(), new OngoingGame());
+        String json = "/src/main/java/edu/fiuba/algo3/modelo/board/mapa.json";
+        TurnManager game = new TurnManager(gladiators, nameOfPlayers, new Board(json), new OngoingGame());
         IDice dice = new DiceMock(1);
             //Objective
         Integer targetPosition = 24/2;

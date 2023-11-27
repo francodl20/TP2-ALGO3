@@ -21,6 +21,7 @@ public class PathSquare implements ISquare{
         obstacle.harm(player);
     }
     public boolean with(Position position){
-        return (this.position == position);
+        boolean isTrue = (this.position.equals(position));
+        return isTrue;
     }
 }

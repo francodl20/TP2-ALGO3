@@ -7,11 +7,11 @@ public class ObstacleFactory {
     public static IObstacle createObstacle(Object obstacleType) {
         String instanceType = (String)obstacleType;
 
-        if (instanceType == "Lesion") {
+        if (instanceType.equals("Lesion")) {
             return new Injury();
-        } else if (instanceType == "Fiera") {
+        } else if (instanceType.equals("Fiera")) {
             return new Beast();
-        } else if (instanceType == "Bacanal") {
+        } else if (instanceType.equals("Bacanal")) {
             return new Bacchanalia();
         } else {
             return new Empty();
