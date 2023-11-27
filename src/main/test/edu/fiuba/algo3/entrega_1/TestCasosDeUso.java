@@ -181,7 +181,6 @@ public class TestCasosDeUso {
     public void afterEightTurnsNoviceBecomesSeniorAndHisEnergyIncreasesInTheNextMove(){
         //Arrange
         Gladiator gladiator = new Gladiator(new Novice(), INITIAL_ENERGY, new Position(), new Helpless());
-        Integer finalEnergy = ZERO_ENERGY;
         Integer expectedEnergy = (INITIAL_ENERGY + SEMISENIOR_BONUS);
         DiceMock dice = new DiceMock(1);
         //Act

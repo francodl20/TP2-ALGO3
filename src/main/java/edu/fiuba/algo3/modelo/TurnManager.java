@@ -2,57 +2,49 @@ package edu.fiuba.algo3.modelo;
 import java.util.*;
 
 
-import edu.fiuba.algo3.modelo.attributes.Position;
-import edu.fiuba.algo3.modelo.attributes.seniority.Novice;
 import edu.fiuba.algo3.modelo.attributes.gameState.GameState;
-import edu.fiuba.algo3.modelo.equipment.Helpless;
 import edu.fiuba.algo3.modelo.board.Board;
 
 public class TurnManager {
-   // private final Integer MAX_ROUNDS = 30;
-    private final Integer INITIAL_ENERGY = 20;
+    private final Map<Gladiator,String> players;
     private Iterator<Gladiator> turnManager;
     private Gladiator currentPlayer;
-    private Integer turnCount;
     private final Board gameBoard;
     private GameState gameState;
-    private final Map<Gladiator,String> players;
+    private Integer turnCount;
 
     public TurnManager(List<Gladiator> gladiators, List<String> listOfNames, Board board, GameState game) {
-        players = new LinkedHashMap<>(); //map que guarda el orden de los elementos
+        players = new LinkedHashMap<>(); //ordered hash map
+        gladiators.forEach(gladiator ->
+            players.put(gladiator, listOfNames.get(gladiators.indexOf(gladiator))));
+        turnManager = players.keySet().iterator();
+        currentPlayer = turnManager.next();
         gameBoard = board;
         gameState = game;
         turnCount = 1;
-        currentPlayer = null;
-        gladiators.forEach(gladiator ->
-            players.put(gladiator,listOfNames.get(gladiators.indexOf(gladiator)))
-        );
-        turnManager = players.keySet().iterator();
-    }
-
-    public TurnManager(Integer amountOfPlayers, List<String> listOfNames, Board board) {
-        players = new LinkedHashMap<>();
-
-        for (int i = 0; i < amountOfPlayers; i++) {
-            players.put(new Gladiator(new Novice(),
-                                        INITIAL_ENERGY,
-                                        new Position(), 
-                                        new Helpless()), listOfNames.get(i));
-        }
-        turnManager = players.keySet().iterator();
-        gameBoard = board;
-        turnCount = 1;
-        currentPlayer = null;
     }
     
-    public GameState playTurn(IDice dice) {
-        if (!turnManager.hasNext() ) {
+    public void pickRandomPlayer(IDice dice) {
+        for (int i = 0; i < dice.roll(); i++) {
+            resetIterator();
+            turnManager.next();
+        }
+        turnCount = 0; //to prevent the reset from altering the rounds
+    }
+    
+    //Resets the iterator when it reaches the end
+    private void resetIterator() {
+        if (!turnManager.hasNext()) {
             turnManager = players.keySet().iterator();
             turnCount++;
         }
+    }
 
+    public GameState playTurn(IDice dice) {
+        resetIterator();
+
+        //Ends the game in case 30 turns were reached
         updateGameState(currentPlayer, players.get(currentPlayer), gameBoard, turnCount);
-
         if (gameState.gameHasEnded()) {
             return gameState;
         }
@@ -63,6 +55,7 @@ public class TurnManager {
             gameBoard.playAtCurrentPositionWith(currentPlayer);
         }
 
+        //Ends the game in case pompeii was reached
         updateGameState(currentPlayer, players.get(currentPlayer), gameBoard, turnCount);
 
         return gameState;
