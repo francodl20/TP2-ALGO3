@@ -2,18 +2,11 @@ package edu.fiuba.algo3.modelo;
 import java.util.*;
 
 
-import edu.fiuba.algo3.modelo.Dice;
-import edu.fiuba.algo3.modelo.Gladiator;
-
 import edu.fiuba.algo3.modelo.attributes.Position;
-import edu.fiuba.algo3.modelo.attributes.gameState.TieGameState;
-import edu.fiuba.algo3.modelo.attributes.gameState.FinishedGameWithWinner;
-import edu.fiuba.algo3.modelo.attributes.gameState.OngoingGame;
 import edu.fiuba.algo3.modelo.attributes.seniority.Novice;
 import edu.fiuba.algo3.modelo.attributes.gameState.GameState;
 import edu.fiuba.algo3.modelo.equipment.Helpless;
 import edu.fiuba.algo3.modelo.board.Board;
-import edu.fiuba.algo3.modelo.board.Square;
 
 public class TurnManager {
     private final Integer MAX_ROUNDS = 30;
@@ -52,7 +45,7 @@ public class TurnManager {
         currentPlayer = null;
     }
     
-    public GameState play(IDice dice) {
+    public GameState playOneTurn(IDice dice) {
         if (!turnManager.hasNext() ) {
             turnManager = players.keySet().iterator();
             turnCount++;

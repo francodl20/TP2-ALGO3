@@ -1,10 +1,6 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.modelo.TurnManager;
-import edu.fiuba.algo3.modelo.IDice;
-import edu.fiuba.algo3.modelo.DiceMock;
-import edu.fiuba.algo3.modelo.Gladiator;
-import edu.fiuba.algo3.modelo.board.Board;
+import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.board.BoardMock;
 import edu.fiuba.algo3.modelo.board.ISquare;
 import edu.fiuba.algo3.modelo.board.SquareFactory;
@@ -14,18 +10,18 @@ import edu.fiuba.algo3.modelo.equipment.Key;
 import edu.fiuba.algo3.modelo.equipment.SwordAndShield;
 
 import edu.fiuba.algo3.modelo.attributes.Position;
-import edu.fiuba.algo3.modelo.attributes.gameState.OngoingGame;
+import edu.fiuba.algo3.modelo.attributes.gameState.*;
 import edu.fiuba.algo3.modelo.attributes.seniority.*;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 //import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
+import static org.junit.jupiter.api.Assertions.*;
 
-public class CasosDeUso {
+
+public class TestCasosDeUso {
     private final Integer ENERGY_RECOVERED_AFTER_MEAL = 10;
     private final Integer ZERO_ENERGY = 0;
     private final Integer INITIAL_ENERGY = 20;
@@ -50,13 +46,15 @@ public class CasosDeUso {
         ArrayList<Gladiator> gladiators = new ArrayList<>(); 
         gladiators.add(gladiator1);
         gladiators.add(gladiator2);  
-
+        ArrayList<String> nameOfPlayers = new ArrayList<>();
+        nameOfPlayers.add("Mockito");
+        nameOfPlayers.add("HomeMadeMock");
             //Game          -->modificar boardMock para que nos sirva bien
-        TurnManager game = new TurnManager(gladiators, new BoardMock(), new OngoingGame());
+        TurnManager game = new TurnManager(gladiators, nameOfPlayers, new BoardMock(), new OngoingGame());
         IDice dice = new DiceMock(1);
     
         //Act
-        game.play(dice);
+        game.playOneTurn(dice);
         
         //Assert
         //BORRAR LOS GET ESTA EN PROCESO
@@ -81,18 +79,24 @@ public class CasosDeUso {
         ArrayList<Gladiator> gladiators = new ArrayList<>(); 
         gladiators.add(gladiator1);
         gladiators.add(gladiator2);
+        ArrayList<String> nameOfPlayers = new ArrayList<>();
+        nameOfPlayers.add("Tito");
+        nameOfPlayers.add("Comodus");
 
-            //Game          -->modificar boardMock para que nos sirva bien
-        TurnManager game = new TurnManager(gladiators, new BoardMock(), new OngoingGame());
-        IDice dice = new DiceMock(5);
+        //Game          -->modificar boardMock para que nos sirva bien
+        TurnManager game = new TurnManager(gladiators, nameOfPlayers, new BoardMock(), new OngoingGame());
+        Integer squaresToMove = 5;
+        IDice dice = new DiceMock(squaresToMove);
 
         Position finalPosition = new Position(2*squaresToMove);
+
         //Act
-        gladiator.playTurn(dice);
-        gladiator.playTurn(dice);
+
+        game.playOneTurn(dice);
+        game.playOneTurn(dice);
 
         //Assert
-        assertEquals(finalPosition, gladiator.getCurrentPosition()); 
+        assertEquals(finalPosition, gladiator.getCurrentPosition());
     }
 
     //Caso de uso 03
@@ -102,10 +106,10 @@ public class CasosDeUso {
         Position expectedPosition = new Position(0);
         Gladiator gladiator = new Gladiator(new Novice(), (0), expectedPosition, new Helpless());
         Integer squaresToMove = 1;
-
+        DiceMock dice = new DiceMock(squaresToMove);
         //Act
         //boolean playedTurn = 
-        gladiator.playTurn(squaresToMove);
+        gladiator.playTurn(dice);
 
          //Assert
         // assertFalse(playedTurn); 
@@ -179,10 +183,10 @@ public class CasosDeUso {
         Gladiator gladiator = new Gladiator(new Novice(), INITIAL_ENERGY, new Position(), new Helpless());
         Integer finalEnergy = ZERO_ENERGY;
         Integer expectedEnergy = (INITIAL_ENERGY + SEMISENIOR_BONUS);
-
+        DiceMock dice = new DiceMock(1);
         //Act
         for (Integer i = 0; i<=SEMISENIOR_THRESHOLD; i++) {
-            gladiator.playTurn(1);
+            gladiator.playTurn(dice);
         }
         //Assert
         assertEquals(gladiator.getEnergy(), expectedEnergy);
@@ -198,8 +202,12 @@ public class CasosDeUso {
         ArrayList<Gladiator> gladiators = new ArrayList<>(); 
         gladiators.add(gladiator1);
         gladiators.add(gladiator2);
-            //Game
-        TurnManager game = new TurnManager(gladiators, new BoardMock(), new OngoingGame());
+        ArrayList<String> nameOfPlayers = new ArrayList<>();
+        nameOfPlayers.add("Tito");
+        nameOfPlayers.add("Comodus");
+
+        //Game
+        TurnManager game = new TurnManager(gladiators, nameOfPlayers, new BoardMock(), new OngoingGame());
         IDice dice = new DiceMock(1);
             //Objetive
         Integer targetPosition = 24/2;
@@ -215,14 +223,14 @@ public class CasosDeUso {
 
         
         //Act
-        game.play(dice);
+        game.playOneTurn(dice);
 
         //Assert
-        assertEquals(gladiator1.in(targetSquare), true);
+        assertTrue(gladiator1.in(targetSquare));
         //Act
-        game.play(dice);
+        game.playOneTurn(dice);
         //Assert
-        assertEquals(gladiator2.in(targetSquare2), true);
+        assertTrue(gladiator2.in(targetSquare2));
     }
 
     //Caso de uso 10
@@ -265,16 +273,20 @@ public class CasosDeUso {
         ArrayList<Gladiator> gladiators = new ArrayList<>(); 
         gladiators.add(gladiator1);
         gladiators.add(gladiator2);
-        TurnManager game = new TurnManager(gladiators, new BoardMock());
-        Integer diceRoll = 0;
-        boolean theGameEnded = false;
+        ArrayList<String> nameOfPlayers = new ArrayList<>();
+        nameOfPlayers.add("Tito");
+        nameOfPlayers.add("Comodus");
+        GameState gameState = new OngoingGame();
+        TurnManager game = new TurnManager(gladiators, nameOfPlayers, new BoardMock(), gameState);
+        DiceMock dice = new DiceMock(0);
         //Act
         for (int i = 0; i <= MAX_ROUNDS*2; i++) {
-            theGameEnded = game.play(diceRoll);
+            assertFalse(gameState.gameHasEnded());
+            gameState = game.playOneTurn(dice);
         }
         
         //Assert
-        assertTrue(theGameEnded);
+        assertTrue(gameState.gameHasEnded());
     }
 
     

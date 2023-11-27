@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 
-public class CasosDeUsoS2 {
+public class TestCasosDeUsoS2 {
 
     //Caso de uso 13
     @Test   
