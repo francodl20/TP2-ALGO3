@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class TestCasosDeUso {
-    private final Integer ENERGY_RECOVERED_AFTER_MEAL = 10;
+    private final Integer ENERGY_RECOVERED_AFTER_MEAL = 15;
     private final Integer ZERO_ENERGY = 0;
     private final Integer INITIAL_ENERGY = 20;
     private final Integer ENERGY_AFTER_FIGHTING_WITH_SWORD_AND_SHIELD_FROM_ZERO_ENERGY = -2;

@@ -8,7 +8,7 @@ import edu.fiuba.algo3.modelo.board.squares.ISquare;
 import edu.fiuba.algo3.modelo.equipment.IEquipment;
 
 public class Gladiator implements IPlayer {
-    private final Integer ENERGY_RECOVERED_AFTER_MEAL = 10;
+    private final Integer ENERGY_RECOVERED_AFTER_MEAL = 15;
     private final Integer ENERGY_LOST_PER_ALCOHOLIC_DRINK = -4;
     private final Integer RECHARGE_RATE_PER_ROUND = 5;
     private Integer energy;
@@ -77,11 +77,14 @@ public class Gladiator implements IPlayer {
 
     public boolean playTurn(IDice dice){
         boolean played = false;
+        Integer diceRoll = dice.roll();
+
         this.energy = this.seniority.energyPlus(this.energy);
         if (this.energy > 0) {
-            played = this.playerState.playTurn(dice.roll());
+            played = this.playerState.playTurn(diceRoll);
         } else {
             this.energy = this.energy + RECHARGE_RATE_PER_ROUND;
+            // El jugador pepito esta cansao, le damos 5 y que siga esperando a la siguiente ronda.
         }
         this.seniority = this.seniority.addTurn();
 

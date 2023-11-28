@@ -1,7 +1,5 @@
 package edu.fiuba.algo3.modelo.attributes.seniority;
 
-
-
 public class Novice implements ISeniority {
     Integer turns;
     Integer SEMISENIORITY_THRESHOLD = 8;
@@ -9,7 +7,6 @@ public class Novice implements ISeniority {
     Integer NOVICE_BONUS = 0;
 
     //todo crear clase de constantes de juego "GameConstants"
-
     public Novice() {
         turns = NOVICE_THRESHOLD;
     }
@@ -17,7 +14,6 @@ public class Novice implements ISeniority {
     @Override
     public ISeniority addTurn() {
         turns++;
-
         if (turns.equals(SEMISENIORITY_THRESHOLD)) {
             return new SemiSenior();
         } else {

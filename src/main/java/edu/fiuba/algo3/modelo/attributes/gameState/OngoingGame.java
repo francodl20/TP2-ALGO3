@@ -6,6 +6,9 @@ import edu.fiuba.algo3.modelo.board.Board;
 public class OngoingGame implements IGameState {
     private final Integer MAX_ROUNDS = 30;
     private final String GAME_ONGOING = "Game Ongoing";
+
+    String playerName;
+
     public boolean gameHasEnded() {
         return false;
     }
@@ -13,6 +16,8 @@ public class OngoingGame implements IGameState {
         return GAME_ONGOING;
     }
     public IGameState update(IPlayer currentPlayer, String playerName, Board board, Integer rounds) {
+        this.playerName = playerName;
+
         if (rounds > MAX_ROUNDS) {
             return new TiedGameState();
         }

@@ -28,7 +28,7 @@ public class TurnManager {
     public void pickRandomPlayer(IDice dice) {
         for (int i = 0; i < dice.roll(); i++) {
             resetIterator();
-            turnManager.next();
+            currentPlayer = turnManager.next();
         }
         turnCount = 0; //to prevent the reset from altering the rounds
     }
@@ -43,7 +43,6 @@ public class TurnManager {
 
     //Plays individual turn
     public IGameState playTurn(IDice dice) {
-        
         //Ends the game in case 30 turns were reached
         updateGameState(currentPlayer, players.get(currentPlayer), gameBoard, turnCount);
         if (gameState.gameHasEnded()) {
@@ -73,4 +72,5 @@ public class TurnManager {
     public Gladiator getCurrentPlayer() {
         return currentPlayer;
     }
+    
 }
