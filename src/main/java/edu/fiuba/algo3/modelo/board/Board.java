@@ -14,14 +14,9 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import java.io.FileReader;
-import java.io.IOException;
 
- 
-import org.json.simple.parser.*;
-//
 
 public class Board {
     HashMap<ISquare, Pair<Integer, Integer>> map;
@@ -29,52 +24,17 @@ public class Board {
     
     public Board(String jsonFilePath){
         map = new HashMap<>();
+        
         try {
             this.buildFromJson(jsonFilePath);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public Board() {}
-/* todo borrar esto
-Unhandled exception type IOExceptionJava(16777384)
-Unhandled exception type ParseExceptionJava(16777384)
-*/
-public void buildFromJson(String jsonFilePath) throws Exception {
-    /*
-    JSONParser parser = new JSONParser();
 
-        try {
-            // Lee el archivo JSON
-            Object obj = parser.parse(new FileReader("ruta/del/archivo.json"));
 
-            // Convierte el objeto JSON en un JSONObject
-            JSONObject jsonObject = (JSONObject) obj;
-
-            // Obtiene las dimensiones del mapa
-            JSONObject mapaObject = (JSONObject) jsonObject.get("mapa");
-            long ancho = (Long) mapaObject.get("ancho");
-            long largo = (Long) mapaObject.get("largo");
-           
-
-            // Obtiene y procesa las celdas del camino
-            JSONArray celdasArray = (JSONArray) jsonObject.getJSONObject("camino").get("celdas");
-            for (Object celdaObj : celdasArray) {
-                JSONObject celdaObject = (JSONObject) celdaObj;
-                long x = (Long) celdaObject.get("x");
-                long y = (Long) celdaObject.get("y");
-                String tipo = (String) celdaObject.get("tipo");
-                String obstaculo = (String) celdaObject.get("obstaculo");
-                String premio = (String) celdaObject.get("premio");
-
-                System.out.println("Celda en (" + x + ", " + y + "): Tipo - " + tipo + ", Obstáculo - " + obstaculo + ", Premio - " + premio);
-            }
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
-        }
-    }
-    */
-
+    public void buildFromJson(String jsonFilePath) throws Exception {
+   
    /*
     JSONObject caminoObject = (JSONObject) jsonFile.get("camino");
     JSONArray squares = (JSONArray) caminoObject.get("celdas");

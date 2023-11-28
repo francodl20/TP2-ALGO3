@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.testUnitarios;
 
-import edu.fiuba.algo3.modelo.equipment.Equipment;
+import edu.fiuba.algo3.modelo.equipment.IEquipment;
 import edu.fiuba.algo3.modelo.equipment.Helmet;
 
 
@@ -21,7 +21,7 @@ public class HelmetTest {
         Integer expectedEnergy = (ENERGY_LOST_WITH_ARMOUR);
 
         //Act
-        Equipment aux = helmet.enhance();
+        IEquipment aux = helmet.enhance();
 
         //Assert
         assertEquals(aux.protectFromtWildBeast(), expectedEnergy); 

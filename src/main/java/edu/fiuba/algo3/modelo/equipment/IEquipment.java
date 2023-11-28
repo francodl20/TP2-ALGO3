@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.modelo.equipment;
 
-public interface Equipment{
+public interface IEquipment{
 
-    public Equipment enhance();
+    public IEquipment enhance();
 
     public Integer protectFromtWildBeast();
 

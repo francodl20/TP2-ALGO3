@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.testUnitarios;
 
-import edu.fiuba.algo3.modelo.equipment.Equipment;
+import edu.fiuba.algo3.modelo.equipment.IEquipment;
 import edu.fiuba.algo3.modelo.equipment.Key;
 
 
@@ -20,7 +20,7 @@ public class KeyTest {
         Integer expectedEnergy = (ENERGY_LOST_WITH_KEY);
 
         //Assert
-        Equipment aux = key.enhance();
+        IEquipment aux = key.enhance();
 
         //Act
         assertEquals(aux.protectFromtWildBeast(), expectedEnergy);

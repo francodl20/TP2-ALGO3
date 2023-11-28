@@ -1,9 +1,9 @@
 package edu.fiuba.algo3.modelo.equipment;
 
 
-public class SwordAndShield implements Equipment {
+public class SwordAndShield implements IEquipment {
 
-    public Equipment enhance(){
+    public IEquipment enhance(){
         return new Key();
     }
 

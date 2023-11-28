@@ -3,7 +3,7 @@ import edu.fiuba.algo3.modelo.IPlayer;
 import edu.fiuba.algo3.modelo.board.Board;
 //import edu.fiuba.algo3.modelo.attributes.gameState.FinishedGameWithWinner;
 
-public class OngoingGame implements GameState {
+public class OngoingGame implements IGameState {
     private final Integer MAX_ROUNDS = 30;
     private final String GAME_ONGOING = "Game Ongoing";
     public boolean gameHasEnded() {
@@ -12,7 +12,7 @@ public class OngoingGame implements GameState {
     public String getWinner() {
         return GAME_ONGOING;
     }
-    public GameState update(IPlayer currentPlayer, String playerName, Board board, Integer rounds) {
+    public IGameState update(IPlayer currentPlayer, String playerName, Board board, Integer rounds) {
         if (rounds > MAX_ROUNDS) {
             return new TiedGameState();
         }

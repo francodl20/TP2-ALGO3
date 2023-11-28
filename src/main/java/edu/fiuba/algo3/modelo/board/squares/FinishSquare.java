@@ -17,7 +17,7 @@ public class FinishSquare implements ISquare{
     }
 
     public void play(IPlayer player){
-        //
+        player.arriveToPompeya();
     }
     public boolean with(Position position){
         return (this.position.equals(position));

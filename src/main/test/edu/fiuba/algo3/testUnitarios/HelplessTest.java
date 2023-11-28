@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.testUnitarios;
 
-import edu.fiuba.algo3.modelo.equipment.Equipment;
+import edu.fiuba.algo3.modelo.equipment.IEquipment;
 import edu.fiuba.algo3.modelo.equipment.Helpless;
 
 
@@ -19,7 +19,7 @@ public class HelplessTest {
         Integer expectedEnergy = (ENERGY_LOST_WITH_HELMET);
 
         //Act
-        Equipment aux = helpless.enhance();
+        IEquipment aux = helpless.enhance();
 
         //Assert
         assertEquals(aux.protectFromtWildBeast(), expectedEnergy);

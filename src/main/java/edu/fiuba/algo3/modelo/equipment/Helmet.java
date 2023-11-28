@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.modelo.equipment;
 
-public class Helmet implements Equipment {
+public class Helmet implements IEquipment {
 
-    public Equipment enhance(){
+    public IEquipment enhance(){
         return new Armour();
     }
 

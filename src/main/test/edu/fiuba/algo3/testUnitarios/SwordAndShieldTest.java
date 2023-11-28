@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.testUnitarios;
 
-import edu.fiuba.algo3.modelo.equipment.Equipment;
+import edu.fiuba.algo3.modelo.equipment.IEquipment;
 import edu.fiuba.algo3.modelo.equipment.SwordAndShield;
 
 
@@ -20,7 +20,7 @@ public class SwordAndShieldTest {
         Integer expectedEnergy = (ENERGY_LOST_WITH_KEY);
 
         //Act
-        Equipment aux = swordAndShield.enhance();
+        IEquipment aux = swordAndShield.enhance();
 
         //Assert
         assertEquals(aux.protectFromtWildBeast(), expectedEnergy);

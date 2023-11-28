@@ -3,7 +3,7 @@ package edu.fiuba.algo3.modelo.attributes.playerState;
 import edu.fiuba.algo3.modelo.Gladiator;
 import edu.fiuba.algo3.modelo.attributes.Position;
 
-public class Healthy implements PlayerState {
+public class Healthy implements IPlayerState {
     private Gladiator gladiator;
 
     public Healthy(Gladiator gladiator) {

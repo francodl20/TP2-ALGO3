@@ -31,7 +31,7 @@ public class TestCasosDeUso {
 
     private final Integer SEMISENIOR_BONUS = 5;
     private final Integer SEMISENIOR_THRESHOLD = 8;
-    private final Integer SENIOR_BONUS = 10;
+   // private final Integer SENIOR_BONUS = 10;
     
 
     private final Integer MAX_ROUNDS = 30;
@@ -48,8 +48,8 @@ public class TestCasosDeUso {
         ArrayList<String> nameOfPlayers = new ArrayList<>();
         nameOfPlayers.add("Mockito");
         nameOfPlayers.add("HomeMadeMock");
-            //Game          -->modificar boardMock para que nos sirva bien
-        String json = "src/main/java/edu/fiuba/algo3/modelo/board/mapa.json";
+            //Game
+        String json = "src/main/java/edu/fiuba/algo3/modelo/board/boardMock.json";
         TurnManager game = new TurnManager(gladiators, nameOfPlayers, new Board(json), new OngoingGame());
         IDice dice = new DiceMock(1);
     
@@ -84,7 +84,7 @@ public class TestCasosDeUso {
         nameOfPlayers.add("Comodus");
 
         //Game          -->modificar boardMock para que nos sirva bien
-        String json = "src/main/java/edu/fiuba/algo3/modelo/board/mapa.json";
+        String json = "src/main/java/edu/fiuba/algo3/modelo/board/boardMock.json";
         TurnManager game = new TurnManager(gladiators, nameOfPlayers, new Board(json), new OngoingGame());
         Integer squaresToMove = 5;
         IDice dice = new DiceMock(squaresToMove);
@@ -94,8 +94,10 @@ public class TestCasosDeUso {
 
         //Act
 
-        game.playTurn(dice);
-        game.playTurn(dice);
+        game.playTurn(dice); //gladiator1
+        game.playTurn(dice); //gladiator2
+        game.playTurn(dice); //gladiator1 
+        game.playTurn(dice); //gladiator2 
 
         //Assert
         assertEquals(finalPosition, gladiator1.getCurrentPosition());
@@ -207,15 +209,15 @@ public class TestCasosDeUso {
         nameOfPlayers.add("Tito");
         nameOfPlayers.add("Comodus");
 
-        //Game
-        String json = "/src/main/java/edu/fiuba/algo3/modelo/board/mapa.json";
+            //Game
+        String json = "src/main/java/edu/fiuba/algo3/modelo/board/boardMock.json";
         TurnManager game = new TurnManager(gladiators, nameOfPlayers, new Board(json), new OngoingGame());
         IDice dice = new DiceMock(1);
             //Objective
         Integer targetPosition = 24/2;
         Object type = "Camino";
-        Object prize = "Camino";
-        Object obstacle = "Camino";
+        Object prize = "";
+        Object obstacle = "";
         ISquare targetSquare = SquareFactory.createSquare(new Position(targetPosition), type, obstacle, prize);
         Integer targetPosition2 = 25;
         Object type2 = "Llegada";
@@ -226,11 +228,11 @@ public class TestCasosDeUso {
         
         //Act
         game.playTurn(dice);
+        game.playTurn(dice);
 
         //Assert
         assertTrue(gladiator1.in(targetSquare));
-        //Act
-        game.playTurn(dice);
+        
         //Assert
         assertTrue(gladiator2.in(targetSquare2));
     }
@@ -270,6 +272,7 @@ public class TestCasosDeUso {
     public void afterThirtyTurnsTheGameEnds(){//todo:
         
         //Arrange
+            //Gladiators
         Gladiator gladiator1 = new Gladiator(new SemiSenior(), INITIAL_ENERGY, new Position(24), new SwordAndShield());
         Gladiator gladiator2 = new Gladiator(new Senior(), INITIAL_ENERGY, new Position(24), new Key());
         ArrayList<Gladiator> gladiators = new ArrayList<>(); 
@@ -278,9 +281,12 @@ public class TestCasosDeUso {
         ArrayList<String> nameOfPlayers = new ArrayList<>();
         nameOfPlayers.add("Tito");
         nameOfPlayers.add("Comodus");
-        GameState gameState = new OngoingGame();
-        TurnManager game = new TurnManager(gladiators, nameOfPlayers, new Board(), gameState);
-        DiceMock dice = new DiceMock(0);
+
+            //Game
+        String json = "src/main/java/edu/fiuba/algo3/modelo/board/boardMock.json";
+        IGameState gameState = new OngoingGame();
+        TurnManager game = new TurnManager(gladiators, nameOfPlayers, new Board(json), gameState);
+        IDice dice = new DiceMock(0);
         //Act
         for (int i = 0; i <= MAX_ROUNDS*2; i++) {
             assertFalse(gameState.gameHasEnded());

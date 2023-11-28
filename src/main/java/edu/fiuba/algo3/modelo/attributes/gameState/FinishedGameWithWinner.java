@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo.attributes.gameState;
 import edu.fiuba.algo3.modelo.IPlayer;
 import edu.fiuba.algo3.modelo.board.Board;
 
-public class FinishedGameWithWinner implements GameState {
+public class FinishedGameWithWinner implements IGameState {
 
     String winner;
 
@@ -18,7 +18,7 @@ public class FinishedGameWithWinner implements GameState {
         return true;
     }
 
-    public GameState update(IPlayer currentPlayer,String playerName,  Board board, Integer rounds) {
+    public IGameState update(IPlayer currentPlayer,String playerName,  Board board, Integer rounds) {
         return this;
     }
 }

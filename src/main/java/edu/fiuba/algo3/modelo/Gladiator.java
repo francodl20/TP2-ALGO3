@@ -2,23 +2,23 @@ package edu.fiuba.algo3.modelo;
  
 import edu.fiuba.algo3.modelo.attributes.Position;
 import edu.fiuba.algo3.modelo.attributes.playerState.Healthy;
-import edu.fiuba.algo3.modelo.attributes.playerState.PlayerState;
-import edu.fiuba.algo3.modelo.attributes.seniority.Seniority;
+import edu.fiuba.algo3.modelo.attributes.playerState.IPlayerState;
+import edu.fiuba.algo3.modelo.attributes.seniority.ISeniority;
 import edu.fiuba.algo3.modelo.board.squares.ISquare;
-import edu.fiuba.algo3.modelo.equipment.Equipment;
+import edu.fiuba.algo3.modelo.equipment.IEquipment;
 
 public class Gladiator implements IPlayer {
     private final Integer ENERGY_RECOVERED_AFTER_MEAL = 10;
     private final Integer ENERGY_LOST_PER_ALCOHOLIC_DRINK = -4;
     private final Integer RECHARGE_RATE_PER_ROUND = 5;
     private Integer energy;
-    private Seniority seniority;
+    private ISeniority seniority;
     private Position position;
-    private Equipment equipment;
-    private PlayerState playerState;
+    private IEquipment equipment;
+    private IPlayerState playerState;
     //private int turns;
     
-    public Gladiator(Seniority seniority, Integer energy, Position position, Equipment equipment) {
+    public Gladiator(ISeniority seniority, Integer energy, Position position, IEquipment equipment) {
         this.energy = energy;
         this.seniority = seniority;
         this.position = position;
@@ -88,7 +88,7 @@ public class Gladiator implements IPlayer {
         return played;
     }
 
-    public void updateStateOfInjuries(PlayerState newState) {
+    public void updateStateOfInjuries(IPlayerState newState) {
         this.playerState = newState;
     }
 

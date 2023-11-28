@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo.attributes.seniority;
 
 
 
-public class Novice implements Seniority {
+public class Novice implements ISeniority {
     Integer turns;
     Integer SEMISENIORITY_THRESHOLD = 8;
     Integer NOVICE_THRESHOLD = 0;
@@ -15,7 +15,7 @@ public class Novice implements Seniority {
     }
 
     @Override
-    public Seniority addTurn() {
+    public ISeniority addTurn() {
         turns++;
 
         if (turns.equals(SEMISENIORITY_THRESHOLD)) {
