@@ -1,4 +1,5 @@
 package edu.fiuba.algo3.modelo.attributes.seniority;
+import edu.fiuba.algo3.Log;
 
 public class Novice implements ISeniority {
     Integer turns;
@@ -6,7 +7,6 @@ public class Novice implements ISeniority {
     Integer NOVICE_THRESHOLD = 0;
     Integer NOVICE_BONUS = 0;
 
-    //todo crear clase de constantes de juego "GameConstants"
     public Novice() {
         turns = NOVICE_THRESHOLD;
     }
@@ -15,6 +15,7 @@ public class Novice implements ISeniority {
     public ISeniority addTurn() {
         turns++;
         if (turns.equals(SEMISENIORITY_THRESHOLD)) {
+            Log.getInstance().info("Al fin... El gladiador actual acaba de recibir el rango de SemiSenior");
             return new SemiSenior();
         } else {
             return this;

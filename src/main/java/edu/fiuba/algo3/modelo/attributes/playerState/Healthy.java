@@ -1,10 +1,10 @@
 package edu.fiuba.algo3.modelo.attributes.playerState;
 
 import edu.fiuba.algo3.modelo.Gladiator;
-import edu.fiuba.algo3.modelo.attributes.Position;
 
 public class Healthy implements IPlayerState {
     private Gladiator gladiator;
+    private Boolean lastTurnPlayed;
 
     public Healthy(Gladiator gladiator) {
         this.gladiator = gladiator;
@@ -16,8 +16,14 @@ public class Healthy implements IPlayerState {
     }
 
     @Override
-    public boolean playTurn(Integer squaresToMove) {
-        gladiator.moveFromCurrentPosition(new Position(squaresToMove));
-        return true;
+    public void playTurn(Integer squaresToMove) {
+        gladiator.moveFromCurrentPosition(squaresToMove);
+        lastTurnPlayed = true;
     }
+
+      @Override
+    public boolean turnPlayed() {
+        return lastTurnPlayed;
+    }
+
 }

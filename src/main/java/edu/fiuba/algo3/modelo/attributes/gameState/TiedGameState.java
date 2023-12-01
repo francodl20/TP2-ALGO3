@@ -1,5 +1,5 @@
 package edu.fiuba.algo3.modelo.attributes.gameState;
-import edu.fiuba.algo3.modelo.IPlayer;
+import edu.fiuba.algo3.modelo.Gladiator;
 import edu.fiuba.algo3.modelo.board.Board;
 
 public class TiedGameState implements IGameState {
@@ -11,7 +11,7 @@ public class TiedGameState implements IGameState {
     public String getWinner() {
         return GAME_ONGOING;
     }
-    public IGameState update(IPlayer currentPlayer, String playerName, Board board, Integer rounds) {
+    public IGameState update(Gladiator currentPlayer, Board board, Integer rounds) {
         return this;
     }
 }

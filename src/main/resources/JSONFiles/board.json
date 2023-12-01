@@ -1,0 +1,283 @@
+{
+	"map": {
+		"width": 10,
+		"length": 18
+	},
+	"path": {
+		"squares": [
+			{
+				"x": 1,
+				"y": 7,
+				"type": "Start",
+				"obstacle": "",
+				"prize": ""
+			},
+			{
+				"x": 2,
+				"y": 7,
+				"type": "Path",
+				"obstacle": "",
+				"prize": "Equipment"
+			},
+			{
+				"x": 2,
+				"y": 6,
+				"type": "Path",
+				"obstacle": "",
+				"prize": "Food"
+			},
+			{
+				"x": 2,
+				"y": 5,
+				"type": "Path",
+				"obstacle": "Injury",
+				"prize": ""
+			},
+			{
+				"x": 2,
+				"y": 4,
+				"type": "Path",
+				"obstacle": "Beast",
+				"prize": ""
+			},
+			{
+				"x": 2,
+				"y": 3,
+				"type": "Path",
+				"obstacle": "Bacchanalia",
+				"prize": "Equipment"
+			},
+			{
+				"x": 2,
+				"y": 2,
+				"type": "Path",
+				"obstacle": "",
+				"prize": ""
+			},
+			{
+				"x": 2,
+				"y": 1,
+				"type": "Path",
+				"obstacle": "Injury",
+				"prize": ""
+			},
+			{
+				"x": 3,
+				"y": 1,
+				"type": "Path",
+				"obstacle": "",
+				"prize": ""
+			},
+			{
+				"x": 4,
+				"y": 1,
+				"type": "Path",
+				"obstacle": "Beast",
+				"prize": "Equipment"
+			},
+			{
+				"x": 5,
+				"y": 1,
+				"type": "Path",
+				"obstacle": "Bacchanalia",
+				"prize": "Equipment"
+			},
+			{
+				"x": 6,
+				"y": 1,
+				"type": "Path",
+				"obstacle": "",
+				"prize": "Food"
+			},
+			{
+				"x": 7,
+				"y": 1,
+				"type": "Path",
+				"obstacle": "Injury",
+				"prize": ""
+			},
+			{
+				"x": 8,
+				"y": 1,
+				"type": "Path",
+				"obstacle": "",
+				"prize": "Food"
+			},
+			{
+				"x": 9,
+				"y": 1,
+				"type": "Path",
+				"obstacle": "Beast",
+				"prize": "Equipment"
+			},
+			{
+				"x": 10,
+				"y": 1,
+				"type": "Path",
+				"obstacle": "",
+				"prize": "Equipment"
+			},
+			{
+				"x": 11,
+				"y": 1,
+				"type": "Path",
+				"obstacle": "",
+				"prize": "Equipment"
+			},
+			{
+				"x": 12,
+				"y": 1,
+				"type": "Path",
+				"obstacle": "Injury",
+				"prize": ""
+			},
+			{
+				"x": 12,
+				"y": 2,
+				"type": "Path",
+				"obstacle": "",
+				"prize": "Food"
+			},
+			{
+				"x": 12,
+				"y": 3,
+				"type": "Path",
+				"obstacle": "",
+				"prize": "Equipment"
+			},
+			{
+				"x": 12,
+				"y": 4,
+				"type": "Path",
+				"obstacle": "Beast",
+				"prize": "Food"
+			},
+			{
+				"x": 12,
+				"y": 5,
+				"type": "Path",
+				"obstacle": "",
+				"prize": "Equipment"
+			},
+			{
+				"x": 12,
+				"y": 6,
+				"type": "Path",
+				"obstacle": "Beast",
+				"prize": "Equipment"
+			},
+			{
+				"x": 12,
+				"y": 7,
+				"type": "Path",
+				"obstacle": "Beast",
+				"prize": "Equipment"
+			},
+			{
+				"x": 12,
+				"y": 8,
+				"type": "Path",
+				"obstacle": "Bacchanalia",
+				"prize": ""
+			},
+			{
+				"x": 12,
+				"y": 9,
+				"type": "Path",
+				"obstacle": "",
+				"prize": "Equipment"
+			},
+			{
+				"x": 13,
+				"y": 9,
+				"type": "Path",
+				"obstacle": "Injury",
+				"prize": "Food"
+			},
+			{
+				"x": 14,
+				"y": 9,
+				"type": "Path",
+				"obstacle": "Beast",
+				"prize": ""
+			},
+			{
+				"x": 15,
+				"y": 9,
+				"type": "Path",
+				"obstacle": "",
+				"prize": "Equipment"
+			},
+			{
+				"x": 16,
+				"y": 9,
+				"type": "Path",
+				"obstacle": "Bacchanalia",
+				"prize": ""
+			},
+			{
+				"x": 17,
+				"y": 9,
+				"type": "Path",
+				"obstacle": "",
+				"prize": "Food"
+			},
+			{
+				"x": 17,
+				"y": 8,
+				"type": "Path",
+				"obstacle": "Injury",
+				"prize": ""
+			},
+			{
+				"x": 17,
+				"y": 7,
+				"type": "Path",
+				"obstacle": "Bacchanalia",
+				"prize": ""
+			},
+			{
+				"x": 17,
+				"y": 6,
+				"type": "Path",
+				"obstacle": "",
+				"prize": "Equipment"
+			},
+			{
+				"x": 17,
+				"y": 5,
+				"type": "Path",
+				"obstacle": "",
+				"prize": "Equipment"
+			},
+			{
+				"x": 17,
+				"y": 4,
+				"type": "Path",
+				"obstacle": "",
+				"prize": "Food"
+			},
+			{
+				"x": 17,
+				"y": 3,
+				"type": "Path",
+				"obstacle": "",
+				"prize": "Equipment"
+			},
+			{
+				"x": 17,
+				"y": 2,
+				"type": "Path",
+				"obstacle": "",
+				"prize": "Equipment"
+			},
+			{
+				"x": 17,
+				"y": 1,
+				"type": "Finish",
+				"obstacle": "",
+				"prize": ""
+			}
+		]
+	}
+}

@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.modelo.attributes.seniority;
 
-
 public interface ISeniority {
 
     //Add 1 to the turn counter, or change object if needed

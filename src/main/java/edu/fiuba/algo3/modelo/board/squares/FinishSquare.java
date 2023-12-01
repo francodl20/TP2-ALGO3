@@ -1,25 +1,29 @@
 package edu.fiuba.algo3.modelo.board.squares;
 
-import edu.fiuba.algo3.modelo.IPlayer;
-import edu.fiuba.algo3.modelo.attributes.Position;
-import edu.fiuba.algo3.modelo.board.obstacles.IObstacle;
+import edu.fiuba.algo3.modelo.Gladiator;
 import edu.fiuba.algo3.modelo.board.prizes.IPrize;
+import edu.fiuba.algo3.modelo.board.obstacles.IObstacle;
+import edu.fiuba.algo3.modelo.attributes.Coordinate;
+
 
 public class FinishSquare implements ISquare{
-    Position position;
+    Coordinate coordinates;
+    Integer position;
     IPrize prize;
     IObstacle obstacle;
 
-    public FinishSquare(Position position, IPrize prize, IObstacle obstacle) {
+    public FinishSquare(Coordinate coordinates, Integer position, IPrize prize, IObstacle obstacle) {
+        this.coordinates = coordinates;
         this.position = position;
         this.prize = prize;
         this.obstacle = obstacle;
     }
 
-    public void play(IPlayer player){
+    public void play(Gladiator player){
         player.arriveToPompeya();
     }
-    public boolean with(Position position){
-        return (this.position.equals(position));
+    
+    public boolean with(Integer position){
+        return (this.position == position);
     }
 }

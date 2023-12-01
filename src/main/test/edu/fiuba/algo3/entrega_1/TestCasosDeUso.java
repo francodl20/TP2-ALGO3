@@ -2,16 +2,17 @@ package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.board.Board;
+import edu.fiuba.algo3.modelo.board.factory.SquareFactory;
 import edu.fiuba.algo3.modelo.board.squares.ISquare;
-import edu.fiuba.algo3.modelo.board.squares.SquareFactory;
 import edu.fiuba.algo3.modelo.equipment.Helpless;
 import edu.fiuba.algo3.modelo.equipment.Helmet;
 import edu.fiuba.algo3.modelo.equipment.Key;
 import edu.fiuba.algo3.modelo.equipment.SwordAndShield;
-
-import edu.fiuba.algo3.modelo.attributes.Position;
+import edu.fiuba.algo3.modelo.attributes.Coordinate;
 import edu.fiuba.algo3.modelo.attributes.gameState.*;
 import edu.fiuba.algo3.modelo.attributes.seniority.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
 //import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -40,18 +41,23 @@ public class TestCasosDeUso {
     public void gladiatorBeginsWithInitialEnergyAndEquipment() {
         //Arrange
             //Gladiators
-        Gladiator gladiator1 = new Gladiator(new Novice(), INITIAL_ENERGY, new Position(), new Helpless());
-        Gladiator gladiator2 = new Gladiator(new Novice(), INITIAL_ENERGY, new Position(), new Helpless());
+        String gladiator1Name = "Mockito";
+        String gladiator2Name = "HomeMadeMock";
+        Integer gladiator1Position = 0;
+        Integer gladiator2Position = 0;
+        Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY, gladiator1Position, new Helpless());
+        Gladiator gladiator2 = new Gladiator(gladiator2Name, new Novice(), INITIAL_ENERGY, gladiator2Position, new Helpless());
         ArrayList<Gladiator> gladiators = new ArrayList<>(); 
         gladiators.add(gladiator1);
         gladiators.add(gladiator2);  
-        ArrayList<String> nameOfPlayers = new ArrayList<>();
-        nameOfPlayers.add("Mockito");
-        nameOfPlayers.add("HomeMadeMock");
             //Game
-        String json = "src/main/java/edu/fiuba/algo3/modelo/board/boardMock.json";
-        TurnManager game = new TurnManager(gladiators, nameOfPlayers, new Board(json), new OngoingGame());
+        
+        String json = "src/main/resources/JSonFiles/boardMock.json";
+        TurnManager game = new TurnManager(gladiators, new Board(json), new OngoingGame());
+        
         IDice dice = new DiceMock(1);
+
+        //Dice diceMock = mock(Dice.class);
     
         //Act
         game.playTurn(dice);
@@ -74,23 +80,24 @@ public class TestCasosDeUso {
     public void gladiatorIsAbleToMove() {
         //Arrange
             //Gladiators
-        Gladiator gladiator1 = new Gladiator(new Novice(), INITIAL_ENERGY, new Position(), new Helpless());
-        Gladiator gladiator2 = new Gladiator(new Novice(), INITIAL_ENERGY, new Position(), new Helpless());
+        String gladiator1Name = "Mockito";
+        String gladiator2Name = "HomeMadeMock";
+        Integer gladiator1Position = 0;
+        Integer gladiator2Position = 0;
+        Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY, gladiator1Position, new Helpless());
+        Gladiator gladiator2 = new Gladiator(gladiator2Name, new Novice(), INITIAL_ENERGY, gladiator2Position, new Helpless());
         ArrayList<Gladiator> gladiators = new ArrayList<>(); 
         gladiators.add(gladiator1);
         gladiators.add(gladiator2);
-        ArrayList<String> nameOfPlayers = new ArrayList<>();
-        nameOfPlayers.add("Tito");
-        nameOfPlayers.add("Comodus");
 
-        //Game          -->modificar boardMock para que nos sirva bien
-        String json = "src/main/java/edu/fiuba/algo3/modelo/board/boardMock.json";
-        TurnManager game = new TurnManager(gladiators, nameOfPlayers, new Board(json), new OngoingGame());
+            //Game 
+        String json = "src/main/resources/JSonFiles/boardMock.json";
+        TurnManager game = new TurnManager(gladiators, new Board(json), new OngoingGame());
         Integer squaresToMove = 5;
         IDice dice = new DiceMock(squaresToMove);
 
 
-        Position finalPosition = new Position(2*squaresToMove);
+        Integer finalPosition = 2*squaresToMove;
 
         //Act
 
@@ -106,17 +113,19 @@ public class TestCasosDeUso {
     //Caso de uso 03
     @Test
     public void gladiatorWithoutEnergyCannotPlayTurn() {
+
         //Arrange
-        Position expectedPosition = new Position(0);
-        Gladiator gladiator = new Gladiator(new Novice(), (0), expectedPosition, new Helpless());
+        String gladiatorName = "Pedro";
+        Integer expectedPosition = 0;
+        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), ZERO_ENERGY, expectedPosition, new Helpless());
+
         Integer squaresToMove = 1;
         DiceMock dice = new DiceMock(squaresToMove);
-        //Act
-        //boolean playedTurn = 
+
+        //Act 
         gladiator.playTurn(dice);
 
-         //Assert
-        // assertFalse(playedTurn); 
+        //Assert
         assertEquals(expectedPosition, gladiator.getCurrentPosition());
     }
 
@@ -124,7 +133,9 @@ public class TestCasosDeUso {
     @Test
     public void eatingIncreasesEnergyInTenUnits() {
         //Arrange
-        Gladiator gladiator = new Gladiator(new Novice(), (0), new Position(), new Helpless());
+        String gladiatorName = "Jose";
+        Integer gladiatorPosition = 0;
+        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), ZERO_ENERGY, gladiatorPosition, new Helpless());
         Integer expectedEnergy = ENERGY_RECOVERED_AFTER_MEAL;
 
         //Act
@@ -138,7 +149,9 @@ public class TestCasosDeUso {
     @Test
     public void improvingEquipmentForTheFirstTimeGivesAHelmet() {
         //Arrange
-        Gladiator gladiator = new Gladiator(new Novice(), (0), new Position(), new Helpless());
+        String gladiatorName = "Jose";
+        Integer gladiatorPosition = 0;
+        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), ZERO_ENERGY, gladiatorPosition, new Helpless());
         Integer expectedEnergy = (ENERGY_AFTER_FIGHTING_WITH_HELMET_FROM_ZERO_ENERGY);
         
         //Act
@@ -153,7 +166,9 @@ public class TestCasosDeUso {
     @Test
     public void improvingEquipmentForTheThirdTimeGivesASwordAndShield() {
         //Arrange
-        Gladiator gladiator = new Gladiator(new Novice(), (0), new Position(), new Helpless());
+         String gladiatorName = "Jose";
+        Integer gladiatorPosition = 0;
+        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), ZERO_ENERGY, gladiatorPosition, new Helpless());
         Integer expectedEnergy = (ENERGY_AFTER_FIGHTING_WITH_SWORD_AND_SHIELD_FROM_ZERO_ENERGY);
 
         //Act
@@ -170,7 +185,9 @@ public class TestCasosDeUso {
       @Test
     public void fightingWithAWildBeastWearingAHelmet() {
         //Arrange
-        Gladiator gladiator = new Gladiator(new Novice(), (0), new Position(), new Helmet());
+        String gladiatorName = "Jose";
+        Integer gladiatorPosition = 0;
+        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), ZERO_ENERGY, gladiatorPosition, new Helmet());
         Integer expectedEnergy = (ENERGY_AFTER_FIGHTING_WITH_HELMET_FROM_ZERO_ENERGY);
 
         //Act
@@ -184,11 +201,15 @@ public class TestCasosDeUso {
     @Test
     public void afterEightTurnsNoviceBecomesSeniorAndHisEnergyIncreasesInTheNextMove(){
         //Arrange
-        Gladiator gladiator = new Gladiator(new Novice(), INITIAL_ENERGY, new Position(), new Helpless());
+        String gladiatorName = "Jose";
+        Integer gladiatorPosition = 0;
+        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), INITIAL_ENERGY, gladiatorPosition, new Helpless());
+        
         Integer expectedEnergy = (INITIAL_ENERGY + SEMISENIOR_BONUS);
         DiceMock dice = new DiceMock(1);
+        
         //Act
-        for (Integer i = 0; i<=SEMISENIOR_THRESHOLD; i++) {
+        for (Integer i = 0; i <= SEMISENIOR_THRESHOLD; i++) {
             gladiator.playTurn(dice);
         }
         //Assert
@@ -199,31 +220,32 @@ public class TestCasosDeUso {
     @Test
     public void arrivingToTheGoalWithoutTheKeyMovesBackToTheMiddleOfTheBoard() { //todo:
         //Arrange
-            //Gladiators
-        Gladiator gladiator1 = new Gladiator(new SemiSenior(), INITIAL_ENERGY, new Position(24), new SwordAndShield());
-        Gladiator gladiator2 = new Gladiator(new Senior(), INITIAL_ENERGY, new Position(24), new Key());
+        String gladiator1Name = "Jose";
+        String gladiator2Name = "Pedro";
+        Integer gladiator1Position = 24;
+        Integer gladiator2Position = 24;
+        Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY, gladiator1Position, new SwordAndShield());
+        Gladiator gladiator2 = new Gladiator(gladiator2Name, new Novice(), INITIAL_ENERGY, gladiator2Position, new Key());
+
         ArrayList<Gladiator> gladiators = new ArrayList<>(); 
         gladiators.add(gladiator1);
         gladiators.add(gladiator2);
-        ArrayList<String> nameOfPlayers = new ArrayList<>();
-        nameOfPlayers.add("Tito");
-        nameOfPlayers.add("Comodus");
 
             //Game
-        String json = "src/main/java/edu/fiuba/algo3/modelo/board/boardMock.json";
-        TurnManager game = new TurnManager(gladiators, nameOfPlayers, new Board(json), new OngoingGame());
+        String json = "src/main/resources/JSonFiles/boardMock.json";
+        TurnManager game = new TurnManager(gladiators, new Board(json), new OngoingGame());
         IDice dice = new DiceMock(1);
             //Objective
         Integer targetPosition = 24/2;
-        Object type = "Camino";
+        Object type = "Path";
         Object prize = "";
         Object obstacle = "";
-        ISquare targetSquare = SquareFactory.createSquare(new Position(targetPosition), type, obstacle, prize);
+        ISquare targetSquare = SquareFactory.createSquare(new Coordinate(3, 10), targetPosition, type, obstacle, prize);
         Integer targetPosition2 = 25;
-        Object type2 = "Llegada";
+        Object type2 = "Finish";
         Object prize2 = "";
         Object obstacle2 = "";
-        ISquare targetSquare2 = SquareFactory.createSquare(new Position(targetPosition2), type2, obstacle2, prize2);
+        ISquare targetSquare2 = SquareFactory.createSquare(new Coordinate(10, 4), targetPosition2, type2, obstacle2, prize2);
 
         
         //Act
@@ -241,7 +263,11 @@ public class TestCasosDeUso {
     @Test
     public void gladiatorDoesNotReceiveDamageFromTheBeastWhenWearingTheKey() {
         //Arrange
-        Gladiator gladiator = new Gladiator(new Novice(), (0), new Position(), new Key());
+
+        String gladiatorName = "Jose";
+        Integer gladiatorPosition = 0;
+        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), ZERO_ENERGY, gladiatorPosition, new Key());
+    
         Integer expectedEnergy = (ENERGY_AFTER_FIGHTING_WITH_KEY_FROM_ZERO_ENERGY);
 
         //Act
@@ -256,7 +282,10 @@ public class TestCasosDeUso {
     @Test
     public void receivingAPrizeWithTheKeyDoesNotChangeTheEquipment(){
         //Arrange
-        Gladiator gladiator = new Gladiator(new Novice(), ZERO_ENERGY, new Position(), new Key());
+        String gladiatorName = "Jose";
+        Integer gladiatorPosition = 0;
+        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), ZERO_ENERGY, gladiatorPosition, new Key());
+        
         Integer expectedEnergy = (ENERGY_AFTER_FIGHTING_WITH_KEY_FROM_ZERO_ENERGY);
 
         //Act
@@ -272,21 +301,24 @@ public class TestCasosDeUso {
     public void afterThirtyTurnsTheGameEnds(){//todo:
         
         //Arrange
+
             //Gladiators
-        Gladiator gladiator1 = new Gladiator(new SemiSenior(), INITIAL_ENERGY, new Position(24), new SwordAndShield());
-        Gladiator gladiator2 = new Gladiator(new Senior(), INITIAL_ENERGY, new Position(24), new Key());
+        String gladiator1Name = "Mockito";
+        String gladiator2Name = "HomeMadeMock";
+        Integer gladiator1Position = 0;
+        Integer gladiator2Position = 0;
+        Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY, gladiator1Position, new Helpless());
+        Gladiator gladiator2 = new Gladiator(gladiator2Name, new Novice(), INITIAL_ENERGY, gladiator2Position, new Helpless());
         ArrayList<Gladiator> gladiators = new ArrayList<>(); 
         gladiators.add(gladiator1);
         gladiators.add(gladiator2);
-        ArrayList<String> nameOfPlayers = new ArrayList<>();
-        nameOfPlayers.add("Tito");
-        nameOfPlayers.add("Comodus");
 
             //Game
-        String json = "src/main/java/edu/fiuba/algo3/modelo/board/boardMock.json";
+        String json = "src/main/resources/JSonFiles/boardMock.json";
         IGameState gameState = new OngoingGame();
-        TurnManager game = new TurnManager(gladiators, nameOfPlayers, new Board(json), gameState);
+        TurnManager game = new TurnManager(gladiators, new Board(json), gameState);
         IDice dice = new DiceMock(0);
+
         //Act
         for (int i = 0; i <= MAX_ROUNDS*2; i++) {
             assertFalse(gameState.gameHasEnded());

@@ -1,32 +1,36 @@
 package edu.fiuba.algo3.modelo;
  
-import edu.fiuba.algo3.modelo.attributes.Position;
 import edu.fiuba.algo3.modelo.attributes.playerState.Healthy;
 import edu.fiuba.algo3.modelo.attributes.playerState.IPlayerState;
 import edu.fiuba.algo3.modelo.attributes.seniority.ISeniority;
 import edu.fiuba.algo3.modelo.board.squares.ISquare;
 import edu.fiuba.algo3.modelo.equipment.IEquipment;
+import edu.fiuba.algo3.Log;
 
-public class Gladiator implements IPlayer {
+public class Gladiator {
     private final Integer ENERGY_RECOVERED_AFTER_MEAL = 15;
     private final Integer ENERGY_LOST_PER_ALCOHOLIC_DRINK = -4;
     private final Integer RECHARGE_RATE_PER_ROUND = 5;
     private Integer energy;
     private ISeniority seniority;
-    private Position position;
+    private Integer position;
     private IEquipment equipment;
     private IPlayerState playerState;
-    //private int turns;
+    private String playerName;
+    private Boolean lastTurnPlayed;
     
-    public Gladiator(ISeniority seniority, Integer energy, Position position, IEquipment equipment) {
+    public Gladiator(String playerName, ISeniority seniority, Integer energy, Integer position, IEquipment equipment) {
         this.energy = energy;
         this.seniority = seniority;
         this.position = position;
         this.equipment = equipment;
         this.playerState = new Healthy(this);
-        // this.turns = 0;
+        this.playerName = playerName;
     }
 
+    public String getPlayerName() {
+        return playerName;
+    }
 
     //Methods related to the squares
     public void eat(){
@@ -42,19 +46,17 @@ public class Gladiator implements IPlayer {
     }
 
     public void getInjured() {
-        // this.energy.getInjured();
         this.playerState.update();
     }
 
     public void fightAgainstWildBeast() {
         Integer energyLost = this.equipment.protectFromtWildBeast();
         this.energy = this.energy + energyLost;
-        //gamestate.beastSquare(energyLost)
     }
 
     public void arriveToPompeya() {
         if (!equipment.arriveToPompeya()) {
-            position = new Position(position.getCurrentPosition()/2);
+           position = position/2;
         }
     }
 
@@ -67,28 +69,37 @@ public class Gladiator implements IPlayer {
         return this.energy;
     }
 
-    public Position getCurrentPosition(){
+    public Integer getCurrentPosition(){
          return this.position;
     }
 
-    public void moveFromCurrentPosition(Position howManySquaresToMove) {
-        position = position.add(howManySquaresToMove);
+    public void moveFromCurrentPosition(Integer howManySquaresToMove) {
+        position = position + howManySquaresToMove;
     }
 
-    public boolean playTurn(IDice dice){
-        boolean played = false;
+    public void playTurn(IDice dice) {
+        lastTurnPlayed = false;
         Integer diceRoll = dice.roll();
 
         this.energy = this.seniority.energyPlus(this.energy);
         if (this.energy > 0) {
-            played = this.playerState.playTurn(diceRoll);
+            Log.getInstance().info(getPlayerName()+" obtuvo: "+diceRoll+", ");
+            this.playerState.playTurn(diceRoll);
+            lastTurnPlayed = this.playerState.turnPlayed();
+            if (lastTurnPlayed) {
+                Log.getInstance().info(getPlayerName()+"obtuvo: "+diceRoll+", y avanzó hasta la casilla "+getCurrentPosition());
+            } else {
+                Log.getInstance().info(getPlayerName()+"se quedó descansando... sigue en la casilla "+getCurrentPosition());
+            }
         } else {
             this.energy = this.energy + RECHARGE_RATE_PER_ROUND;
-            // El jugador pepito esta cansao, le damos 5 y que siga esperando a la siguiente ronda.
+            Log.getInstance().info(getPlayerName()+"tiene noni... su energía es de: "+energy+", por ahora sigue en la casilla "+getCurrentPosition());
         }
         this.seniority = this.seniority.addTurn();
+    }
 
-        return played;
+    public boolean turnPlayed() {
+        return lastTurnPlayed;
     }
 
     public void updateStateOfInjuries(IPlayerState newState) {

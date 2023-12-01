@@ -1,12 +1,12 @@
 package edu.fiuba.algo3.modelo.board.squares;
-import edu.fiuba.algo3.modelo.IPlayer;
-import edu.fiuba.algo3.modelo.attributes.Position;
+import edu.fiuba.algo3.modelo.Gladiator;
+
 
 public interface ISquare {
 
     //Acts according to the square content
-    public void play(IPlayer player);
+    public void play(Gladiator player);
     
     //Returns true if the position matches, false if not
-    public boolean with(Position position);
+    public boolean with(Integer position);
 }

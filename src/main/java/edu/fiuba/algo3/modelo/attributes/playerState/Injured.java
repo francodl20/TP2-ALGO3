@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.Gladiator;
 
 public class Injured implements IPlayerState {
     private Gladiator gladiator;
+    private Boolean lastTurnPlayed;
 
     public Injured(Gladiator gladiator) {
         this.gladiator = gladiator;
@@ -15,8 +16,13 @@ public class Injured implements IPlayerState {
     }
 
     @Override
-    public boolean playTurn(Integer squaresToMove) {
+    public void playTurn(Integer squaresToMove) {
         this.update();
-        return false;
+        lastTurnPlayed = false;
+    }
+
+    @Override
+    public boolean turnPlayed() {
+        return lastTurnPlayed;
     }
 }

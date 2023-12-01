@@ -5,9 +5,10 @@ import edu.fiuba.algo3.modelo.board.Board;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.equipment.Helpless;
 
-import edu.fiuba.algo3.modelo.attributes.Position;
+
 import edu.fiuba.algo3.modelo.attributes.gameState.*;
 import edu.fiuba.algo3.modelo.attributes.seniority.*;
+
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
@@ -25,49 +26,49 @@ public class TestCasosDeUsoS2 {
     @Test   
     public void CanNotReadAJsonWithWrongFormat()throws Exception{
     
-    String path2="src/main/java/edu/fiuba/algo3/modelo/board/uselessJson.json";
-    //Board board = new Board();
-    assertThrows(Exception.class, () -> new Board(path2));
+    String json = "src/main/resources/JSonFiles/uselessJson.json";
+    assertThrows(Exception.class, () -> new Board(json));
 }
-    //Caso de uso 14  ------ solo hay un Json :/ 
-   
-    //Caso de uso 15  ------- No hay Json de enemigos. No sabe, no responde
+
     @Test   
     //Caso de uso 16
     public void AdheresToDomainModel(){
+      //Arrange
+        //Gladiators
+      String gladiator1Name = "Moquito";
+      String gladiator2Name = "HomeMadeMoco";
+      Integer gladiator1Position = 0;
+      Integer gladiator2Position = 0;
+      Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY,gladiator1Position, new Helpless());
+      Gladiator gladiator2 = new Gladiator(gladiator2Name,new Novice(), INITIAL_ENERGY, gladiator2Position, new Helpless());
+      ArrayList<Gladiator> gladiators = new ArrayList<>(); 
+      gladiators.add(gladiator1);
+      gladiators.add(gladiator2); 
 
-        Gladiator gladiator1 = new Gladiator(new Novice(), INITIAL_ENERGY, new Position(), new Helpless());
-        Gladiator gladiator2 = new Gladiator(new Novice(), INITIAL_ENERGY, new Position(), new Helpless());
-        ArrayList<Gladiator> gladiators = new ArrayList<>(); 
-        gladiators.add(gladiator1);
-        gladiators.add(gladiator2);  
-        ArrayList<String> nameOfPlayers = new ArrayList<>();
-        nameOfPlayers.add("Moquito");
-        nameOfPlayers.add("HomeMadeMoco");
-        Integer expectedEnergy = 70;
-          
-        String json = "src/main/java/edu/fiuba/algo3/modelo/board/boardTest.json";
-
-        TurnManager game = new TurnManager(gladiators, nameOfPlayers, new Board(json), new OngoingGame());
-        IDice dice = new DiceMock(1);
-    
-        //Act
-        for (int i = 0; i <= 7; i++) {
-            game.playTurn(dice);
-            game.playTurn(dice);
-        }
-        
-        //Assert
-        assertEquals(expectedEnergy, game.getCurrentPlayer().getEnergy());
+      //Game
+      String json = "src/main/resources/JSonFiles/boardTest.json";
+      TurnManager game = new TurnManager(gladiators, new Board(json), new OngoingGame());
+      IDice dice = new DiceMock(1);
+      
+      Integer expectedEnergy = 70;
+      
+      //Act
+      for (int i = 0; i <= 7; i++) {
+          game.playTurn(dice);
+          game.playTurn(dice);
+      }
+      
+      //Assert
+      assertEquals(expectedEnergy, game.getCurrentPlayer().getEnergy());
     }
 
     //Caso de uso 18
     public void theLogWorks(){
-        Loginator log;
+      //  Loginator log;
         Boolean result;
 
-        result = log.isWorking();
+      //  result = log.isWorking();
 
-        assertTrue(result);
+       // assertTrue(result);
     }
 }
