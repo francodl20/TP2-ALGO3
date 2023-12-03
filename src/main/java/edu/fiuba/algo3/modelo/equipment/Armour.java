@@ -1,4 +1,5 @@
 package edu.fiuba.algo3.modelo.equipment;
+
 import edu.fiuba.algo3.Log;
 public class Armour implements IEquipment {
 

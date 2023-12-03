@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.board.Board;
+import edu.fiuba.algo3.modelo.Log;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.equipment.Helpless;
@@ -64,11 +65,17 @@ public class TestCasosDeUsoS2 {
 
     //Caso de uso 18
     public void theLogWorks(){
-      //  Loginator log;
-        Boolean result;
+      
+      ByteArrayOutputStream logOutput = new ByteArrayOutputStream();
+      System.setOut(new PrintStream(logOutput));
 
-      //  result = log.isWorking();
+      // Llama al método info y captura la salida
+      Log log = Log.getInstance();
+      log.info("Test message case 18");
+      String output = logOutput.toString().trim();
 
-       // assertTrue(result);
+      System.setOut(System.out);
+
+      assertEquals("Test message case 18", output);
     }
 }

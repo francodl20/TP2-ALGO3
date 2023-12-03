@@ -43,8 +43,24 @@ public class Gladiator {
         this.equipment = this.equipment.enhance();
     }
 
-    public void enjoyBacchanalia(Integer howManyDrinks){
-        this.energy = (this.energy + (howManyDrinks * ENERGY_LOST_PER_ALCOHOLIC_DRINK));
+    public void enjoyBacchanalia(Integer happyHourMultiplier){
+        Integer diceRoll = dice.roll();
+        /* todo tranqui?
+Un gladiador romano, con voz un poco temblorosa,
+canta una canción de amor en un bar lleno de locura.
+Se inclina hacia la mesa y toma otra copa.
+
+El gladiador romano, con ojos rojos y sonrisa desordenada,
+canta una canción de amor en un bar lleno de locura.
+Se inclina hacia la mesa y toma otra copa.
+
+Su voz se vuelve más fuerte, pero también más desordenada,
+canta una canción de amor en un bar lleno de locura.
+Se inclina hacia la mesa y toma otra copa. 
+(La canción es "O Mio Babbino Caro" de Giacomo Puccini)
+         */
+        Log
+        this.energy = (this.energy + (happyHourMultiplier * diceRoll * ENERGY_LOST_PER_ALCOHOLIC_DRINK));
     }
 
     public void getInjured() {
@@ -85,17 +101,17 @@ public class Gladiator {
 
         this.energy = this.seniority.energyPlus(this.energy);
         if (this.energy > 0) {
-            Log.getInstance().info(getPlayerName()+" obtuvo: "+diceRoll+", ");
+            Log.getInstance().info(getPlayerName() + " obtuvo: " + diceRoll + ", ");
             this.playerState.playTurn(diceRoll);
             lastTurnPlayed = this.playerState.turnPlayed();
             if (lastTurnPlayed) {
-                Log.getInstance().info(getPlayerName()+"obtuvo: "+diceRoll+", y avanzó hasta la casilla "+getCurrentPosition());
+                Log.getInstance().info(getPlayerName() + "obtuvo: " + diceRoll + ", y avanzó hasta la casilla " + getCurrentPosition());
             } else {
-                Log.getInstance().info(getPlayerName()+"se quedó descansando... sigue en la casilla "+getCurrentPosition());
+                Log.getInstance().info(getPlayerName() + "se quedó descansando... sigue en la casilla " + getCurrentPosition());
             }
         } else {
             this.energy = this.energy + RECHARGE_RATE_PER_ROUND;
-            Log.getInstance().info(getPlayerName()+"tiene noni... su energía es de: "+energy+", por ahora sigue en la casilla "+getCurrentPosition());
+            Log.getInstance().info(getPlayerName() + "tiene noni... su energía es de: " + energy + ", por ahora sigue en la casilla " + getCurrentPosition());
         }
         this.seniority = this.seniority.addTurn();
     }
