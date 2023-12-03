@@ -18,14 +18,16 @@ public class Gladiator {
     private IPlayerState playerState;
     private String playerName;
     private Boolean lastTurnPlayed;
+    private IDice dice;
     
-    public Gladiator(String playerName, ISeniority seniority, Integer energy, Integer position, IEquipment equipment) {
+    public Gladiator(String playerName, ISeniority seniority, Integer energy, Integer position, IEquipment equipment, IDice playerDice) {
         this.energy = energy;
         this.seniority = seniority;
         this.position = position;
         this.equipment = equipment;
         this.playerState = new Healthy(this);
         this.playerName = playerName;
+        this.dice = playerDice;
     }
 
     public String getPlayerName() {

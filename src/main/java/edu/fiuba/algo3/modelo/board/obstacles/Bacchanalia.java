@@ -7,6 +7,7 @@ public class Bacchanalia implements IObstacle {
     public Bacchanalia() { }
 
     public void harm(Gladiator player) {
-        player.enjoyBacchanalia(4);
+        Integer diceRoll = player.rollDice();
+        player.enjoyBacchanalia(4*diceRoll);
     }
 }

@@ -29,7 +29,7 @@ public class TurnManager {
             resetIterator();
             currentPlayer = turnManager.next();
         }
-        Log.getInstance().info("La partida comenzará con el jugador: "+currentPlayer.getPlayerName());
+        Log.getInstance().info("La partida comenzará con el jugador: " + currentPlayer.getPlayerName());
         turnCount = 0; //to prevent the reset from altering the rounds
     }
     
@@ -55,7 +55,8 @@ public class TurnManager {
         if (currentPlayer.turnPlayed()) {
             gameBoard.playAtCurrentPositionWith(currentPlayer);
         }
-        
+
+
         //Ends the game in case pompeii was reached
         updateGameState(currentPlayer, gameBoard, turnCount);
         
