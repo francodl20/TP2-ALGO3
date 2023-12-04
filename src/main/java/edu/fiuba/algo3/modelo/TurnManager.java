@@ -52,7 +52,7 @@ public class TurnManager {
         currentPlayer.playTurn(dice);
 
         //If the turn is played, update the game
-        if (currentPlayer.turnPlayed()) {
+        if (currentPlayer.turnPlayed()) {   //alternative to this: play turn returns the boolean
             gameBoard.playAtCurrentPositionWith(currentPlayer);
         }
 

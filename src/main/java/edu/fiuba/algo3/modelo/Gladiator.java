@@ -19,20 +19,30 @@ public class Gladiator {
     private String playerName;
     private Boolean lastTurnPlayed;
     private IDice dice;
-    
-    public Gladiator(String playerName, ISeniority seniority, Integer energy, Integer position, IEquipment equipment, IDice playerDice) {
+
+    public Gladiator(String playerName, ISeniority seniority, Integer energy, Integer position, IEquipment equipment) {
         this.energy = energy;
         this.seniority = seniority;
         this.position = position;
         this.equipment = equipment;
         this.playerState = new Healthy(this);
         this.playerName = playerName;
-        this.dice = playerDice;
+        this.dice = new Dice();
     }
 
+    //Getters
     public String getPlayerName() {
         return playerName;
     }
+
+    public Integer getEnergy() {
+        return this.energy;
+    }
+
+    public Integer getCurrentPosition(){
+         return this.position;
+    }
+    //
 
     //Methods related to the squares
     public void eat(){
@@ -46,30 +56,44 @@ public class Gladiator {
     public void enjoyBacchanalia(Integer happyHourMultiplier){
         Integer diceRoll = dice.roll();
         /* todo tranqui?
-Un gladiador romano, con voz un poco temblorosa,
-canta una canción de amor en un bar lleno de locura.
-Se inclina hacia la mesa y toma otra copa.
+            Un gladiador romano, con voz un poco temblorosa,
+            canta una canción de amor en un bar lleno de locura.
+            Se inclina hacia la mesa y toma otra copa.
 
-El gladiador romano, con ojos rojos y sonrisa desordenada,
-canta una canción de amor en un bar lleno de locura.
-Se inclina hacia la mesa y toma otra copa.
+            Este gladiador romano, con ojos rojos y sonrisa desordenada,
+            canta una canción de amor en un bar lleno de locura.
+            Se inclina hacia la mesa y toma otra copa.
 
-Su voz se vuelve más fuerte, pero también más desordenada,
-canta una canción de amor en un bar lleno de locura.
-Se inclina hacia la mesa y toma otra copa. 
-(La canción es "O Mio Babbino Caro" de Giacomo Puccini)
+            Su voz se vuelve más fuerte, pero también más desordenada,
+            canta una canción de amor en un bar lleno de locura.
+            Se inclina hacia la mesa y toma otra copa. 
+            (La canción es "O Mio Babbino Caro" de Giacomo Puccini)
          */
-        Log
-        this.energy = (this.energy + (happyHourMultiplier * diceRoll * ENERGY_LOST_PER_ALCOHOLIC_DRINK));
+        String gotDrankedSong = "Este gladiador romano, con ojos rojos y sonrisa desordenada,\n" +
+                                "canta una canción de amor en un bar lleno de locura.\n" +
+                                "Se inclina hacia la mesa y toma otra copa.\n";
+                                //(La canción es "O Mio Babbino Caro" de Giacomo Puccini)
+        Log.getInstance().info(gotDrankedSong);
+        Log.getInstance().info("El gladiador parece que está borracho, se tomó " + diceRoll +  " tintos.");
+        Integer energyLost = (happyHourMultiplier * diceRoll);
+        Log.getInstance().info("para recuperarse va a necesitar... " + energyLost + " puntos de energía, ");
+        this.energy = (this.energy - energyLost);
+        Log.getInstance().info("quedó con " + this.energy + " puntos.");
     }
 
     public void getInjured() {
+        Log.getInstance().info("¿Por qué los malhumorados no juegan al escondite? Porque siempre los encuentran de mal humor.");
+        Log.getInstance().info("El gladiador se tropezó con una piedra del camino... asique pierde el próximo turno :(");
         this.playerState.update();
     }
 
     public void fightAgainstWildBeast() {
+        Log.getInstance().info("Que es esto? Es un pájaro? Es un avión? No... Es una bestia que quiere matar al gladiador!");
         Integer energyLost = this.equipment.protectFromtWildBeast();
+        Log.getInstance().info("El gladiador está en un duro combate, intentó usar su equipamiento,\n");
         this.energy = this.energy + energyLost;
+        Log.getInstance().info(" ahora su nuevo nivel de energía es: "+this.energy);
+
     }
 
     public void arriveToPompeya() {
@@ -83,25 +107,17 @@ Se inclina hacia la mesa y toma otra copa.
     }
     //
 
-    public Integer getEnergy() {
-        return this.energy;
+    public void moveFromCurrentPosition(Integer squaresToMove) {
+        position = position + squaresToMove;
     }
 
-    public Integer getCurrentPosition(){
-         return this.position;
-    }
-
-    public void moveFromCurrentPosition(Integer howManySquaresToMove) {
-        position = position + howManySquaresToMove;
-    }
-
-    public void playTurn(IDice dice) {
+    public void playTurn(IDice newDice) {
+        this.dice = newDice;
         lastTurnPlayed = false;
         Integer diceRoll = dice.roll();
 
         this.energy = this.seniority.energyPlus(this.energy);
         if (this.energy > 0) {
-            Log.getInstance().info(getPlayerName() + " obtuvo: " + diceRoll + ", ");
             this.playerState.playTurn(diceRoll);
             lastTurnPlayed = this.playerState.turnPlayed();
             if (lastTurnPlayed) {

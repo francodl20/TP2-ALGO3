@@ -23,49 +23,49 @@
 				"x": 1,
 				"y": 3,
 				"type": "Path",
+				"obstacle": "Beast",
+				"prize": ""
+			},
+			{
+				"x": 1,
+				"y": 4,
+				"type": "Path",
 				"obstacle": "",
 				"prize": "Equipment"
 			},
 			{
 				"x": 1,
-				"y": 4,
+				"y": 5,
 				"type": "Path",
 				"obstacle": "Beast",
 				"prize": ""
 			},
 			{
 				"x": 1,
-				"y": 5,
-				"type": "Path",
-				"obstacle": "",
-				"prize": "Food"
-			},
-			{
-				"x": 1,
 				"y": 6,
 				"type": "Path",
 				"obstacle": "",
-				"prize": "Food"
+				"prize": "Equipment"
 			},
 			{
 				"x": 1,
 				"y": 7,
 				"type": "Path",
-				"obstacle": "",
-				"prize": "Food"
+				"obstacle": "Beast",
+				"prize": ""
 			},
 			{
 				"x": 1,
 				"y": 8,
 				"type": "Path",
 				"obstacle": "",
-				"prize": "Food"
+				"prize": "Equipment"
 			},
 			{
 				"x": 1,
 				"y": 9,
 				"type": "Path",
-				"obstacle": "",
+				"obstacle": "Beast",
 				"prize": ""
 			},
 			{
@@ -73,109 +73,18 @@
 				"y": 10,
 				"type": "Path",
 				"obstacle": "",
-				"prize": ""
+				"prize": "Equipment"
 			},
 			{
 				"x": 2,
 				"y": 10,
 				"type": "Path",
-				"obstacle": "",
+				"obstacle": "Beast",
 				"prize": ""
 			},
 			{
 				"x": 3,
 				"y": 10,
-				"type": "Path",
-				"obstacle": "",
-				"prize": ""
-			},
-			{
-				"x": 4,
-				"y": 10,
-				"type": "Path",
-				"obstacle": "",
-				"prize": ""
-			},
-			{
-				"x": 5,
-				"y": 10,
-				"type": "Path",
-				"obstacle": "",
-				"prize": ""
-			},
-			{
-				"x": 6,
-				"y": 10,
-				"type": "Path",
-				"obstacle": "",
-				"prize": ""
-			},
-			{
-				"x": 7,
-				"y": 10,
-				"type": "Path",
-				"obstacle": "",
-				"prize": ""
-			},
-			{
-				"x": 8,
-				"y": 10,
-				"type": "Path",
-				"obstacle": "",
-				"prize": ""
-			},
-			{
-				"x": 9,
-				"y": 10,
-				"type": "Path",
-				"obstacle": "",
-				"prize": ""
-			},
-			{
-				"x": 10,
-				"y": 10,
-				"type": "Path",
-				"obstacle": "",
-				"prize": ""
-			},
-			{
-				"x": 10,
-				"y": 9,
-				"type": "Path",
-				"obstacle": "",
-				"prize": ""
-			},
-			{
-				"x": 10,
-				"y": 8,
-				"type": "Path",
-				"obstacle": "",
-				"prize": ""
-			},
-			{
-				"x": 10,
-				"y": 7,
-				"type": "Path",
-				"obstacle": "",
-				"prize": ""
-			},
-			{
-				"x": 10,
-				"y": 6,
-				"type": "Path",
-				"obstacle": "",
-				"prize": ""
-			},
-			{
-				"x": 10,
-				"y": 5,
-				"type": "Path",
-				"obstacle": "",
-				"prize": ""
-			},
-			{
-				"x": 10,
-				"y": 4,
 				"type": "Finish",
 				"obstacle": "",
 				"prize": ""

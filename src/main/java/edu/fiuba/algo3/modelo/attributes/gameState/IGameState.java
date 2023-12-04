@@ -7,4 +7,6 @@ public interface IGameState {
     boolean gameHasEnded();
 
     IGameState update(Gladiator currentPlayer, Board board, Integer rounds);
+
+    String getWinner();
 }

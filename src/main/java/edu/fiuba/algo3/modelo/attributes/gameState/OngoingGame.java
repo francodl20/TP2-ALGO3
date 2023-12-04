@@ -5,7 +5,7 @@ import edu.fiuba.algo3.modelo.Gladiator;
 
 public class OngoingGame implements IGameState {
     private final Integer MAX_ROUNDS = 30;
-    private final String GAME_ONGOING = "Game Ongoing";
+    private final String WINNER_STATE = "There's no winner yet.";
 
     Gladiator player;
 
@@ -13,7 +13,7 @@ public class OngoingGame implements IGameState {
         return false;
     }
     public String getWinner() {
-        return GAME_ONGOING;
+        return WINNER_STATE;
     }
     public IGameState update(Gladiator currentPlayer, Board board, Integer rounds) {
         this.player = currentPlayer;

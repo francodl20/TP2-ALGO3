@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.testUnitarios;
+package edu.fiuba.algo3.testUnitarios.equipment;
 
 import org.junit.jupiter.api.Test;
 

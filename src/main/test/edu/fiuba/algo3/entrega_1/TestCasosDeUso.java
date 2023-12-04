@@ -11,8 +11,7 @@ import edu.fiuba.algo3.modelo.equipment.SwordAndShield;
 import edu.fiuba.algo3.modelo.attributes.Coordinate;
 import edu.fiuba.algo3.modelo.attributes.gameState.*;
 import edu.fiuba.algo3.modelo.attributes.seniority.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+
 
 import org.junit.jupiter.api.Test;
 //import static org.junit.jupiter.api.Assertions.assertFalse;

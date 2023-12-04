@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.board.Board;
-import edu.fiuba.algo3.modelo.Log;
+import edu.fiuba.algo3.Log;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.equipment.Helpless;
@@ -15,6 +15,10 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 //import static org.junit.jupiter.api.Assertions.assertFalse;
 //import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -35,7 +39,6 @@ public class TestCasosDeUsoS2 {
     //Caso de uso 16
     public void AdheresToDomainModel(){
       //Arrange
-        //Gladiators
       String gladiator1Name = "Moquito";
       String gladiator2Name = "HomeMadeMoco";
       Integer gladiator1Position = 0;
@@ -63,19 +66,20 @@ public class TestCasosDeUsoS2 {
       assertEquals(expectedEnergy, game.getCurrentPlayer().getEnergy());
     }
 
+    @Test
     //Caso de uso 18
     public void theLogWorks(){
-      
+      //Arrange
       ByteArrayOutputStream logOutput = new ByteArrayOutputStream();
       System.setOut(new PrintStream(logOutput));
-
-      // Llama al método info y captura la salida
       Log log = Log.getInstance();
-      log.info("Test message case 18");
-      String output = logOutput.toString().trim();
 
+      //Act
+      log.info("This is a test message for use case 18");
+      String output = logOutput.toString().trim();
       System.setOut(System.out);
 
-      assertEquals("Test message case 18", output);
+      //Assert
+      assertEquals("This is a test message for use case 18", output);
     }
 }
