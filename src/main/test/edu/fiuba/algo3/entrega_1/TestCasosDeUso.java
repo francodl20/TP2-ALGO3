@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import static org.mockito.Mockito.*;
 
 public class TestCasosDeUso {
     private final Integer ENERGY_RECOVERED_AFTER_MEAL = 15;
@@ -44,22 +45,27 @@ public class TestCasosDeUso {
         String gladiator2Name = "HomeMadeMock";
         Integer gladiator1Position = 0;
         Integer gladiator2Position = 0;
-        IDice dice = new DiceMock(1);
-        Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY, gladiator1Position, new Helpless(), dice);
-        Gladiator gladiator2 = new Gladiator(gladiator2Name, new Novice(), INITIAL_ENERGY, gladiator2Position, new Helpless(), dice);
+        Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY, gladiator1Position, new Helpless(), new Dice());
+        Gladiator gladiator2 = new Gladiator(gladiator2Name, new Novice(), INITIAL_ENERGY, gladiator2Position, new Helpless(), new Dice());
         ArrayList<Gladiator> gladiators = new ArrayList<>(); 
         gladiators.add(gladiator1);
         gladiators.add(gladiator2);  
-            //Game
+        //Game
         
         String json = "src/main/resources/JSonFiles/boardMock.json";
-        TurnManager game = new TurnManager(gladiators, new Board(json), new OngoingGame());
+        Board board = null;
+        try {
+            board = new Board(json);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        TurnManager game = new TurnManager(gladiators, board, new OngoingGame());
+        Dice dice = mock(Dice.class);
+        when(dice.roll()).thenReturn(1);
         
 
-        //Dice diceMock = mock(Dice.class);
-    
         //Act
-        game.playTurn();
+        game.playTurn(dice);
         
         //Assert
         //BORRAR LOS GET ESTA EN PROCESO
@@ -83,25 +89,33 @@ public class TestCasosDeUso {
         String gladiator2Name = "HomeMadeMock";
         Integer gladiator1Position = 0;
         Integer gladiator2Position = 0;
-        Integer squaresToMove = 5;
-        IDice dice = new DiceMock(squaresToMove);
-        Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY, gladiator1Position, new Helpless(), dice);
-        Gladiator gladiator2 = new Gladiator(gladiator2Name, new Novice(), INITIAL_ENERGY, gladiator2Position, new Helpless(), dice);
+        Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY, gladiator1Position, new Helpless(), new Dice());
+        Gladiator gladiator2 = new Gladiator(gladiator2Name, new Novice(), INITIAL_ENERGY, gladiator2Position, new Helpless(), new Dice());
         ArrayList<Gladiator> gladiators = new ArrayList<>(); 
         gladiators.add(gladiator1);
         gladiators.add(gladiator2);
-
-            //Game 
+        
+        //Game 
         String json = "src/main/resources/JSonFiles/boardMock.json";
-        TurnManager game = new TurnManager(gladiators, new Board(json), new OngoingGame());
+        Board board = null;
+        try {
+            board = new Board(json);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        TurnManager game = new TurnManager(gladiators, board, new OngoingGame());
+        
+        Integer squaresToMove = 5;
+        Dice dice = mock(Dice.class);
+        when(dice.roll()).thenReturn(squaresToMove);
 
         Integer finalPosition = 2*squaresToMove;
 
         //Act
-        game.playTurn(); //gladiator1
-        game.playTurn(); //gladiator2
-        game.playTurn(); //gladiator1
-        game.playTurn(); //gladiator2
+        game.playTurn(dice); //gladiator1
+        game.playTurn(dice); //gladiator2
+        game.playTurn(dice); //gladiator1
+        game.playTurn(dice); //gladiator2
 
         //Assert
         assertEquals(finalPosition, gladiator1.getCurrentPosition());
@@ -113,12 +127,12 @@ public class TestCasosDeUso {
         //Arrange
         String gladiatorName = "Pedro";
         Integer expectedPosition = 0;
+        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), ZERO_ENERGY, expectedPosition, new Helpless(), new Dice());
         Integer squaresToMove = 1;
         DiceMock dice = new DiceMock(squaresToMove);
-        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), ZERO_ENERGY, expectedPosition, new Helpless(), dice);
-
+        
         //Act 
-        gladiator.playTurn();
+        gladiator.playTurn(dice);
 
         //Assert
         assertEquals(expectedPosition, gladiator.getCurrentPosition());
@@ -130,11 +144,9 @@ public class TestCasosDeUso {
         //Arrange
         String gladiatorName = "Jose";
         Integer gladiatorPosition = 0;
-        Integer squaresToMove = 0;
-        DiceMock dice = new DiceMock(squaresToMove);
-        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), ZERO_ENERGY, gladiatorPosition, new Helpless(), dice);
+        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), ZERO_ENERGY, gladiatorPosition, new Helpless(), new Dice());
         Integer expectedEnergy = ENERGY_RECOVERED_AFTER_MEAL;
-
+        
         //Act
         gladiator.eat();
 
@@ -149,7 +161,8 @@ public class TestCasosDeUso {
         String gladiatorName = "Jose";
         Integer gladiatorPosition = 0;
         Integer squaresToMove = 0;
-        DiceMock dice = new DiceMock(squaresToMove);
+        Dice dice = mock(Dice.class);
+        when(dice.roll()).thenReturn(squaresToMove);
         Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), ZERO_ENERGY, gladiatorPosition, new Helpless(), dice);
         Integer expectedEnergy = (ENERGY_AFTER_FIGHTING_WITH_HELMET_FROM_ZERO_ENERGY);
         
@@ -165,10 +178,11 @@ public class TestCasosDeUso {
     @Test
     public void improvingEquipmentForTheThirdTimeGivesASwordAndShield() {
         //Arrange
-         String gladiatorName = "Jose";
+        String gladiatorName = "Jose";
         Integer gladiatorPosition = 0;
         Integer squaresToMove = 0;
-        DiceMock dice = new DiceMock(squaresToMove);
+        Dice dice = mock(Dice.class);
+        when(dice.roll()).thenReturn(squaresToMove);
         Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), ZERO_ENERGY, gladiatorPosition, new Helpless(), dice);
         Integer expectedEnergy = (ENERGY_AFTER_FIGHTING_WITH_SWORD_AND_SHIELD_FROM_ZERO_ENERGY);
 
@@ -189,7 +203,8 @@ public class TestCasosDeUso {
         String gladiatorName = "Jose";
         Integer gladiatorPosition = 0;
         Integer squaresToMove = 0;
-        DiceMock dice = new DiceMock(squaresToMove);
+        Dice dice = mock(Dice.class);
+        when(dice.roll()).thenReturn(squaresToMove);
         Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), ZERO_ENERGY, gladiatorPosition, new Helmet(), dice);
         Integer expectedEnergy = (ENERGY_AFTER_FIGHTING_WITH_HELMET_FROM_ZERO_ENERGY);
 
@@ -206,15 +221,17 @@ public class TestCasosDeUso {
         //Arrange
         String gladiatorName = "Jose";
         Integer gladiatorPosition = 0;
+        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), INITIAL_ENERGY, gladiatorPosition, new Helpless(), new Dice());
+        
         Integer squaresToMove = 1;
-        DiceMock dice = new DiceMock(squaresToMove);
-        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), INITIAL_ENERGY, gladiatorPosition, new Helpless(), dice);
+        Dice dice = mock(Dice.class);
+        when(dice.roll()).thenReturn(squaresToMove);
         
         Integer expectedEnergy = (INITIAL_ENERGY + SEMISENIOR_BONUS);
 
         //Act
         for (Integer i = 0; i <= SEMISENIOR_THRESHOLD; i++) {
-            gladiator.playTurn();
+            gladiator.playTurn(dice);
         }
         //Assert
         assertEquals(gladiator.getEnergy(), expectedEnergy);
@@ -224,22 +241,31 @@ public class TestCasosDeUso {
     @Test
     public void arrivingToTheGoalWithoutTheKeyMovesBackToTheMiddleOfTheBoard() { //todo:
         //Arrange
+            //Gladiators
         String gladiator1Name = "Jose";
         String gladiator2Name = "Pedro";
         Integer gladiator1Position = 24;
         Integer gladiator2Position = 24;
-        Integer squaresToMove = 1;
-        DiceMock dice = new DiceMock(squaresToMove);
-        Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY, gladiator1Position, new SwordAndShield(), dice);
-        Gladiator gladiator2 = new Gladiator(gladiator2Name, new Novice(), INITIAL_ENERGY, gladiator2Position, new Key(), dice);
-
+        Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY, gladiator1Position, new SwordAndShield(), new Dice());
+        Gladiator gladiator2 = new Gladiator(gladiator2Name, new Novice(), INITIAL_ENERGY, gladiator2Position, new Key(), new Dice());
         ArrayList<Gladiator> gladiators = new ArrayList<>(); 
         gladiators.add(gladiator1);
         gladiators.add(gladiator2);
-
+        
+        
             //Game
+        Integer squaresToMove = 1;
+        Dice dice = mock(Dice.class);
+        when(dice.roll()).thenReturn(squaresToMove);
         String json = "src/main/resources/JSonFiles/boardMock.json";
-        TurnManager game = new TurnManager(gladiators, new Board(json), new OngoingGame());
+        Board board = null;
+        try {
+            board = new Board(json);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        TurnManager game = new TurnManager(gladiators, board, new OngoingGame());
+
             //Objective
         Integer targetPosition = 24/2;
         Object type = "Path";
@@ -254,8 +280,8 @@ public class TestCasosDeUso {
 
         
         //Act
-        game.playTurn();
-        game.playTurn();
+        game.playTurn(dice);
+        game.playTurn(dice);
 
         //Assert
         assertTrue(gladiator1.in(targetSquare));
@@ -271,10 +297,9 @@ public class TestCasosDeUso {
 
         String gladiatorName = "Jose";
         Integer gladiatorPosition = 0;
-        Integer squaresToMove = 0;
-        DiceMock dice = new DiceMock(squaresToMove);
-        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), ZERO_ENERGY, gladiatorPosition, new Key(), dice);
-    
+        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), ZERO_ENERGY, gladiatorPosition, new Key(), new Dice());
+        
+        
         Integer expectedEnergy = (ENERGY_AFTER_FIGHTING_WITH_KEY_FROM_ZERO_ENERGY);
 
         //Act
@@ -291,9 +316,7 @@ public class TestCasosDeUso {
         //Arrange
         String gladiatorName = "Jose";
         Integer gladiatorPosition = 0;
-        Integer squaresToMove = 0;
-        DiceMock dice = new DiceMock(squaresToMove);
-        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), ZERO_ENERGY, gladiatorPosition, new Key(), dice);
+        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), ZERO_ENERGY, gladiatorPosition, new Key(), new Dice());
         
         Integer expectedEnergy = (ENERGY_AFTER_FIGHTING_WITH_KEY_FROM_ZERO_ENERGY);
 
@@ -310,29 +333,35 @@ public class TestCasosDeUso {
     public void afterThirtyTurnsTheGameEnds(){//todo:
         
         //Arrange
-
             //Gladiators
         String gladiator1Name = "Mockito";
         String gladiator2Name = "HomeMadeMock";
         Integer gladiator1Position = 0;
         Integer gladiator2Position = 0;
-        Integer squaresToMove = 0;
-        DiceMock dice = new DiceMock(squaresToMove);
-        Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY, gladiator1Position, new Helpless(), dice);
-        Gladiator gladiator2 = new Gladiator(gladiator2Name, new Novice(), INITIAL_ENERGY, gladiator2Position, new Helpless(), dice);
+        Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY, gladiator1Position, new Helpless(), new Dice());
+        Gladiator gladiator2 = new Gladiator(gladiator2Name, new Novice(), INITIAL_ENERGY, gladiator2Position, new Helpless(), new Dice());
         ArrayList<Gladiator> gladiators = new ArrayList<>(); 
         gladiators.add(gladiator1);
         gladiators.add(gladiator2);
-
+        
             //Game
+        Integer squaresToMove = 0;
+        Dice dice = mock(Dice.class);
+        when(dice.roll()).thenReturn(squaresToMove);
         String json = "src/main/resources/JSonFiles/boardMock.json";
         IGameState gameState = new OngoingGame();
-        TurnManager game = new TurnManager(gladiators, new Board(json), gameState);
+        Board board = null;
+        try {
+            board = new Board(json);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        TurnManager game = new TurnManager(gladiators, board, gameState);
 
         //Act
         for (int i = 0; i <= MAX_ROUNDS*2; i++) {
             assertFalse(gameState.gameHasEnded());
-            gameState = game.playTurn();
+            gameState = game.playTurn(dice);
         }
         
         //Assert

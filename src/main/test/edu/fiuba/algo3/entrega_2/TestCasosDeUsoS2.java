@@ -19,6 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
+import static org.mockito.Mockito.*;
+
 //import static org.junit.jupiter.api.Assertions.assertFalse;
 //import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -29,10 +31,10 @@ public class TestCasosDeUsoS2 {
 
     //Caso de uso 13
     @Test   
-    public void CanNotReadAJsonWithWrongFormat()throws Exception{
+    public void canNotReadAJsonWithWrongFormat()throws Exception{
     
     String json = "src/main/resources/JSonFiles/uselessJson.json";
-    assertThrows(Error.class, () -> new Board(json));
+    assertThrows(Exception.class, () -> new Board(json));
 } 
       //                      ^error or exception?
 
@@ -44,17 +46,24 @@ public class TestCasosDeUsoS2 {
       String gladiator2Name = "HomeMadeMoco";
       Integer gladiator1Position = 0;
       Integer gladiator2Position = 0;
-      Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY,gladiator1Position, new Helpless());
-      Gladiator gladiator2 = new Gladiator(gladiator2Name,new Novice(), INITIAL_ENERGY, gladiator2Position, new Helpless());
+      Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY,gladiator1Position, new Helpless(), new Dice());
+      Gladiator gladiator2 = new Gladiator(gladiator2Name,new Novice(), INITIAL_ENERGY, gladiator2Position, new Helpless(), new Dice());
       ArrayList<Gladiator> gladiators = new ArrayList<>(); 
       gladiators.add(gladiator1);
       gladiators.add(gladiator2); 
 
       //Game
       String json = "src/main/resources/JSonFiles/boardTest.json";
-      TurnManager game = new TurnManager(gladiators, new Board(json), new OngoingGame());
-      IDice dice = new DiceMock(1);
-      
+      Board board = null;
+      try {
+        board = new Board(json);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+      TurnManager game = new TurnManager(gladiators, board, new OngoingGame());
+      Dice dice = mock(Dice.class);
+      when(dice.roll()).thenReturn(1);
+
       Integer expectedEnergy = 20 - 15 - 10 + 5 + 5;
       
       //Act

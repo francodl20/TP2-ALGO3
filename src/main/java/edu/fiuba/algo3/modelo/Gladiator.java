@@ -9,7 +9,6 @@ import edu.fiuba.algo3.Log;
 
 public class Gladiator {
     private final Integer ENERGY_RECOVERED_AFTER_MEAL = 15;
-    private final Integer ENERGY_LOST_PER_ALCOHOLIC_DRINK = -4;
     private final Integer RECHARGE_RATE_PER_ROUND = 5;
     private Integer energy;
     private ISeniority seniority;
@@ -111,8 +110,10 @@ public class Gladiator {
         position = position + squaresToMove;
     }
 
-    public void playTurn() {
+    public void playTurn(IDice dice) {
         lastTurnPlayed = false;
+
+        this.dice = dice;
         Integer diceRoll = dice.roll();
 
         this.energy = this.seniority.energyPlus(this.energy);
@@ -120,13 +121,13 @@ public class Gladiator {
             this.playerState.playTurn(diceRoll);
             lastTurnPlayed = this.playerState.turnPlayed();
             if (lastTurnPlayed) {
-                Log.getInstance().info(getPlayerName() + "obtuvo: " + diceRoll + ", y avanzó hasta la casilla " + getCurrentPosition());
+                Log.getInstance().info(getPlayerName() + " obtuvo: " + diceRoll + ", y avanzó hasta la casilla " + getCurrentPosition());
             } else {
-                Log.getInstance().info(getPlayerName() + "se quedó descansando... sigue en la casilla " + getCurrentPosition());
+                Log.getInstance().info(getPlayerName() + " se quedó descansando... sigue en la casilla " + getCurrentPosition());
             }
         } else {
             this.energy = this.energy + RECHARGE_RATE_PER_ROUND;
-            Log.getInstance().info(getPlayerName() + "tiene noni... su energía es de: " + energy + ", por ahora sigue en la casilla " + getCurrentPosition());
+            Log.getInstance().info(getPlayerName() + " tiene noni... su energía es de: " + energy + ", por ahora sigue en la casilla " + getCurrentPosition());
         }
         this.seniority = this.seniority.addTurn();
     }

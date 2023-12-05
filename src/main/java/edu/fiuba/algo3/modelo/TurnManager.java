@@ -42,14 +42,14 @@ public class TurnManager {
     }
 
     //Plays individual turn
-    public IGameState playTurn() {
+    public IGameState playTurn(IDice dice) {
         //Ends the game in case 30 turns were reached
         updateGameState(currentPlayer, gameBoard, turnCount);
         if (gameState.gameHasEnded()) {
             return gameState;
         }
         
-        currentPlayer.playTurn();
+        currentPlayer.playTurn(dice);
 
         //If the turn is played, update the game
         if (currentPlayer.turnPlayed()) {   //alternative to this: play turn returns the boolean

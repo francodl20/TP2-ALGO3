@@ -1,5 +1,5 @@
-package edu.fiuba.algo3.entrega_3;
 
+package edu.fiuba.algo3.entrega_3;
 import edu.fiuba.algo3.modelo.board.Board;
 
 import edu.fiuba.algo3.modelo.*;
@@ -14,6 +14,8 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static org.mockito.Mockito.*;
 
 
 //import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -33,17 +35,25 @@ public class TestCasosDeUsoS3 {
       String gladiator2Name = "Mockito";
       Integer gladiator1Position = 1;
       Integer gladiator2Position = 1;
-      Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY, gladiator1Position, new Helpless());
-      Gladiator gladiator2 = new Gladiator(gladiator2Name,new Novice(), INITIAL_ENERGY, gladiator2Position, new Helpless());
+      Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY, gladiator1Position, new Helpless(), new Dice());
+      Gladiator gladiator2 = new Gladiator(gladiator2Name,new Novice(), INITIAL_ENERGY, gladiator2Position, new Helpless(), new Dice());
       ArrayList<Gladiator> gladiators = new ArrayList<>(); 
       gladiators.add(gladiator1);
       gladiators.add(gladiator2); 
 
       //Game
+      Dice diceOne = mock(Dice.class);
+      when(diceOne.roll()).thenReturn(1);
+      Dice diceTwo = mock(Dice.class);
+      when(diceTwo.roll()).thenReturn(2);
       String json = "src/main/resources/JSonFiles/boardTest.json";
-      TurnManager game = new TurnManager(gladiators, new Board(json), new OngoingGame());
-      IDice diceOne = new DiceMock(1);
-      IDice diceTwo = new DiceMock(2);
+      Board board = null;
+        try {
+            board = new Board(json);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+      TurnManager game = new TurnManager(gladiators, board, new OngoingGame());
 
       IGameState gameState = null;
       
@@ -67,16 +77,23 @@ public class TestCasosDeUsoS3 {
       String gladiator2Name = "Mockito";
       Integer gladiator1Position = 1;
       Integer gladiator2Position = 1;
-      Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY, gladiator1Position, new Helpless());
-      Gladiator gladiator2 = new Gladiator(gladiator2Name,new Novice(), INITIAL_ENERGY, gladiator2Position, new Helpless());
+      Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY, gladiator1Position, new Helpless(), new Dice());
+      Gladiator gladiator2 = new Gladiator(gladiator2Name,new Novice(), INITIAL_ENERGY, gladiator2Position, new Helpless(), new Dice());
       ArrayList<Gladiator> gladiators = new ArrayList<>(); 
       gladiators.add(gladiator1);
       gladiators.add(gladiator2); 
 
       //Game
       String json = "src/main/resources/JSonFiles/boardTest.json";
-      TurnManager game = new TurnManager(gladiators, new Board(json), new OngoingGame());
-      IDice diceOne = new DiceMock(0);
+      Board board = null;
+        try {
+            board = new Board(json);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+      TurnManager game = new TurnManager(gladiators, board, new OngoingGame());
+      Dice diceOne = mock(Dice.class);
+      when(diceOne.roll()).thenReturn(0);
 
       IGameState gameState = null;
       

@@ -17,11 +17,11 @@ public class Board {
     Coordinate dimension;
 
     //TO DO: 
-    public Board(String jsonFilePath){
+    public Board(String jsonFilePath) throws Exception {
         try {
             map = Parser.buildFromJson(jsonFilePath);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new IncorrectJSONFormat("The JSON format is no supported");
         }
     }
 

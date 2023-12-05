@@ -27,4 +27,8 @@ public class PathSquare implements ISquare{
     public boolean with(Integer position){
         return (this.position == position);
     }
+
+    public Coordinate getSquareCoordinate(){
+        return this.coordinates;
+    }
 }

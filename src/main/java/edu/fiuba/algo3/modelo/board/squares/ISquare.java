@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.board.squares;
 import edu.fiuba.algo3.modelo.Gladiator;
+import edu.fiuba.algo3.modelo.attributes.Coordinate;
 
 
 public interface ISquare {
@@ -9,4 +10,7 @@ public interface ISquare {
     
     //Returns true if the position matches, false if not
     public boolean with(Integer position);
+    
+    //Returns true if the position matches, false if not
+    public Coordinate getSquareCoordinate();
 }
