@@ -1,9 +1,11 @@
 package edu.fiuba.algo3.modelo.board;
 
 //Local clases
+import edu.fiuba.algo3.modelo.exceptions.IncorrectJSONFormat;
 import edu.fiuba.algo3.modelo.attributes.Coordinate;
 import edu.fiuba.algo3.modelo.board.squares.ISquare;
 import edu.fiuba.algo3.modelo.Gladiator;
+
 
 //Ext libraries
 import java.util.*;

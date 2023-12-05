@@ -1,8 +1,8 @@
 {
-	"map": {
+	"mapa": {
 		"width": 10
 	},
-	"path": {
+	"camino": {
 		"squares": [
 			{
 				"x": 1,

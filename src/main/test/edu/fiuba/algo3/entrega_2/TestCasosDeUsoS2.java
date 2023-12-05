@@ -32,12 +32,13 @@ public class TestCasosDeUsoS2 {
     public void CanNotReadAJsonWithWrongFormat()throws Exception{
     
     String json = "src/main/resources/JSonFiles/uselessJson.json";
-    assertThrows(Exception.class, () -> new Board(json));
-}
+    assertThrows(Error.class, () -> new Board(json));
+} 
+      //                      ^error or exception?
 
     @Test   
     //Caso de uso 16
-    public void AdheresToDomainModel(){
+    public void verifyCorrectParsing(){
       //Arrange
       String gladiator1Name = "Moquito";
       String gladiator2Name = "HomeMadeMoco";
@@ -54,7 +55,7 @@ public class TestCasosDeUsoS2 {
       TurnManager game = new TurnManager(gladiators, new Board(json), new OngoingGame());
       IDice dice = new DiceMock(1);
       
-      Integer expectedEnergy = 70;
+      Integer expectedEnergy = 20 - 15 - 10 + 5 + 5;
       
       //Act
       for (int i = 0; i <= 7; i++) {
