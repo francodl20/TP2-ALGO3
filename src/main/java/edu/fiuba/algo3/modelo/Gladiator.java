@@ -20,14 +20,14 @@ public class Gladiator {
     private Boolean lastTurnPlayed;
     private IDice dice;
 
-    public Gladiator(String playerName, ISeniority seniority, Integer energy, Integer position, IEquipment equipment) {
+    public Gladiator(String playerName, ISeniority seniority, Integer energy, Integer position, IEquipment equipment, IDice dice) {
         this.energy = energy;
         this.seniority = seniority;
         this.position = position;
         this.equipment = equipment;
         this.playerState = new Healthy(this);
         this.playerName = playerName;
-        this.dice = new Dice();
+        this.dice = dice;
     }
 
     //Getters
@@ -76,9 +76,9 @@ public class Gladiator {
         Log.getInstance().info(gotDrankedSong);
         Log.getInstance().info("El gladiador parece que está borracho, se tomó " + diceRoll +  " tintos.");
         Integer energyLost = (happyHourMultiplier * diceRoll);
-        Log.getInstance().info("para recuperarse va a necesitar... " + energyLost + " puntos de energía, ");
+        Log.getInstance().info("... para recuperarse va a necesitar " + energyLost + " puntos de energía, ");
         this.energy = (this.energy - energyLost);
-        Log.getInstance().info("quedó con " + this.energy + " puntos.");
+        Log.getInstance().info("... quedó con " + this.energy + " puntos.");
     }
 
     public void getInjured() {
@@ -111,8 +111,7 @@ public class Gladiator {
         position = position + squaresToMove;
     }
 
-    public void playTurn(IDice newDice) {
-        this.dice = newDice;
+    public void playTurn() {
         lastTurnPlayed = false;
         Integer diceRoll = dice.roll();
 
