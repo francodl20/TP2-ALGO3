@@ -8,6 +8,7 @@ public class Injured implements IPlayerState {
 
     public Injured(Gladiator gladiator) {
         this.gladiator = gladiator;
+        this.lastTurnPlayed = false;
     }
 
     @Override

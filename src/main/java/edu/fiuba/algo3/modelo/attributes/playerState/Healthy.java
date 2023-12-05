@@ -8,6 +8,7 @@ public class Healthy implements IPlayerState {
 
     public Healthy(Gladiator gladiator) {
         this.gladiator = gladiator;
+        this.lastTurnPlayed = false;
     }
 
     @Override
