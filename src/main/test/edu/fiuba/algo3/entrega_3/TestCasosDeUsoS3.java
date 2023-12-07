@@ -12,7 +12,6 @@ import edu.fiuba.algo3.modelo.attributes.seniority.*;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import static org.mockito.Mockito.*;
@@ -53,7 +52,7 @@ public class TestCasosDeUsoS3 {
         } catch (Exception e) {
             e.printStackTrace();
         }
-      TurnManager game = new TurnManager(gladiators, board, new OngoingGame());
+      GameController game = new GameController(gladiators, board, new OngoingGame());
 
       IGameState gameState = null;
       
@@ -91,7 +90,7 @@ public class TestCasosDeUsoS3 {
         } catch (Exception e) {
             e.printStackTrace();
         }
-      TurnManager game = new TurnManager(gladiators, board, new OngoingGame());
+      GameController game = new GameController(gladiators, board, new OngoingGame());
       Dice diceOne = mock(Dice.class);
       when(diceOne.roll()).thenReturn(0);
 

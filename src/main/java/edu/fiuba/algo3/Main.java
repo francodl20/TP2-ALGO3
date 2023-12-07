@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import edu.fiuba.algo3.modelo.Dice;
 import edu.fiuba.algo3.modelo.Gladiator;
-import edu.fiuba.algo3.modelo.TurnManager;
+import edu.fiuba.algo3.modelo.GameController;
 import edu.fiuba.algo3.modelo.attributes.gameState.IGameState;
 import edu.fiuba.algo3.modelo.attributes.gameState.OngoingGame;
 import edu.fiuba.algo3.modelo.attributes.seniority.Novice;
@@ -54,7 +54,7 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        TurnManager game = new TurnManager(gladiators, board, new OngoingGame());
+        GameController game = new GameController(gladiators, board, new OngoingGame());
         IGameState gameState = new OngoingGame();
 
         while (!gameState.gameHasEnded()){

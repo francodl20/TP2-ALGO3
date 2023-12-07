@@ -60,7 +60,7 @@ public class TestCasosDeUsoS2 {
       } catch (Exception e) {
         e.printStackTrace();
       }
-      TurnManager game = new TurnManager(gladiators, board, new OngoingGame());
+      GameController game = new GameController(gladiators, board, new OngoingGame());
       Dice dice = mock(Dice.class);
       when(dice.roll()).thenReturn(1);
 
