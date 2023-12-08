@@ -57,7 +57,7 @@ public class HomeScreen extends Application {
         stage.setResizable(false);
         stage.setMaximized(false);
 
-          Scene scene = new Scene(stackPane, 650, 650);
+          Scene scene = new Scene(stackPane, 600, 600);
   
           stage.setTitle("Escape del Coliseo");
           stage.setScene(scene);
