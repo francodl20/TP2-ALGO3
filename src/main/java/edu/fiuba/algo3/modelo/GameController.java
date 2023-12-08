@@ -31,17 +31,17 @@ public class GameController {
         Log.getInstance().info("La partida comenzará con el jugador: " + getCurrentPlayer().getPlayerName());
         // turnCount = 0; //to prevent the reset from altering the rounds
     }
-    
-
 
     //Plays individual turn
     public IGameState playTurn(IDice dice) {
         //Ends the game in case 30 turns were reached
-        updateGameState(getCurrentPlayer(), gameBoard, turnCount);
+        Gladiator currentPlayer = turnManager.getCurrent();
+        updateGameState(currentPlayer, gameBoard, turnManager.getTurnCount());
+
         if (gameState.gameHasEnded()) {
             return gameState;
         }
-        
+
         currentPlayer.playTurn(dice);
 
         //If the turn is played, update the game
@@ -49,13 +49,8 @@ public class GameController {
             gameBoard.playAtCurrentPositionWith(currentPlayer);
         }
 
+        turnManager.next();
 
-        //Ends the game in case pompeii was reached
-        updateGameState(currentPlayer, gameBoard, turnCount);
-
-        turnManager.resetIterator();
-        currentPlayer = turnManager.next();
-        
         return gameState;
     }
 
@@ -64,9 +59,8 @@ public class GameController {
         this.gameState = gameState.update(currentPlayer, board, rounds);
     }
 
-    //Illegal
     public Gladiator getCurrentPlayer() {
-        return currentPlayer;
+        return turnManager.getCurrent();
     }
     
 }

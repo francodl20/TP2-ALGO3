@@ -17,12 +17,11 @@ public class OngoingGame implements IGameState {
     }
     public IGameState update(Gladiator currentPlayer, Board board, Integer rounds) {
         this.player = currentPlayer;
-
-        if (rounds > MAX_ROUNDS) {
-            return new TiedGameState();
-        }
         if (currentPlayer.in(board.getPompeii())) {
             return new FinishedGameWithWinner(player);
+        }
+        if (rounds > MAX_ROUNDS) {
+            return new TiedGameState();
         }
         return this;
     }

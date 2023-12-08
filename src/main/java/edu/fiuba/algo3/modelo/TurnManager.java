@@ -31,5 +31,7 @@ public class TurnManager {
         }
         turnCount = 0;
     }
-
+    public Integer getTurnCount() {
+        return turnCount;
+    }
 }
