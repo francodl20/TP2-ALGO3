@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.attributes.gameState.IGameState;
 import edu.fiuba.algo3.modelo.board.Board;
 import edu.fiuba.algo3.Log;
 import edu.fiuba.algo3.modelo.TurnManager;
+
 public class GameController {
     //private final List<Gladiator> players;
     private TurnManager turnManager;
@@ -15,12 +16,8 @@ public class GameController {
     //private Integer turnCount;
 
     public GameController(List<Gladiator> gladiators, Board board, IGameState game) {
-        //players = gladiators;
-        //turnManager = players.iterator();
-        //currentPlayer = turnManager.next();
         gameBoard = board;
         gameState = game;
-        //turnCount = 1;
         turnManager = new TurnManager(gladiators);
         //currentPlayer = turnManager.getCurrent();
     }
@@ -35,7 +32,7 @@ public class GameController {
     //Plays individual turn
     public IGameState playTurn(IDice dice) {
         //Ends the game in case 30 turns were reached
-        Gladiator currentPlayer = turnManager.getCurrent();
+        Gladiator currentPlayer = turnManager.getNextGladiator();
         updateGameState(currentPlayer, gameBoard, turnManager.getTurnCount());
 
         if (gameState.gameHasEnded()) {
@@ -49,8 +46,6 @@ public class GameController {
             gameBoard.playAtCurrentPositionWith(currentPlayer);
         }
 
-        turnManager.next();
-
         return gameState;
     }
 
@@ -60,7 +55,7 @@ public class GameController {
     }
 
     public Gladiator getCurrentPlayer() {
-        return turnManager.getCurrent();
+        return turnManager.getCurrentGladiator();
     }
     
 }

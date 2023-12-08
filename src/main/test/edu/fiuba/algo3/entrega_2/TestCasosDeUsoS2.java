@@ -35,7 +35,7 @@ public class TestCasosDeUsoS2 {
     String json = "src/main/resources/JSonFiles/uselessJson.json";
     assertThrows(InvalidJSONFormatException.class, () -> new Board(json));
 } 
-      //                      ^error or exception?
+    //                      ^error or exception?
 
     @Test   
     //Caso de uso 16

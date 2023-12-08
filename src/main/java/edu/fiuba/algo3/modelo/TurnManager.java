@@ -4,35 +4,50 @@ import java.util.Iterator;
 import java.util.List;
 
 public class TurnManager {
-
     List<Gladiator> players;
-    Iterator<Gladiator> playersIter;
-
+    Iterator<Gladiator> playersIterator;
     Gladiator currentPlayer;
-
     Integer turnCount;
+
     public TurnManager(List<Gladiator> gladiators) {
         this.players = gladiators;
+        playersIterator = gladiators.iterator();
+        currentPlayer = playersIterator.next();
+        turnCount = 1;
     }
-    Gladiator getCurrent() {
-        return currentPlayer;
-    }
-    //Resets the iterator when it reaches the end
-    public void next() {
-        if (!playersIter.hasNext()) {
-            playersIter = players.iterator();
-            turnCount++;
-        }
-        currentPlayer = playersIter.next();
-    }
+
     public void pickRandomPlayer(Integer numberOfPlayer) {
-        playersIter = players.iterator();
+        playersIterator = players.iterator();
         for (; numberOfPlayer > 1; numberOfPlayer--) {
             next();
         }
         turnCount = 0;
     }
+
+    //Resets the iterator when it reaches the end
+    public void next() {
+        if (!playersIterator.hasNext()) {
+            playersIterator = players.iterator();
+        }
+        currentPlayer = playersIterator.next();
+    }
+
+    //Use under discretion
+    public Gladiator getCurrentGladiator(){
+        return currentPlayer;
+    }
+
     public Integer getTurnCount() {
-        return turnCount;
+        Integer gameTurn = turnCount / players.size();
+        return gameTurn;
+    }
+
+    public Gladiator getNextGladiator(){
+        Gladiator gladiator = currentPlayer;
+
+        next();
+        turnCount++;
+
+        return gladiator;
     }
 }
