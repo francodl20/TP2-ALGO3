@@ -1,28 +1,19 @@
 package edu.fiuba.algo3.modelo.board;
 
 //Local clases
-import edu.fiuba.algo3.modelo.exceptions.IncorrectJSONFormat;
 import edu.fiuba.algo3.modelo.attributes.Coordinate;
 import edu.fiuba.algo3.modelo.board.squares.ISquare;
 import edu.fiuba.algo3.modelo.Gladiator;
 
-
-//Ext libraries
 import java.util.*;
-
 
 public class Board {
    
     LinkedList<ISquare> map;
     Coordinate dimension;
 
-    //TO DO: 
     public Board(String jsonFilePath) throws Exception {
-        try {
-            map = Parser.buildFromJson(jsonFilePath);
-        } catch (Exception e) {
-            throw new IncorrectJSONFormat("The JSON format is no supported");
-        }
+        map = Parser.buildFromJson(jsonFilePath);
     }
 
     public void playAtCurrentPositionWith(Gladiator currentPlayer) {
@@ -33,8 +24,7 @@ public class Board {
         }
     }
 
-    
-    public ISquare getPompeii() {
-        return map.getLast();
+    public boolean pompeiiHas(Gladiator currentPlayer) {
+        return (currentPlayer.in(map.getLast()));
     }
 }

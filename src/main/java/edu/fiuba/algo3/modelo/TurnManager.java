@@ -10,9 +10,11 @@ public class TurnManager {
     private final List<Gladiator> players;
     private Iterator<Gladiator> turnManager;
     private Gladiator currentPlayer;
+    //^turn manager
     private final Board gameBoard;
     private IGameState gameState;
     private Integer turnCount;
+    //^game controller
 
     public TurnManager(List<Gladiator> gladiators, Board board, IGameState game) {
         players = gladiators;

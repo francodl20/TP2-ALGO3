@@ -5,8 +5,7 @@ import edu.fiuba.algo3.Log;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.equipment.Helpless;
-
-
+import edu.fiuba.algo3.modelo.exceptions.InvalidJSONFormatException;
 import edu.fiuba.algo3.modelo.attributes.gameState.*;
 import edu.fiuba.algo3.modelo.attributes.seniority.*;
 
@@ -34,7 +33,7 @@ public class TestCasosDeUsoS2 {
     public void canNotReadAJsonWithWrongFormat()throws Exception{
     
     String json = "src/main/resources/JSonFiles/uselessJson.json";
-    assertThrows(Exception.class, () -> new Board(json));
+    assertThrows(InvalidJSONFormatException.class, () -> new Board(json));
 } 
       //                      ^error or exception?
 
@@ -46,8 +45,8 @@ public class TestCasosDeUsoS2 {
       String gladiator2Name = "HomeMadeMoco";
       Integer gladiator1Position = 0;
       Integer gladiator2Position = 0;
-      Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY,gladiator1Position, new Helpless(), new Dice());
-      Gladiator gladiator2 = new Gladiator(gladiator2Name,new Novice(), INITIAL_ENERGY, gladiator2Position, new Helpless(), new Dice());
+      Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY,gladiator1Position, new Helpless(), new D6());
+      Gladiator gladiator2 = new Gladiator(gladiator2Name,new Novice(), INITIAL_ENERGY, gladiator2Position, new Helpless(), new D6());
       ArrayList<Gladiator> gladiators = new ArrayList<>(); 
       gladiators.add(gladiator1);
       gladiators.add(gladiator2); 
@@ -61,7 +60,7 @@ public class TestCasosDeUsoS2 {
         e.printStackTrace();
       }
       TurnManager game = new TurnManager(gladiators, board, new OngoingGame());
-      Dice dice = mock(Dice.class);
+      D6 dice = mock(D6.class);
       when(dice.roll()).thenReturn(1);
 
       Integer expectedEnergy = 20 - 15 - 10 + 5 + 5;

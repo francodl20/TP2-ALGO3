@@ -41,6 +41,10 @@ public class Gladiator {
     public Integer getCurrentPosition(){
          return this.position;
     }
+
+    public boolean turnPlayed() {
+        return lastTurnPlayed;
+    }
     //
 
     //Methods related to the squares
@@ -106,9 +110,15 @@ public class Gladiator {
     }
     //
 
+    //Setter
     public void moveFromCurrentPosition(Integer squaresToMove) {
         position = position + squaresToMove;
     }
+
+    public void updateStateOfInjuries(IPlayerState newState) {
+        this.playerState = newState;
+    }
+    //
 
     public void playTurn(IDice dice) {
         lastTurnPlayed = false;
@@ -132,13 +142,7 @@ public class Gladiator {
         this.seniority = this.seniority.addTurn();
     }
 
-    public boolean turnPlayed() {
-        return lastTurnPlayed;
-    }
-
-    public void updateStateOfInjuries(IPlayerState newState) {
-        this.playerState = newState;
-    }
+    
 
     
 }

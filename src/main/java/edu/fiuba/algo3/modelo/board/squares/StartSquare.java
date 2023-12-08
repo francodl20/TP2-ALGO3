@@ -24,7 +24,7 @@ public class StartSquare implements ISquare{
         prize.boostGladiator(player);
         obstacle.harm(player);
     }
-     
+    
     public boolean with(Integer position){
         return (this.position == position);
     }

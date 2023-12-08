@@ -2,7 +2,7 @@ package edu.fiuba.algo3;
 
 import java.util.ArrayList;
 
-import edu.fiuba.algo3.modelo.Dice;
+import edu.fiuba.algo3.modelo.D6;
 import edu.fiuba.algo3.modelo.Gladiator;
 import edu.fiuba.algo3.modelo.TurnManager;
 import edu.fiuba.algo3.modelo.attributes.gameState.IGameState;
@@ -43,7 +43,7 @@ public class Main {
         
         for (int i = 0; i < numberOfPlayers; i++) {
             String name = getPlayerName(scanner, i);
-            Gladiator currentGladiator = new Gladiator(name, new Novice(), INITIAL_ENERGY, 1, new Helpless(), new Dice());
+            Gladiator currentGladiator = new Gladiator(name, new Novice(), INITIAL_ENERGY, 1, new Helpless(), new D6());
             gladiators.add(currentGladiator);
         }
 
@@ -60,7 +60,7 @@ public class Main {
         while (!gameState.gameHasEnded()){
             System.out.println("\nPress enter to roll the dice");
             scanner.nextLine();
-            gameState = game.playTurn(new Dice());
+            gameState = game.playTurn(new D6());
         }
         
     }

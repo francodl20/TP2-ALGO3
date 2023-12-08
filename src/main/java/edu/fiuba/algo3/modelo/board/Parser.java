@@ -4,6 +4,7 @@ package edu.fiuba.algo3.modelo.board;
 import edu.fiuba.algo3.modelo.attributes.Coordinate;
 import edu.fiuba.algo3.modelo.board.factory.SquareFactory;
 import edu.fiuba.algo3.modelo.board.squares.ISquare;
+import edu.fiuba.algo3.modelo.exceptions.InvalidJSONFormatException;
 
 //Ext libraries
 import java.util.*;
@@ -16,7 +17,13 @@ import org.json.simple.parser.JSONParser;
 import java.io.FileReader;
 
 public class Parser {
-    
+    private static final String PATH = "path";
+    private static final String SQUARES = "squares";
+    private static final String TYPE = "type";
+    private static final String OBSTACLE = "obstacle";
+    private static final String PRIZE = "prize";
+    private static final String X = "x";
+    private static final String Y = "y";
 
     public static LinkedList<ISquare> buildFromJson(String jsonFilePath) throws Exception {
         LinkedList<ISquare> map = new LinkedList<>();
@@ -24,42 +31,63 @@ public class Parser {
         //JSON variables
         Object jsonObj = new JSONParser().parse(new FileReader(jsonFilePath));
         JSONObject jsonFile = (JSONObject) jsonObj;  
+        
+        JSONObject caminoObject = (JSONObject) jsonFile.get(PATH);
+        if (caminoObject == null) {
+            throw new InvalidJSONFormatException(jsonFilePath + ": 'path' wasn't found");
+        }
 
-        JSONObject caminoObject = (JSONObject) jsonFile.get("path");
-        JSONArray squares = (JSONArray) caminoObject.get("squares");
+        JSONArray squares = (JSONArray) caminoObject.get(SQUARES);
+        if (squares == null) {
+            throw new InvalidJSONFormatException(jsonFilePath + ": 'squares' wasn't found");
+        }
         //
-
+        
+        //JSON navigation
         Iterator<Map.Entry> squareAtributeIterator;
         Iterator squareIterator = squares.iterator();
         Integer squareNumber = 0;
+        //
+
+        Object type = null;
+        Object obstacle = null;
+        Object prize = null;
+        Object x = null;
+        Object y = null;
         
         while (squareIterator.hasNext()) { 
             squareAtributeIterator = ((Map) squareIterator.next()).entrySet().iterator(); 
-            Object type = null;
-            Object obstacle = null;
-            Object prize = null;
-            Object x = null;
-            Object y = null;
+            type = null;
+            obstacle = null;
+            prize = null;
+            x = null;
+            y = null;
             squareNumber++;
             while (squareAtributeIterator.hasNext()) { 
                 Map.Entry pair = squareAtributeIterator.next();
-                if (pair.getKey().equals("type")) {
+
+                if (pair.getKey().equals(TYPE)) {
                     type = pair.getValue();
                 }
-                else if (pair.getKey().equals("obstacle")){
+                else if (pair.getKey().equals(OBSTACLE)){
                     obstacle = pair.getValue();
-                } else if (pair.getKey().equals("prize")){
+                } else if (pair.getKey().equals(PRIZE)){
                     prize = pair.getValue();
-                } else if (pair.getKey().equals("x")){
+                } else if (pair.getKey().equals(X)){
                     x = pair.getValue();
-                } else if (pair.getKey().equals("y")){
+                } else if (pair.getKey().equals(Y)){
                     y = pair.getValue();
                 }
             }
-            //todo: if type or position are null, throw an exception InvalidJSONException
-            //todo: validate the existance of start and finish|
-            //todo: validate continuity through the coordinates
-            //
+            
+            //Format validation
+            if (type == null || obstacle == null || prize == null ||
+                x == null || y == null) {
+                throw new InvalidJSONFormatException(jsonFilePath + ": Missing parameters in squares");
+            }
+            if (squareNumber == 1 && !type.equals("Start")) {
+                throw new InvalidJSONFormatException(jsonFilePath + ": Missing 'Start' square");
+            }
 
             //complicated casting due to parsing object
             Integer xValue = ((Long)x).intValue();
@@ -67,7 +95,12 @@ public class Parser {
             ISquare nextSquare = SquareFactory.createSquare(new Coordinate(xValue, yValue), squareNumber, type, obstacle, prize);
 
             map.add(nextSquare);
-        } 
+        }
+
+        //The map has to end ond a Finish square
+        if (!type.equals("Finish")) {
+            throw new InvalidJSONFormatException(jsonFilePath + ": Missing 'Finish' square");
+        }
 
         return map;
     }

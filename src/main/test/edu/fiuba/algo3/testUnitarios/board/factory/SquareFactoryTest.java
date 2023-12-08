@@ -1,9 +1,10 @@
 package edu.fiuba.algo3.testUnitarios.board.factory;
 
+//Test
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.Test;
-
+//Tested
 import edu.fiuba.algo3.modelo.board.factory.SquareFactory;
 import edu.fiuba.algo3.modelo.board.squares.ISquare;
 import edu.fiuba.algo3.modelo.board.squares.StartSquare;

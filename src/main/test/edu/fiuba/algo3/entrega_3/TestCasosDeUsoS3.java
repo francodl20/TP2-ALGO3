@@ -35,16 +35,16 @@ public class TestCasosDeUsoS3 {
       String gladiator2Name = "Mockito";
       Integer gladiator1Position = 1;
       Integer gladiator2Position = 1;
-      Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY, gladiator1Position, new Helpless(), new Dice());
-      Gladiator gladiator2 = new Gladiator(gladiator2Name,new Novice(), INITIAL_ENERGY, gladiator2Position, new Helpless(), new Dice());
+      Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY, gladiator1Position, new Helpless(), new D6());
+      Gladiator gladiator2 = new Gladiator(gladiator2Name,new Novice(), INITIAL_ENERGY, gladiator2Position, new Helpless(), new D6());
       ArrayList<Gladiator> gladiators = new ArrayList<>(); 
       gladiators.add(gladiator1);
       gladiators.add(gladiator2); 
 
       //Game
-      Dice diceOne = mock(Dice.class);
+      D6 diceOne = mock(D6.class);
       when(diceOne.roll()).thenReturn(1);
-      Dice diceTwo = mock(Dice.class);
+      D6 diceTwo = mock(D6.class);
       when(diceTwo.roll()).thenReturn(2);
       String json = "src/main/resources/JSonFiles/boardTest.json";
       Board board = null;
@@ -77,8 +77,8 @@ public class TestCasosDeUsoS3 {
       String gladiator2Name = "Mockito";
       Integer gladiator1Position = 1;
       Integer gladiator2Position = 1;
-      Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY, gladiator1Position, new Helpless(), new Dice());
-      Gladiator gladiator2 = new Gladiator(gladiator2Name,new Novice(), INITIAL_ENERGY, gladiator2Position, new Helpless(), new Dice());
+      Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY, gladiator1Position, new Helpless(), new D6());
+      Gladiator gladiator2 = new Gladiator(gladiator2Name,new Novice(), INITIAL_ENERGY, gladiator2Position, new Helpless(), new D6());
       ArrayList<Gladiator> gladiators = new ArrayList<>(); 
       gladiators.add(gladiator1);
       gladiators.add(gladiator2); 
@@ -92,7 +92,7 @@ public class TestCasosDeUsoS3 {
             e.printStackTrace();
         }
       TurnManager game = new TurnManager(gladiators, board, new OngoingGame());
-      Dice diceOne = mock(Dice.class);
+      D6 diceOne = mock(D6.class);
       when(diceOne.roll()).thenReturn(0);
 
       IGameState gameState = null;
