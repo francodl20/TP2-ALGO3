@@ -57,7 +57,8 @@ public class TestCasosDeUso {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        TurnManager game = new TurnManager(gladiators, board, new OngoingGame());
+
+        GameController game = new GameController(gladiators, board, new OngoingGame());
         D6 dice = mock(D6.class);
         when(dice.roll()).thenReturn(1);
         
@@ -101,7 +102,7 @@ public class TestCasosDeUso {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        TurnManager game = new TurnManager(gladiators, board, new OngoingGame());
+        GameController game = new GameController(gladiators, board, new OngoingGame());
         
         Integer squaresToMove = 5;
         D6 dice = mock(D6.class);
@@ -263,7 +264,7 @@ public class TestCasosDeUso {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        TurnManager game = new TurnManager(gladiators, board, new OngoingGame());
+        GameController game = new GameController(gladiators, board, new OngoingGame());
 
             //Objective
         Integer targetPosition = 24/2;
@@ -354,7 +355,7 @@ public class TestCasosDeUso {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        TurnManager game = new TurnManager(gladiators, board, gameState);
+        GameController game = new GameController(gladiators, board, gameState);
 
         //Act
         for (int i = 0; i <= MAX_ROUNDS*2; i++) {
