@@ -6,22 +6,19 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
-import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class HomeScreen extends Application {
+public class HomeScreen {
     
-    public static void main(String[] args) {
-        launch(args);
+    private final Stage stage;
+
+    public HomeScreen(Stage stage) {
+        this.stage = stage;
     }
-
-
-
-    @Override
-    public void start(Stage stage) {
+    public void start() {
          
         Image image = new Image(getClass().getResourceAsStream("/images/homeScreen.png"));
 
@@ -53,6 +50,12 @@ public class HomeScreen extends Application {
 
        
         stackPane.getChildren().addAll(titleLabel, continueButton);
+
+        continueButton.setOnAction(event -> {
+         
+            UserInformationScreen userInformationScreen = new UserInformationScreen();
+            userInformationScreen.start(stage);
+        });
 
         stage.setResizable(false);
         stage.setMaximized(false);

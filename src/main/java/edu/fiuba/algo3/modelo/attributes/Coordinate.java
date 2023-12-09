@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo.attributes;
 
+import java.util.Objects;
+
 public class Coordinate{
     Integer x;
     Integer y;
@@ -22,5 +24,13 @@ public class Coordinate{
     public Integer getYValue() {
         return this.y;
     }
+   @Override
+public boolean equals(Object obj) {
+    if (this == obj) return true;
+    if (obj == null || getClass() != obj.getClass()) return false;
+    Coordinate coordinate = (Coordinate) obj;
+    return Objects.equals(x, coordinate.x) && Objects.equals(y, coordinate.y);
+}
+
   
 }

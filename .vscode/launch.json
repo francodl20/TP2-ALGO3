@@ -3,6 +3,20 @@
   "configurations": [
     {
       "type": "java",
+      "name": "App",
+      "request": "launch",
+      "mainClass": "edu.fiuba.algo3/edu.fiuba.algo3.App",
+      "projectName": "tp2"
+    },
+    {
+      "type": "java",
+      "name": "HomeScreen",
+      "request": "launch",
+      "mainClass": "edu.fiuba.algo3/edu.fiuba.algo3.HomeScreen",
+      "projectName": "tp2"
+    },
+    {
+      "type": "java",
       "name": "UserInformationScreen",
       "request": "launch",
       "mainClass": "edu.fiuba.algo3/edu.fiuba.algo3.UserInformationScreen",

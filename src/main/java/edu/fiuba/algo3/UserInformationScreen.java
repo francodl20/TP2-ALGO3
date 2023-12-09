@@ -1,24 +1,25 @@
 package edu.fiuba.algo3;
 
 import javafx.scene.Node; 
-import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.geometry.Pos;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 import javafx.scene.paint.Color;
-import javafx.geometry.Pos;
+import javafx.scene.image.Image;
+import javafx.scene.layout.GridPane;
+import javafx.application.Application;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundSize;
+import javafx.beans.binding.BooleanBinding;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundPosition;
 
 public class UserInformationScreen extends Application {
 
@@ -62,7 +63,7 @@ public class UserInformationScreen extends Application {
         
         Label labelNumberOfPlayers = new Label("Ingrese el numero de jugadores \n        (entre 2 y 6)");
         labelNumberOfPlayers.setStyle("-fx-font-family: 'Press Start 2P'; -fx-font-size: 12px;");
-        labelNumberOfPlayers.setTextFill(Color.web("#F08080"));;
+        labelNumberOfPlayers.setTextFill(Color.web("#C80B0B"));;
         labelNumberOfPlayers.setFont(customFont);
 
         TextField txtNumberOfPlayers = new TextField();
@@ -129,7 +130,7 @@ public class UserInformationScreen extends Application {
         for (int i = 0; i < numberOfPlayers; i++) {
             Label label = new Label("Ingrese el nombre del jugador #" + (i + 1) + ":");
             label.setStyle("-fx-font-family: 'Press Start 2P'; -fx-font-size: 10px;");
-            label.setTextFill(Color.web("#F08080"));;
+            label.setTextFill(Color.web("#C80B0B"));;
             label.setFont(customFont);
             label.setPrefWidth(400);
             TextField textField = new TextField();
@@ -149,8 +150,9 @@ public class UserInformationScreen extends Application {
         grid.add(buttonSubmitNames, 0, 17);
 
         buttonSubmitNames.setOnAction(event -> {
+           
             boolean namesValid = true;
-            for (Node node : grid.getChildren()) {
+            for (Node node : specificGrid.getChildren()) {
                 if (node instanceof TextField) {
                     TextField textField = (TextField) node;
                     if (textField.getText().trim().isEmpty()) {
@@ -160,8 +162,18 @@ public class UserInformationScreen extends Application {
                 }
             }
 
+
             if (namesValid) {
+                  // Instanciar y mostrar el mapa
+                
                 showAlert("Exito", "Los nombres se han ingresado satisfactoriamente.");
+                
+                MapView mapView = new MapView(10, 18);
+                mapView.cargarCoordenadas();
+
+                Scene mapScene = new Scene(mapView, 800, 600); 
+                stage.setScene(mapScene);
+                
             } else {
                 showAlert("Error", "Todos los nombres deben estar conformados por lo menos de un caracter.");
             }
