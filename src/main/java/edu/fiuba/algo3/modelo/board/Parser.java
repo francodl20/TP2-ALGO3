@@ -90,6 +90,7 @@ public class Parser {
             }
 
             //complicated casting due to parsing object
+            // -1 to match 
             Integer xValue = ((Long)x).intValue();
             Integer yValue = ((Long)y).intValue();
             ISquare nextSquare = SquareFactory.createSquare(new Coordinate(xValue, yValue), squareNumber, type, obstacle, prize);

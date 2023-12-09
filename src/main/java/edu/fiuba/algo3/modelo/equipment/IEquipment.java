@@ -6,6 +6,6 @@ public interface IEquipment{
 
     public Integer protectFromtWildBeast();
 
-    public boolean arriveToPompeya();
+    public boolean canEnterPompeii();
 }
                             

@@ -10,7 +10,7 @@ public class Key implements IEquipment {
         return (0); 
     }
 
-    public boolean arriveToPompeya() {
+    public boolean canEnterPompeii() {
         return true;
     }
 }

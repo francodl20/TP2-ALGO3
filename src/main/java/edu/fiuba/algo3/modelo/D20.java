@@ -1,5 +1,4 @@
 package edu.fiuba.algo3.modelo;
-
 import java.util.Random;
 
 public class D20 implements IDice{

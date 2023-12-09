@@ -43,8 +43,8 @@ public class TestCasosDeUso {
         String gladiator2Name = "HomeMadeMock";
         Integer gladiator1Position = 0;
         Integer gladiator2Position = 0;
-        Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY, gladiator1Position, new Helpless(), new D6());
-        Gladiator gladiator2 = new Gladiator(gladiator2Name, new Novice(), INITIAL_ENERGY, gladiator2Position, new Helpless(), new D6());
+        Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY, gladiator1Position, new Helpless());
+        Gladiator gladiator2 = new Gladiator(gladiator2Name, new Novice(), INITIAL_ENERGY, gladiator2Position, new Helpless());
         ArrayList<Gladiator> gladiators = new ArrayList<>(); 
         gladiators.add(gladiator1);
         gladiators.add(gladiator2);  
@@ -88,8 +88,8 @@ public class TestCasosDeUso {
         String gladiator2Name = "HomeMadeMock";
         Integer gladiator1Position = 0;
         Integer gladiator2Position = 0;
-        Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY, gladiator1Position, new Helpless(), new D6());
-        Gladiator gladiator2 = new Gladiator(gladiator2Name, new Novice(), INITIAL_ENERGY, gladiator2Position, new Helpless(), new D6());
+        Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY, gladiator1Position, new Helpless());
+        Gladiator gladiator2 = new Gladiator(gladiator2Name, new Novice(), INITIAL_ENERGY, gladiator2Position, new Helpless());
         ArrayList<Gladiator> gladiators = new ArrayList<>(); 
         gladiators.add(gladiator1);
         gladiators.add(gladiator2);
@@ -126,7 +126,7 @@ public class TestCasosDeUso {
         //Arrange
         String gladiatorName = "Pedro";
         Integer expectedPosition = 0;
-        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), ZERO_ENERGY, expectedPosition, new Helpless(), new D6());
+        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), ZERO_ENERGY, expectedPosition, new Helpless());
         Integer squaresToMove = 1;
         D6 dice = mock(D6.class);
         when(dice.roll()).thenReturn(squaresToMove);
@@ -144,7 +144,7 @@ public class TestCasosDeUso {
         //Arrange
         String gladiatorName = "Jose";
         Integer gladiatorPosition = 0;
-        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), ZERO_ENERGY, gladiatorPosition, new Helpless(), new D6());
+        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), ZERO_ENERGY, gladiatorPosition, new Helpless());
         Integer expectedEnergy = ENERGY_RECOVERED_AFTER_MEAL;
         
         //Act
@@ -160,10 +160,7 @@ public class TestCasosDeUso {
         //Arrange
         String gladiatorName = "Jose";
         Integer gladiatorPosition = 0;
-        Integer squaresToMove = 0;
-        D6 dice = mock(D6.class);
-        when(dice.roll()).thenReturn(squaresToMove);
-        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), ZERO_ENERGY, gladiatorPosition, new Helpless(), dice);
+        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), ZERO_ENERGY, gladiatorPosition, new Helpless());
         Integer expectedEnergy = (ENERGY_AFTER_FIGHTING_WITH_HELMET_FROM_ZERO_ENERGY);
         
         //Act
@@ -180,10 +177,7 @@ public class TestCasosDeUso {
         //Arrange
         String gladiatorName = "Jose";
         Integer gladiatorPosition = 0;
-        Integer squaresToMove = 0;
-        D6 dice = mock(D6.class);
-        when(dice.roll()).thenReturn(squaresToMove);
-        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), ZERO_ENERGY, gladiatorPosition, new Helpless(), dice);
+        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), ZERO_ENERGY, gladiatorPosition, new Helpless());
         Integer expectedEnergy = (ENERGY_AFTER_FIGHTING_WITH_SWORD_AND_SHIELD_FROM_ZERO_ENERGY);
 
         //Act
@@ -202,10 +196,7 @@ public class TestCasosDeUso {
         //Arrange
         String gladiatorName = "Jose";
         Integer gladiatorPosition = 0;
-        Integer squaresToMove = 0;
-        D6 dice = mock(D6.class);
-        when(dice.roll()).thenReturn(squaresToMove);
-        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), ZERO_ENERGY, gladiatorPosition, new Helmet(), dice);
+        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), ZERO_ENERGY, gladiatorPosition, new Helmet());
         Integer expectedEnergy = (ENERGY_AFTER_FIGHTING_WITH_HELMET_FROM_ZERO_ENERGY);
 
         //Act
@@ -221,7 +212,7 @@ public class TestCasosDeUso {
         //Arrange
         String gladiatorName = "Jose";
         Integer gladiatorPosition = 0;
-        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), INITIAL_ENERGY, gladiatorPosition, new Helpless(), new D6());
+        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), INITIAL_ENERGY, gladiatorPosition, new Helpless());
         
         Integer squaresToMove = 1;
         D6 dice = mock(D6.class);
@@ -246,8 +237,8 @@ public class TestCasosDeUso {
         String gladiator2Name = "Pedro";
         Integer gladiator1Position = 24;
         Integer gladiator2Position = 24;
-        Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY, gladiator1Position, new SwordAndShield(), new D6());
-        Gladiator gladiator2 = new Gladiator(gladiator2Name, new Novice(), INITIAL_ENERGY, gladiator2Position, new Key(), new D6());
+        Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY, gladiator1Position, new SwordAndShield());
+        Gladiator gladiator2 = new Gladiator(gladiator2Name, new Novice(), INITIAL_ENERGY, gladiator2Position, new Key());
         ArrayList<Gladiator> gladiators = new ArrayList<>(); 
         gladiators.add(gladiator1);
         gladiators.add(gladiator2);
@@ -297,7 +288,7 @@ public class TestCasosDeUso {
 
         String gladiatorName = "Jose";
         Integer gladiatorPosition = 0;
-        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), ZERO_ENERGY, gladiatorPosition, new Key(), new D6());
+        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), ZERO_ENERGY, gladiatorPosition, new Key());
         
         
         Integer expectedEnergy = (ENERGY_AFTER_FIGHTING_WITH_KEY_FROM_ZERO_ENERGY);
@@ -315,7 +306,7 @@ public class TestCasosDeUso {
         //Arrange
         String gladiatorName = "Jose";
         Integer gladiatorPosition = 0;
-        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), ZERO_ENERGY, gladiatorPosition, new Key(), new D6());
+        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), ZERO_ENERGY, gladiatorPosition, new Key());
         
         Integer expectedEnergy = (ENERGY_AFTER_FIGHTING_WITH_KEY_FROM_ZERO_ENERGY);
 
@@ -337,8 +328,8 @@ public class TestCasosDeUso {
         String gladiator2Name = "HomeMadeMock";
         Integer gladiator1Position = 0;
         Integer gladiator2Position = 0;
-        Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY, gladiator1Position, new Helpless(), new D6());
-        Gladiator gladiator2 = new Gladiator(gladiator2Name, new Novice(), INITIAL_ENERGY, gladiator2Position, new Helpless(), new D6());
+        Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY, gladiator1Position, new Helpless());
+        Gladiator gladiator2 = new Gladiator(gladiator2Name, new Novice(), INITIAL_ENERGY, gladiator2Position, new Helpless());
         ArrayList<Gladiator> gladiators = new ArrayList<>(); 
         gladiators.add(gladiator1);
         gladiators.add(gladiator2);
@@ -359,12 +350,12 @@ public class TestCasosDeUso {
 
         //Act
         for (int i = 0; i <= MAX_ROUNDS*2; i++) {
-            assertFalse(gameState.gameHasEnded());
+            assertFalse(gameState.hasEnded());
             gameState = game.playTurn(dice);
         }
         
         //Assert
-        assertTrue(gameState.gameHasEnded());
+        assertTrue(gameState.hasEnded());
     }
 
 }

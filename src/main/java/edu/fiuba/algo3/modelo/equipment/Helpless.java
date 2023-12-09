@@ -14,7 +14,7 @@ public class Helpless implements IEquipment {
         return (-20);
     }
 
-    public boolean arriveToPompeya() {
+    public boolean canEnterPompeii() {
         return false;
     }
 }

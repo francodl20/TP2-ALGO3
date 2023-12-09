@@ -1,5 +1,4 @@
 package edu.fiuba.algo3.modelo.attributes.playerState;
-
 import edu.fiuba.algo3.modelo.Gladiator;
 
 public class Injured implements IPlayerState {

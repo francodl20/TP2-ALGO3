@@ -3,7 +3,7 @@ import edu.fiuba.algo3.modelo.board.Board;
 import edu.fiuba.algo3.modelo.Gladiator;
 
 public class FinishedGameWithWinner implements IGameState {
-    public final String WINNER;
+    private final String WINNER;
 
     public FinishedGameWithWinner(Gladiator theWinner) {
         this.WINNER = theWinner.getPlayerName() + " has won the game.";
@@ -13,7 +13,7 @@ public class FinishedGameWithWinner implements IGameState {
         return WINNER;
     }
 
-    public boolean gameHasEnded() {
+    public boolean hasEnded() {
         return true;
     }
 

@@ -22,7 +22,7 @@ public class FinishSquare implements ISquare{
 
     public void play(Gladiator player){
         Log.getInstance().info(player.getPlayerName()+" llegó a Pompeya!");
-        player.arriveToPompeya();
+        player.arriveToPompeii();
        }
     
     public boolean with(Integer position){

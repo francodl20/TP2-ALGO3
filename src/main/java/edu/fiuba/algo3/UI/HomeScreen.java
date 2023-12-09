@@ -1,15 +1,14 @@
-package edu.fiuba.algo3;
-
+package edu.fiuba.algo3.UI;
 
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
-import javafx.scene.text.Font;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.geometry.Pos;
 
 public class HomeScreen {
     
@@ -18,6 +17,7 @@ public class HomeScreen {
     public HomeScreen(Stage stage) {
         this.stage = stage;
     }
+
     public void start() {
          
         Image image = new Image(getClass().getResourceAsStream("/images/homeScreen.png"));
@@ -44,11 +44,10 @@ public class HomeScreen {
         continueButton.setPrefSize(180, 40);
         continueButton.setFont(customFont);
 
-    
         StackPane.setAlignment(continueButton, Pos.BOTTOM_CENTER);
         StackPane.setMargin(continueButton, new javafx.geometry.Insets(0, 0, 10, 0));
-
-       
+ 
+        
         stackPane.getChildren().addAll(titleLabel, continueButton);
 
         continueButton.setOnAction(event -> {

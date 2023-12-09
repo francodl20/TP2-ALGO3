@@ -2,6 +2,7 @@ package edu.fiuba.algo3;
 
 import java.util.ArrayList;
 
+//Temporary
 import edu.fiuba.algo3.modelo.D6;
 import edu.fiuba.algo3.modelo.Gladiator;
 import edu.fiuba.algo3.modelo.GameController;
@@ -57,7 +58,7 @@ public class Main {
         GameController game = new GameController(gladiators, board, new OngoingGame());
         IGameState gameState = new OngoingGame();
 
-        while (!gameState.gameHasEnded()){
+        while (!gameState.hasEnded()){
             System.out.println("\nPress enter to roll the dice");
             scanner.nextLine();
             gameState = game.playTurn(new D6());

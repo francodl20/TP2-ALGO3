@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.equipment;
-
 import edu.fiuba.algo3.Log;
+
 public class Armour implements IEquipment {
 
     public IEquipment enhance() {
@@ -13,7 +13,7 @@ public class Armour implements IEquipment {
         return -10;    
     }
 
-    public boolean arriveToPompeya() {
+    public boolean canEnterPompeii() {
         return false;
     }
 }   

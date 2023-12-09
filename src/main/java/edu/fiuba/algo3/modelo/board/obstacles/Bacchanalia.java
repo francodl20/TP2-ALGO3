@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.board.obstacles;
 
+import edu.fiuba.algo3.modelo.D6;
 import edu.fiuba.algo3.modelo.Gladiator;
 
 public class Bacchanalia implements IObstacle {
@@ -10,6 +11,7 @@ public class Bacchanalia implements IObstacle {
     }
 
     public void harm(Gladiator player) {
-        player.enjoyBacchanalia(ENERGY_DRAIN);
+        D6 dice = new D6();
+        player.enjoyBacchanalia(ENERGY_DRAIN * dice.roll());
     }
 }

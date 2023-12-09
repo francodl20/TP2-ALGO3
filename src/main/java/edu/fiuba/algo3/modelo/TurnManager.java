@@ -4,10 +4,10 @@ import java.util.Iterator;
 import java.util.List;
 
 public class TurnManager {
-    List<Gladiator> players;
-    Iterator<Gladiator> playersIterator;
-    Gladiator currentPlayer;
-    Integer turnCount;
+    private List<Gladiator> players;
+    private Iterator<Gladiator> playersIterator;
+    private Gladiator currentPlayer;
+    private Integer turnCount;
 
     public TurnManager(List<Gladiator> gladiators) {
         this.players = gladiators;
@@ -16,12 +16,11 @@ public class TurnManager {
         turnCount = 1;
     }
 
-    public void pickRandomPlayer(Integer numberOfPlayer) {
+    public void pickRandomPlayer(Integer diceRoll) {
         playersIterator = players.iterator();
-        for (; numberOfPlayer > 1; numberOfPlayer--) {
+        for (; diceRoll >= 1; diceRoll--) {
             next();
         }
-        turnCount = 0;
     }
 
     //Resets the iterator when it reaches the end
@@ -32,6 +31,16 @@ public class TurnManager {
         currentPlayer = playersIterator.next();
     }
 
+    //Getters
+    public Gladiator getNextGladiator(){
+        Gladiator gladiator = currentPlayer;
+
+        next();
+        turnCount++;
+
+        return gladiator;
+    }
+
     //Use under discretion
     public Gladiator getCurrentGladiator(){
         return currentPlayer;
@@ -40,14 +49,5 @@ public class TurnManager {
     public Integer getTurnCount() {
         Integer gameTurn = turnCount / players.size();
         return gameTurn;
-    }
-
-    public Gladiator getNextGladiator(){
-        Gladiator gladiator = currentPlayer;
-
-        next();
-        turnCount++;
-
-        return gladiator;
     }
 }

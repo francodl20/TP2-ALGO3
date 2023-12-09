@@ -34,8 +34,8 @@ public class TestCasosDeUsoS3 {
       String gladiator2Name = "Mockito";
       Integer gladiator1Position = 1;
       Integer gladiator2Position = 1;
-      Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY, gladiator1Position, new Helpless(), new D6());
-      Gladiator gladiator2 = new Gladiator(gladiator2Name,new Novice(), INITIAL_ENERGY, gladiator2Position, new Helpless(), new D6());
+      Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY, gladiator1Position, new Helpless());
+      Gladiator gladiator2 = new Gladiator(gladiator2Name,new Novice(), INITIAL_ENERGY, gladiator2Position, new Helpless());
       ArrayList<Gladiator> gladiators = new ArrayList<>(); 
       gladiators.add(gladiator1);
       gladiators.add(gladiator2); 
@@ -76,8 +76,8 @@ public class TestCasosDeUsoS3 {
       String gladiator2Name = "Mockito";
       Integer gladiator1Position = 1;
       Integer gladiator2Position = 1;
-      Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY, gladiator1Position, new Helpless(), new D6());
-      Gladiator gladiator2 = new Gladiator(gladiator2Name,new Novice(), INITIAL_ENERGY, gladiator2Position, new Helpless(), new D6());
+      Gladiator gladiator1 = new Gladiator(gladiator1Name, new Novice(), INITIAL_ENERGY, gladiator1Position, new Helpless());
+      Gladiator gladiator2 = new Gladiator(gladiator2Name,new Novice(), INITIAL_ENERGY, gladiator2Position, new Helpless());
       ArrayList<Gladiator> gladiators = new ArrayList<>(); 
       gladiators.add(gladiator1);
       gladiators.add(gladiator2); 

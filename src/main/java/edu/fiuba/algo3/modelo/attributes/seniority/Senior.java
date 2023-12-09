@@ -1,9 +1,9 @@
 package edu.fiuba.algo3.modelo.attributes.seniority;
 
 public class Senior implements ISeniority {
-    Integer turns;
-    Integer SENIORITY_BONUS = 10;
-    Integer SENIORITY_THRESHOLD = 12;
+    private final Integer SENIORITY_BONUS = 10;
+    private final Integer SENIORITY_THRESHOLD = 12;
+    private Integer turns;
 
     public Senior() {
         turns = SENIORITY_THRESHOLD;

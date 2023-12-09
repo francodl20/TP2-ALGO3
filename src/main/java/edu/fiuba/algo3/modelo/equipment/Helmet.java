@@ -1,5 +1,4 @@
 package edu.fiuba.algo3.modelo.equipment;
-
 import edu.fiuba.algo3.Log;
 
 public class Helmet implements IEquipment {
@@ -14,7 +13,7 @@ public class Helmet implements IEquipment {
         return (-15);
     }
 
-    public boolean arriveToPompeya() {
+    public boolean canEnterPompeii() {
         return false;
     }
 }

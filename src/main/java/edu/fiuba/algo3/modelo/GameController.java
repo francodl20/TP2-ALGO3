@@ -1,41 +1,36 @@
 package edu.fiuba.algo3.modelo;
 import java.util.*;
 
-
 import edu.fiuba.algo3.modelo.attributes.gameState.IGameState;
 import edu.fiuba.algo3.modelo.board.Board;
 import edu.fiuba.algo3.Log;
-import edu.fiuba.algo3.modelo.TurnManager;
 
 public class GameController {
-    //private final List<Gladiator> players;
+    private final Board GAMEBOARD;
     private TurnManager turnManager;
-    //private Gladiator currentPlayer;
-    private final Board gameBoard;
     private IGameState gameState;
-    //private Integer turnCount;
 
     public GameController(List<Gladiator> gladiators, Board board, IGameState game) {
-        gameBoard = board;
+        GAMEBOARD = board;
         gameState = game;
         turnManager = new TurnManager(gladiators);
-        //currentPlayer = turnManager.getCurrent();
     }
     
     //Randomizes the current player (used at the start)
     public void pickRandomPlayer(IDice dice) {
         turnManager.pickRandomPlayer(dice.roll());
-        Log.getInstance().info("La partida comenzará con el jugador: " + getCurrentPlayer().getPlayerName());
-        // turnCount = 0; //to prevent the reset from altering the rounds
+
+        Log.getInstance().info(
+            "La partida comenzará con el jugador: " + getCurrentPlayer().getPlayerName());
     }
 
     //Plays individual turn
     public IGameState playTurn(IDice dice) {
+
         //Ends the game in case 30 turns were reached
         Gladiator currentPlayer = turnManager.getNextGladiator();
-        updateGameState(currentPlayer, gameBoard, turnManager.getTurnCount());
-
-        if (gameState.gameHasEnded()) {
+        updateGameState(currentPlayer, GAMEBOARD, turnManager.getTurnCount());
+        if (gameState.hasEnded()) {
             return gameState;
         }
 
@@ -43,7 +38,7 @@ public class GameController {
 
         //If the turn is played, update the game
         if (currentPlayer.turnPlayed()) {   //alternative to this: play turn returns the boolean
-            gameBoard.playAtCurrentPositionWith(currentPlayer);
+            GAMEBOARD.playAtCurrentPositionWith(currentPlayer);
         }
 
         return gameState;
