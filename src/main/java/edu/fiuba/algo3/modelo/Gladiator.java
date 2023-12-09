@@ -37,7 +37,7 @@ public class Gladiator {
         return this.energy;
     }
 
-    public Integer getCurrentPosition(){
+    public Integer getPosition(){
          return this.position;
     }
 
@@ -80,9 +80,10 @@ public class Gladiator {
     }
 
     public void fightAgainstWildBeast() {
+        Integer energyLost = this.equipment.protectFromtWildBeast();
+
         Log.getInstance().info(
             "Que es esto? Es un pájaro? Es un avión? No... Es una bestia que quiere matar al gladiador!");
-        Integer energyLost = this.equipment.protectFromtWildBeast();
         Log.getInstance().info(
             "El gladiador está en un duro combate, intentó usar su equipamiento,\n");
         this.energy = this.energy + energyLost;
@@ -93,7 +94,12 @@ public class Gladiator {
     public void arriveToPompeii() {
         if (!equipment.canEnterPompeii()) {
            position = position/2;
+           
+           Log.getInstance().info(
+            this.playerName + " no tenía la llave, retrocedió la mitad del camino.");
         }
+
+        Log.getInstance().info(this.playerName + " llegó a Pompeya!");
     }
 
     public boolean in(ISquare square){
@@ -123,18 +129,18 @@ public class Gladiator {
             lastTurnPlayed = this.playerState.turnPlayed();
             
             if (lastTurnPlayed) {
-                Log.getInstance().info(getPlayerName() + " obtuvo: " + 
-                diceRoll + ", y avanzó hasta la casilla " + getCurrentPosition());
+                Log.getInstance().info(
+                    getPlayerName() + " obtuvo un: " + diceRoll);
             } else {
-                Log.getInstance().info(getPlayerName() + 
-                " se quedó descansando... sigue en la casilla " + getCurrentPosition());
+                Log.getInstance().info(
+                    getPlayerName() + " se quedó descansando... sigue en la misma casilla");
             }
 
         } else {
             this.energy = this.energy + RECHARGE_RATE_PER_ROUND;
 
             Log.getInstance().info(getPlayerName() + " tiene noni... su energía es de: " + 
-            energy + ", por ahora sigue en la casilla " + getCurrentPosition());
+            energy + ", por ahora sigue en la misma casilla");
         }
 
         this.seniority = this.seniority.addTurn();

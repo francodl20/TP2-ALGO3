@@ -44,7 +44,7 @@ public class Main {
         
         for (int i = 0; i < numberOfPlayers; i++) {
             String name = getPlayerName(scanner, i);
-            Gladiator currentGladiator = new Gladiator(name, new Novice(), INITIAL_ENERGY, 1, new Helpless(), new D6());
+            Gladiator currentGladiator = new Gladiator(name, new Novice(), INITIAL_ENERGY, 1, new Helpless());
             gladiators.add(currentGladiator);
         }
 

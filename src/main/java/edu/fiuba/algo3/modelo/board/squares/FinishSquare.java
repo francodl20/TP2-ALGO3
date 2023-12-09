@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.modelo.board.squares;
 
-import edu.fiuba.algo3.Log;
 import edu.fiuba.algo3.modelo.Gladiator;
 import edu.fiuba.algo3.modelo.board.prizes.IPrize;
 import edu.fiuba.algo3.modelo.board.obstacles.IObstacle;
@@ -21,9 +20,8 @@ public class FinishSquare implements ISquare{
     }
 
     public void play(Gladiator player){
-        Log.getInstance().info(player.getPlayerName()+" llegó a Pompeya!");
         player.arriveToPompeii();
-       }
+    }
     
     public boolean with(Integer position){
         return (this.position == position);

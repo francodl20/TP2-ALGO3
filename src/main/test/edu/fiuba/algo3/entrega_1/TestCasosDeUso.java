@@ -117,7 +117,7 @@ public class TestCasosDeUso {
         game.playTurn(dice); //gladiator2
 
         //Assert
-        assertEquals(finalPosition, gladiator1.getCurrentPosition());
+        assertEquals(finalPosition, gladiator1.getPosition());
     }
 
     //Caso de uso 03
@@ -135,7 +135,7 @@ public class TestCasosDeUso {
         gladiator.playTurn(dice);
 
         //Assert
-        assertEquals(expectedPosition, gladiator.getCurrentPosition());
+        assertEquals(expectedPosition, gladiator.getPosition());
     }
 
     //Caso de uso 04

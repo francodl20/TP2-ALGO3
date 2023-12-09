@@ -17,9 +17,18 @@ public class Board {
     }
 
     public void playAtCurrentPositionWith(Gladiator currentPlayer) {
+        Integer controlVar = 0;
+
         for (ISquare square : map) {
+            controlVar++;
+
             if(currentPlayer.in(square)){
                 square.play(currentPlayer);
+
+            } else if (controlVar > map.size()) {
+                //In case the gladiator rolled more than the available squares
+                currentPlayer.moveFromCurrentPosition(map.size() - controlVar);
+                map.getLast().play(currentPlayer);
             }
         }
     }

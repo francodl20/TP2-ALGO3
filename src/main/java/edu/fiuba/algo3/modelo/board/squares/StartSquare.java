@@ -21,7 +21,7 @@ public class StartSquare implements ISquare{
     }
 
     public void play(Gladiator player){
-        prize.boostGladiator(player);
+        prize.boost(player);
         obstacle.harm(player);
     }
     
