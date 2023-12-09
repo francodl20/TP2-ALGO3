@@ -7,58 +7,39 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 //Dependencies
 import edu.fiuba.algo3.modelo.Gladiator;
-import edu.fiuba.algo3.modelo.attributes.Coordinate;
 import edu.fiuba.algo3.modelo.attributes.seniority.Novice;
+import edu.fiuba.algo3.modelo.attributes.Coordinate;
 import edu.fiuba.algo3.modelo.board.obstacles.EmptyObstacle;
 import edu.fiuba.algo3.modelo.board.prizes.EmptyPrize;
+import edu.fiuba.algo3.modelo.board.obstacles.Beast;
+import edu.fiuba.algo3.modelo.board.prizes.Food;
 import edu.fiuba.algo3.modelo.equipment.Helpless;
-import edu.fiuba.algo3.modelo.equipment.Key;
 
 //Tested
-import edu.fiuba.algo3.modelo.board.squares.FinishSquare;
+import edu.fiuba.algo3.modelo.board.squares.PathSquare;
 
-public class FinishSquareTest {
+public class PathSquareTest {
     
     @Test
-    public void gladiatorReachesPompeii() {
+    public void gladiatorGetsHitAndHealed() {
         //Arrange
         String gladiatorName = "Bro";
-        Integer gladiatorPosition = 20;
-        Integer energy = 10;
-        Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), energy, gladiatorPosition, new Key());
-
-        Coordinate coord = new Coordinate(1, 1);
-        EmptyPrize emptyP = new EmptyPrize();
-        EmptyObstacle epmtyO = new EmptyObstacle();
-        FinishSquare pompeii = new FinishSquare(coord, 20, emptyP, epmtyO);
-
-        //Act
-        pompeii.play(gladiator);
-
-        //Assert
-        assertEquals(gladiatorPosition, gladiator.getPosition());
-    }
-
-    @Test
-    public void gladiatorCantReachPompeii() {
-        //Arrange
-        String gladiatorName = "Bro";
-        Integer gladiatorPosition = 20;
-        Integer energy = 10;
+        Integer gladiatorPosition = 10;
+        Integer energy = 5;
         Gladiator gladiator = new Gladiator(gladiatorName, new Novice(), energy, gladiatorPosition, new Helpless());
 
         Coordinate coord = new Coordinate(1, 1);
-        EmptyPrize emptyP = new EmptyPrize();
-        EmptyObstacle epmtyO = new EmptyObstacle();
-        FinishSquare pompeii = new FinishSquare(coord, 20, emptyP, epmtyO);
+        Food food = new Food();
+        Beast beast = new Beast();
+        PathSquare pompeii = new PathSquare(coord, 10, food, beast);
 
-        Integer expectedPosition = 10;
+        Integer expectedEnergy = 5 + 15 - 20;
 
         //Act
         pompeii.play(gladiator);
 
         //Assert
-        assertEquals(expectedPosition, gladiator.getPosition());
+        assertEquals(expectedEnergy, gladiator.getEnergy());
     }
 
     @Test
@@ -68,7 +49,7 @@ public class FinishSquareTest {
         Integer position = 20;
         EmptyPrize emptyP = new EmptyPrize();
         EmptyObstacle epmtyO = new EmptyObstacle();
-        FinishSquare pompeii = new FinishSquare(coord, position, emptyP, epmtyO);
+        PathSquare pompeii = new PathSquare(coord, position, emptyP, epmtyO);
 
         //Act
         Boolean result = pompeii.with(position);
@@ -83,7 +64,7 @@ public class FinishSquareTest {
         Coordinate coord = new Coordinate(1, 1);
         EmptyPrize emptyP = new EmptyPrize();
         EmptyObstacle epmtyO = new EmptyObstacle();
-        FinishSquare pompeii = new FinishSquare(coord, 20, emptyP, epmtyO);
+        PathSquare pompeii = new PathSquare(coord, 20, emptyP, epmtyO);
 
         //Act
         Coordinate result = pompeii.getSquareCoordinate();
