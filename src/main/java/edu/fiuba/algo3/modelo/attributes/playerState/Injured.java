@@ -11,14 +11,13 @@ public class Injured implements IPlayerState {
     }
 
     @Override
-    public void update() {
-        gladiator.updateStateOfInjuries(new Healthy(gladiator));
+    public IPlayerState update() {
+        return new Healthy(gladiator);
     }
 
     @Override
-    public void playTurn(Integer squaresToMove) {
-        this.update();
-        lastTurnPlayed = false;
+    public IPlayerState playTurn(Integer squaresToMove) {
+        return this.update();
     }
 
     @Override

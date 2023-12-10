@@ -1,39 +1,44 @@
 package edu.fiuba.algo3.testUnitarios.equipment;
 
-import edu.fiuba.algo3.modelo.equipment.IEquipment;
-import edu.fiuba.algo3.modelo.equipment.SwordAndShield;
-
-
-
+//Test
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class SwordAndShieldTest {
+//Dependencies
+import edu.fiuba.algo3.modelo.equipment.IEquipment;
 
-    public static final int ENERGY_LOST_WITH_KEY = 0;
-    public static final int ENERGY_LOST_WITH_SWORD_AND_SHIELD = -2;
+//Tested
+import edu.fiuba.algo3.modelo.equipment.SwordAndShield;
+
+public class SwordAndShieldTest {
+    
+    public static final int EXPECTED_LOSS_WITH_SWORD_AND_SHIELD = -2;
+    public static final int EXPECTED_LOSS_WITH_KEY = 0;
 
     @Test
-    public void Case01ByImprovingSwordAndShieldYouObtainAKey() {
+    public void swordAndShieldProtectsProperly() {
+
         //Arrange
         SwordAndShield swordAndShield = new SwordAndShield();
-        Integer expectedEnergy = (ENERGY_LOST_WITH_KEY);
 
         //Act
-        IEquipment aux = swordAndShield.enhance();
+        Integer energyLost = swordAndShield.protectFromtWildBeast();
 
         //Assert
-        assertEquals(aux.protectFromtWildBeast(), expectedEnergy);
+        assertEquals(energyLost, EXPECTED_LOSS_WITH_SWORD_AND_SHIELD);
     }
 
     @Test
-    public void Case02TheLostEnergyUsingSwordAndShieldIsCorrect() {
-        
+    public void swordAndShieldEnhancesIntoKey() {
+
         //Arrange
         SwordAndShield swordAndShield = new SwordAndShield();
-        Integer expectedEnergy = (ENERGY_LOST_WITH_SWORD_AND_SHIELD);
+
+        //Act
+        IEquipment key = swordAndShield.enhance();
+        Integer energyLost = key.protectFromtWildBeast();
 
         //Assert
-        assertEquals(swordAndShield.protectFromtWildBeast(), expectedEnergy);
+        assertEquals(energyLost, EXPECTED_LOSS_WITH_KEY);
     }
 }

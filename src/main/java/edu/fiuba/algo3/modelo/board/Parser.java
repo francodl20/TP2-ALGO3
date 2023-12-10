@@ -32,12 +32,12 @@ public class Parser {
         Object jsonObj = new JSONParser().parse(new FileReader(jsonFilePath));
         JSONObject jsonFile = (JSONObject) jsonObj;  
         
-        JSONObject caminoObject = (JSONObject) jsonFile.get(PATH);
-        if (caminoObject == null) {
+        JSONObject pathObject = (JSONObject) jsonFile.get(PATH);
+        if (pathObject == null) {
             throw new InvalidJSONFormatException(jsonFilePath + ": 'path' wasn't found");
         }
 
-        JSONArray squares = (JSONArray) caminoObject.get(SQUARES);
+        JSONArray squares = (JSONArray) pathObject.get(SQUARES);
         if (squares == null) {
             throw new InvalidJSONFormatException(jsonFilePath + ": 'squares' wasn't found");
         }

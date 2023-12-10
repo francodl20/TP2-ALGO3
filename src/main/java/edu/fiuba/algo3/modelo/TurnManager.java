@@ -24,7 +24,7 @@ public class TurnManager {
     }
 
     //Resets the iterator when it reaches the end
-    public void next() {
+    private void next() {
         if (!playersIterator.hasNext()) {
             playersIterator = players.iterator();
         }

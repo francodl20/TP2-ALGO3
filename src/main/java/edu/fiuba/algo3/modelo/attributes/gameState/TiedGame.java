@@ -2,10 +2,10 @@ package edu.fiuba.algo3.modelo.attributes.gameState;
 import edu.fiuba.algo3.modelo.board.Board;
 import edu.fiuba.algo3.modelo.Gladiator;
 
-public class TiedGameState implements IGameState {
+public class TiedGame implements IGameState {
     private final String WINNER_STATE;
 
-    public TiedGameState(){
+    public TiedGame(){
         this.WINNER_STATE = "Game Tied.";
     }
 

@@ -1,40 +1,44 @@
 package edu.fiuba.algo3.testUnitarios.equipment;
 
-import edu.fiuba.algo3.modelo.equipment.IEquipment;
-import edu.fiuba.algo3.modelo.equipment.Helmet;
-
-
+//Test
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+//Dependencies
+import edu.fiuba.algo3.modelo.equipment.IEquipment;
+
+//Tested
+import edu.fiuba.algo3.modelo.equipment.Helmet;
+
 public class HelmetTest {
 
-    public static final int ENERGY_LOST_WITH_HELMET = -15;
-    public static final int ENERGY_LOST_WITH_ARMOUR = -10;
+    public static final int EXPECTED_LOSS_WITH_HELMET = -15;
+    public static final int EXPECTED_LOSS_WITH_ARMOUR = -10;
 
     @Test
-    public void Case01ByImprovingAHelmetYouObtainAnArmor() {
-
-        
+    public void helmetProtectsProperly() {
+    
         //Arrange
         Helmet helmet = new Helmet();
-        Integer expectedEnergy = (ENERGY_LOST_WITH_ARMOUR);
 
         //Act
-        IEquipment aux = helmet.enhance();
+        Integer energyLost = helmet.protectFromtWildBeast();
 
         //Assert
-        assertEquals(aux.protectFromtWildBeast(), expectedEnergy); 
+        assertEquals(energyLost, EXPECTED_LOSS_WITH_HELMET);
     }
 
     @Test
-    public void Case02TheLostEnergyWearingAHelmetIsCorrect() {
-        
+    public void helmetEnhancesIntoArmour() {
+
         //Arrange
         Helmet helmet = new Helmet();
-        Integer expectedEnergy = (ENERGY_LOST_WITH_HELMET);
+
+        //Act
+        IEquipment armour = helmet.enhance();
+        Integer energyLost = armour.protectFromtWildBeast();
 
         //Assert
-        assertEquals(helmet.protectFromtWildBeast(), expectedEnergy);
+        assertEquals(energyLost, EXPECTED_LOSS_WITH_ARMOUR);
     }
 }

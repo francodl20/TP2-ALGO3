@@ -76,7 +76,7 @@ public class Gladiator {
             "¿Por qué los malhumorados no juegan al escondite? Porque siempre los encuentran de mal humor.");
         Log.getInstance().info(
             "El gladiador se tropezó con una piedra del camino... así que pierde el próximo turno :(");
-        this.playerState.update();
+        this.playerState = this.playerState.update();
     }
 
     public void fightAgainstWildBeast() {
@@ -108,7 +108,7 @@ public class Gladiator {
     //
 
     //Setters
-    public void moveFromCurrentPosition(Integer squaresToMove) {
+    public void advance(Integer squaresToMove) {
         position = position + squaresToMove;
     }
 
@@ -125,7 +125,7 @@ public class Gladiator {
         Integer diceRoll = dice.roll();
 
         if (this.energy > 0) {
-            this.playerState.playTurn(diceRoll);
+            this.playerState = this.playerState.playTurn(diceRoll);
             lastTurnPlayed = this.playerState.turnPlayed();
             
             if (lastTurnPlayed) {

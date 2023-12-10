@@ -38,7 +38,7 @@ public class GameController {
 
         //If the turn is played, update the game
         if (currentPlayer.turnPlayed()) {   //alternative to this: play turn returns the boolean
-            GAMEBOARD.playAtCurrentPositionWith(currentPlayer);
+            GAMEBOARD.playWith(currentPlayer);
         }
 
         return gameState;

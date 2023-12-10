@@ -1,39 +1,44 @@
 package edu.fiuba.algo3.testUnitarios.equipment;
 
-import edu.fiuba.algo3.modelo.equipment.IEquipment;
-import edu.fiuba.algo3.modelo.equipment.Key;
-
-
-
+//Test
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+//Dependencies
+import edu.fiuba.algo3.modelo.equipment.IEquipment;
+
+//Tested
+import edu.fiuba.algo3.modelo.equipment.Key;
+
 public class KeyTest {
 
-    public static final int ENERGY_LOST_WITH_KEY = 0;
+    public static final int EXPECTED_LOSS_WITH_KEY = 0;
 
 
     @Test
-    public void Case01ByImprovingKeyYouObtainAKey() {
-         //Arrange
-        Key key = new Key();
-        Integer expectedEnergy = (ENERGY_LOST_WITH_KEY);
+    public void keyProtectsProperly() {
 
-        //Assert
-        IEquipment aux = key.enhance();
+        //Arrange
+        Key key = new Key();
 
         //Act
-        assertEquals(aux.protectFromtWildBeast(), expectedEnergy);
+        Integer energyLost = key.protectFromtWildBeast();   
+
+        //Assert
+        assertEquals(energyLost, EXPECTED_LOSS_WITH_KEY);
     }
 
     @Test
-    public void Case02TheLostEnergyUsingKeyIsCorrect() {
+    public void keyEnhancesIntoKey() {
         
         //Arrange
         Key key = new Key();
-        Integer expectedEnergy = (ENERGY_LOST_WITH_KEY);
+
+        //Act
+        IEquipment key2 = key.enhance();
+        Integer energyLost = key2.protectFromtWildBeast();   
 
         //Assert
-        assertEquals(key.protectFromtWildBeast(), expectedEnergy);
+        assertEquals(energyLost, EXPECTED_LOSS_WITH_KEY);
     }
 }

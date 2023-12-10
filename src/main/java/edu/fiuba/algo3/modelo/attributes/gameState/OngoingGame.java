@@ -27,7 +27,7 @@ public class OngoingGame implements IGameState {
             return new FinishedGameWithWinner(currentPlayer);
         }
         if (rounds > MAX_ROUNDS) {
-            return new TiedGameState();
+            return new TiedGame();
         }
         return this;
     }

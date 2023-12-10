@@ -16,7 +16,7 @@ public class Board {
         map = Parser.buildFromJson(jsonFilePath);
     }
 
-    public void playAtCurrentPositionWith(Gladiator currentPlayer) {
+    public void playWith(Gladiator currentPlayer) {
         Integer controlVar = 0;
 
         for (ISquare square : map) {
@@ -27,7 +27,7 @@ public class Board {
 
             } else if (controlVar > map.size()) {
                 //In case the gladiator rolled more than the available squares
-                currentPlayer.moveFromCurrentPosition(map.size() - controlVar);
+                currentPlayer.advance(map.size() - controlVar);
                 map.getLast().play(currentPlayer);
             }
         }

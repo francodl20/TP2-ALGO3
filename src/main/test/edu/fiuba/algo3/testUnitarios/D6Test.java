@@ -1,25 +1,30 @@
-package edu.fiuba.algo3.testUnitarios.equipment;
+package edu.fiuba.algo3.testUnitarios;
 
-import edu.fiuba.algo3.modelo.D6;
+//Test
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class DiceTest {
+//Tested
+import edu.fiuba.algo3.modelo.D6;
+
+public class D6Test {
 
     @Test
     public void diceReturnANumberBetween1And6() {
         D6 dice = new D6();
-        int result = dice.roll();
+        int number = dice.roll();
+
+        Boolean result = (number >= 1) && (number <= 6);
         
-        assertTrue((result >= 1) && (result <= 6));
+        assertTrue(result);
     }
     
     @Test
     public void multipleDiceRollsReturnNumbersBetween1And6() {
         D6 dice = new D6();
         for (int i = 0; i < 100; i++) {
-            int diceRoll = dice.roll();
-            assertTrue(diceRoll >= 1 && diceRoll <= 6);
+            int number = dice.roll();
+            assertTrue(number >= 1 && number <= 6);
         }
     }
 }

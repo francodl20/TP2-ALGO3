@@ -1,9 +1,9 @@
 package edu.fiuba.algo3.modelo.attributes.playerState;
 
 public interface IPlayerState {
-    public void update();
+    public IPlayerState update();
 
-    public void playTurn(Integer squaresToMove);
+    public IPlayerState playTurn(Integer squaresToMove);
 
     public boolean turnPlayed();
 }
