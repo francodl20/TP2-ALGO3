@@ -23,7 +23,7 @@ public class Controller {
         
     }
 
-    public void sartUI(){
+    public void startUI(){
         homeScreen.start(this);
     }
 
@@ -32,11 +32,12 @@ public class Controller {
     }
 
     public void showMap(){
-        mapView = new MapView(10, 18);
+        this.mapView = new MapView(10, 18);
         mapView.loadCoordinates();
 
         Scene mapScene = new Scene(mapView);
         primaryStage.setScene(mapScene);
+        primaryStage.show();
     }
 
     public void recieveNumberOfPLayers(int number){}

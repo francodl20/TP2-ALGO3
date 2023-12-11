@@ -1,21 +1,26 @@
 package edu.fiuba.algo3;
 
-import java.util.ArrayList;
-
-//Temporary
-import edu.fiuba.algo3.modelo.D6;
-import edu.fiuba.algo3.modelo.Gladiator;
-import edu.fiuba.algo3.modelo.GameController;
-import edu.fiuba.algo3.modelo.attributes.gameState.IGameState;
-import edu.fiuba.algo3.modelo.attributes.gameState.OngoingGame;
-import edu.fiuba.algo3.modelo.attributes.seniority.Novice;
-import edu.fiuba.algo3.modelo.board.Board;
-import edu.fiuba.algo3.modelo.equipment.Helpless;
-
-import java.util.Scanner;
 
 public class Main {
+
+    public static void main(String[] args){
+
+        App.main(args);
+    }
     /**
+     import java.util.ArrayList;
+     
+     //Temporary
+     import edu.fiuba.algo3.modelo.D6;
+     import edu.fiuba.algo3.modelo.Gladiator;
+     import edu.fiuba.algo3.modelo.GameController;
+     import edu.fiuba.algo3.modelo.attributes.gameState.IGameState;
+     import edu.fiuba.algo3.modelo.attributes.gameState.OngoingGame;
+     import edu.fiuba.algo3.modelo.attributes.seniority.Novice;
+     import edu.fiuba.algo3.modelo.board.Board;
+     import edu.fiuba.algo3.modelo.equipment.Helpless;
+     
+     import java.util.Scanner;
      * 
     private static final Integer INITIAL_ENERGY = 20;
 

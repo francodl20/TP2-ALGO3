@@ -10,9 +10,9 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) {
         
-       Controller controller = new Controller(primaryStage);
-       controller.sartUI();
-       controller.showMap();
+        Controller controller = new Controller(primaryStage);
+        controller.startUI();
+        
 
     }
 

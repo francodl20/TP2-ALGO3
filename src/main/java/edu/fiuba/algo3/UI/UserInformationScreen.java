@@ -158,6 +158,7 @@ public class UserInformationScreen extends GridPane {
                 controller.startGame(playerNames, numberOfPlayers);
               
                 stage.close();
+                controller.showMap();
                 
             } else {
                 showAlert("Error", "Todos los nombres deben estar conformados por lo menos de un caracter.");
