@@ -1,10 +1,13 @@
 package edu.fiuba.algo3.modelo;
  
-import edu.fiuba.algo3.modelo.attributes.playerState.Healthy;
 import edu.fiuba.algo3.modelo.attributes.playerState.IPlayerState;
 import edu.fiuba.algo3.modelo.attributes.seniority.ISeniority;
 import edu.fiuba.algo3.modelo.board.squares.ISquare;
 import edu.fiuba.algo3.modelo.equipment.IEquipment;
+
+import edu.fiuba.algo3.modelo.attributes.playerState.Healthy;
+import edu.fiuba.algo3.modelo.attributes.seniority.Novice;
+import edu.fiuba.algo3.modelo.equipment.Helpless;
 import edu.fiuba.algo3.Log;
 
 public class Gladiator {
@@ -17,6 +20,16 @@ public class Gladiator {
     private IPlayerState playerState;
     private IEquipment equipment;
     private Boolean lastTurnPlayed;
+
+    public Gladiator(String playerName) {
+        this.seniority = new Novice();
+        this.playerName = playerName;
+        this.position = 1;
+        this.energy = 20;
+        this.playerState = new Healthy(this);
+        this.equipment = new Helpless();
+        this.lastTurnPlayed = false;
+    }
 
     public Gladiator(String playerName, ISeniority seniority, Integer energy, Integer position, IEquipment equipment) {
         this.seniority = seniority;

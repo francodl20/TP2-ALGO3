@@ -15,7 +15,8 @@ import edu.fiuba.algo3.modelo.equipment.Helpless;
 import java.util.Scanner;
 
 public class Main {
-
+    /**
+     * 
     private static final Integer INITIAL_ENERGY = 20;
 
     public static Integer getNumberOfPlayers(Scanner scanner) {
@@ -65,4 +66,5 @@ public class Main {
         }
         
     }
+     */
 }

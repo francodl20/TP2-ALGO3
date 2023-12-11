@@ -1,31 +1,40 @@
 package edu.fiuba.algo3.UI;
 
+import java.util.List;
 import javafx.scene.Node; 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.geometry.Pos;
 import javafx.geometry.HPos;
+import java.util.LinkedList;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.text.Font;
 import javafx.scene.paint.Color;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
-import javafx.application.Application;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.CornerRadii;
+import javafx.collections.ObservableList;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundRepeat;
+import edu.fiuba.algo3.controller.Controller;
 import javafx.scene.layout.BackgroundPosition;
 
-public class UserInformationScreen extends Application {
+public class UserInformationScreen extends GridPane {
 
-    @Override
+
+    private final Controller controller;
+
+    public UserInformationScreen(Controller controller) {
+        this.controller = controller;
+    }
+
     public void start(Stage stage) {
          
-        Image backgroundImage = new Image("file:src/main/resources/images/usersInformationScreen.jpg"); 
+        Image backgroundImage = new Image("file:src/main/resources/images/UserInformationScreen.png"); 
         BackgroundSize backgroundSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false);
         BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
         Background backgroundObject = new Background(background);
@@ -79,6 +88,7 @@ public class UserInformationScreen extends Application {
             } else {
                 showAlert("Error", "Ingrese un numero valido de jugadoress (entre 2 y 6).");
             }
+
         });
     
         stage.setScene(scene);
@@ -90,7 +100,7 @@ public class UserInformationScreen extends Application {
     
     private void requestPlayerNames(Stage stage, int numberOfPlayers) {
 
-        Image backgroundImage = new Image("file:src/main/resources/images/usersInformationScreen.jpg"); 
+        Image backgroundImage = new Image("file:src/main/resources/images/UserInformationScreen.png"); 
         BackgroundSize backgroundSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false);
         BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
         Background backgroundObject = new Background(background);
@@ -141,12 +151,13 @@ public class UserInformationScreen extends Application {
             if (namesAreValid(specificGrid)) {
                
                 showAlert("Exito", "Los nombres se han ingresado satisfactoriamente.");
-                
-                MapView mapView = new MapView(10, 18);
-                mapView.loadCoordinates();
+            
+                List<String> playerNames = getPlayerNames(specificGrid, numberOfPlayers);
 
-                Scene mapScene = new Scene(mapView, 400, 700); 
-                stage.setScene(mapScene);
+                
+                controller.startGame(playerNames, numberOfPlayers);
+              
+                stage.close();
                 
             } else {
                 showAlert("Error", "Todos los nombres deben estar conformados por lo menos de un caracter.");
@@ -188,7 +199,33 @@ public class UserInformationScreen extends Application {
         alert.showAndWait();
     }
 
-    public static void main(String[] args) {
-        launch(args);
+    private List<String> getPlayerNames(GridPane specificGrid, int numberOfPlayers) {
+    List<String> playerNames = new LinkedList<String>();
+
+    for (int i = 0; i < numberOfPlayers; i++) {
+        Node node = getNodeByRowColumnIndex(i, 7, specificGrid);
+        if (node instanceof TextField) {
+            TextField textField = (TextField) node;
+            playerNames.add(textField.getText());
+        }
     }
+
+    return playerNames;
+}
+
+private Node getNodeByRowColumnIndex(final int row, final int column, GridPane gridPane) {
+    Node result = null;
+    ObservableList<Node> children = gridPane.getChildren();
+
+    for (Node node : children) {
+        if (GridPane.getRowIndex(node) == row && GridPane.getColumnIndex(node) == column) {
+            result = node;
+            break;
+        }
+    }
+
+    return result;
+}
+
+
 }

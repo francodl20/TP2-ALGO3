@@ -1,9 +1,8 @@
 package edu.fiuba.algo3;
 
-import edu.fiuba.algo3.UI.HomeScreen;
+import edu.fiuba.algo3.controller.Controller;
 import javafx.application.Application;
 import javafx.stage.Stage;
-
 
 
 public class App extends Application {
@@ -11,11 +10,10 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) {
         
-        HomeScreen homeScreen = new HomeScreen(primaryStage);
-        homeScreen.start();
-    
-        primaryStage.setTitle("Escape del Coliseo");
-        primaryStage.show();
+       Controller controller = new Controller(primaryStage);
+       controller.sartUI();
+       controller.showMap();
+
     }
 
     public static void main(String[] args) {

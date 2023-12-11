@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.UI;
 
+import edu.fiuba.algo3.controller.Controller;
+
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -18,7 +20,7 @@ public class HomeScreen {
         this.stage = stage;
     }
 
-    public void start() {
+    public void start(Controller controller) {
          
         Image image = new Image(getClass().getResourceAsStream("/images/homeScreen.png"));
 
@@ -51,8 +53,7 @@ public class HomeScreen {
         stackPane.getChildren().addAll(titleLabel, continueButton);
 
         continueButton.setOnAction(event -> {
-         
-            UserInformationScreen userInformationScreen = new UserInformationScreen();
+            UserInformationScreen userInformationScreen = new UserInformationScreen(controller);
             userInformationScreen.start(stage);
         });
 
