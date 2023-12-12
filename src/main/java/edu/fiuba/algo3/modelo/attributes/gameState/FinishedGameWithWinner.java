@@ -6,7 +6,7 @@ public class FinishedGameWithWinner implements IGameState {
     private final String WINNER;
 
     public FinishedGameWithWinner(Gladiator theWinner) {
-        this.WINNER = theWinner.getPlayerName() + " has won the game.";
+        this.WINNER = theWinner.getName() + " has won the game.";
     }
 
     public String getWinner(){

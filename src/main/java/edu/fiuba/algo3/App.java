@@ -12,6 +12,7 @@ public class App extends Application {
         
         Controller controller = new Controller(primaryStage);
         controller.startUI();
+        //controller.play(;)
         
 
     }

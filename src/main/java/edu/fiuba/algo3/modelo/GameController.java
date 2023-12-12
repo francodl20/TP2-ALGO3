@@ -11,6 +11,7 @@ public class GameController {
     private final Board GAMEBOARD;
     private TurnManager turnManager;
     private IGameState gameState;
+    private Integer lastDiceRoll = 0;
 
     //Default constructor
     public GameController(List<String> gladiatorNames, Integer numberOfPlayers) {
@@ -53,7 +54,7 @@ public class GameController {
         turnManager.pickRandomPlayer(dice.roll());
 
         Log.getInstance().info(
-            "La partida comenzará con el jugador: " + getCurrentPlayer().getPlayerName());
+            "La partida comenzará con el jugador: " + getCurrentPlayer().getName());
     }
 
     //Plays individual turn
@@ -66,7 +67,7 @@ public class GameController {
             return gameState;
         }
 
-        currentPlayer.playTurn(dice);
+        this.lastDiceRoll = currentPlayer.playTurn(dice);
 
         //If the turn is played, update the game
         if (currentPlayer.turnPlayed()) {   //alternative to this: play turn returns the boolean
@@ -83,6 +84,10 @@ public class GameController {
 
     public Gladiator getCurrentPlayer() {
         return turnManager.getCurrentGladiator();
+    }
+
+    public Integer getLastDiceRoll(){
+        return this.lastDiceRoll;
     }
     
 }

@@ -40,7 +40,7 @@ public class TurnManagerTest {
         Gladiator currentGladiator = manager.getCurrentGladiator();
 
         //Assert
-        assertEquals(gladiator1Name, currentGladiator.getPlayerName());
+        assertEquals(gladiator1Name, currentGladiator.getName());
     }
 
     @Test
@@ -98,6 +98,6 @@ public class TurnManagerTest {
         Gladiator currentGladiator = manager.getCurrentGladiator();
 
         //Assert
-        assertEquals(gladiator2Name, currentGladiator.getPlayerName());
+        assertEquals(gladiator2Name, currentGladiator.getName());
     }
 }

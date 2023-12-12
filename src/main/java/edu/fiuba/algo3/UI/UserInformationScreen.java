@@ -94,8 +94,8 @@ public class UserInformationScreen extends GridPane {
         stage.setScene(scene);
         stage.show();
         
-        stage.setResizable(false);
-        stage.setMaximized(false);
+        //stage.setResizable(false);
+        //stage.setMaximized(false);
     }
     
     private void requestPlayerNames(Stage stage, int numberOfPlayers) {
@@ -145,12 +145,12 @@ public class UserInformationScreen extends GridPane {
         buttonSubmitNames.setPrefSize(150, 40);
         buttonSubmitNames.setFont(customFont);
         grid.setHalignment(buttonSubmitNames, HPos.CENTER);
-        grid.add(buttonSubmitNames, 0, 17);
+        grid.add(buttonSubmitNames, 0, 25);
 
         buttonSubmitNames.setOnAction(event -> {   
             if (namesAreValid(specificGrid)) {
                
-                showAlert("Exito", "Los nombres se han ingresado satisfactoriamente.");
+               
             
                 List<String> playerNames = getPlayerNames(specificGrid, numberOfPlayers);
 

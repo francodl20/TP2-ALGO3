@@ -42,7 +42,7 @@ public class Gladiator {
     }
 
     //Getters
-    public String getPlayerName() {
+    public String getName() {
         return playerName;
     }
 
@@ -130,7 +130,7 @@ public class Gladiator {
     }
     //
 
-    public void playTurn(IDice dice) {
+    public Integer playTurn(IDice dice) {
         lastTurnPlayed = false;
 
         this.energy = this.seniority.energyPlus(this.energy);
@@ -143,20 +143,22 @@ public class Gladiator {
             
             if (lastTurnPlayed) {
                 Log.getInstance().info(
-                    getPlayerName() + " obtuvo un: " + diceRoll);
+                    getName() + " obtuvo un: " + diceRoll);
             } else {
                 Log.getInstance().info(
-                    getPlayerName() + " se quedó descansando... sigue en la misma casilla");
+                    getName() + " se quedó descansando... sigue en la misma casilla");
             }
 
         } else {
             this.energy = this.energy + RECHARGE_RATE_PER_ROUND;
 
-            Log.getInstance().info(getPlayerName() + " tiene noni... su energía es de: " + 
+            Log.getInstance().info(getName() + " tiene noni... su energía es de: " + 
             energy + ", por ahora sigue en la misma casilla");
         }
 
         this.seniority = this.seniority.addTurn();
+
+        return diceRoll;
     }
   
 }
