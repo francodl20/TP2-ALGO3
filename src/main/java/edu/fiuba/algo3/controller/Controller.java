@@ -56,9 +56,13 @@ public class Controller {
           
     }
 
+    public List<Gladiator> getPlayers(){
+        return game.getPlayers();
+    }
+    
     public void showMap(){
-        this.mapView = new MapView(18, 10, this, playerNames);
-        mapView.loadCoordinates();
+        this.mapView = new MapView(18, 10, this/*, this.game.getPlayers() , playerNames*/);
+       // mapView.loadCoordinates();
 
         Color backgroundColor = Color.BLACK; 
         BackgroundFill backgroundFill = new BackgroundFill(backgroundColor, null, null);

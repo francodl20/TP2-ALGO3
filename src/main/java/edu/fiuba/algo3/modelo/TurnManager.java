@@ -46,6 +46,11 @@ public class TurnManager {
         return currentPlayer;
     }
 
+    //Use under discretion
+    public List<Gladiator> getGladiators(){
+        return players;
+    }
+
     public Integer getTurnCount() {
         Integer gameTurn = turnCount / players.size();
         return gameTurn;

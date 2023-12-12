@@ -156,7 +156,7 @@ public class UserInformationScreen extends GridPane {
 
                 
                 controller.startGame(playerNames, numberOfPlayers);
-              
+                
                 stage.close();
                 controller.showMap();
                 

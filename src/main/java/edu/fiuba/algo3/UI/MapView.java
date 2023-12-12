@@ -4,11 +4,11 @@ import edu.fiuba.algo3.modelo.board.squares.ISquare;
 import edu.fiuba.algo3.modelo.board.Parser;
 import edu.fiuba.algo3.controller.Controller;
 import edu.fiuba.algo3.modelo.attributes.Coordinate;
+import edu.fiuba.algo3.modelo.Gladiator;
 
 import java.util.*;
 
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -24,11 +24,12 @@ public class MapView extends GridPane{
     private Integer mapHeight;
     private Controller controller;
     private LinkedList<ISquare> walkableSquares;
-    private List<String> playerNames;
+    //private List<String> playerNames;
     private List<ImageView> playersAvatars;
-    private List<Coordinate> playerPositions;
+    //private List<Gladiator> players;
+    //private List<Coordinate> playerPositions;
     
-    public MapView(Integer mapWidth, Integer mapHeight, Controller controller, List<String> playerNames) {
+    public MapView(Integer mapWidth, Integer mapHeight, Controller controller/* , List<Gladiator> players*/) {
         if (mapWidth <= 0 || mapHeight <= 0) {
             throw new IllegalArgumentException("Dimensiones del mapa deben ser mayores que cero");
         }
@@ -37,14 +38,18 @@ public class MapView extends GridPane{
         this.mapHeight = mapHeight;
         this.controller = controller;
         this.walkableSquares = new LinkedList<ISquare>();
-        this.playerNames = playerNames;
-        this.playerPositions = new LinkedList<>();
+       // this.playerNames = playerNames;
+        //this.players = players;
+       // this.playerPositions = new LinkedList<>();
         this.playersAvatars = new LinkedList<>();
 
         loadCoordinates();
-        for (String splayer : playerNames) {
+        /*
+         * 
+         for (String splayer : playerNames) {
             playerPositions.add(walkableSquares.getFirst().getSquareCoordinate());
         }
+        */
         
         setPlayersAvatars();
         drawMap();
@@ -63,7 +68,7 @@ public class MapView extends GridPane{
 
         diceButton.setOnAction(event->{
             controller.movePlayer();
-            updatePlayerPosition();
+            //updatePlayerPosition();
             drawMap();
         });
 
@@ -80,7 +85,7 @@ public class MapView extends GridPane{
 
 
     private void drawMap() {
-
+        List<Gladiator> players = controller.getPlayers();
         for (int y = 1; y <= mapHeight; y++) {
             for (int x = 1; x <= mapWidth; x++) {
                 StackPane cellPane = new StackPane();
@@ -93,9 +98,13 @@ public class MapView extends GridPane{
                     tile.setImage(walkableImage);
                     cellPane.getChildren().add(tile);
                     
-                    for (int i = 0; i < playerNames.size(); i++) {
-                        Coordinate coord = playerPositions.get(i);
-                        if (coord.equals( new Coordinate(x, y))) {
+                    for (int i = 0; i < players.size(); i++) {
+
+                        //Coordinate coord = controller.getPlayers().get(i).getPosition();
+                        //if (coord.equals( new Coordinate(x, y))) {
+                          //  cellPane.getChildren().add(playersAvatars.get(i));
+                        //}
+                        if (getSquarePosition(x,y) == players.get(i).getPosition()) {
                             cellPane.getChildren().add(playersAvatars.get(i));
                         }
                     }
@@ -109,22 +118,45 @@ public class MapView extends GridPane{
             }
         }
 
-        for (int i = 0; i < playerNames.size(); i++) {
+        /*
+         * 
+         for (int i = 0; i < players.size(); i++) {
             
-            this.add(playersAvatars.get(i), playerPositions.get(i).getXValue(), playerPositions.get(i).getYValue());
-        }
+             this.add(playersAvatars.get(i), playerPositions.get(i).getXValue(), playerPositions.get(i).getYValue());
+            }
+            */
 
 
     }
 
+    /*
+    private void drawPlayers(){
+        
+    }
+     
     public void updatePlayerPosition() {
         String name = controller.playerToDraw();
         Integer position = controller.playerPosition();
         
-        int playerNum = this.playerNames.indexOf(name);
+        int playerNum = this.players.indexOf(name);
         Coordinate coord = this.walkableSquares.get(position).getSquareCoordinate();
         
         playerPositions.set(playerNum, coord);
+    }
+    */
+    
+    private int getSquarePosition(int x, int y) {
+       
+        Coordinate targetCoordinate = new Coordinate(x, y);
+        int position = -1;
+       
+        for (int i = 0; i < walkableSquares.size(); i++) {
+            if (walkableSquares.get(i).getSquareCoordinate().equals(targetCoordinate)) {
+                position = i;
+            }
+        }
+
+        return position;      
     }
     
     private boolean isAWalkableSquare(int x, int y) {
@@ -143,7 +175,7 @@ public class MapView extends GridPane{
 
     private void setPlayersAvatars(){
 
-        for (Integer index = 0; index < playerNames.size(); index++) {
+        for (Integer index = 0; index < controller.getPlayers().size(); index++) {
            playersAvatars.add(playerFactory(index + 1));
         }
 

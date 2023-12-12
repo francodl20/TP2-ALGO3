@@ -85,6 +85,9 @@ public class GameController {
     public Gladiator getCurrentPlayer() {
         return turnManager.getCurrentGladiator();
     }
+    public List<Gladiator> getPlayers() {
+        return turnManager.getGladiators();
+    }
 
     public Integer getLastDiceRoll(){
         return this.lastDiceRoll;
