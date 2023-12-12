@@ -9,4 +9,8 @@ public class Beast implements IObstacle {
     public void harm(Gladiator player) {
         player.fightAgainstWildBeast();
     }
+
+    public String getType(){
+        return "Beast";
+    }
 }

@@ -14,4 +14,8 @@ public class Bacchanalia implements IObstacle {
         D6 dice = new D6();
         player.enjoyBacchanalia(ENERGY_DRAIN * dice.roll());
     }
+
+    public String getType(){
+        return "Bachanalia";
+    }
 }

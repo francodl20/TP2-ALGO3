@@ -13,4 +13,9 @@ public interface ISquare {
     
     //Returns true if the position matches, false if not
     public Coordinate getSquareCoordinate();
+
+    public String getPrizeType();
+     
+    public String getObstacleType();
+
 }

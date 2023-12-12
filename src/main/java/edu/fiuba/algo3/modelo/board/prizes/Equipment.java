@@ -7,5 +7,9 @@ public class Equipment implements IPrize {
         player.enhanceArmour();
     }
 
+     public String getType(){
+        return "Equipment";
+    }
+
  
 }

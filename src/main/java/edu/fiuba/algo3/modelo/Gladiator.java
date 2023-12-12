@@ -94,14 +94,14 @@ public class Gladiator {
 
     public void fightAgainstWildBeast() {
         Integer energyLost = this.equipment.protectFromtWildBeast();
+        this.energy = this.energy + energyLost;
 
         Log.getInstance().info(
-            "Que es esto? Es un pájaro? Es un avión? No... Es una bestia que quiere matar al gladiador!");
+            "Que es esto? Es un pájaro? Es un avión? No... ");
         Log.getInstance().info(
-            "El gladiador está en un duro combate, intentó usar su equipamiento,\n");
-        this.energy = this.energy + energyLost;
+            "¡Es una bestia que quiere matar al gladiador!");
         Log.getInstance().info(
-            " ahora su nuevo nivel de energía es: " + this.energy);
+            "Despues de un duro combate, su nivel de energía es: " + this.energy);
     }
 
     public void arriveToPompeii() {
@@ -160,7 +160,10 @@ public class Gladiator {
 
         return diceRoll;
     }
-  
+    
+    public void stayInBound(Integer lastPosition){
+        this.position = lastPosition;
+    }
 }
 
 

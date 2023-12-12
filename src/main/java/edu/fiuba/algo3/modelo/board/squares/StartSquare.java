@@ -29,7 +29,15 @@ public class StartSquare implements ISquare{
         return (this.position == position);
     }
 
-      public Coordinate getSquareCoordinate(){
+    public Coordinate getSquareCoordinate(){
         return this.coordinates;
-      }
+    }
+
+    public String getPrizeType(){
+        return this.prize.getType();
+    }
+     
+    public String getObstacleType(){
+        return this.obstacle.getType();
+    }
 }

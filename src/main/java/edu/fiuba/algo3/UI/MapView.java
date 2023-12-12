@@ -13,7 +13,12 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
-
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 import javafx.scene.control.Button;
 
 
@@ -52,7 +57,7 @@ public class MapView extends GridPane{
         */
         
         setPlayersAvatars();
-        drawMap();
+        drawMap(0);
 
         String fontPath = "/fonts/PressStart2P-Regular.ttf";
         Font customFont = Font.loadFont(getClass().getResourceAsStream(fontPath), 40);
@@ -69,12 +74,12 @@ public class MapView extends GridPane{
         diceButton.setOnAction(event->{
             controller.movePlayer();
             //updatePlayerPosition();
-            drawMap();
+            //drawMap();
         });
 
     }
 
-    public void loadCoordinates(){
+    private void loadCoordinates(){
         try {
             walkableSquares = Parser.buildFromJson("src/main/resources/JSONFiles/board.json");
         } catch (Exception e) {
@@ -82,9 +87,7 @@ public class MapView extends GridPane{
         }
     }
 
-
-
-    private void drawMap() {
+    public void drawMap(Integer mainPlayerPosition) {
         List<Gladiator> players = controller.getPlayers();
         for (int y = 1; y <= mapHeight; y++) {
             for (int x = 1; x <= mapWidth; x++) {
@@ -104,7 +107,7 @@ public class MapView extends GridPane{
                         //if (coord.equals( new Coordinate(x, y))) {
                           //  cellPane.getChildren().add(playersAvatars.get(i));
                         //}
-                        if (getSquarePosition(x,y) == players.get(i).getPosition()) {
+                        if (getSquarePosition(x,y) == (players.get(i).getPosition() - 1)) {
                             cellPane.getChildren().add(playersAvatars.get(i));
                         }
                     }
@@ -128,22 +131,6 @@ public class MapView extends GridPane{
 
 
     }
-
-    /*
-    private void drawPlayers(){
-        
-    }
-     
-    public void updatePlayerPosition() {
-        String name = controller.playerToDraw();
-        Integer position = controller.playerPosition();
-        
-        int playerNum = this.players.indexOf(name);
-        Coordinate coord = this.walkableSquares.get(position).getSquareCoordinate();
-        
-        playerPositions.set(playerNum, coord);
-    }
-    */
     
     private int getSquarePosition(int x, int y) {
        
@@ -216,10 +203,14 @@ public class MapView extends GridPane{
         gladiators.put(5, fifthGladiator);
         gladiators.put(6, sixthGladiator);
         
-
         return  gladiators.get(numberOfPlayer);
     }
 
+    private void waitFor(Stage stage, Integer seconds) {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(seconds), ae -> stage.close()));
+        timeline.setCycleCount(1);
+        timeline.play();
+    }
 
 }
 

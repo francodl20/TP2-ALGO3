@@ -13,14 +13,10 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
 
 public class Controller {
 
@@ -62,7 +58,7 @@ public class Controller {
     
     public void showMap(){
         this.mapView = new MapView(18, 10, this/*, this.game.getPlayers() , playerNames*/);
-       // mapView.loadCoordinates();
+        // mapView.loadCoordinates();
 
         Color backgroundColor = Color.BLACK; 
         BackgroundFill backgroundFill = new BackgroundFill(backgroundColor, null, null);
@@ -88,7 +84,11 @@ public class Controller {
 
         D6 dice = new D6();
         gameState = game.playTurn(dice);
-        lastDiceRoll = game.getLastDiceRoll();
+        //lastDiceRoll = game.getLastDiceRoll();
+
+        mapView.drawMap(currentPlayer.getPosition());
+
+
         
         if (gameState.hasEnded()){
            finishScreen(gameState.getWinner());
@@ -103,9 +103,9 @@ public class Controller {
         text.setText(endMessage);
         text.setFill(Color.WHITE);
         text.setFont(Font.font(40));
-       // text.selectionFillProperty(Color.AQUA);
-       text.setY(300);
-       text.setX(150);
+        // text.selectionFillProperty(Color.AQUA);
+        text.setY(300);
+        text.setX(150);
         
         root.getChildren().add(text);
 
@@ -118,20 +118,6 @@ public class Controller {
 
     public Integer playerPosition(){
         return game.getCurrentPlayer().getPosition();
-    }
-
-    public void clearGridPane(GridPane gridPane) {
-        ObservableList<Node> children = gridPane.getChildren();
-
-        for (Node node : children) {
-            if (node instanceof Pane) {
-                // Si el nodo es un Pane (StackPane, por ejemplo), elimina sus hijos
-                ((Pane) node).getChildren().clear();
-            } else {
-                // Si el nodo no es un Pane, simplemente elimínalo
-                children.remove(node);
-            }
-        }
     }
     
 }
