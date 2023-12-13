@@ -11,9 +11,10 @@ public class App extends Application {
     public void start(Stage primaryStage) {
         
         Controller controller = new Controller(primaryStage);
-        //controller.startUI();
+        controller.startUI();
+        //controller.showSquareInfo("Empty", "Food");
         //controller.play(;)
-        controller.prueba();
+       // controller.prueba();
 
     }
 

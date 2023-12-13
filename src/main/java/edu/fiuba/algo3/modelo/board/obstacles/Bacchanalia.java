@@ -16,6 +16,6 @@ public class Bacchanalia implements IObstacle {
     }
 
     public String getType(){
-        return "Bachanalia";
+        return "Bacchanalia";
     }
 }

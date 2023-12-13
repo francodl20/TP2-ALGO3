@@ -28,12 +28,11 @@ public class PrizeView {
             backgroundImageView.setFitHeight(400);
 
             Label titleLabel = prizeLabelFactory(prizeType);
+            StackPane stackPane = new StackPane();
+            stackPane.getChildren().addAll(backgroundImageView);
             
             String fontPath = "/fonts/PressStart2P-Regular.ttf";
             Font customFont = Font.loadFont(getClass().getResourceAsStream(fontPath), 10);
-            titleLabel.setFont(customFont);
-            titleLabel.setStyle("-fx-text-fill: #FFFFFF; -fx-background-color: rgba(0, 0, 0, 0.7); -fx-padding: 6px;");
-            titleLabel.setAlignment(Pos.CENTER);
             
             
             Button continueButton = new Button("Continuar");
@@ -44,7 +43,7 @@ public class PrizeView {
             
             StackPane.setAlignment(continueButton, Pos.BOTTOM_CENTER);
             StackPane.setMargin(continueButton, new javafx.geometry.Insets(0, 0, 10, 0));
-            
+            StackPane.setAlignment(titleLabel, Pos.TOP_CENTER);
             
             
             continueButton.setOnAction(event -> {
@@ -52,8 +51,6 @@ public class PrizeView {
             });
             
             
-            StackPane stackPane = new StackPane();
-            stackPane.getChildren().addAll(backgroundImageView);
             stackPane.getChildren().addAll(titleLabel, continueButton);
            
             Scene scene = new Scene(stackPane, 400, 400);
@@ -66,7 +63,7 @@ public class PrizeView {
         Map<String, ImageView> prizeTypes = new HashMap<>();
 
         ImageView food = new ImageView("file:src/main/resources/images/foodImage.png");
-        ImageView equipment = new ImageView("file:src/main/resources/images/EquipmentPrize.png");
+        ImageView equipment = new ImageView("file:src/main/resources/images/equipmentImage.png");
 
 
         prizeTypes.put("Food", food);
@@ -75,11 +72,19 @@ public class PrizeView {
         return prizeTypes.get(prizeType);
     }
     private Label prizeLabelFactory(String prizeType) {
-        Map<String, Label> prizeTypes = new HashMap<>();
+        Map<String, Label> prizeTypes = new HashMap<>(); String fontPath = "/fonts/PressStart2P-Regular.ttf";
+        Font customFoodFont = Font.loadFont(getClass().getResourceAsStream(fontPath), 12);
+        Font customEquipmentFont = Font.loadFont(getClass().getResourceAsStream(fontPath), 13);
 
         Label foodLbl = new Label("           Oh si si!\n el Gladiador se está comiendo \n         un rico Sushi ");
+        foodLbl.setFont(customFoodFont);
+        foodLbl.setStyle("-fx-text-fill: #FFFFFF; -fx-background-color: rgba(0, 0, 0, 0.7); -fx-padding: 6px;");
+        foodLbl.setAlignment(Pos.CENTER);
+       
         Label equipmentLbl = new Label("         Oh si si!\n el Gladiador ha mejorado \n      su equipamiento");
-
+        equipmentLbl.setFont(customEquipmentFont);
+        equipmentLbl.setStyle("-fx-text-fill: #FFFFFF; -fx-background-color: rgba(0, 0, 0, 0.7); -fx-padding: 6px;");
+        equipmentLbl.setAlignment(Pos.CENTER);
 
         prizeTypes.put("Food", foodLbl);
         prizeTypes.put("Equipment", equipmentLbl);

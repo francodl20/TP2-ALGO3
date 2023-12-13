@@ -117,8 +117,13 @@ public class MapView extends GridPane{
             
                 this.add(cellPane, x, y);
             }
+             
+        }    
+            if(mainPlayerPosition > 0){
+                
+            System.out.println(mainPlayerPosition);
+            controller.showSquareInfo(walkableSquares.get(mainPlayerPosition - 1).getObstacleType(),walkableSquares.get(mainPlayerPosition - 1).getPrizeType());
         }
-
         /*
          * 
          for (int i = 0; i < players.size(); i++) {
