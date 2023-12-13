@@ -4,6 +4,7 @@ import java.util.List;
 
 import edu.fiuba.algo3.UI.HomeScreen;
 import edu.fiuba.algo3.UI.MapView;
+import edu.fiuba.algo3.UI.PrizeView;
 import edu.fiuba.algo3.modelo.D6;
 import edu.fiuba.algo3.modelo.GameController;
 import edu.fiuba.algo3.modelo.Gladiator;
@@ -22,6 +23,7 @@ public class Controller {
 
     MapView mapView;
     HomeScreen homeScreen;
+    PrizeView prizeView;
     GameController game;
     Gladiator currentPlayer;
     Stage primaryStage;
@@ -118,6 +120,11 @@ public class Controller {
 
     public Integer playerPosition(){
         return game.getCurrentPlayer().getPosition();
+    }
+
+    public void prueba(){
+       this.prizeView = new PrizeView();
+       prizeView.showPrizeInfo("Food");
     }
     
 }
