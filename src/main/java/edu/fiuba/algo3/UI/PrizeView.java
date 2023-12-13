@@ -4,7 +4,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
@@ -23,42 +22,39 @@ public class PrizeView {
             Stage popupStage = new Stage();
             popupStage.initModality(Modality.APPLICATION_MODAL);
             popupStage.setTitle("Premio");
-
-            Image backgroundImage = prizeImageFactory(prizeType);
-
             
-            ImageView backgroundImageView = new ImageView(backgroundImage);
+            ImageView backgroundImageView = prizeImageFactory(prizeType);
             backgroundImageView.setFitWidth(400);
             backgroundImageView.setFitHeight(400);
 
-            StackPane stackPane = new StackPane();
             Label titleLabel = prizeLabelFactory(prizeType);
-         
+            
             String fontPath = "/fonts/PressStart2P-Regular.ttf";
             Font customFont = Font.loadFont(getClass().getResourceAsStream(fontPath), 10);
             titleLabel.setFont(customFont);
             titleLabel.setStyle("-fx-text-fill: #FFFFFF; -fx-background-color: rgba(0, 0, 0, 0.7); -fx-padding: 6px;");
             titleLabel.setAlignment(Pos.CENTER);
-
-
+            
+            
             Button continueButton = new Button("Continuar");
             continueButton.setStyle("-fx-font-family: 'Press Start 2P'; -fx-background-color: beige;");
-
+            
             continueButton.setPrefSize(150, 40);
             continueButton.setFont(customFont);
-
+            
             StackPane.setAlignment(continueButton, Pos.BOTTOM_CENTER);
             StackPane.setMargin(continueButton, new javafx.geometry.Insets(0, 0, 10, 0));
             
             
-            stackPane.getChildren().addAll(titleLabel, continueButton);
-
+            
             continueButton.setOnAction(event -> {
                 popupStage.close();
             });
-
+            
+            
+            StackPane stackPane = new StackPane();
             stackPane.getChildren().addAll(backgroundImageView);
-
+            stackPane.getChildren().addAll(titleLabel, continueButton);
            
             Scene scene = new Scene(stackPane, 400, 400);
             popupStage.setScene(scene);
@@ -66,11 +62,11 @@ public class PrizeView {
         }
     }
 
-    private Image prizeImageFactory(String prizeType) {
-        Map<String, Image> prizeTypes = new HashMap<>();
+    private ImageView prizeImageFactory(String prizeType) {
+        Map<String, ImageView> prizeTypes = new HashMap<>();
 
-        Image food = new Image("file:src/main/resources/images/prizeFood.png");
-        Image equipment = new Image("file:src/main/resources/images/EquipmentPrize.png");
+        ImageView food = new ImageView("file:src/main/resources/images/foodImage.png");
+        ImageView equipment = new ImageView("file:src/main/resources/images/EquipmentPrize.png");
 
 
         prizeTypes.put("Food", food);

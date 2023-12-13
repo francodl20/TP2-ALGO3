@@ -73,8 +73,8 @@ public class ObstacleView {
         Map <String, Image> obstacleTypes = new HashMap<>();
 
         Image injury = new Image("file:src/main/resources/images/gladiator.png");
-        Image beast = new Image("file:src/main/resources/images/gladiator2.png"); 
-        Image bacchanalia = new Image("file:src/main/resources/images/gladiator2.png");
+        Image beast = new Image("file:src/main/resources/images/beastImage.png"); 
+        Image bacchanalia = new Image("file:src/main/resources/images/bacchanaliaImage.png");
         
         obstacleTypes.put("Injury", injury);
         obstacleTypes.put("Beast", beast);
