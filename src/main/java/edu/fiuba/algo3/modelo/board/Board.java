@@ -14,6 +14,7 @@ public class Board {
 
     public Board(String jsonFilePath) throws Exception {
         map = Parser.buildFromJson(jsonFilePath);
+        dimension = Parser.mapSize(jsonFilePath);
     }
 
     public void playWith(Gladiator currentPlayer) {
@@ -35,5 +36,13 @@ public class Board {
 
     public boolean pompeiiHas(Gladiator currentPlayer) {
         return (currentPlayer.in(map.getLast()));
+    }
+
+    public LinkedList<ISquare> getSquares() {
+        return map;
+    }
+
+    public Coordinate getMapSize() {
+        return dimension;
     }
 }

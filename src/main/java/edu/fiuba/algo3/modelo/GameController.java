@@ -2,9 +2,11 @@ package edu.fiuba.algo3.modelo;
 import java.util.*;
 
 import edu.fiuba.algo3.modelo.exceptions.InvalidJSONFormatException;
+import edu.fiuba.algo3.modelo.attributes.Coordinate;
 import edu.fiuba.algo3.modelo.attributes.gameState.IGameState;
 import edu.fiuba.algo3.modelo.attributes.gameState.OngoingGame;
 import edu.fiuba.algo3.modelo.board.Board;
+import edu.fiuba.algo3.modelo.board.squares.ISquare;
 import edu.fiuba.algo3.Log;
 
 public class GameController {
@@ -85,6 +87,7 @@ public class GameController {
     public Gladiator getCurrentPlayer() {
         return turnManager.getCurrentGladiator();
     }
+
     public List<Gladiator> getPlayers() {
         return turnManager.getGladiators();
     }
@@ -93,4 +96,11 @@ public class GameController {
         return this.lastDiceRoll;
     }
     
+    public LinkedList<ISquare> getSquares() {
+        return GAMEBOARD.getSquares();
+    }
+
+    public Coordinate getMapSize() {
+        return GAMEBOARD.getMapSize();
+    }
 }

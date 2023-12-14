@@ -25,18 +25,19 @@ public class MapView extends GridPane{
     private LinkedList<ISquare> walkableSquares;
     private List<ImageView> playersAvatars;
     
-    public MapView(Integer mapWidth, Integer mapHeight, Controller controller) {
+    public MapView(LinkedList<ISquare> squares, Coordinate mapSize, Controller controller) {
+        
+        
+        this.mapWidth = mapSize.getXValue();
+        this.mapHeight = mapSize.getYValue();
+        this.controller = controller;
+        this.walkableSquares = squares;
+        this.playersAvatars = new LinkedList<>();
+        
         if (mapWidth <= 0 || mapHeight <= 0) {
             throw new IllegalArgumentException("Dimensiones del mapa deben ser mayores que cero");
         }
 
-        this.mapWidth = mapWidth;
-        this.mapHeight = mapHeight;
-        this.controller = controller;
-        this.walkableSquares = new LinkedList<ISquare>();
-        this.playersAvatars = new LinkedList<>();
-
-        loadCoordinates();
 
         setPlayersAvatars();
         drawMap(0);
@@ -57,14 +58,6 @@ public class MapView extends GridPane{
             controller.movePlayer();
         });
 
-    }
-
-    private void loadCoordinates(){
-        try {
-            walkableSquares = Parser.buildFromJson("src/main/resources/JSONFiles/board.json");
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
     }
 
     public void drawMap(Integer mainPlayerPosition) {

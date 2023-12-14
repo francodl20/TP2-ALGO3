@@ -21,18 +21,20 @@ import javafx.stage.Stage;
 
 public class Controller {
     
-    GameController game;
-    IGameState gameState;
-    List<String> playerNames;
-    Gladiator currentPlayer;
-    int numberOfPlayers;
-    Integer lastDiceRoll;
+    private GameController game;
+    private IGameState gameState;
+    private List<String> playerNames;
+    private Gladiator currentPlayer;
+    private int numberOfPlayers;
+    private Integer lastDiceRoll;
+    private static Integer mapHight;
+    private static Integer mapLenght;
 
-    Stage primaryStage;
-    HomeScreen homeScreen;
-    MapView mapView;
-    PrizeView prizeView;
-    ObstacleView obstacleView;
+    private Stage primaryStage;
+    private HomeScreen homeScreen;
+    private MapView mapView;
+    private PrizeView prizeView;
+    private ObstacleView obstacleView;
 
     public Controller(Stage primaryStage){
 
@@ -62,7 +64,7 @@ public class Controller {
     
     public void showMap(){
 
-        this.mapView = new MapView(18, 10, this);
+        this.mapView = new MapView(game.getSquares(), game.getMapSize(), this);
 
         Color backgroundColor = Color.BLACK; 
         BackgroundFill backgroundFill = new BackgroundFill(backgroundColor, null, null);
