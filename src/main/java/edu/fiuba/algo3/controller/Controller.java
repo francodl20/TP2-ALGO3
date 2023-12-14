@@ -20,18 +20,19 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Controller {
-
-    MapView mapView;
-    HomeScreen homeScreen;
-    PrizeView prizeView;
-    ObstacleView obstacleView;
+    
     GameController game;
-    Gladiator currentPlayer;
-    Stage primaryStage;
+    IGameState gameState;
     List<String> playerNames;
+    Gladiator currentPlayer;
     int numberOfPlayers;
     Integer lastDiceRoll;
-    IGameState gameState;
+
+    Stage primaryStage;
+    HomeScreen homeScreen;
+    MapView mapView;
+    PrizeView prizeView;
+    ObstacleView obstacleView;
 
     public Controller(Stage primaryStage){
 
@@ -60,14 +61,17 @@ public class Controller {
     }
     
     public void showMap(){
+
         this.mapView = new MapView(18, 10, this);
 
         Color backgroundColor = Color.BLACK; 
         BackgroundFill backgroundFill = new BackgroundFill(backgroundColor, null, null);
         Background background = new Background(backgroundFill);
+
         StackPane root = new StackPane();
         root.setBackground(background);
         root.getChildren().add(mapView);
+
         Scene mapScene = new Scene(root);
 
         primaryStage.setScene(mapScene);
@@ -92,7 +96,6 @@ public class Controller {
         creditScreen.start(this);
     }
  
-
     public String playerToDraw(){
         return game.getCurrentPlayer().getName();
     }
@@ -108,6 +111,7 @@ public class Controller {
        this.obstacleView = new ObstacleView();
        obstacleView.showObstacleInfo(obstacleType);
     }
+
     public void showFinishScreen(String endMessage){
        FinishScreen finishScreen = new FinishScreen(endMessage);
        finishScreen.start(this);

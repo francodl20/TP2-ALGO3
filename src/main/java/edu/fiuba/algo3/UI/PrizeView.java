@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.UI;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -9,6 +11,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -56,7 +59,15 @@ public class PrizeView {
             Scene scene = new Scene(stackPane, 400, 400);
             popupStage.setScene(scene);
             popupStage.show();
+
+            waitFor(popupStage, 2);
         }
+    }
+
+    private void waitFor(Stage stage, Integer seconds) {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(seconds), ae -> stage.close()));
+        timeline.setCycleCount(1);
+        timeline.play();
     }
 
     private ImageView prizeImageFactory(String prizeType) {
@@ -71,6 +82,7 @@ public class PrizeView {
 
         return prizeTypes.get(prizeType);
     }
+
     private Label prizeLabelFactory(String prizeType) {
         Map<String, Label> prizeTypes = new HashMap<>(); 
         String fontPath = "/fonts/PressStart2P-Regular.ttf";

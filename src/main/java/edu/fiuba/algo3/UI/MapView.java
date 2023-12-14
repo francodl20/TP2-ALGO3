@@ -183,8 +183,6 @@ public class MapView extends GridPane{
         return  gladiators.get(numberOfPlayer);
     }
 
-  
-
 }
 
 

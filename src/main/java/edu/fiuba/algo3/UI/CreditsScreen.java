@@ -50,7 +50,7 @@ public class CreditsScreen extends StackPane{
         waitFor(creditStage, 10);
     }
 
-         private void waitFor(Stage stage, Integer seconds) {
+    private void waitFor(Stage stage, Integer seconds) {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(seconds), ae -> stage.close()));
         timeline.setCycleCount(1);
         timeline.play();

@@ -3,7 +3,8 @@ package edu.fiuba.algo3.UI;
 import java.util.HashMap;
 import java.util.Map;
 
-
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,6 +15,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class ObstacleView {
   
@@ -61,10 +63,16 @@ public class ObstacleView {
             Scene scene = new Scene(stackPane, 400, 400);
             popupStage.setScene(scene);
             popupStage.show();
-        }
 
+            waitFor(popupStage, 2);
+        }
     }
 
+    private void waitFor(Stage stage, Integer seconds) {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(seconds), ae -> stage.close()));
+        timeline.setCycleCount(1);
+        timeline.play();
+    }
 
     private Image obstacleImageFactory(String obstacleType){
         

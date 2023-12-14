@@ -91,7 +91,6 @@ public class FinishScreen extends StackPane {
         winner.setTranslateY(-180);
         
       
-
         resultTypes.put(true, tiedGame);
         resultTypes.put(false, winner);
 
