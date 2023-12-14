@@ -1,11 +1,12 @@
 package edu.fiuba.algo3.UI;
 
-import edu.fiuba.algo3.controller.Controller;
+import java.util.HashMap;
+import java.util.Map;
 
+import edu.fiuba.algo3.controller.Controller;
 import javafx.scene.Scene;
-import javafx.scene.Group;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
 import javafx.scene.layout.StackPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,60 +14,87 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.geometry.Pos;
 
-public class FinishScreen extends Group {
+public class FinishScreen extends StackPane {
 
     String endMessage;
-/*
+
 
     public FinishScreen(String endMessage) {
         this.endMessage = endMessage;
     }
-
+    
     public void start(Controller controller) {
-         
-        Image image = new Image(getClass().getResourceAsStream("/images/OutroImage.png"));
-
-        ImageView imageView = new ImageView(image);
-  
-        imageView.setFitWidth(650); 
-        imageView.setFitHeight(650); 
-  
-        StackPane stackPane = new StackPane(imageView);
-  
-        Label titleLabel = new Label("BIENVENIDOS" + "\n" + "     A  " + "\n" +  " ALGO-ROMA");
+        Stage finishStage = new Stage();
         
-        String fontPath = "/fonts/PressStart2P-Regular.ttf";
-        Font customFont = Font.loadFont(getClass().getResourceAsStream(fontPath), 40);
-        titleLabel.setFont(customFont);
-        titleLabel.setStyle("-fx-text-fill: #FFFFFF; -fx-background-color: rgba(0, 0, 0, 0.7); -fx-padding: 10px;");
-        titleLabel.setAlignment(Pos.CENTER);
+        finishStage.setTitle("Resultado del juego");
+            
+        ImageView backgroundImageView = resultImageFactory(endMessage.equals("Game tied."));
+        backgroundImageView.setFitWidth(600);
+        backgroundImageView.setFitHeight(600);
 
-
+        Label labelText = resultLabelFactory(endMessage.equals("Game tied."));
+        
         Button continueButton = new Button("Continuar");
         continueButton.setStyle("-fx-font-family: 'Press Start 2P'; -fx-background-color: beige;");
-
-        continueButton.setPrefSize(180, 40);
+        
+        String fontPath = "/fonts/PressStart2P-Regular.ttf";
+        Font customFont = Font.loadFont(getClass().getResourceAsStream(fontPath), 10);
+        continueButton.setPrefSize(150, 40);
         continueButton.setFont(customFont);
-
+        
         StackPane.setAlignment(continueButton, Pos.BOTTOM_CENTER);
         StackPane.setMargin(continueButton, new javafx.geometry.Insets(0, 0, 10, 0));
- 
         
-        stackPane.getChildren().addAll(titleLabel, continueButton);
-
         continueButton.setOnAction(event -> {
-            UserInformationScreen userInformationScreen = new UserInformationScreen(controller);
-            userInformationScreen.start(stage);
+            finishStage.close();
+            controller.showCredits();
         });
-        stage.setResizable(false);
-        stage.setMaximized(false);
 
-        Scene scene = new Scene(stackPane, 650, 650);
-  
-          stage.setTitle("Gracias por jugar MF");
-          stage.setScene(scene);
-          stage.show();
-        
+        getChildren().addAll(backgroundImageView,labelText, continueButton);
+
+        Scene scene = new Scene(this, 600, 600);
+        finishStage.setScene(scene);
+        finishStage.show();
     }
-  */      
+
+     private ImageView resultImageFactory(boolean result) {
+        Map<Boolean, ImageView> resultTypes = new HashMap<>();
+
+        ImageView tiedGame = new ImageView("file:src/main/resources/images/tiedGameImage.png");
+        ImageView winner = new ImageView("file:src/main/resources/images/winnerImage.png");
+
+
+        resultTypes.put(true, tiedGame);
+        resultTypes.put(false, winner);
+
+        return resultTypes.get(result);
+    }
+    
+     private Label resultLabelFactory(Boolean result) {
+        Map<Boolean, Label> resultTypes = new HashMap<>();
+        String fontPath = "/fonts/PressStart2P-Regular.ttf";
+        Font customTiedGameFont = Font.loadFont(getClass().getResourceAsStream(fontPath), 24);
+        Font customWinnerFont = Font.loadFont(getClass().getResourceAsStream(fontPath), 14);
+
+        Label tiedGame = new Label(endMessage);
+        tiedGame.setFont(customTiedGameFont);
+        tiedGame.setStyle("-fx-text-fill: #FFFFFF; -fx-background-color: rgba(0, 0, 0, 0.7); -fx-padding: 24px;");
+        setAlignment(tiedGame, Pos.CENTER);
+        tiedGame.setTranslateY(-180);
+        
+        
+        Label winner = new Label(endMessage.split("\\s+")[0] + " ha ganado el juego!!");
+        winner.setFont(customWinnerFont);
+        winner.setStyle("-fx-text-fill: #000000; -fx-padding: 6px;");
+       
+        setAlignment(winner, Pos.CENTER);
+        winner.setTranslateY(-180);
+        
+      
+
+        resultTypes.put(true, tiedGame);
+        resultTypes.put(false, winner);
+
+        return resultTypes.get(result);
+    }
 }

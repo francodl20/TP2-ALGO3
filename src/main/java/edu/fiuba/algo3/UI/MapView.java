@@ -13,10 +13,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.stage.Stage;
-import javafx.util.Duration;
 import javafx.scene.control.Button;
 
 
@@ -27,12 +23,9 @@ public class MapView extends GridPane{
     private Integer mapHeight;
     private Controller controller;
     private LinkedList<ISquare> walkableSquares;
-    //private List<String> playerNames;
     private List<ImageView> playersAvatars;
-    //private List<Gladiator> players;
-    //private List<Coordinate> playerPositions;
     
-    public MapView(Integer mapWidth, Integer mapHeight, Controller controller/* , List<Gladiator> players*/) {
+    public MapView(Integer mapWidth, Integer mapHeight, Controller controller) {
         if (mapWidth <= 0 || mapHeight <= 0) {
             throw new IllegalArgumentException("Dimensiones del mapa deben ser mayores que cero");
         }
@@ -41,19 +34,10 @@ public class MapView extends GridPane{
         this.mapHeight = mapHeight;
         this.controller = controller;
         this.walkableSquares = new LinkedList<ISquare>();
-       // this.playerNames = playerNames;
-        //this.players = players;
-       // this.playerPositions = new LinkedList<>();
         this.playersAvatars = new LinkedList<>();
 
         loadCoordinates();
-        /*
-         * 
-         for (String splayer : playerNames) {
-            playerPositions.add(walkableSquares.getFirst().getSquareCoordinate());
-        }
-        */
-        
+
         setPlayersAvatars();
         drawMap(0);
 
@@ -71,8 +55,6 @@ public class MapView extends GridPane{
 
         diceButton.setOnAction(event->{
             controller.movePlayer();
-            //updatePlayerPosition();
-            //drawMap();
         });
 
     }
@@ -124,14 +106,6 @@ public class MapView extends GridPane{
             System.out.println(mainPlayerPosition);
             controller.showSquareInfo(walkableSquares.get(mainPlayerPosition - 1).getObstacleType(),walkableSquares.get(mainPlayerPosition - 1).getPrizeType());
         }
-        /*
-         * 
-         for (int i = 0; i < players.size(); i++) {
-            
-             this.add(playersAvatars.get(i), playerPositions.get(i).getXValue(), playerPositions.get(i).getYValue());
-            }
-            */
-
 
     }
     
@@ -209,11 +183,7 @@ public class MapView extends GridPane{
         return  gladiators.get(numberOfPlayer);
     }
 
-    private void waitFor(Stage stage, Integer seconds) {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(seconds), ae -> stage.close()));
-        timeline.setCycleCount(1);
-        timeline.play();
-    }
+  
 
 }
 

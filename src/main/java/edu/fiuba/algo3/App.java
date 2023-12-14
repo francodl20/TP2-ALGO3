@@ -14,7 +14,7 @@ public class App extends Application {
         controller.startUI();
         //controller.showSquareInfo("Empty", "Food");
         //controller.play(;)
-       // controller.prueba();
+        //controller.showFinishScreen("Fabi has won");
 
     }
 

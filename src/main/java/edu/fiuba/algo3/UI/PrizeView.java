@@ -72,7 +72,8 @@ public class PrizeView {
         return prizeTypes.get(prizeType);
     }
     private Label prizeLabelFactory(String prizeType) {
-        Map<String, Label> prizeTypes = new HashMap<>(); String fontPath = "/fonts/PressStart2P-Regular.ttf";
+        Map<String, Label> prizeTypes = new HashMap<>(); 
+        String fontPath = "/fonts/PressStart2P-Regular.ttf";
         Font customFoodFont = Font.loadFont(getClass().getResourceAsStream(fontPath), 12);
         Font customEquipmentFont = Font.loadFont(getClass().getResourceAsStream(fontPath), 13);
 
