@@ -64,7 +64,7 @@ public class ObstacleView {
             popupStage.setScene(scene);
             popupStage.show();
 
-            waitFor(popupStage, 2);
+            waitFor(popupStage, 6);
         }
     }
 

@@ -1,8 +1,5 @@
 package edu.fiuba.algo3.UI;
 
-
-
-
 import edu.fiuba.algo3.controller.Controller;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
