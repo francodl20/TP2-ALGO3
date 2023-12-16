@@ -60,7 +60,7 @@ public class PrizeView {
             popupStage.setScene(scene);
             popupStage.show();
 
-            waitFor(popupStage, 2);
+            waitFor(popupStage, 6);
         }
     }
 
