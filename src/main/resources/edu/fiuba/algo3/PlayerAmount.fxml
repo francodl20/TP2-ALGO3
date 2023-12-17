@@ -13,14 +13,14 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fiuba.algo3.PlayerAmountController">
    <children>
       <ImageView fitHeight="650.0" fitWidth="650.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/UserInformationScreen.png" />
          </image>
       </ImageView>
-      <Button id="button" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" stylesheets="@css/textFormat.css" text="Continuar" StackPane.alignment="BOTTOM_CENTER">
+      <Button id="button" fx:id="continueButton" mnemonicParsing="false" onAction="#switchPlayerNames" prefHeight="40.0" prefWidth="150.0" stylesheets="@css/textFormat.css" text="Continuar" StackPane.alignment="BOTTOM_CENTER">
          <StackPane.margin>
             <Insets bottom="70.0" />
          </StackPane.margin>
@@ -38,7 +38,7 @@
                   <Insets top="10.0" />
                </HBox.margin>
             </Label>
-            <TextField id="textField" alignment="CENTER" maxWidth="68.0" prefHeight="50.0" prefWidth="68.0" promptText="6" stylesheets="@css/textFormat.css">
+            <TextField id="textField" fx:id="numberOfPlayers" alignment="CENTER" maxWidth="68.0" prefHeight="50.0" prefWidth="68.0" promptText="6" stylesheets="@css/textFormat.css">
                <font>
                   <Font name="Press Start 2P" size="22.0" />
                </font>

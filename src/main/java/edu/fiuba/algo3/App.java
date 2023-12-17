@@ -24,6 +24,12 @@ public class App extends Application{
         scene.setRoot(loadFXML(fxml));
     }
 
+    static IController setRootAndGetController(String fxml) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        scene.setRoot(fxmlLoader.load());
+        return fxmlLoader.getController();
+    }
+
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
