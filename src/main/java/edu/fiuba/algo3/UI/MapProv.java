@@ -1,22 +1,29 @@
 package edu.fiuba.algo3.UI;
 
 import edu.fiuba.algo3.modelo.board.squares.ISquare;
-import edu.fiuba.algo3.modelo.board.Parser;
+import edu.fiuba.algo3.GameMenuBar;
 import edu.fiuba.algo3.controller.Controller;
 import edu.fiuba.algo3.modelo.attributes.Coordinate;
 import edu.fiuba.algo3.modelo.Gladiator;
 
 import java.util.*;
 
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuBar;
 
 
-public class MapView extends GridPane{
+
+public class MapProv extends BorderPane{
 
     
     private Integer mapWidth;
@@ -24,8 +31,10 @@ public class MapView extends GridPane{
     private Controller controller;
     private LinkedList<ISquare> walkableSquares;
     private List<ImageView> playersAvatars;
+    private Image walkableImage;
+    private Image nonWalkableImage;
     
-    public MapView(LinkedList<ISquare> squares, Coordinate mapSize, Controller controller) {
+    public MapProv(LinkedList<ISquare> squares, Coordinate mapSize, Controller controller) {
         
         
         this.mapWidth = mapSize.getXValue();
@@ -38,29 +47,73 @@ public class MapView extends GridPane{
             throw new IllegalArgumentException("Dimensiones del mapa deben ser mayores que cero");
         }
 
+        walkableImage = new Image("file:src/main/resources/images/rockTile.png");
+        nonWalkableImage =  new Image("file:src/main/resources/images/lavaOMG.png");
+        
+       
 
         setPlayersAvatars();
-        drawMap(0);
+        drawGame(new GridPane(), 0, controller.getPlayers().get(0));
 
+}   
+
+    public void drawGame(GridPane mapPane, Integer mainPlayerPosition, Gladiator currentPlayer ){
+     
         String fontPath = "/fonts/PressStart2P-Regular.ttf";
-        Font customFont = Font.loadFont(getClass().getResourceAsStream(fontPath), 40);
+        Font customFont = Font.loadFont(getClass().getResourceAsStream(fontPath), 14);
+
+        MenuBar menuBar = GameMenuBar.createMenuBar();
+        this.setTop(menuBar);
+
        
+        VBox borderBox = new VBox();
+        this.setLeft(borderBox);
+        borderBox.setSpacing(30);
+        borderBox.setPadding(new Insets(10));
+        
+        
+        Label playerNameLabel = new Label("Jugador actual: " + currentPlayer.getName());
+        playerNameLabel.setStyle("-fx-font-family: 'Press Start 2P'; -fx-font-size: 12; -fx-text-fill: #ffffff;");
+        Label seniorityLabel = new Label("Seniority: " + currentPlayer.getSeniority());
+        seniorityLabel.setStyle("-fx-font-family: 'Press Start 2P'; -fx-font-size: 12; -fx-text-fill: #ffffff;");
+        Label energyLabel = new Label("Energía: " + currentPlayer.getEnergy());
+        energyLabel.setStyle("-fx-font-family: 'Press Start 2P'; -fx-font-size: 12; -fx-text-fill: #ffffff;");
+        Label stateLabel = new Label("Estado: " + currentPlayer.getPlayerState());
+        stateLabel.setStyle("-fx-font-family: 'Press Start 2P'; -fx-font-size: 12; -fx-text-fill: #ffffff;");
+        Label equipmentLabel = new Label("Equipamiento: " + currentPlayer.getEquipment());
+        equipmentLabel.setStyle("-fx-font-family: 'Press Start 2P'; -fx-font-size: 12; -fx-text-fill: #ffffff;");
        
+
         Button diceButton = new Button("Tirar dado");
         diceButton.setStyle("-fx-font-family: 'Press Start 2P'; -fx-background-color: beige;");
-
-    
-        diceButton.setPrefSize(180, 40);
         diceButton.setFont(customFont);
-        this.add(diceButton,0, 5); 
+    
 
-        diceButton.setOnAction(event->{
+        
+        diceButton.setOnAction(event -> {
             controller.movePlayer();
         });
+    
+        Button goBackButton = new Button("Volver");
+        goBackButton.setStyle("-fx-font-family: 'Press Start 2P'; -fx-background-color: beige;");
+        goBackButton.setFont(customFont);
+      
 
+        
+        goBackButton.setOnAction(event -> {
+            
+            UserInformationScreen screen = new UserInformationScreen(controller);
+            screen.requestAmountOfPlayers(new Stage());
+            controller.getStage().close();
+        });
+
+        borderBox.getChildren().addAll(playerNameLabel, seniorityLabel,energyLabel,equipmentLabel, stateLabel, diceButton, goBackButton);
+       
+        drawMap(mapPane, mainPlayerPosition);
+        this.setCenter(mapPane);
     }
-
-    public void drawMap(Integer mainPlayerPosition) {
+    
+    public void drawMap(GridPane mapPane, Integer mainPlayerPosition) {
         List<Gladiator> players = controller.getPlayers();
         for (int y = 1; y <= mapHeight; y++) {
             for (int x = 1; x <= mapWidth; x++) {
@@ -70,7 +123,7 @@ public class MapView extends GridPane{
                 tile.setFitHeight(50);
 
                 if (isAWalkableSquare(x, y)) {
-                    Image walkableImage = new Image("file:src/main/resources/images/rockTile.png");
+                 
                     tile.setImage(walkableImage);
                     cellPane.getChildren().add(tile);
                     
@@ -81,12 +134,12 @@ public class MapView extends GridPane{
                         }
                     }
                 } else {
-                    Image nonWalkableImage = new Image("file:src/main/resources/images/lavaOMG.png");
+            
                     tile.setImage(nonWalkableImage);
                     cellPane.getChildren().add(tile);
                 } 
             
-                this.add(cellPane, x, y);
+                mapPane.add(cellPane, x, y);
             }
              
         }    

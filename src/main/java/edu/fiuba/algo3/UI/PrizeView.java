@@ -57,10 +57,13 @@ public class PrizeView {
             stackPane.getChildren().addAll(titleLabel, continueButton);
            
             Scene scene = new Scene(stackPane, 400, 400);
+
+            popupStage.setX(700);
+            popupStage.setY(50);
             popupStage.setScene(scene);
             popupStage.show();
 
-            waitFor(popupStage, 2);
+            waitFor(popupStage, 5);
         }
     }
 

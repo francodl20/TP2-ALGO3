@@ -61,10 +61,12 @@ public class ObstacleView {
 
            
             Scene scene = new Scene(stackPane, 400, 400);
+            popupStage.setX(200);
+            popupStage.setY(50);
             popupStage.setScene(scene);
             popupStage.show();
 
-            waitFor(popupStage, 2);
+            waitFor(popupStage, 5);
         }
     }
 

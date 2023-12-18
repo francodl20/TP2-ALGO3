@@ -29,4 +29,9 @@ public class SemiSenior implements ISeniority {
     public Integer energyPlus(Integer energy){
         return (energy + SEMISENIORITY_BONUS);
     }
+
+    @Override
+    public String getSeniorityType(){
+        return "Semi-Senior";
+    }
 }

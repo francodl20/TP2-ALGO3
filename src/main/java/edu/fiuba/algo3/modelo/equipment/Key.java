@@ -20,4 +20,8 @@ public class Key implements IEquipment {
     public boolean canEnterPompeii() {
         return true;
     }
+
+    public String getEquipmentType() {
+        return "LLave";
+    }
 }

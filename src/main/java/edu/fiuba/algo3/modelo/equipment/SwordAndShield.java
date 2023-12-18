@@ -22,4 +22,8 @@ public class SwordAndShield implements IEquipment {
     public boolean canEnterPompeii() {
         return false;
     }
+
+    public String getEquipmentType() {
+        return "Espada y Escudo";
+    }
 }

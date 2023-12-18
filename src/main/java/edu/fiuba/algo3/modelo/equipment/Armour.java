@@ -18,4 +18,8 @@ public class Armour implements IEquipment {
     public boolean canEnterPompeii() {
         return false;
     }
+
+    public String getEquipmentType() {
+        return "Armadura";
+    }
 }   

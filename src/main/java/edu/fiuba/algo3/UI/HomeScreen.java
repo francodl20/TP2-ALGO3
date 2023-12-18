@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.UI;
 
+import edu.fiuba.algo3.GameMenuBar;
 import edu.fiuba.algo3.controller.Controller;
 
 import javafx.scene.Scene;
@@ -8,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuBar;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.geometry.Pos;
@@ -42,23 +44,21 @@ public class HomeScreen {
 
         Button continueButton = new Button("Continuar");
         continueButton.setStyle("-fx-font-family: 'Press Start 2P'; -fx-background-color: beige;");
-
         continueButton.setPrefSize(180, 40);
         continueButton.setFont(customFont);
 
         StackPane.setAlignment(continueButton, Pos.BOTTOM_CENTER);
         StackPane.setMargin(continueButton, new javafx.geometry.Insets(0, 0, 10, 0));
+        MenuBar menuBar = GameMenuBar.createMenuBar();
+        StackPane.setAlignment(menuBar, Pos.TOP_CENTER);;
  
         
-        stackPane.getChildren().addAll(titleLabel, continueButton);
+        stackPane.getChildren().addAll(titleLabel, continueButton, menuBar);
 
         continueButton.setOnAction(event -> {
             UserInformationScreen userInformationScreen = new UserInformationScreen(controller);
-            userInformationScreen.start(stage);
+            userInformationScreen.requestAmountOfPlayers(stage);
         });
-
-        stage.setResizable(false);
-        stage.setMaximized(false);
 
           Scene scene = new Scene(stackPane, 600, 600);
   

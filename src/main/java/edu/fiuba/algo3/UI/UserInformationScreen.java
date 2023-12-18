@@ -13,6 +13,7 @@ import javafx.scene.text.Font;
 import javafx.scene.paint.Color;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.CornerRadii;
 import javafx.collections.ObservableList;
@@ -20,6 +21,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundRepeat;
+import edu.fiuba.algo3.GameMenuBar;
 import edu.fiuba.algo3.controller.Controller;
 import javafx.scene.layout.BackgroundPosition;
 
@@ -32,7 +34,7 @@ public class UserInformationScreen extends GridPane {
         this.controller = controller;
     }
 
-    public void start(Stage stage) {
+    public void requestAmountOfPlayers(Stage stage) {
          
         Image backgroundImage = new Image("file:src/main/resources/images/UserInformationScreen.png"); 
         BackgroundSize backgroundSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false);
@@ -41,19 +43,18 @@ public class UserInformationScreen extends GridPane {
 
         GridPane mainGrid = new GridPane();
         mainGrid.setBackground(backgroundObject);
-        mainGrid.setHgap(10);
         mainGrid.setVgap(10);
-        mainGrid.setPadding(new Insets(20, 20, 20, 20));
-
+      
         GridPane specificGrid = new GridPane();
         specificGrid.setAlignment(Pos.CENTER);
         specificGrid.setHgap(10);
         specificGrid.setVgap(10);
-        specificGrid.setPadding(new Insets(20, 20, 20, 20));
+        specificGrid.setPadding(new Insets(20, 43, 20, 43));
 
         String backgroundColorHex = "#000000"; 
         Color backgroundColor = Color.web(backgroundColorHex, 0.7);
         specificGrid.setBackground(new Background(new BackgroundFill(backgroundColor, CornerRadii.EMPTY, Insets.EMPTY))); 
+       
         Scene scene = new Scene(mainGrid, 600, 600);
 
         String fontPath = "/fonts/PressStart2P-Regular.ttf";
@@ -63,7 +64,7 @@ public class UserInformationScreen extends GridPane {
         
         Label labelNumberOfPlayers = new Label("Ingrese el numero de jugadores \n        (entre 2 y 6)");
         labelNumberOfPlayers.setStyle("-fx-font-family: 'Press Start 2P'; -fx-font-size: 12px;");
-        labelNumberOfPlayers.setTextFill(Color.web("#C80B0B"));;
+        labelNumberOfPlayers.setTextFill(Color.web("#FFFFFF"));;
         labelNumberOfPlayers.setFont(customFont);
 
         TextField txtNumberOfPlayers = new TextField();
@@ -77,7 +78,14 @@ public class UserInformationScreen extends GridPane {
         specificGrid.add(labelNumberOfPlayers, 0, 0);
         specificGrid.add(txtNumberOfPlayers, 1, 0);
         specificGrid.add(buttonSendNumberOfPlayers, 2, 0);
+        
+        MenuBar menuBar = GameMenuBar.createMenuBar();
+        mainGrid.setAlignment(Pos.TOP_CENTER);
 
+        
+        setColumnSpan(menuBar, Integer.MAX_VALUE);
+
+        mainGrid.add(menuBar, 0,0);
         mainGrid.add(specificGrid, 0, 2);
         
         buttonSendNumberOfPlayers.setOnAction(event -> {
@@ -107,9 +115,10 @@ public class UserInformationScreen extends GridPane {
 
         GridPane grid = new GridPane();
         grid.setPrefSize(600, 600);
-        grid.setBackground(backgroundObject);grid.setHgap(10);
+        grid.setBackground(backgroundObject);
+
         grid.setVgap(10);
-        grid.setPadding(new Insets(20, 20, 20, 20));
+     
 
         GridPane specificGrid = new GridPane();
         specificGrid.setAlignment(Pos.CENTER);
@@ -128,8 +137,8 @@ public class UserInformationScreen extends GridPane {
 
         for (int i = 0; i < numberOfPlayers; i++) {
             Label label = new Label("Ingrese el nombre del jugador #" + (i + 1) + ":");
-            label.setStyle("-fx-font-family: 'Press Start 2P'; -fx-font-size: 10px;");
-            label.setTextFill(Color.web("#C80B0B"));;
+            label.setStyle("-fx-font-family: 'Press Start 2P'; -fx-font-size: 11px;");
+            label.setTextFill(Color.web("#FFFFFF"));;
             label.setFont(customFont);
             label.setPrefWidth(400);
             TextField textField = new TextField();
@@ -138,22 +147,29 @@ public class UserInformationScreen extends GridPane {
             specificGrid.add(textField, 7, i);
         }
 
-        grid.add(specificGrid, 0, 2);
+        grid.add(specificGrid, 0, 5);
        
         Button buttonSubmitNames = new Button("Enviar");
         buttonSubmitNames.setStyle("-fx-font-family: 'Press Start 2P'; -fx-background-color: beige; -fx-font-size: 20px;");
         buttonSubmitNames.setPrefSize(150, 40);
         buttonSubmitNames.setFont(customFont);
-        grid.setHalignment(buttonSubmitNames, HPos.CENTER);
+        grid.setHalignment(buttonSubmitNames, HPos.RIGHT);
         grid.add(buttonSubmitNames, 0, 25);
+        Button buttonGoBack = new Button("Volver");
+        buttonGoBack.setStyle("-fx-font-family: 'Press Start 2P'; -fx-background-color: beige; -fx-font-size: 20px;");
+        buttonGoBack.setPrefSize(150, 40);
+        buttonGoBack.setFont(customFont);
+        grid.setHalignment(buttonGoBack, HPos.LEFT);
+        grid.add(buttonGoBack, 0, 25);
+
+        MenuBar menuBar = GameMenuBar.createMenuBar();
+        grid.add(menuBar, 0,0);
+ 
 
         buttonSubmitNames.setOnAction(event -> {   
             if (namesAreValid(specificGrid)) {
-               
-               
             
                 List<String> playerNames = getPlayerNames(specificGrid, numberOfPlayers);
-
                 
                 controller.startGame(playerNames, numberOfPlayers);
                 
@@ -163,6 +179,10 @@ public class UserInformationScreen extends GridPane {
             } else {
                 showAlert("Error", "Todos los nombres deben estar conformados por lo menos de un caracter.");
             }
+        });
+        
+        buttonGoBack.setOnAction(event -> {   
+           requestAmountOfPlayers(stage);
         });
 
         stage.setScene(scene);

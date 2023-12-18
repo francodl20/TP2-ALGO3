@@ -7,4 +7,6 @@ public interface ISeniority {
 
     //Return corresponding amount of energy
     public Integer energyPlus(Integer energy);
+
+    public String getSeniorityType();
 }

@@ -18,4 +18,8 @@ public class Helmet implements IEquipment {
     public boolean canEnterPompeii() {
         return false;
     }
+
+    public String getEquipmentType() {
+        return "Casco";
+    }
 }

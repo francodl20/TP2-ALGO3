@@ -37,20 +37,32 @@ public class FinishScreen extends StackPane {
         Button continueButton = new Button("Continuar");
         continueButton.setStyle("-fx-font-family: 'Press Start 2P'; -fx-background-color: beige;");
         
+        Button startAgainButton = new Button("Volver a jugar");
+        startAgainButton.setStyle("-fx-font-family: 'Press Start 2P'; -fx-background-color: beige;");
+        startAgainButton.setPrefSize(180, 40);
+        
         String fontPath = "/fonts/PressStart2P-Regular.ttf";
         Font customFont = Font.loadFont(getClass().getResourceAsStream(fontPath), 10);
-        continueButton.setPrefSize(150, 40);
+        continueButton.setPrefSize(200, 40);
         continueButton.setFont(customFont);
         
-        StackPane.setAlignment(continueButton, Pos.BOTTOM_CENTER);
-        StackPane.setMargin(continueButton, new javafx.geometry.Insets(0, 0, 10, 0));
+        StackPane.setAlignment(continueButton, Pos.BOTTOM_RIGHT);
+        StackPane.setMargin(continueButton, new javafx.geometry.Insets(0, 5, 10, 0));
+        
+        StackPane.setAlignment(startAgainButton, Pos.BOTTOM_LEFT);
+        StackPane.setMargin(startAgainButton, new javafx.geometry.Insets(0, 0, 10, 5));
         
         continueButton.setOnAction(event -> {
             finishStage.close();
             controller.showCredits();
         });
+        
+        startAgainButton.setOnAction(event -> {
+            finishStage.close();
+            controller.startUI();
+        });
 
-        getChildren().addAll(backgroundImageView,labelText, continueButton);
+        getChildren().addAll(backgroundImageView,labelText, continueButton, startAgainButton);
 
         Scene scene = new Scene(this, 600, 600);
         finishStage.setScene(scene);

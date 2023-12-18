@@ -20,4 +20,8 @@ public class Helpless implements IEquipment {
     public boolean canEnterPompeii() {
         return false;
     }
+
+    public String getEquipmentType() {
+        return "No tiene";
+    }
 }

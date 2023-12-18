@@ -45,6 +45,18 @@ public class Gladiator {
     public String getName() {
         return playerName;
     }
+   
+    public String getSeniority() {
+        return this.seniority.getSeniorityType();
+    }
+   
+    public String getPlayerState() {
+        return this.playerState.getPlayerState();
+    }
+   
+    public String getEquipment() {
+        return this.equipment.getEquipmentType();
+    }
 
     public Integer getEnergy() {
         return this.energy;

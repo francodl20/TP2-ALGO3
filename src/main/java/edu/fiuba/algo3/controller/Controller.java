@@ -3,8 +3,10 @@ package edu.fiuba.algo3.controller;
 import java.util.List;
 
 import edu.fiuba.algo3.UI.HomeScreen;
+import edu.fiuba.algo3.UI.MapProv;
 import edu.fiuba.algo3.UI.CreditsScreen;
 import edu.fiuba.algo3.UI.FinishScreen;
+import edu.fiuba.algo3.UI.GameView;
 import edu.fiuba.algo3.UI.MapView;
 import edu.fiuba.algo3.UI.PrizeView;
 import edu.fiuba.algo3.UI.ObstacleView;
@@ -15,6 +17,7 @@ import edu.fiuba.algo3.modelo.attributes.gameState.IGameState;
 import javafx.scene.Scene;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -24,15 +27,17 @@ public class Controller {
     private GameController game;
     private IGameState gameState;
     private List<String> playerNames;
-    private Gladiator currentPlayer;
     private int numberOfPlayers;
-    private Integer lastDiceRoll;
-    private static Integer mapHight;
-    private static Integer mapLenght;
+    private Gladiator currentPlayer;
+    //private Integer lastDiceRoll;
+    //private static Integer mapHight;
+    //private static Integer mapLenght;
 
     private Stage primaryStage;
     private HomeScreen homeScreen;
-    private MapView mapView;
+    // private GameView gameView;
+    private GridPane mapGrid;
+    private MapProv mapProv;
     private PrizeView prizeView;
     private ObstacleView obstacleView;
 
@@ -40,6 +45,7 @@ public class Controller {
 
         this.primaryStage = primaryStage;
         homeScreen = new HomeScreen(primaryStage);
+        mapGrid = new GridPane();
         
     }
 
@@ -64,18 +70,18 @@ public class Controller {
     
     public void showMap(){
 
-        this.mapView = new MapView(game.getSquares(), game.getMapSize(), this);
-
+        this.mapProv = new MapProv(game.getSquares(), game.getMapSize(), this);
+ 
         Color backgroundColor = Color.BLACK; 
         BackgroundFill backgroundFill = new BackgroundFill(backgroundColor, null, null);
         Background background = new Background(backgroundFill);
 
         StackPane root = new StackPane();
         root.setBackground(background);
-        root.getChildren().add(mapView);
-
+        root.getChildren().add(mapProv);
+        
         Scene mapScene = new Scene(root);
-
+        
         primaryStage.setScene(mapScene);
         primaryStage.show();
     }
@@ -86,9 +92,10 @@ public class Controller {
         D6 dice = new D6();
         gameState = game.playTurn(dice);
 
-        mapView.drawMap(currentPlayer.getPosition());
+        mapProv.drawGame(mapGrid,currentPlayer.getPosition(), this.currentPlayer);
 
         if (gameState.hasEnded()){
+            primaryStage.close();
            showFinishScreen(gameState.getWinner());
         }
     }
@@ -119,4 +126,7 @@ public class Controller {
        finishScreen.start(this);
     }
     
+    public Stage getStage(){
+        return this.primaryStage;
+    }
 }
