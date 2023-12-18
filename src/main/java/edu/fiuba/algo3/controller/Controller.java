@@ -55,7 +55,7 @@ public class Controller {
         this.playerNames = playerNames;
         this.numberOfPlayers = numberOfPlayers;
         this.game = new GameController(playerNames, numberOfPlayers);     
-          
+        
     }
 
     public List<Gladiator> getPlayers(){

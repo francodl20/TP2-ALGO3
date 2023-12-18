@@ -1,13 +1,18 @@
 package edu.fiuba.algo3;
 
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
+import edu.fiuba.algo3.modelo.GameController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
 public class PlayerNamesController implements IController {
+
+    Integer numberOfPlayers;
 
     @FXML
     private Label labelOne;
@@ -48,7 +53,13 @@ public class PlayerNamesController implements IController {
 
     @FXML
     private void switchToMap() throws IOException {
-        App.setRoot("MapView");
+        List<String> nameList = listOfPlayerNames(numberOfPlayers);
+        GameController game = new GameController(nameList, numberOfPlayers);
+
+        MapViewController mapView = 
+        (MapViewController) App.setRootAndGetController("MapView");
+
+        mapView.setGame(game);
     }
 
     @FXML
@@ -56,7 +67,9 @@ public class PlayerNamesController implements IController {
         App.setRoot("PlayerAmount");
     }
 
-    public void setAmount(Integer amount){
+    public void setAmount(Integer amount) {
+        numberOfPlayers = amount;
+
         makeBackgroundVisible(amount);
 
         if (1 <= amount) {
@@ -77,6 +90,31 @@ public class PlayerNamesController implements IController {
         if (6 <= amount) {
             makePlayerSixAccesible();
         }
+    }
+
+    private LinkedList<String> listOfPlayerNames(Integer num) {
+        LinkedList<String> nameList = new LinkedList<>();
+
+        if (1<= num ) {
+            nameList.add(nameOne.getText());
+        }
+        if (2<= num ) {
+            nameList.add(nameTwo.getText());
+        }
+        if (3<= num ) {
+            nameList.add(nameThree.getText());
+        }
+        if (4<= num ) {
+            nameList.add(nameFour.getText());
+        }
+        if (5<= num ) {
+            nameList.add(nameFive.getText());
+        }
+        if (6<= num ) {
+            nameList.add(nameSix.getText());
+        }
+
+        return nameList;
     }
 
     private void makeBackgroundVisible(Integer number) {

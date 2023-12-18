@@ -1,64 +1,53 @@
-package edu.fiuba.algo3.UI;
+package edu.fiuba.algo3;
 
-import edu.fiuba.algo3.modelo.board.squares.ISquare;
-import edu.fiuba.algo3.modelo.board.Parser;
-import edu.fiuba.algo3.controller.Controller;
-import edu.fiuba.algo3.modelo.attributes.Coordinate;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+import edu.fiuba.algo3.modelo.GameController;
 import edu.fiuba.algo3.modelo.Gladiator;
-
-import java.util.*;
-
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
+import edu.fiuba.algo3.modelo.attributes.Coordinate;
+import edu.fiuba.algo3.modelo.board.squares.ISquare;
+import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.text.Font;
-import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 
-
-public class MapView extends GridPane{
-
-    private Integer mapWidth;
+public class MapViewController implements IController{
+    
+    private GameController gameController;
     private Integer mapHeight;
-    private Controller controller;
+    private Integer mapWidth;
     private LinkedList<ISquare> walkableSquares;
     private List<ImageView> playersAvatars;
-    
-    public MapView(LinkedList<ISquare> squares, Coordinate mapSize, Controller controller) {
-        
-        
-        this.mapWidth = mapSize.getXValue();
-        this.mapHeight = mapSize.getYValue();
-        this.controller = controller;
-        this.walkableSquares = squares;
-        this.playersAvatars = new LinkedList<>();
-        
-        if (mapWidth <= 0 || mapHeight <= 0) {
-            throw new IllegalArgumentException("Dimensiones del mapa deben ser mayores que cero");
-        }
+
+    GridPane mapGrid;
+
+    @FXML
+    StackPane mapStack;
+
+    public void setGame(GameController game) {
+        gameController = game;
+
+        Coordinate mapSize = gameController.getMapSize();
+        mapHeight = mapSize.getYValue();
+        mapWidth = mapSize.getXValue();
+        walkableSquares = gameController.getSquares();
+        playersAvatars = new LinkedList<>();
+
+        mapGrid = new GridPane();
+        mapStack.getChildren().add(mapGrid);
 
         setPlayersAvatars();
-        drawMap(0);
 
-        String fontPath = "/fonts/PressStart2P-Regular.ttf";
-        Font customFont = Font.loadFont(getClass().getResourceAsStream(fontPath), 40);
-       
-        Button diceButton = new Button("Tirar dado");
-        diceButton.setStyle("-fx-font-family: 'Press Start 2P'; -fx-background-color: beige;");
-
-    
-        diceButton.setPrefSize(180, 40);
-        diceButton.setFont(customFont);
-        this.add(diceButton,0, 5); 
-
-        diceButton.setOnAction(event->{
-            controller.movePlayer();
-        });
-
+        showMap(0);
     }
+   
+    private void showMap(Integer mainPlayerPosition) {
+        List<Gladiator> players = gameController.getPlayers();
 
-    public void drawMap(Integer mainPlayerPosition) {
-        List<Gladiator> players = controller.getPlayers();
         Image walkableImage = new Image("file:src/main/resources/images/rockTile.png");
         Image nonWalkableImage = new Image("file:src/main/resources/images/lavaOMG.png");
 
@@ -83,30 +72,19 @@ public class MapView extends GridPane{
                     cellPane.getChildren().add(tile);
                 } 
             
-                this.add(cellPane, x, y);
-            }
-             
-        }    
-            if(mainPlayerPosition > 0){
-                
-            controller.showSquareInfo(walkableSquares.get(mainPlayerPosition - 1).getObstacleType(),walkableSquares.get(mainPlayerPosition - 1).getPrizeType());
-        }
-    }
-    
-    private int getSquarePosition(int x, int y) {
-       
-        Coordinate targetCoordinate = new Coordinate(x, y);
-        int position = -1;
-       
-        for (int i = 0; i < walkableSquares.size(); i++) {
-            if (walkableSquares.get(i).getSquareCoordinate().equals(targetCoordinate)) {
-                position = i;
+                mapGrid.add(cellPane, x, y);
             }
         }
+        
+        if(mainPlayerPosition > 0){
 
-        return position;      
+            String obstacleType = walkableSquares.get(mainPlayerPosition - 1).getObstacleType();
+            String prizeType = walkableSquares.get(mainPlayerPosition - 1).getPrizeType();
+            //controller.showSquareInfo(walkableSquares.get(mainPlayerPosition - 1)
+            //.getObstacleType(), walkableSquares.get(mainPlayerPosition - 1).getPrizeType());
+        }
     }
-    
+
     private boolean isAWalkableSquare(int x, int y) {
        
         Coordinate targetCoordinate = new Coordinate(x, y);
@@ -121,9 +99,23 @@ public class MapView extends GridPane{
         return isWalkable;      
     }
 
+    private int getSquarePosition(int x, int y) {
+       
+        Coordinate targetCoordinate = new Coordinate(x, y);
+        int position = -1;
+       
+        for (int i = 0; i < walkableSquares.size(); i++) {
+            if (walkableSquares.get(i).getSquareCoordinate().equals(targetCoordinate)) {
+                position = i;
+            }
+        }
+
+        return position;      
+    }
+
     private void setPlayersAvatars(){
 
-        for (Integer index = 0; index < controller.getPlayers().size(); index++) {
+        for (Integer index = 0; index < gameController.getPlayers().size(); index++) {
            playersAvatars.add(playerFactory(index + 1));
         }
 
@@ -166,8 +158,4 @@ public class MapView extends GridPane{
         
         return  gladiators.get(numberOfPlayer);
     }
-
 }
-
-
-    
