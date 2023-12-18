@@ -62,6 +62,9 @@ public class MapView extends GridPane{
 
     public void drawMap(Integer mainPlayerPosition) {
         List<Gladiator> players = controller.getPlayers();
+        Image walkableImage = new Image("file:src/main/resources/images/rockTile.png");
+        Image nonWalkableImage = new Image("file:src/main/resources/images/lavaOMG.png");
+
         for (int y = 1; y <= mapHeight; y++) {
             for (int x = 1; x <= mapWidth; x++) {
                 StackPane cellPane = new StackPane();
@@ -70,7 +73,6 @@ public class MapView extends GridPane{
                 tile.setFitHeight(50);
 
                 if (isAWalkableSquare(x, y)) {
-                    Image walkableImage = new Image("file:src/main/resources/images/rockTile.png");
                     tile.setImage(walkableImage);
                     cellPane.getChildren().add(tile);
                     
@@ -81,7 +83,6 @@ public class MapView extends GridPane{
                         }
                     }
                 } else {
-                    Image nonWalkableImage = new Image("file:src/main/resources/images/lavaOMG.png");
                     tile.setImage(nonWalkableImage);
                     cellPane.getChildren().add(tile);
                 } 
