@@ -171,10 +171,10 @@ public class UserInformationScreen extends GridPane {
             
                 List<String> playerNames = getPlayerNames(specificGrid, numberOfPlayers);
                 
-                controller.startGame(playerNames, numberOfPlayers);
-                
-                stage.close();
-                controller.showMap();
+                controller.setGame(playerNames, numberOfPlayers);
+                DiceView diceView = new DiceView(controller);
+                diceView.requestPreferedDice(stage);
+                //controller.showMap();
                 
             } else {
                 showAlert("Error", "Todos los nombres deben estar conformados por lo menos de un caracter.");

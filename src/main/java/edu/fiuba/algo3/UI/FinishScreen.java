@@ -43,7 +43,7 @@ public class FinishScreen extends StackPane {
         
         String fontPath = "/fonts/PressStart2P-Regular.ttf";
         Font customFont = Font.loadFont(getClass().getResourceAsStream(fontPath), 10);
-        continueButton.setPrefSize(200, 40);
+        continueButton.setPrefSize(220, 40);
         continueButton.setFont(customFont);
         
         StackPane.setAlignment(continueButton, Pos.BOTTOM_RIGHT);

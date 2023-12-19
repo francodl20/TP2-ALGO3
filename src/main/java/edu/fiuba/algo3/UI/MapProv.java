@@ -102,9 +102,11 @@ public class MapProv extends BorderPane{
         
         goBackButton.setOnAction(event -> {
             
-            UserInformationScreen screen = new UserInformationScreen(controller);
-            screen.requestAmountOfPlayers(new Stage());
-            controller.getStage().close();
+            //UserInformationScreen screen = new UserInformationScreen(controller);
+            //screen.requestAmountOfPlayers(new Stage());
+            DiceView screen = new DiceView(controller);
+            screen.requestPreferedDice(controller.getStage());
+           // controller.getStage().close();
         });
 
         borderBox.getChildren().addAll(playerNameLabel, seniorityLabel,energyLabel,equipmentLabel, stateLabel, diceButton, goBackButton);

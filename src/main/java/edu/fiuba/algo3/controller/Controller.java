@@ -6,13 +6,12 @@ import edu.fiuba.algo3.UI.HomeScreen;
 import edu.fiuba.algo3.UI.MapProv;
 import edu.fiuba.algo3.UI.CreditsScreen;
 import edu.fiuba.algo3.UI.FinishScreen;
-import edu.fiuba.algo3.UI.GameView;
 import edu.fiuba.algo3.UI.MapView;
 import edu.fiuba.algo3.UI.PrizeView;
 import edu.fiuba.algo3.UI.ObstacleView;
-import edu.fiuba.algo3.modelo.D6;
 import edu.fiuba.algo3.modelo.GameController;
 import edu.fiuba.algo3.modelo.Gladiator;
+import edu.fiuba.algo3.modelo.IDice;
 import edu.fiuba.algo3.modelo.attributes.gameState.IGameState;
 import javafx.scene.Scene;
 import javafx.scene.layout.Background;
@@ -29,13 +28,10 @@ public class Controller {
     private List<String> playerNames;
     private int numberOfPlayers;
     private Gladiator currentPlayer;
-    //private Integer lastDiceRoll;
-    //private static Integer mapHight;
-    //private static Integer mapLenght;
+    private IDice dice; 
 
     private Stage primaryStage;
     private HomeScreen homeScreen;
-    // private GameView gameView;
     private GridPane mapGrid;
     private MapProv mapProv;
     private PrizeView prizeView;
@@ -57,7 +53,7 @@ public class Controller {
         homeScreen.start(this);
     }
 
-    public void startGame(List<String> playerNames, int numberOfPlayers) {
+    public void setGame(List<String> playerNames, int numberOfPlayers) {
         this.playerNames = playerNames;
         this.numberOfPlayers = numberOfPlayers;
         this.game = new GameController(playerNames, numberOfPlayers);     
@@ -86,10 +82,13 @@ public class Controller {
         primaryStage.show();
     }
 
+    public void setDice(IDice dice){
+        this.dice = dice;
+    }
+    
     public void movePlayer(){
         this.currentPlayer = game.getCurrentPlayer();
 
-        D6 dice = new D6();
         gameState = game.playTurn(dice);
 
         mapProv.drawGame(mapGrid,currentPlayer.getPosition(), this.currentPlayer);
