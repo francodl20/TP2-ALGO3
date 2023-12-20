@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-public class PlayerAmountController implements IController {
+public class PlayerAmountController {
     
     @FXML
     private TextField numberOfPlayers;
@@ -17,10 +17,9 @@ public class PlayerAmountController implements IController {
     public void switchPlayerNames() throws IOException {
         Integer amount = Integer.parseInt(numberOfPlayers.getText());
 
-        PlayerNamesController playerNamesController = 
-        (PlayerNamesController) App.setRootAndGetController("PlayerNames");
+        GameInfo.setPlayerAmount(amount);
 
-        playerNamesController.setAmount(amount);
+        App.setRoot("PlayerNames");
     }
 
 }

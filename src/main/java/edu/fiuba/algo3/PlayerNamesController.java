@@ -1,65 +1,37 @@
 package edu.fiuba.algo3;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import edu.fiuba.algo3.modelo.GameController;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
-public class PlayerNamesController implements IController {
+public class PlayerNamesController implements Initializable {
 
     Integer numberOfPlayers;
 
     @FXML
-    private Label labelOne;
+    private Label labelOne, labelTwo, labelThree,labelFour, labelFive, labelSix;
     @FXML
-    private TextField nameOne;
+    private TextField nameOne, nameTwo, nameThree, nameFour, nameFive, nameSix;
     @FXML
-    private HBox hbox1;
-    @FXML
-    private Label labelTwo;
-    @FXML
-    private TextField nameTwo;
-    @FXML
-    private HBox hbox2;
-    @FXML
-    private Label labelThree;
-    @FXML
-    private TextField nameThree;
-    @FXML
-    private HBox hbox3;
-    @FXML
-    private Label labelFour;
-    @FXML
-    private TextField nameFour;
-    @FXML
-    private HBox hbox4;
-    @FXML
-    private Label labelFive;
-    @FXML
-    private TextField nameFive;
-    @FXML
-    private HBox hbox5;
-    @FXML
-    private Label labelSix;
-    @FXML
-    private TextField nameSix;
-    @FXML
-    private HBox hbox6;
+    private HBox hbox1, hbox2, hbox3, hbox4, hbox5, hbox6;
 
     @FXML
     private void switchToMap() throws IOException {
         List<String> nameList = listOfPlayerNames(numberOfPlayers);
         GameController game = new GameController(nameList, numberOfPlayers);
 
-        MapViewController mapView = 
-        (MapViewController) App.setRootAndGetController("MapView");
+        GameInfo.setGame(game);
 
-        mapView.setGame(game);
+        App.setRoot("MapView");
     }
 
     @FXML
@@ -67,7 +39,7 @@ public class PlayerNamesController implements IController {
         App.setRoot("PlayerAmount");
     }
 
-    public void setAmount(Integer amount) {
+    private void setAmount(Integer amount) {
         numberOfPlayers = amount;
 
         makeBackgroundVisible(amount);
@@ -178,7 +150,9 @@ public class PlayerNamesController implements IController {
         nameSix.setEditable(true);
     }
 
-    
 
-
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        setAmount(GameInfo.getPlayerAmount());
+    }
 }
