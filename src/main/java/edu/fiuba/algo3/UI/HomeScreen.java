@@ -49,7 +49,7 @@ public class HomeScreen {
 
         StackPane.setAlignment(continueButton, Pos.BOTTOM_CENTER);
         StackPane.setMargin(continueButton, new javafx.geometry.Insets(0, 0, 10, 0));
-        MenuBar menuBar = GameMenuBar.createMenuBar();
+        MenuBar menuBar = GameMenuBar.createMenuBar(stage);
         StackPane.setAlignment(menuBar, Pos.TOP_CENTER);;
  
         

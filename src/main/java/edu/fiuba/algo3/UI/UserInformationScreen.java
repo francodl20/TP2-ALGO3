@@ -13,7 +13,6 @@ import javafx.scene.text.Font;
 import javafx.scene.paint.Color;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.CornerRadii;
 import javafx.collections.ObservableList;
@@ -79,7 +78,7 @@ public class UserInformationScreen extends GridPane {
         specificGrid.add(txtNumberOfPlayers, 1, 0);
         specificGrid.add(buttonSendNumberOfPlayers, 2, 0);
         
-        MenuBar menuBar = GameMenuBar.createMenuBar();
+        MenuBar menuBar = GameMenuBar.createMenuBar(stage);
         mainGrid.setAlignment(Pos.TOP_CENTER);
 
         
@@ -102,8 +101,8 @@ public class UserInformationScreen extends GridPane {
         stage.setScene(scene);
         stage.show();
         
-        //stage.setResizable(false);
-        //stage.setMaximized(false);
+        stage.setResizable(false);
+        stage.setMaximized(false);
     }
     
     private void requestPlayerNames(Stage stage, int numberOfPlayers) {
@@ -162,7 +161,7 @@ public class UserInformationScreen extends GridPane {
         grid.setHalignment(buttonGoBack, HPos.LEFT);
         grid.add(buttonGoBack, 0, 25);
 
-        MenuBar menuBar = GameMenuBar.createMenuBar();
+        MenuBar menuBar = GameMenuBar.createMenuBar(stage);
         grid.add(menuBar, 0,0);
  
 
