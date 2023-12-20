@@ -101,7 +101,7 @@ public class Controller {
 
         if (gameState.hasEnded()){
             primaryStage.close();
-           showFinishScreen(gameState.getWinner());
+            showFinishScreen(gameState.getWinner());
         }
     }
     

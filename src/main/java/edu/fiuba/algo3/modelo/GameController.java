@@ -76,6 +76,8 @@ public class GameController {
             GAMEBOARD.playWith(currentPlayer);
         }
 
+        updateGameState(currentPlayer, GAMEBOARD, turnManager.getTurnCount());
+
         return gameState;
     }
 
