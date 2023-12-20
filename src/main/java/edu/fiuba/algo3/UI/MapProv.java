@@ -62,7 +62,7 @@ public class MapProv extends BorderPane{
         String fontPath = "/fonts/PressStart2P-Regular.ttf";
         Font customFont = Font.loadFont(getClass().getResourceAsStream(fontPath), 14);
 
-        MenuBar menuBar = GameMenuBar.createMenuBar(controller.getStage());
+        MenuBar menuBar = GameMenuBar.createMenuBar(controller.getStage(), controller);
         this.setTop(menuBar);
 
        

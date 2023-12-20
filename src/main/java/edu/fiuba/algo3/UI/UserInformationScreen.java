@@ -78,7 +78,7 @@ public class UserInformationScreen extends GridPane {
         specificGrid.add(txtNumberOfPlayers, 1, 0);
         specificGrid.add(buttonSendNumberOfPlayers, 2, 0);
         
-        MenuBar menuBar = GameMenuBar.createMenuBar(stage);
+        MenuBar menuBar = GameMenuBar.createMenuBar(stage, controller);
         mainGrid.setAlignment(Pos.TOP_CENTER);
 
         
@@ -161,7 +161,7 @@ public class UserInformationScreen extends GridPane {
         grid.setHalignment(buttonGoBack, HPos.LEFT);
         grid.add(buttonGoBack, 0, 25);
 
-        MenuBar menuBar = GameMenuBar.createMenuBar(stage);
+        MenuBar menuBar = GameMenuBar.createMenuBar(stage, controller);
         grid.add(menuBar, 0,0);
  
 

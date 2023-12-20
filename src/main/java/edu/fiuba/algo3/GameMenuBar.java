@@ -4,13 +4,9 @@ package edu.fiuba.algo3;
 import edu.fiuba.algo3.UI.AboutGameView;
 import edu.fiuba.algo3.UI.InstructionsView;
 import edu.fiuba.algo3.controller.Controller;
-import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 
@@ -19,7 +15,7 @@ public class GameMenuBar{
     public GameMenuBar(){
         
     }
-    public static MenuBar createMenuBar(Stage stage) {
+    public static MenuBar createMenuBar(Stage stage, Controller controller) {
         
         Menu gameMenu = new Menu("Opciones del Juego");;
         MenuItem exitItem = new MenuItem("Salir");
@@ -31,10 +27,10 @@ public class GameMenuBar{
         
         Menu changeMusictMenu = new Menu("Cambiar canción");
         MenuItem mulanMusictItem = new MenuItem("Hombres de Acción");
-        MenuItem mainMusictItem = new MenuItem("Tema Principal");
+        MenuItem trumpetMusictItem = new MenuItem("Trompetesco");
         MenuItem marioGalaxyMusictItem = new MenuItem("Galáctico");
         
-        changeMusictMenu.getItems().addAll(mulanMusictItem, mainMusictItem, marioGalaxyMusictItem);
+        changeMusictMenu.getItems().addAll(mulanMusictItem, trumpetMusictItem, marioGalaxyMusictItem);
         
         Menu helpMenu = new Menu("Ayuda");
         MenuItem instructionsItem = new MenuItem("Instrucciones");
@@ -44,8 +40,23 @@ public class GameMenuBar{
 
         exitItem.setOnAction(e -> System.exit(0));
         maximizeStageItem.setOnAction(e -> stage.setMaximized(true));
-        pauseMusictItem.setOnAction(e -> System.out.println("prueba")); 
-        resumeMusictItem.setOnAction(e -> System.out.println("prueba"));
+
+        mulanMusictItem.setOnAction(e -> {
+            controller.getMusicController().playMulanMusic();
+        }); 
+        trumpetMusictItem.setOnAction(e -> {
+            controller.getMusicController().playTrumpetsMusic();
+        }); 
+        marioGalaxyMusictItem.setOnAction(e -> {
+            controller.getMusicController().playGalacticMusic();;
+        }); 
+        pauseMusictItem.setOnAction(e -> {
+            controller.getMusicController().pause();
+        }); 
+
+        resumeMusictItem.setOnAction(e -> {
+             controller.getMusicController().resume();
+        });
         
         instructionsItem.setOnAction(e -> {
             InstructionsView instructions = new InstructionsView();

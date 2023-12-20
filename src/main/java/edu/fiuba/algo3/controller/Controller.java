@@ -20,6 +20,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.scene.media.MediaPlayer;
 
 public class Controller {
     
@@ -29,6 +30,9 @@ public class Controller {
     private int numberOfPlayers;
     private Gladiator currentPlayer;
     private IDice dice; 
+    private MusicController musicController;
+    private MediaPlayer mediaPlayer;
+
 
     private Stage primaryStage;
     private HomeScreen homeScreen;
@@ -42,11 +46,13 @@ public class Controller {
         this.primaryStage = primaryStage;
         homeScreen = new HomeScreen(primaryStage);
         mapGrid = new GridPane();
+        musicController = new MusicController();
         
     }
 
     public void startUI(){
         homeScreen.start(this);
+        this.musicController.playInitialMusic();
     }
     
     public void getNumbreOfPlayers(){
@@ -65,7 +71,7 @@ public class Controller {
     }
     
     public void showMap(){
-
+        musicController.playMainMusic();
         this.mapProv = new MapProv(game.getSquares(), game.getMapSize(), this);
  
         Color backgroundColor = Color.BLACK; 
@@ -127,5 +133,9 @@ public class Controller {
     
     public Stage getStage(){
         return this.primaryStage;
+    }
+
+    public MusicController getMusicController(){
+        return this.musicController;
     }
 }
