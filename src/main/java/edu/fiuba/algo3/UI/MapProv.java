@@ -29,6 +29,8 @@ public class MapProv extends BorderPane {
     private LinkedList<ISquare> walkableSquares;
     private List<ImageView> playersAvatars;
     private List<ImageView> playersProfiles;
+    private Image startTile;
+    private Image finishTile;
     private Image walkableImage;
     private Image nonWalkableImage;
 
@@ -47,6 +49,9 @@ public class MapProv extends BorderPane {
 
         walkableImage = new Image("file:src/main/resources/images/rockTile.png");
         nonWalkableImage =  new Image("file:src/main/resources/images/grassTile.png");
+        startTile =  new Image("file:src/main/resources/images/startTile.jpg");
+        finishTile =  new Image("file:src/main/resources/images/finishTile.jpg");
+        
 
         setPlayersAvatars();
         drawGame(new GridPane(), 0, controller.getPlayers().get(0));
@@ -118,7 +123,17 @@ public class MapProv extends BorderPane {
                 tile.setFitHeight(60);
 
                 if (isAWalkableSquare(x, y)) {
-                    tile.setImage(walkableImage);
+
+                    if (isStartSquare(x,y)) {
+                        
+                        tile.setImage(startTile);
+                    }
+                    else if (isFinisgSquare(x,y)) {
+                        
+                        tile.setImage(finishTile);
+                    }
+                    else{ tile.setImage(walkableImage);}
+                   
                     cellPane.getChildren().add(tile);
 
                     for (int i = 0; i < players.size(); i++) {
@@ -151,6 +166,16 @@ public class MapProv extends BorderPane {
         return position;      
     }
 
+    private boolean isStartSquare(int x, int y) {
+        Coordinate targetCoordinate = new Coordinate(x, y);
+        
+        return walkableSquares.getFirst().getSquareCoordinate().equals(targetCoordinate);      
+    }
+    private boolean isFinisgSquare(int x, int y) {
+        Coordinate targetCoordinate = new Coordinate(x, y);
+       
+        return walkableSquares.getLast().getSquareCoordinate().equals(targetCoordinate);      
+    }
     private boolean isAWalkableSquare(int x, int y) {
         Coordinate targetCoordinate = new Coordinate(x, y);
         boolean isWalkable = false;

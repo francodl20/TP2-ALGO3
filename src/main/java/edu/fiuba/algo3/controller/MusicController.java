@@ -25,17 +25,44 @@ public class MusicController {
         this.repet(mediaPlayer);
         return mediaPlayer;
     }
-
+    
     public MediaPlayer setMulanMusic() {
         mediaPlayer = this.setMusic(0.1, "/music/hombresDeAccion.mp3");
+        this.repet(mediaPlayer);
+
         return mediaPlayer;
     }
 
     public MediaPlayer setGalacticMusic() {
         mediaPlayer = this.setMusic(0.1, "/music/galactic.mp3");
+        this.repet(mediaPlayer);
         return mediaPlayer;
     }
 
+    public MediaPlayer setWinningMusic() {
+        mediaPlayer = this.setMusic(0.1, "/music/winningSound.mp3");
+        return mediaPlayer;
+    }
+
+    public MediaPlayer setLosingMusic() {
+        mediaPlayer = this.setMusic(0.1, "/music/losingSound.mp3");
+        return mediaPlayer;
+    }
+    
+    public void playWinningMusic() {
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+        }
+        setWinningMusic();
+        mediaPlayer.play();
+    }
+    public void playLosingMusic() {
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+        }
+        setLosingMusic();
+        mediaPlayer.play();
+    }
     public void playInitialMusic() {
         if (mediaPlayer != null) {
             mediaPlayer.stop();

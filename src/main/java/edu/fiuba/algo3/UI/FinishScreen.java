@@ -63,7 +63,7 @@ public class FinishScreen extends StackPane {
         });
 
         getChildren().addAll(backgroundImageView,labelText, continueButton, startAgainButton);
-
+        setMusic(controller);
         Scene scene = new Scene(this, 600, 600);
         finishStage.setScene(scene);
         finishStage.show();
@@ -82,6 +82,16 @@ public class FinishScreen extends StackPane {
         return resultTypes.get(result);
     }
     
+    private void setMusic(Controller controller){
+        if (endMessage.equals("Game tied.")) {
+            controller.getMusicController().playLosingMusic();
+        }
+        else{
+            controller.getMusicController().playWinningMusic();
+
+        }
+
+    }
      private Label resultLabelFactory(Boolean result) {
         Map<Boolean, Label> resultTypes = new HashMap<>();
         String fontPath = "/fonts/PressStart2P-Regular.ttf";
