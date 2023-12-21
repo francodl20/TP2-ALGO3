@@ -32,6 +32,6 @@ public class Novice implements ISeniority {
     
     @Override
     public String getSeniorityType(){
-        return "Novicio";
+        return "Novato";
     }
 }

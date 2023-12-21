@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.UI;
 
+import edu.fiuba.algo3.GameMenuBar;
 import edu.fiuba.algo3.controller.Controller;
 import edu.fiuba.algo3.modelo.IDice;
 import edu.fiuba.algo3.modelo.D6;
@@ -9,6 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
@@ -46,14 +48,14 @@ public class DiceView extends StackPane {
         setAlignment(d6, Pos.BOTTOM_LEFT);
         d6.setPrefSize(180, 40);
         d6.setTranslateY(-100);
-        //StackPane.setMargin(d6, new javafx.geometry.Insets(0, 5, 10, 0));
+        
         
         Button d10 = new Button("10 caras");
         d10.setStyle("-fx-font-family: 'Press Start 2P'; -fx-background-color: beige;");
         setAlignment(d10, Pos.BOTTOM_CENTER);
         d10.setPrefSize(180, 40);
         d10.setTranslateY(-100);
-        //StackPane.setMargin(d6, new javafx.geometry.Insets(0, 0, 10, 0));
+        
         
         Button d20 = new Button("20 caras");
         d20.setStyle("-fx-font-family: 'Press Start 2P'; -fx-background-color: beige;");
@@ -65,10 +67,10 @@ public class DiceView extends StackPane {
         goBackButton.setStyle("-fx-font-family: 'Press Start 2P'; -fx-background-color: beige;");
         setAlignment(goBackButton, Pos.BOTTOM_CENTER);
         goBackButton.setPrefSize(180, 40);
-       // goBackButton.setTranslateY(-100);
-        //StackPane.setMargin(d6, new javafx.geometry.Insets(0, 0, 10, 5));
-        
-        getChildren().addAll(diceImageView, instruction, d6, d10, d20, goBackButton);
+     
+        MenuBar bar = GameMenuBar.createMenuBar(diceStage, controller);
+       setAlignment(bar, Pos.TOP_CENTER);
+        getChildren().addAll(diceImageView, instruction, d6, d10, d20, goBackButton, bar);
         
         d6.setOnAction(event -> {
             diceStage.close();

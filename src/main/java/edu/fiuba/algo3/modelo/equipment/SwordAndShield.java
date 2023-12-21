@@ -24,6 +24,6 @@ public class SwordAndShield implements IEquipment {
     }
 
     public String getEquipmentType() {
-        return "Espada y Escudo";
+        return "Espada y \nEscudo";
     }
 }

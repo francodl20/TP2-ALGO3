@@ -1,7 +1,5 @@
 package edu.fiuba.algo3;
 
-import edu.fiuba.algo3.UI.AboutGameView;
-import edu.fiuba.algo3.UI.InstructionsView;
 import edu.fiuba.algo3.controller.Controller;
 import javafx.application.Application;
 import javafx.stage.Stage;

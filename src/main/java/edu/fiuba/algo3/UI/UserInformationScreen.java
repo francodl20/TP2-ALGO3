@@ -1,11 +1,15 @@
 package edu.fiuba.algo3.UI;
 
 import java.util.List;
+import java.util.Set;
+
 import javafx.scene.Node; 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.geometry.Pos;
 import javafx.geometry.HPos;
+
+import java.util.HashSet;
 import java.util.LinkedList;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
@@ -63,7 +67,7 @@ public class UserInformationScreen extends GridPane {
         
         Label labelNumberOfPlayers = new Label("Ingrese el numero de jugadores \n        (entre 2 y 6)");
         labelNumberOfPlayers.setStyle("-fx-font-family: 'Press Start 2P'; -fx-font-size: 12px;");
-        labelNumberOfPlayers.setTextFill(Color.web("#FFFFFF"));;
+        labelNumberOfPlayers.setTextFill(Color.web("#FFFFFF"));
         labelNumberOfPlayers.setFont(customFont);
 
         TextField txtNumberOfPlayers = new TextField();
@@ -100,9 +104,6 @@ public class UserInformationScreen extends GridPane {
     
         stage.setScene(scene);
         stage.show();
-        
-        stage.setResizable(false);
-        stage.setMaximized(false);
     }
     
     private void requestPlayerNames(Stage stage, int numberOfPlayers) {
@@ -137,7 +138,7 @@ public class UserInformationScreen extends GridPane {
         for (int i = 0; i < numberOfPlayers; i++) {
             Label label = new Label("Ingrese el nombre del jugador #" + (i + 1) + ":");
             label.setStyle("-fx-font-family: 'Press Start 2P'; -fx-font-size: 11px;");
-            label.setTextFill(Color.web("#FFFFFF"));;
+            label.setTextFill(Color.web("#FFFFFF"));
             label.setFont(customFont);
             label.setPrefWidth(400);
             TextField textField = new TextField();
@@ -173,10 +174,9 @@ public class UserInformationScreen extends GridPane {
                 controller.setGame(playerNames, numberOfPlayers);
                 DiceView diceView = new DiceView(controller);
                 diceView.requestPreferedDice(stage);
-                //controller.showMap();
                 
             } else {
-                showAlert("Error", "Todos los nombres deben estar conformados por lo menos de un caracter.");
+                showAlert("Error", "Todos los nombres deben estar conformados por lo menos de cuatro caracteres y los mismos no deben repetirse.");
             }
         });
         
@@ -196,6 +196,9 @@ public class UserInformationScreen extends GridPane {
         }
     }
 
+    /*
+     
+    
     private boolean namesAreValid(GridPane specificGrid){
         boolean namesValid = true;
 
@@ -208,8 +211,39 @@ public class UserInformationScreen extends GridPane {
                     }
                 }
             }
-        return namesValid;
+            return namesValid;
+        }
+    */
+
+    private boolean namesAreValid(GridPane specificGrid) {
+    boolean namesValid = true;
+    Set<String> uniqueNames = new HashSet<>();
+
+    for (Node node : specificGrid.getChildren()) {
+        if (node instanceof TextField) {
+            TextField textField = (TextField) node;
+            String name = textField.getText().trim();
+
+            if (name.length() < 4) {
+                namesValid = false;
+                break;
+            }
+
+            if (!uniqueNames.add(name)) {
+                namesValid = false;
+                break;
+            }
+
+            if (name.equalsIgnoreCase("Game")) {
+                namesValid = false;
+                break;
+            }
+        }
     }
+
+    return namesValid;
+}
+
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

@@ -27,10 +27,10 @@ public class GameMenuBar{
         
         Menu changeMusictMenu = new Menu("Cambiar canción");
         MenuItem mulanMusictItem = new MenuItem("Hombres de Acción");
-        MenuItem trumpetMusictItem = new MenuItem("Trompetesco");
+        MenuItem chillingMusictItem = new MenuItem("Chilling");
         MenuItem marioGalaxyMusictItem = new MenuItem("Galáctico");
         
-        changeMusictMenu.getItems().addAll(mulanMusictItem, trumpetMusictItem, marioGalaxyMusictItem);
+        changeMusictMenu.getItems().addAll(mulanMusictItem, chillingMusictItem, marioGalaxyMusictItem);
         
         Menu helpMenu = new Menu("Ayuda");
         MenuItem instructionsItem = new MenuItem("Instrucciones");
@@ -44,7 +44,7 @@ public class GameMenuBar{
         mulanMusictItem.setOnAction(e -> {
             controller.getMusicController().playMulanMusic();
         }); 
-        trumpetMusictItem.setOnAction(e -> {
+        chillingMusictItem.setOnAction(e -> {
             controller.getMusicController().playTrumpetsMusic();
         }); 
         marioGalaxyMusictItem.setOnAction(e -> {

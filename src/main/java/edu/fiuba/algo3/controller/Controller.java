@@ -13,6 +13,8 @@ import edu.fiuba.algo3.modelo.GameController;
 import edu.fiuba.algo3.modelo.Gladiator;
 import edu.fiuba.algo3.modelo.IDice;
 import edu.fiuba.algo3.modelo.attributes.gameState.IGameState;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.Scene;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.StackPane;
@@ -20,6 +22,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javafx.scene.media.MediaPlayer;
 
 public class Controller {
@@ -100,6 +103,7 @@ public class Controller {
         mapProv.drawGame(mapGrid,currentPlayer.getPosition(), this.currentPlayer);
 
         if (gameState.hasEnded()){
+            waitFor(this.primaryStage, 2);
             primaryStage.close();
             showFinishScreen(gameState.getWinner());
         }
@@ -137,5 +141,11 @@ public class Controller {
 
     public MusicController getMusicController(){
         return this.musicController;
+    }
+
+      private void waitFor(Stage stage, Integer seconds) {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(seconds), ae -> stage.close()));
+        timeline.setCycleCount(1);
+        timeline.play();
     }
 }
