@@ -6,6 +6,9 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.Slider;
 
 public class HomeScreenController implements Initializable{
     
@@ -16,6 +19,48 @@ public class HomeScreenController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        GameInfo.getSoundController().setSong("gameIntro");
+        MenuBarController.setUp(volumeSlider);
+
+        GameInfo.getSoundController().setSong("0-gameIntro");
+    }
+
+    //MenuBar
+    @FXML
+    Slider volumeSlider;
+    @FXML
+    MenuItem playPause;
+
+    @FXML
+    private void closeGame() {
+        MenuBarController.closeGame();
+    }
+
+    @FXML
+    private void fullScreen() {
+        MenuBarController.fullScreen();
+    }
+
+    @FXML
+    private void pauseMusic() {
+        MenuBarController.pauseMusic();
+        playPause.setText("Reproducir música");
+        playPause.setOnAction(event -> {playMusic();}); 
+    }
+
+    @FXML
+    private void playMusic() {
+        MenuBarController.playMusic();
+        playPause.setText("Pausar música");
+        playPause.setOnAction(event -> {pauseMusic();});
+    }
+
+    @FXML
+    private void help() {
+        MenuBarController.help();
+    }   
+    
+    @FXML
+    private void about() {
+       MenuBarController.about(); 
     }
 }

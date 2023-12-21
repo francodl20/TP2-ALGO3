@@ -3,6 +3,8 @@ package edu.fiuba.algo3;
 import java.io.File;
 import java.util.ArrayList;
 
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -34,21 +36,16 @@ public class SoundController{
 
         //set up the player
         volume = 0.1;
-        setSong("gameIntro");
+        setSong("0-gameIntro");
 
-        //arrange the menu
-        /*for (File song : songs) {
-            //nofuncionaaaa
-            MenuItem item = new MenuItem(song.getName());
-            String songPath = song.toURI().toString();
-            item.setOnAction(event -> {
-                setSong(songPath);
-            });
-            soundMenu.getItems().add(item);
+    }
 
-        }*/
-        //songs.get(0).getName()
+    public void play() {
+        mediaPlayer.play();
+    }
 
+    public void pause() {
+        mediaPlayer.pause();
     }
 
     public void setSong(String name) {
@@ -64,13 +61,27 @@ public class SoundController{
         mediaPlayer.setVolume(volume);
         play();
     }
-
-    public void play() {
-        mediaPlayer.play();
-    }
-
-    public void pause() {
-        mediaPlayer.pause();
-    }
     
+    public void setVolume(double volume) {
+        mediaPlayer.setVolume(volume);
+    }
+
+    public Menu createSongMenu() {
+        Menu menu = new Menu("Canciones");
+
+        for (File song : songs) {
+            if (song == songs.get(0)) continue;
+
+            String name = song.getName().replace(".mp3", "");
+
+            MenuItem item = new MenuItem(name);
+            item.setOnAction(event -> {
+                setSong(name);
+            });
+
+            menu.getItems().add(item);
+        }
+
+        return menu;
+    }
 }

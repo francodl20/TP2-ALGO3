@@ -31,6 +31,16 @@ public class App extends Application{
         return fxmlLoader.load();
     }
 
+    static void closeApp() {
+        Stage stage = (Stage) scene.getWindow();
+        stage.close();
+    }
+
+    static void fullScreen() {
+        Stage stage = (Stage) scene.getWindow();
+        stage.setFullScreen(true);
+    }
+ 
     public static void main(String[] args) {
         launch();
     }

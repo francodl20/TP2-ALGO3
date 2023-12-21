@@ -5,6 +5,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -15,22 +16,25 @@
         <menus>
           <Menu mnemonicParsing="false" text="Juego">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+                  <MenuItem mnemonicParsing="false" onAction="#returnToMenu" text="Volver al menu" />
+                  <MenuItem mnemonicParsing="false" onAction="#fullScreen" text="Pantalla completa" />
+              <MenuItem mnemonicParsing="false" onAction="#closeGame" text="Cerrar" />
             </items>
           </Menu>
           <Menu fx:id="soundMenu" mnemonicParsing="false" text="Sonido">
             <items>
-                  <Menu fx:id="songsMenu" mnemonicParsing="false" text="Canciones" />
-                  <Menu mnemonicParsing="false" text="Volumen">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                    </items>
-                  </Menu>
+                  <MenuItem mnemonicParsing="false" text="Volumen">
+                     <graphic>
+                        <Slider fx:id="volumeSlider" nodeOrientation="LEFT_TO_RIGHT" value="10.0" />
+                     </graphic>
+                  </MenuItem>
+                  <MenuItem fx:id="playPause" mnemonicParsing="false" onAction="#pauseMusic" text="Pausar música" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Help">
+          <Menu mnemonicParsing="false" text="Ayuda">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem mnemonicParsing="false" text="Instrucciones" />
+                  <MenuItem mnemonicParsing="false" text="Acerca de" />
             </items>
           </Menu>
         </menus>
@@ -47,7 +51,7 @@
    <left>
       <AnchorPane maxHeight="600.0" prefHeight="514.0" prefWidth="86.0" BorderPane.alignment="CENTER">
          <children>
-            <SplitMenuButton fx:id="diceButton" layoutX="14.0" layoutY="299.0" mnemonicParsing="false" onAction="#playWithD6" text="D6" AnchorPane.leftAnchor="14.0">
+            <SplitMenuButton fx:id="diceButton" layoutX="14.0" layoutY="299.0" mnemonicParsing="false" onAction="#playWithD6" stylesheets="@css/textFormat.css" text="D6" AnchorPane.leftAnchor="14.0">
               <items>
                   <MenuItem fx:id="dice6" mnemonicParsing="false" onAction="#setD6" text="D6" />
                 <MenuItem fx:id="dice10" mnemonicParsing="false" onAction="#setD10" text="D10" />

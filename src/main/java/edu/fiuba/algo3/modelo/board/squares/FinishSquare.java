@@ -7,10 +7,10 @@ import edu.fiuba.algo3.modelo.attributes.Coordinate;
 
 
 public class FinishSquare implements ISquare{
-    Coordinate coordinates;
-    Integer position;
-    IPrize prize;
-    IObstacle obstacle;
+    private Coordinate coordinates;
+    private Integer position;
+    private IPrize prize;
+    private IObstacle obstacle;
 
     public FinishSquare(Coordinate coordinates, Integer position, IPrize prize, IObstacle obstacle) {
         this.coordinates = coordinates;

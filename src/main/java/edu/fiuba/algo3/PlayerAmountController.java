@@ -1,12 +1,18 @@
 package edu.fiuba.algo3;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 
-public class PlayerAmountController {
+public class PlayerAmountController implements Initializable{
     
     @FXML
     private TextField numberOfPlayers;
@@ -20,6 +26,57 @@ public class PlayerAmountController {
         GameInfo.setPlayerAmount(amount);
 
         App.setRoot("PlayerNames");
+    }
+
+    //MenuBar
+    @FXML
+    Slider volumeSlider;
+    @FXML
+    MenuItem playPause;
+
+
+    @FXML
+    private void returnToMenu() throws IOException{
+        MenuBarController.returnToMenu();
+    }
+
+    @FXML
+    private void closeGame() {
+        MenuBarController.closeGame();
+    }
+
+    @FXML
+    private void fullScreen() {
+        MenuBarController.fullScreen();
+    }
+
+    @FXML
+    private void pauseMusic() {
+        MenuBarController.pauseMusic();
+        playPause.setText("Reproducir música");
+        playPause.setOnAction(event -> {playMusic();}); 
+    }
+
+    @FXML
+    private void playMusic() {
+        MenuBarController.playMusic();
+        playPause.setText("Pausar música");
+        playPause.setOnAction(event -> {pauseMusic();});
+    }
+
+    @FXML
+    private void help() {
+        MenuBarController.help();
+    }   
+    
+    @FXML
+    private void about() {
+       MenuBarController.about(); 
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        MenuBarController.setUp(volumeSlider);
     }
 
 }

@@ -6,6 +6,9 @@
 
 #textField {
     -fx-background-color: rgb(204, 248, 237);
+    background-color: rgb(204, 248, 237);
+    -fx-font-family: 'Press Start 2P';
+    font-family: 'Press Start 2P';
 }
 
 #homeTitle {
@@ -33,4 +36,27 @@
 
 #textBackground {
     -fx-background-color: rgba(0, 0, 0, 0.7);
+}
+
+.split-menu-button {
+    -fx-font-family: 'Press Start 2P';
+    font-family: 'Press Start 2P';
+    -fx-background-color:black;
+    background-color: black;
+}
+
+.split-menu-button .label {
+    -fx-background-color: beige;
+    background-color: beige;
+}
+
+.split-menu-button .arrow-button {
+    -fx-background-color: beige;
+    background-color: beige;
+}
+
+.split-menu-button .menu-item {
+    -fx-background-color: beige;
+    background-color: beige;
+
 }

@@ -1,38 +1,37 @@
 package edu.fiuba.algo3;
 
-import java.io.File;
+import java.io.IOException;
+//Java
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.ResourceBundle;
 import java.util.LinkedList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.Timer;
 
+//Model
+import edu.fiuba.algo3.modelo.D6;
 import edu.fiuba.algo3.modelo.D10;
 import edu.fiuba.algo3.modelo.D20;
-import edu.fiuba.algo3.modelo.D6;
-import edu.fiuba.algo3.modelo.GameController;
-import edu.fiuba.algo3.modelo.Gladiator;
 import edu.fiuba.algo3.modelo.attributes.Coordinate;
 import edu.fiuba.algo3.modelo.board.squares.ISquare;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import edu.fiuba.algo3.modelo.GameController;
+import edu.fiuba.algo3.modelo.Gladiator;
 
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+//Fxml
+import javafx.fxml.Initializable;
+import javafx.fxml.FXML;
+
+//Javafx
+import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.SplitMenuButton;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.Slider;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.GridPane;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 
 public class MapViewController implements Initializable{
     
@@ -43,14 +42,14 @@ public class MapViewController implements Initializable{
     private LinkedList<ISquare> walkableSquares;
     private List<ImageView> playersAvatars;
 
-    GridPane mapGrid;
+    private GridPane mapGrid;
 
     @FXML
-    ScrollPane scrollPane;
-
+    private ScrollPane scrollPane;
     @FXML
-    SplitMenuButton diceButton;
+    private SplitMenuButton diceButton;
 
+    //PlayGame
     @FXML
     private void playWithD6() {
         gameController.playTurn(new D6());
@@ -93,7 +92,55 @@ public class MapViewController implements Initializable{
         diceButton.setOnAction(event -> {playWithD20();});
     }
 
+    //MenuBar
+    @FXML
+    Menu soundMenu;
+    @FXML
+    Slider volumeSlider;
+    @FXML
+    MenuItem playPause;
 
+
+    @FXML
+    private void returnToMenu() throws IOException{
+        MenuBarController.returnToMenu();
+    }
+
+    @FXML
+    private void closeGame() {
+        MenuBarController.closeGame();
+    }
+
+    @FXML
+    private void fullScreen() {
+        MenuBarController.fullScreen();
+    }
+
+    @FXML
+    private void pauseMusic() {
+        MenuBarController.pauseMusic();
+        playPause.setText("Reproducir música");
+        playPause.setOnAction(event -> {playMusic();}); 
+    }
+
+    @FXML
+    private void playMusic() {
+        MenuBarController.playMusic();
+        playPause.setText("Pausar música");
+        playPause.setOnAction(event -> {pauseMusic();});
+    }
+
+    @FXML
+    private void help() {
+        MenuBarController.help();
+    }   
+    
+    @FXML
+    private void about() {
+       MenuBarController.about(); 
+    }
+    
+    //private
     private void showMap(Integer mainPlayerPosition) {
         List<Gladiator> players = gameController.getPlayers();
 
@@ -125,7 +172,7 @@ public class MapViewController implements Initializable{
             }
         }
         
-        if(mainPlayerPosition > 0){
+        if(mainPlayerPosition > 0 && mainPlayerPosition != walkableSquares.size()) {
 
             String obstacleType = walkableSquares.get(mainPlayerPosition - 1).getObstacleType();
             String prizeType = walkableSquares.get(mainPlayerPosition - 1).getPrizeType();
@@ -219,15 +266,15 @@ public class MapViewController implements Initializable{
         walkableSquares = gameController.getSquares();
         playersAvatars = new LinkedList<>();
 
-        mapGrid = new GridPane();
-        scrollPane.setBackground(new Background(
-            new BackgroundFill(Color.BLACK, null , null)));     
+        mapGrid = new GridPane();    
         scrollPane.setContent(mapGrid);
 
         setPlayersAvatars();
-
         showMap(0);
 
-        GameInfo.getSoundController().setSong("galactic");
+        MenuBarController.setUp(soundMenu);
+        MenuBarController.setUp(volumeSlider);
+
+        GameInfo.getSoundController().setSong("Galactic");
     }
 }
