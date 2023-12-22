@@ -10,9 +10,7 @@ import edu.fiuba.algo3.modelo.GameController;
 import edu.fiuba.algo3.modelo.exceptions.InvalidNameException;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
@@ -32,8 +30,17 @@ public class PlayerNamesController implements Initializable {
     Label validationLabel;
 
     private void validateName(String name) throws Exception{
-        
-        if (name.length() < 4) {
+        Boolean lenghtValidation = name.length() < 4;
+        Boolean numberValidation = true;
+
+        try {
+            Integer.parseInt(name);
+        } catch (NumberFormatException e) {
+            numberValidation = false;
+        }
+
+
+        if (lenghtValidation || numberValidation) {
             throw new InvalidNameException();
         } else {
             validationLabel.setText("");

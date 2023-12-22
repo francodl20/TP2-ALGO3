@@ -40,7 +40,7 @@ public class App extends Application{
         Stage stage = (Stage) scene.getWindow();
         stage.setFullScreen(true);
     }
-    
+
     public static void main(String[] args) {
         launch();
     }
