@@ -8,7 +8,7 @@ import edu.fiuba.algo3.modelo.equipment.IEquipment;
 import edu.fiuba.algo3.modelo.attributes.playerState.Healthy;
 import edu.fiuba.algo3.modelo.attributes.seniority.Novice;
 import edu.fiuba.algo3.modelo.equipment.Helpless;
-import edu.fiuba.algo3.Log;
+import edu.fiuba.algo3.OutputController;
 
 public class Gladiator {
     private final Integer ENERGY_RECOVERED_AFTER_MEAL = 15;
@@ -62,6 +62,8 @@ public class Gladiator {
     //Methods related to the squares
     public void eat(){
         this.energy = (this.energy + ENERGY_RECOVERED_AFTER_MEAL);
+        OutputController.ateFood(getName(), getEnergy());
+
     }
 
     public void enhanceArmour(){
@@ -69,50 +71,30 @@ public class Gladiator {
     }
 
     public void enjoyBacchanalia(Integer energyLost){
-        String gotDrankedSong = "Este gladiador romano, con ojos rojos y sonrisa desordenada,\n" +
-                                "canta una canción de amor en un bar lleno de locura.\n" +
-                                "Se inclina hacia la mesa y toma otra copa.\n";
-                                //(The song is called "O Mio Babbino Caro" by Giacomo Puccini)
         this.energy = (this.energy - energyLost);
-
-        Log.getInstance().info(gotDrankedSong);
-        Log.getInstance().info(
-            "El gladiador parece que está borracho, se tomó " + energyLost/4 +  " tintos.");
-        Log.getInstance().info(
-            "... para recuperarse va a necesitar " + energyLost + " puntos de energía, ");
-        Log.getInstance().info(
-            "... quedó con " + this.energy + " puntos.");
+        OutputController.partied(energyLost, getEnergy());
     }
 
     public void getInjured() {
-        Log.getInstance().info(
-            "¿Por qué los malhumorados no juegan al escondite? Porque siempre los encuentran de mal humor.");
-        Log.getInstance().info(
-            "El gladiador se tropezó con una piedra del camino... así que pierde el próximo turno :(");
         this.playerState = this.playerState.update();
+        OutputController.gotInjured();
     }
 
     public void fightAgainstWildBeast() {
         Integer energyLost = this.equipment.protectFromtWildBeast();
         this.energy = this.energy + energyLost;
 
-        Log.getInstance().info(
-            "Que es esto? Es un pájaro? Es un avión? No... ");
-        Log.getInstance().info(
-            "¡Es una bestia que quiere matar al gladiador!");
-        Log.getInstance().info(
-            "Despues de un duro combate, su nivel de energía es: " + this.energy);
+        OutputController.foughtWithABeast(getEnergy());
     }
 
     public void arriveToPompeii() {
         if (!equipment.canEnterPompeii()) {
            position = position/2;
            
-           Log.getInstance().info(
-            this.playerName + " no tenía la llave, retrocedió la mitad del camino.");
+           OutputController.notReachedPompeii();
         }
 
-        Log.getInstance().info(this.playerName + " llegó a Pompeya!");
+        OutputController.reachedPompeii(getName());
     }
 
     public boolean in(ISquare square){
@@ -142,21 +124,20 @@ public class Gladiator {
             lastTurnPlayed = this.playerState.turnPlayed();
             
             if (lastTurnPlayed) {
-                Log.getInstance().info(
-                    getName() + " obtuvo un: " + diceRoll);
+                OutputController.playerPlayed(getName(), diceRoll, getEnergy());
             } else {
-                Log.getInstance().info(
-                    getName() + " se quedó descansando... sigue en la misma casilla");
+                OutputController.playerNotPlayed(getName(), getEnergy());
             }
 
         } else {
             this.energy = this.energy + RECHARGE_RATE_PER_ROUND;
-
-            Log.getInstance().info(getName() + " tiene noni... su energía es de: " + 
-            energy + ", por ahora sigue en la misma casilla");
+            OutputController.playerOutOfEnergy(getName(), getEnergy());
+            
         }
 
         this.seniority = this.seniority.addTurn();
+        
+        OutputController.actualPosition(position);
 
         return diceRoll;
     }

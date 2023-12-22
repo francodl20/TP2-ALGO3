@@ -20,6 +20,8 @@ public class FinishSquare implements ISquare{
     }
 
     public void play(Gladiator player){
+        prize.boost(player);
+        obstacle.harm(player);
         player.arriveToPompeii();
     }
     
@@ -29,13 +31,5 @@ public class FinishSquare implements ISquare{
 
     public Coordinate getSquareCoordinate(){
         return this.coordinates;
-    }
-
-    public String getPrizeType(){
-        return this.prize.getType();
-    }
-     
-    public String getObstacleType(){
-        return this.obstacle.getType();
     }
 }

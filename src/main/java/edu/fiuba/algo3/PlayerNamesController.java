@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import edu.fiuba.algo3.modelo.GameController;
+import edu.fiuba.algo3.modelo.exceptions.InvalidNameException;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
@@ -26,15 +28,28 @@ public class PlayerNamesController implements Initializable {
     private TextField nameOne, nameTwo, nameThree, nameFour, nameFive, nameSix;
     @FXML
     private HBox hbox1, hbox2, hbox3, hbox4, hbox5, hbox6;
+    @FXML
+    Label validationLabel;
+
+    private void validateName(String name) throws Exception{
+        
+        if (name.length() < 4) {
+            throw new InvalidNameException();
+        } else {
+            validationLabel.setText("");
+        }
+        
+    }
 
     @FXML
     private void switchToMap() throws IOException {
         List<String> nameList = listOfPlayerNames(numberOfPlayers);
-        GameController game = new GameController(nameList, numberOfPlayers);
 
-        GameInfo.setGame(game);
-
-        App.setRoot("MapView");
+        if (nameList != null) {
+            GameController game = new GameController(nameList, numberOfPlayers);
+            GameInfo.setGame(game);
+            App.setRoot("MapView");
+        }
     }
 
     @FXML
@@ -69,24 +84,44 @@ public class PlayerNamesController implements Initializable {
 
     private LinkedList<String> listOfPlayerNames(Integer num) {
         LinkedList<String> nameList = new LinkedList<>();
+        String name;
 
-        if (1<= num ) {
-            nameList.add(nameOne.getText());
-        }
-        if (2<= num ) {
-            nameList.add(nameTwo.getText());
-        }
-        if (3<= num ) {
-            nameList.add(nameThree.getText());
-        }
-        if (4<= num ) {
-            nameList.add(nameFour.getText());
-        }
-        if (5<= num ) {
-            nameList.add(nameFive.getText());
-        }
-        if (6<= num ) {
-            nameList.add(nameSix.getText());
+        try {
+
+            if (1<= num ) {
+                name = nameOne.getText();
+                validateName(name);
+                nameList.add(name);
+            }
+            if (2<= num ) {
+                name = nameTwo.getText();
+                validateName(name);
+                nameList.add(name);
+            }
+            if (3<= num ) {
+                name = nameThree.getText();
+                validateName(name);
+                nameList.add(name);
+            }
+            if (4<= num ) {
+                name = nameFour.getText();
+                validateName(name);
+                nameList.add(name);
+            }
+            if (5<= num ) {
+                name = nameFive.getText();
+                validateName(name);
+                nameList.add(name);
+            }
+            if (6<= num ) {
+                name = nameSix.getText();
+                validateName(name);
+                nameList.add(name);
+            }
+
+        } catch (Exception e) {
+            validationLabel.setText("Los nombres ingresados deben\ntener al menor 4 letras");
+            nameList = null;
         }
 
         return nameList;
@@ -190,7 +225,7 @@ public class PlayerNamesController implements Initializable {
     }
 
     @FXML
-    private void help() {
+    private void help() throws IOException {
         MenuBarController.help();
     }   
     

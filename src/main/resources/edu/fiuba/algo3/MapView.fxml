@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -7,8 +8,10 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.SplitMenuButton?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fiuba.algo3.MapViewController">
    <top>
@@ -40,28 +43,82 @@
         </menus>
       </MenuBar>
    </top>
+   <center>
+      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" pannable="true" prefHeight="500.0" prefWidth="500.0" style="-fx-background: transparent; -fx-background-image: url(file:src/main/resources/images/landscapeBackground.png); -fx-background-size: cover;" vbarPolicy="NEVER" />
+   </center>
    <bottom>
-      <AnchorPane maxHeight="1.7976931348623157E308" minHeight="65.0" prefHeight="100.0" prefWidth="606.0" style="-fx-background-color: #000000;" BorderPane.alignment="CENTER">
-         <children>
-            <Label layoutX="23.0" layoutY="14.0" text="Energia:" textFill="WHITE" />
-            <Label layoutX="23.0" layoutY="34.0" text="Senioridad:" textFill="WHITE" />
-         </children>
-      </AnchorPane>
+      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxHeight="250.0" maxWidth="1.7976931348623157E308" minHeight="150.0" minWidth="200.0" style="-fx-background-image: url(file:src/main/resources/images/dungeonBackground.jpg); -fx-background-size: cover; -fx-background: transparent;" BorderPane.alignment="CENTER">
+         <content>
+            <VBox prefHeight="200.0" prefWidth="620.0">
+               <children>
+                  <Label id="text" fx:id="moveInfoLabel" alignment="TOP_LEFT" stylesheets="@css/textFormat.css" text="Default" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label id="text" fx:id="prizeInfoLabel" alignment="TOP_LEFT" layoutX="20.0" layoutY="20.0" stylesheets="@css/textFormat.css" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label id="text" fx:id="obstacleInfoLabel" alignment="TOP_LEFT" layoutX="20.0" layoutY="44.0" stylesheets="@css/textFormat.css" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
    </bottom>
    <left>
-      <AnchorPane maxHeight="600.0" prefHeight="514.0" prefWidth="86.0" BorderPane.alignment="CENTER">
+      <VBox minWidth="250.0" spacing="30.0" style="-fx-background-image: url(file:src/main/resources/images/dungeonBackground.jpg); -fx-background-size: cover;" BorderPane.alignment="CENTER">
          <children>
-            <SplitMenuButton fx:id="diceButton" layoutX="14.0" layoutY="299.0" mnemonicParsing="false" onAction="#playWithD6" stylesheets="@css/textFormat.css" text="D6" AnchorPane.leftAnchor="14.0">
+            <ImageView fx:id="playerPfp" fitHeight="81.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/gladiator1pfp.png" />
+               </image>
+               <VBox.margin>
+                  <Insets left="60.0" right="50.0" />
+               </VBox.margin>
+            </ImageView>
+            <Label id="text" fx:id="nameLabel" alignment="TOP_LEFT" stylesheets="@css/textFormat.css" textFill="WHITE">
+               <graphic>
+                  <Label id="text" text="Nombre:" />
+               </graphic>
+            </Label>
+            <Label id="text" fx:id="seniorityLabel" alignment="TOP_LEFT" layoutX="10.0" layoutY="101.0" stylesheets="@css/textFormat.css" textFill="WHITE">
+               <graphic>
+                  <Label id="text" text="Rango: " />
+               </graphic>
+            </Label>
+            <Label id="text" fx:id="energyLabel" alignment="TOP_LEFT" layoutX="10.0" layoutY="125.0" stylesheets="@css/textFormat.css" textFill="WHITE">
+               <graphic>
+                  <Label id="text" text="Energía: " />
+               </graphic>
+            </Label>
+            <Label id="text" fx:id="equipmentLabel" alignment="TOP_LEFT" contentDisplay="TOP" layoutX="10.0" layoutY="149.0" stylesheets="@css/textFormat.css" textFill="WHITE">
+               <graphic>
+                  <Label id="text" text="Equipamiento: " />
+               </graphic>
+            </Label>
+            <SplitMenuButton fx:id="diceButton" mnemonicParsing="false" onAction="#playWithD6" scaleX="1.5" scaleY="1.5" stylesheets="@css/textFormat.css" text="D6">
               <items>
                   <MenuItem fx:id="dice6" mnemonicParsing="false" onAction="#setD6" text="D6" />
                 <MenuItem fx:id="dice10" mnemonicParsing="false" onAction="#setD10" text="D10" />
                 <MenuItem fx:id="dice20" mnemonicParsing="false" onAction="#setD20" text="D20" />
               </items>
+               <VBox.margin>
+                  <Insets left="70.0" top="100.0" />
+               </VBox.margin>
             </SplitMenuButton>
          </children>
-      </AnchorPane>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="5.0" left="10.0" right="5.0" top="10.0" />
+         </padding>
+      </VBox>
    </left>
-   <center>
-      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" pannable="true" prefHeight="500.0" prefWidth="500.0" style="-fx-background: transparent; -fx-background-image: url(file:src/main/resources/images/landscapeBackground.png); -fx-background-size: cover;" vbarPolicy="NEVER" />
-   </center>
 </BorderPane>

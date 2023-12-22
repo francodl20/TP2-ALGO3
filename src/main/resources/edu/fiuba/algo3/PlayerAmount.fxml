@@ -12,6 +12,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
 <StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fiuba.algo3.PlayerAmountController">
@@ -39,7 +42,7 @@
                   <Insets top="10.0" />
                </HBox.margin>
             </Label>
-            <TextField id="textField" fx:id="numberOfPlayers" alignment="CENTER" maxWidth="68.0" prefHeight="50.0" prefWidth="68.0" promptText="6" stylesheets="@css/textFormat.css">
+            <TextField id="textField" fx:id="numberOfPlayers" alignment="CENTER" maxWidth="68.0" onKeyTyped="#validateNumber" prefHeight="50.0" prefWidth="68.0" promptText="6" stylesheets="@css/textFormat.css">
                <font>
                   <Font name="Press Start 2P" size="22.0" />
                </font>
@@ -83,5 +86,44 @@
             </Menu>
          </menus>
       </MenuBar>
+      <Label fx:id="validationLabel" StackPane.alignment="BOTTOM_CENTER">
+         <StackPane.margin>
+            <Insets bottom="150.0" />
+         </StackPane.margin>
+         <font>
+            <Font name="Press Start 2P" size="22.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="0.5037878643382678" endY="1.0" startX="0.5037878572263501">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="0.01903553307056427" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.29071332436069985">
+                     <color>
+                        <Color red="1.0" green="0.01903553307056427" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.4945277878081606">
+                     <color>
+                        <Color red="1.0" green="0.9666666388511658" blue="1.1102230246251565E-16" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.7200538358008074">
+                     <color>
+                        <Color red="1.0" green="0.09000000357627869" blue="0.09000000357627869" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="0.09000000357627869" blue="0.09000000357627869" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
    </children>
 </StackPane>

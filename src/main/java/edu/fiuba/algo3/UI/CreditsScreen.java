@@ -14,7 +14,7 @@ import javafx.util.Duration;
 
 public class CreditsScreen extends StackPane{
     
-    public void start(Controller controller) {
+    public void start() {
         Stage creditStage = new Stage();
         
         creditStage.setTitle("Creditos");

@@ -6,9 +6,4 @@ public class Injury implements IObstacle {
     public void harm(Gladiator player) {
         player.getInjured();
     }
-
-     public String getType(){
-        return "Injury";
-    }
-
 }

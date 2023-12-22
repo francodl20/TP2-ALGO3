@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import edu.fiuba.algo3.modelo.exceptions.InvalidAmountException;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Slider;
@@ -16,10 +18,28 @@ public class PlayerAmountController implements Initializable{
     
     @FXML
     private TextField numberOfPlayers;
-
     @FXML
     private Button continueButton;
+    @FXML
+    private Label validationLabel;
 
+    @FXML
+    private void validateNumber() {
+        try {
+            Integer amount = Integer.parseInt(numberOfPlayers.getText());
+            if (amount < 2 || amount > 6) {
+                throw new InvalidAmountException();
+            } else {
+                continueButton.setDisable(false);
+                validationLabel.setText("");
+            }
+        } catch (Exception e) {
+            continueButton.setDisable(true);
+            validationLabel.setText("Numero ingresado incorrecto!");
+        }
+    }
+
+    @FXML
     public void switchPlayerNames() throws IOException {
         Integer amount = Integer.parseInt(numberOfPlayers.getText());
 
@@ -65,7 +85,7 @@ public class PlayerAmountController implements Initializable{
     }
 
     @FXML
-    private void help() {
+    private void help() throws IOException {
         MenuBarController.help();
     }   
     

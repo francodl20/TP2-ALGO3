@@ -24,6 +24,7 @@ import javafx.fxml.FXML;
 
 //Javafx
 import javafx.scene.control.SplitMenuButton;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
@@ -41,6 +42,7 @@ public class MapViewController implements Initializable{
     private Integer mapWidth;
     private LinkedList<ISquare> walkableSquares;
     private List<ImageView> playersAvatars;
+    private List<Image> playerPfps;
 
     private GridPane mapGrid;
 
@@ -51,27 +53,54 @@ public class MapViewController implements Initializable{
 
     //PlayGame
     @FXML
+    ImageView playerPfp;
+    @FXML
+    Label moveInfoLabel;
+    @FXML
+    Label prizeInfoLabel;
+    @FXML
+    Label obstacleInfoLabel;
+
+    @FXML
+    Label nameLabel;
+    @FXML
+    Label seniorityLabel;
+    @FXML
+    Label energyLabel;
+    @FXML
+    Label equipmentLabel;
+
+    @FXML
     private void playWithD6() {
         gameController.playTurn(new D6());
-        //setPlayerInformation() return player position
-        Gladiator gladiator = gameController.getCurrentPlayer();
-        showMap(gladiator.getPosition());
+        setMoveInfo();
+        setPrizeInfo();
+        setObstacleInfo();
+
+        setStats();
+        showMap();
     }
 
     @FXML
     private void playWithD10() {
         gameController.playTurn(new D10());
-        //setPlayerInformation() return player position
-        Gladiator gladiator = gameController.getCurrentPlayer();
-        showMap(gladiator.getPosition());
+        setMoveInfo();
+        setPrizeInfo();
+        setObstacleInfo();
+
+        setStats();
+        showMap();
     }
 
     @FXML
     private void playWithD20() {
         gameController.playTurn(new D20());
-        //setPlayerInformation() return player position
-        Gladiator gladiator = gameController.getCurrentPlayer();
-        showMap(gladiator.getPosition());
+        setMoveInfo();
+        setPrizeInfo();
+        setObstacleInfo();
+
+        setStats();
+        showMap();
     }
 
     @FXML
@@ -91,6 +120,7 @@ public class MapViewController implements Initializable{
         diceButton.setText("D20");
         diceButton.setOnAction(event -> {playWithD20();});
     }
+
 
     //MenuBar
     @FXML
@@ -131,7 +161,7 @@ public class MapViewController implements Initializable{
     }
 
     @FXML
-    private void help() {
+    private void help() throws IOException {
         MenuBarController.help();
     }   
     
@@ -141,9 +171,37 @@ public class MapViewController implements Initializable{
     }
     
     //private
-    private void showMap(Integer mainPlayerPosition) {
-        List<Gladiator> players = gameController.getPlayers();
+    public void setMoveInfo() {
+        moveInfoLabel.setText(GameInfo.getMoveInfo());
+    }
 
+    public void setPrizeInfo() {
+        prizeInfoLabel.setText(GameInfo.getPrizeInfo());
+    }
+
+    public void setObstacleInfo() {
+        obstacleInfoLabel.setText(GameInfo.getObstacleInfo());
+    }
+
+    public void setStats() {
+        setPfp();
+        nameLabel.setText(GameInfo.getName());
+        seniorityLabel.setText(GameInfo.getSeniority());
+        energyLabel.setText(GameInfo.getEnergy());
+        equipmentLabel.setText(GameInfo.getEquipment());
+    }
+
+    private void setPfp() {
+        Integer currentIndex = gameController.getPlayers().indexOf(gameController.getCurrentPlayer());
+        playerPfp.setImage(playerPfps.get(currentIndex));
+    }
+
+    private void showMap() {
+        List<Gladiator> players = gameController.getPlayers();
+        Integer mainPlayerPosition = GameInfo.getPosition();
+
+        Image start = new Image("file:src/main/resources/images/startSquare.png");
+        Image finish = new Image("file:src/main/resources/images/finishSquare.png");
         Image walkableImage = new Image("file:src/main/resources/images/rockTile.png");
         Image nonWalkableImage = new Image("file:src/main/resources/images/grassTile.png");
 
@@ -155,9 +213,18 @@ public class MapViewController implements Initializable{
                 tile.setFitHeight(60);
 
                 if (isAWalkableSquare(x, y)) {
-                    tile.setImage(walkableImage);
-                    cellPane.getChildren().add(tile);
-                    
+
+                    if (x == 1 && y == 7) {
+                        tile.setImage(start);
+                        cellPane.getChildren().add(tile);
+                    } else if (x == 17 && y == 1) {
+                        tile.setImage(finish);
+                        cellPane.getChildren().add(tile);
+                    } else {
+                        tile.setImage(walkableImage);
+                        cellPane.getChildren().add(tile);
+                    }
+
                     for (int i = 0; i < players.size(); i++) {
                         if (getSquarePosition(x,y) == (players.get(i).getPosition() - 1)) {
                             cellPane.getChildren().add(playersAvatars.get(i));
@@ -170,14 +237,6 @@ public class MapViewController implements Initializable{
             
                 mapGrid.add(cellPane, x, y);
             }
-        }
-        
-        if(mainPlayerPosition > 0 && mainPlayerPosition != walkableSquares.size()) {
-
-            String obstacleType = walkableSquares.get(mainPlayerPosition - 1).getObstacleType();
-            String prizeType = walkableSquares.get(mainPlayerPosition - 1).getPrizeType();
-            //controller.showSquareInfo(walkableSquares.get(mainPlayerPosition - 1)
-            //.getObstacleType(), walkableSquares.get(mainPlayerPosition - 1).getPrizeType());
         }
     }
 
@@ -217,6 +276,12 @@ public class MapViewController implements Initializable{
 
     }
 
+    private void setPlayerPfps() {
+        for (Integer index = 0; index < gameController.getPlayers().size(); index++) {
+           playerPfps.add(pfpFactory(index + 1));
+        }
+    }
+
     private ImageView playerFactory(Integer numberOfPlayer){
         
         Map <Integer, ImageView> gladiators = new HashMap<>();
@@ -237,7 +302,7 @@ public class MapViewController implements Initializable{
         fourthGladiator.setFitWidth(60);
         fourthGladiator.setFitHeight(60);
         
-        ImageView fifthGladiator = new ImageView("file:src/main/resources/images/gladiator6.png");
+        ImageView fifthGladiator = new ImageView("file:src/main/resources/images/gladiator5.png");
         fifthGladiator.setFitWidth(60);
         fifthGladiator.setFitHeight(60);
         
@@ -255,6 +320,37 @@ public class MapViewController implements Initializable{
         return  gladiators.get(numberOfPlayer);
     }
 
+    private Image pfpFactory(Integer numberOfPlayer){
+        
+        Map <Integer, Image> gladiatorPfps = new HashMap<>();
+
+        Image firstGladiator = new Image("file:src/main/resources/images/gladiator1pfp.png");
+
+        Image secondGladiator = new Image("file:src/main/resources/images/gladiator2pfp.png");
+
+        Image thirdGladiator = new Image("file:src/main/resources/images/gladiator3pfp.png");
+
+        Image fourthGladiator = new Image("file:src/main/resources/images/gladiator4pfp.png");
+
+        Image fifthGladiator = new Image("file:src/main/resources/images/gladiator5pfp.png");
+        
+        Image sixthGladiator = new Image("file:src/main/resources/images/gladiator6pfp.png");
+
+        gladiatorPfps.put(1, firstGladiator);
+        gladiatorPfps.put(2, secondGladiator);
+        gladiatorPfps.put(3, thirdGladiator);
+        gladiatorPfps.put(4, fourthGladiator);
+        gladiatorPfps.put(5, fifthGladiator);
+        gladiatorPfps.put(6, sixthGladiator);
+        
+        return  gladiatorPfps.get(numberOfPlayer);
+    }
+
+    private void pickRandomPlayer() {
+        gameController.pickRandomPlayer(new D6());
+        GameInfo.getMoveInfo();
+    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -265,16 +361,23 @@ public class MapViewController implements Initializable{
         mapWidth = mapSize.getXValue();
         walkableSquares = gameController.getSquares();
         playersAvatars = new LinkedList<>();
+        playerPfps = new LinkedList<>();
 
         mapGrid = new GridPane();    
         scrollPane.setContent(mapGrid);
 
         setPlayersAvatars();
-        showMap(0);
+        setPlayerPfps();
+        showMap();
+
+        pickRandomPlayer();
+        setMoveInfo();
+        setStats();
 
         MenuBarController.setUp(soundMenu);
         MenuBarController.setUp(volumeSlider);
 
         GameInfo.getSoundController().setSong("Galactic");
     }
+
 }

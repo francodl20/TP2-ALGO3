@@ -32,12 +32,4 @@ public class StartSquare implements ISquare{
     public Coordinate getSquareCoordinate(){
         return this.coordinates;
     }
-
-    public String getPrizeType(){
-        return this.prize.getType();
-    }
-     
-    public String getObstacleType(){
-        return this.obstacle.getType();
-    }
 }

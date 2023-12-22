@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Slider;
 
@@ -55,7 +54,7 @@ public class HomeScreenController implements Initializable{
     }
 
     @FXML
-    private void help() {
+    private void help() throws IOException {
         MenuBarController.help();
     }   
     

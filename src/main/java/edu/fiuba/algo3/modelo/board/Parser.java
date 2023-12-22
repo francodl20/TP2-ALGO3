@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo.board;
 
 //Local clases
-import edu.fiuba.algo3.controller.Controller;
 import edu.fiuba.algo3.modelo.attributes.Coordinate;
 import edu.fiuba.algo3.modelo.board.factory.SquareFactory;
 import edu.fiuba.algo3.modelo.board.squares.ISquare;

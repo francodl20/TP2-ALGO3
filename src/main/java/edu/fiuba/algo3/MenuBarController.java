@@ -5,7 +5,6 @@ import java.io.IOException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.Slider;
 
 public class MenuBarController {
@@ -44,8 +43,8 @@ public class MenuBarController {
         GameInfo.getSoundController().play();
     }
 
-    public static void help() {
-
+    public static void help() throws IOException{
+        App.setRoot("");
     }   
     
     public static void about() {

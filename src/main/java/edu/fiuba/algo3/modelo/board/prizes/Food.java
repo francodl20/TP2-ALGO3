@@ -8,13 +8,5 @@ public class Food implements IPrize {
 
     public void boost(Gladiator player) {
         player.eat();
-        Log.getInstance().info(
-            "Oh si si! " + player.getName() + " se está comiendo un rico Sushi \uD80C\uDD9C!");
-        Log.getInstance().info((
-            "Su energía ahora es de: "+player.getEnergy()));
-    }
-
-    public String getType(){
-        return "Food";
     }
 }

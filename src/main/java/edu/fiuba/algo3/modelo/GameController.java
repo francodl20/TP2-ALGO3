@@ -8,6 +8,7 @@ import edu.fiuba.algo3.modelo.attributes.gameState.OngoingGame;
 import edu.fiuba.algo3.modelo.board.Board;
 import edu.fiuba.algo3.modelo.board.squares.ISquare;
 import edu.fiuba.algo3.Log;
+import edu.fiuba.algo3.OutputController;
 
 public class GameController {
     private final Board GAMEBOARD;
@@ -54,9 +55,7 @@ public class GameController {
     //Randomizes the current player (used at the start)
     public void pickRandomPlayer(IDice dice) {
         turnManager.pickRandomPlayer(dice.roll());
-
-        Log.getInstance().info(
-            "La partida comenzará con el jugador: " + getCurrentPlayer().getName());
+        OutputController.playerPicked(getCurrentPlayer().getName());
     }
 
     //Plays individual turn
@@ -68,13 +67,15 @@ public class GameController {
         if (gameState.hasEnded()) {
             return gameState;
         }
-
+        
         this.lastDiceRoll = currentPlayer.playTurn(dice);
 
         //If the turn is played, update the game
         if (currentPlayer.turnPlayed()) {   //alternative to this: play turn returns the boolean
             GAMEBOARD.playWith(currentPlayer);
         }
+
+        updateGameState(currentPlayer, GAMEBOARD, turnManager.getTurnCount());
 
         return gameState;
     }

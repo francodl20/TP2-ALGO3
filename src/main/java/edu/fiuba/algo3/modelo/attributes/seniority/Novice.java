@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.attributes.seniority;
 import edu.fiuba.algo3.Log;
+import edu.fiuba.algo3.OutputController;
 
 public class Novice implements ISeniority {
     private final Integer SEMISENIORITY_THRESHOLD = 8;
@@ -16,11 +17,13 @@ public class Novice implements ISeniority {
         turns++;
         
         if (turns.equals(SEMISENIORITY_THRESHOLD)) {
-            Log.getInstance().info(
-                "Al fin... El gladiador actual acaba de recibir el rango de SemiSenior");
-            return new SemiSenior();
 
+            OutputController.semiSeniorMessage();
+            OutputController.updateSeniority("Semi Senior");
+            return new SemiSenior();
         } else {
+
+            OutputController.updateSeniority("Novato");
             return this;
         }
     }

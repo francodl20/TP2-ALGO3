@@ -4,6 +4,4 @@ import edu.fiuba.algo3.modelo.Gladiator;
 public interface IObstacle{
 
     public void harm(Gladiator player);
-
-     public String getType();
 }

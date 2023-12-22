@@ -1,13 +1,10 @@
 package edu.fiuba.algo3.modelo.equipment;
-import edu.fiuba.algo3.Log;
+import edu.fiuba.algo3.OutputController;
 
 public class Helmet implements IEquipment {
 
     public IEquipment enhance(){
-        Log.getInstance().info(
-            "Oh si si, este guerrero va a mejorar su armadura!");
-        Log.getInstance().info(
-            "Basta de usar casco, ahora aumenta su protección con un escudo!\n");
+        OutputController.enhancedHelmet();
         return new Armour();
     }
 

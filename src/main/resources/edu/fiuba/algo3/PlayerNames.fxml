@@ -15,6 +15,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
 <StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fiuba.algo3.PlayerNamesController">
@@ -98,21 +101,33 @@
                <GridPane.margin>
                   <Insets left="30.0" right="30.0" />
                </GridPane.margin>
+               <font>
+                  <Font name="Press Start 2P" size="12.0" />
+               </font>
             </TextField>
             <TextField id="textField" fx:id="nameFour" editable="false" layoutX="10.0" layoutY="24.0" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets left="30.0" right="30.0" />
                </GridPane.margin>
+               <font>
+                  <Font name="Press Start 2P" size="12.0" />
+               </font>
             </TextField>
             <TextField id="textField" fx:id="nameFive" editable="false" layoutX="10.0" layoutY="24.0" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="5">
                <GridPane.margin>
                   <Insets left="30.0" right="30.0" />
                </GridPane.margin>
+               <font>
+                  <Font name="Press Start 2P" size="12.0" />
+               </font>
             </TextField>
             <TextField id="textField" fx:id="nameSix" editable="false" layoutX="400.0" layoutY="73.0" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="6">
                <GridPane.margin>
                   <Insets left="30.0" right="30.0" />
                </GridPane.margin>
+               <font>
+                  <Font name="Press Start 2P" size="12.0" />
+               </font>
             </TextField>
          </children>
       </GridPane>
@@ -157,5 +172,44 @@
             </Menu>
          </menus>
       </MenuBar>
+      <Label fx:id="validationLabel" StackPane.alignment="BOTTOM_CENTER">
+         <font>
+            <Font name="Press Start 2P" size="22.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="0.5037878643382678" endY="1.0" startX="0.5037878572263501">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="0.01903553307056427" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.29071332436069985">
+                     <color>
+                        <Color red="1.0" green="0.01903553307056427" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.4945277878081606">
+                     <color>
+                        <Color red="1.0" green="0.9666666388511658" blue="1.1102230246251565E-16" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.7200538358008074">
+                     <color>
+                        <Color red="1.0" green="0.09000000357627869" blue="0.09000000357627869" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="0.09000000357627869" blue="0.09000000357627869" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+         <StackPane.margin>
+            <Insets bottom="160.0" />
+         </StackPane.margin>
+      </Label>
    </children>
 </StackPane>
