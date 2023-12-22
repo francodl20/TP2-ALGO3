@@ -27,4 +27,9 @@ public class Healthy implements IPlayerState {
         return lastTurnPlayed;
     }
 
+
+    public String getPlayerState(){
+        return "Sano";
+    }
+
 }

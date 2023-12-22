@@ -4,8 +4,10 @@ import edu.fiuba.algo3.Log;
 public class Helmet implements IEquipment {
 
     public IEquipment enhance(){
-        Log.getInstance().info("Oh si si, este guerrero va a mejorar su armadura!");
-        Log.getInstance().info("Basta de usar casco, ahora aumenta su protección con un escudo!");
+        Log.getInstance().info(
+            "Oh si si, este guerrero va a mejorar su armadura!");
+        Log.getInstance().info(
+            "Basta de usar casco, ahora aumenta su protección con un escudo!\n");
         return new Armour();
     }
 
@@ -15,5 +17,9 @@ public class Helmet implements IEquipment {
 
     public boolean canEnterPompeii() {
         return false;
+    }
+
+    public String getEquipmentType() {
+        return "Casco";
     }
 }

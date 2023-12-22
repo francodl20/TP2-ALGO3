@@ -1,10 +1,13 @@
 package edu.fiuba.algo3.modelo;
  
-import edu.fiuba.algo3.modelo.attributes.playerState.Healthy;
 import edu.fiuba.algo3.modelo.attributes.playerState.IPlayerState;
 import edu.fiuba.algo3.modelo.attributes.seniority.ISeniority;
 import edu.fiuba.algo3.modelo.board.squares.ISquare;
 import edu.fiuba.algo3.modelo.equipment.IEquipment;
+
+import edu.fiuba.algo3.modelo.attributes.playerState.Healthy;
+import edu.fiuba.algo3.modelo.attributes.seniority.Novice;
+import edu.fiuba.algo3.modelo.equipment.Helpless;
 import edu.fiuba.algo3.Log;
 
 public class Gladiator {
@@ -18,6 +21,16 @@ public class Gladiator {
     private IEquipment equipment;
     private Boolean lastTurnPlayed;
 
+    public Gladiator(String playerName) {
+        this.seniority = new Novice();
+        this.playerName = playerName;
+        this.position = 1;
+        this.energy = 20;
+        this.playerState = new Healthy(this);
+        this.equipment = new Helpless();
+        this.lastTurnPlayed = false;
+    }
+
     public Gladiator(String playerName, ISeniority seniority, Integer energy, Integer position, IEquipment equipment) {
         this.seniority = seniority;
         this.playerName = playerName;
@@ -29,8 +42,20 @@ public class Gladiator {
     }
 
     //Getters
-    public String getPlayerName() {
+    public String getName() {
         return playerName;
+    }
+   
+    public String getSeniority() {
+        return this.seniority.getSeniorityType();
+    }
+   
+    public String getPlayerState() {
+        return this.playerState.getPlayerState();
+    }
+   
+    public String getEquipment() {
+        return this.equipment.getEquipmentType();
     }
 
     public Integer getEnergy() {
@@ -81,14 +106,14 @@ public class Gladiator {
 
     public void fightAgainstWildBeast() {
         Integer energyLost = this.equipment.protectFromtWildBeast();
+        this.energy = this.energy + energyLost;
 
         Log.getInstance().info(
-            "Que es esto? Es un pájaro? Es un avión? No... Es una bestia que quiere matar al gladiador!");
+            "Que es esto? Es un pájaro? Es un avión? No... ");
         Log.getInstance().info(
-            "El gladiador está en un duro combate, intentó usar su equipamiento,\n");
-        this.energy = this.energy + energyLost;
+            "¡Es una bestia que quiere matar al gladiador!");
         Log.getInstance().info(
-            " ahora su nuevo nivel de energía es: " + this.energy);
+            "Despues de un duro combate, su nivel de energía es: " + this.energy);
     }
 
     public void arriveToPompeii() {
@@ -117,7 +142,7 @@ public class Gladiator {
     }
     //
 
-    public void playTurn(IDice dice) {
+    public Integer playTurn(IDice dice) {
         lastTurnPlayed = false;
 
         this.energy = this.seniority.energyPlus(this.energy);
@@ -130,22 +155,27 @@ public class Gladiator {
             
             if (lastTurnPlayed) {
                 Log.getInstance().info(
-                    getPlayerName() + " obtuvo un: " + diceRoll);
+                    getName() + " obtuvo un: " + diceRoll);
             } else {
                 Log.getInstance().info(
-                    getPlayerName() + " se quedó descansando... sigue en la misma casilla");
+                    getName() + " se quedó descansando... sigue en la misma casilla");
             }
 
         } else {
             this.energy = this.energy + RECHARGE_RATE_PER_ROUND;
 
-            Log.getInstance().info(getPlayerName() + " tiene noni... su energía es de: " + 
+            Log.getInstance().info(getName() + " tiene noni... su energía es de: " + 
             energy + ", por ahora sigue en la misma casilla");
         }
 
         this.seniority = this.seniority.addTurn();
+
+        return diceRoll;
     }
-  
+    
+    public void stayInBound(Integer lastPosition){
+        this.position = lastPosition;
+    }
 }
 
 

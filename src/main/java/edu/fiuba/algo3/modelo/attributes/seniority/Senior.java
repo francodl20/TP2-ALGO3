@@ -20,4 +20,9 @@ public class Senior implements ISeniority {
         
         return (energy + SENIORITY_BONUS);
     }
+
+    @Override
+    public String getSeniorityType(){
+        return "Senior";
+    }
 }

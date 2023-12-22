@@ -6,7 +6,7 @@ public class TiedGame implements IGameState {
     private final String WINNER_STATE;
 
     public TiedGame(){
-        this.WINNER_STATE = "Game Tied.";
+        this.WINNER_STATE = "Game tied.";
     }
 
     public boolean hasEnded(){

@@ -29,4 +29,9 @@ public class Novice implements ISeniority {
     public Integer energyPlus(Integer energy){
         return energy + NOVICE_BONUS;
     }
+    
+    @Override
+    public String getSeniorityType(){
+        return "Novato";
+    }
 }

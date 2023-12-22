@@ -6,4 +6,6 @@ public interface IPlayerState {
     public IPlayerState playTurn(Integer squaresToMove);
 
     public boolean turnPlayed();
+    
+    public String getPlayerState();
 }

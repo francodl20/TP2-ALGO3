@@ -7,5 +7,7 @@ public interface IEquipment{
     public Integer protectFromtWildBeast();
 
     public boolean canEnterPompeii();
+   
+    public String getEquipmentType();
 }
                             

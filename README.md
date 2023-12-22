@@ -1,6 +1,6 @@
 ![tp2](https://github.com/fiuba/algo3_proyecto_base_tp2/actions/workflows/build.yml/badge.svg) [![codecov](https://codecov.io/gh/fiuba/algo3_proyecto_base_tp2/branch/master/graph/badge.svg)](https://codecov.io/gh/fiuba/algo3_proyecto_base_tp2)
 
-# TP2 Algoritmos 3: {nombre} 
+# TP2 Algoritmos 3: {Grupo 1} 
 
 Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUBA
 
@@ -12,7 +12,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 * **Integrante 4** - [Franco de León](https://github.com/francodl20)
 * **Integrante 5** - [Gerónimo Fanti](https://github.com/Gero-F)
 
-Corrector: **{Corrector}**
+Corrector: **{Joaquín y Bruno}**
 
 ## Aplicación
 

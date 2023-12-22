@@ -7,4 +7,8 @@ public class Injury implements IObstacle {
         player.getInjured();
     }
 
+     public String getType(){
+        return "Injury";
+    }
+
 }

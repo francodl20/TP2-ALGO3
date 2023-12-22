@@ -50,7 +50,7 @@ public class GameControllerTest {
 
         //Act
         Gladiator currentGladiator = controller.getCurrentPlayer();
-        Boolean result = currentGladiator.getPlayerName().equals(gladiator1Name);
+        Boolean result = currentGladiator.getName().equals(gladiator1Name);
 
         //Assert
         assertTrue(result);

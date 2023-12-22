@@ -24,4 +24,8 @@ public class Injured implements IPlayerState {
     public boolean turnPlayed() {
         return lastTurnPlayed;
     }
+
+    public String getPlayerState(){
+        return "Herido";
+    }
 }

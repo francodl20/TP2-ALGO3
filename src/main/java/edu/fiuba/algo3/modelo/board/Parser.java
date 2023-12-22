@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.board;
 
 //Local clases
+import edu.fiuba.algo3.controller.Controller;
 import edu.fiuba.algo3.modelo.attributes.Coordinate;
 import edu.fiuba.algo3.modelo.board.factory.SquareFactory;
 import edu.fiuba.algo3.modelo.board.squares.ISquare;
@@ -18,6 +19,7 @@ import java.io.FileReader;
 
 public class Parser {
     private static final String PATH = "path";
+    private static final String MAP = "map";
     private static final String SQUARES = "squares";
     private static final String TYPE = "type";
     private static final String OBSTACLE = "obstacle";
@@ -30,8 +32,8 @@ public class Parser {
 
         //JSON variables
         Object jsonObj = new JSONParser().parse(new FileReader(jsonFilePath));
-        JSONObject jsonFile = (JSONObject) jsonObj;  
-        
+        JSONObject jsonFile = (JSONObject) jsonObj;
+
         JSONObject pathObject = (JSONObject) jsonFile.get(PATH);
         if (pathObject == null) {
             throw new InvalidJSONFormatException(jsonFilePath + ": 'path' wasn't found");
@@ -44,6 +46,7 @@ public class Parser {
         //
         
         //JSON navigation
+
         Iterator<Map.Entry> squareAtributeIterator;
         Iterator squareIterator = squares.iterator();
         Integer squareNumber = 0;
@@ -104,5 +107,22 @@ public class Parser {
         }
 
         return map;
+    }
+
+    public static Coordinate mapSize(String jsonFilePath) throws Exception {
+        Object jsonObj = new JSONParser().parse(new FileReader(jsonFilePath));
+        JSONObject jsonFile = (JSONObject) jsonObj;
+
+        JSONObject mapObject = (JSONObject) jsonFile.get(MAP);
+        if (mapObject == null) {
+            throw new InvalidJSONFormatException(jsonFilePath + ": 'map' wasn't found");
+        }
+
+        Object width = mapObject.get("width");
+        Object length = mapObject.get("length");
+
+        Coordinate coord = new Coordinate(((Long) length).intValue(), ((Long) width).intValue());
+
+        return coord;
     }
 }

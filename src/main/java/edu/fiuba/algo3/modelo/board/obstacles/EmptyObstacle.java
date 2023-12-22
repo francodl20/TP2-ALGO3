@@ -6,5 +6,9 @@ public class EmptyObstacle implements IObstacle{
     public void harm(Gladiator player) { 
        //Empty behaviour needed 
     }
+    
+    public String getType(){
+        return "Empty";
+    }
 
 }

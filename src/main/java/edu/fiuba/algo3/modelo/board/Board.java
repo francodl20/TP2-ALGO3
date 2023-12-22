@@ -14,26 +14,35 @@ public class Board {
 
     public Board(String jsonFilePath) throws Exception {
         map = Parser.buildFromJson(jsonFilePath);
+        dimension = Parser.mapSize(jsonFilePath);
     }
 
     public void playWith(Gladiator currentPlayer) {
-        Integer controlVar = 0;
+        Boolean gladiatorPLayed = false;
 
         for (ISquare square : map) {
-            controlVar++;
 
             if(currentPlayer.in(square)){
                 square.play(currentPlayer);
-
-            } else if (controlVar > map.size()) {
-                //In case the gladiator rolled more than the available squares
-                currentPlayer.advance(map.size() - controlVar);
-                map.getLast().play(currentPlayer);
-            }
+                gladiatorPLayed = true;
+            } 
+        }
+        if (!gladiatorPLayed) {
+            //In case the gladiator rolled more than the available squares
+            currentPlayer.stayInBound(map.size());
+            map.getLast().play(currentPlayer);
         }
     }
 
     public boolean pompeiiHas(Gladiator currentPlayer) {
         return (currentPlayer.in(map.getLast()));
+    }
+
+    public LinkedList<ISquare> getSquares() {
+        return map;
+    }
+
+    public Coordinate getMapSize() {
+        return dimension;
     }
 }

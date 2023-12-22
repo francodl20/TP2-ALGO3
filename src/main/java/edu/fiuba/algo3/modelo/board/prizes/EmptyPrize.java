@@ -7,4 +7,8 @@ public class EmptyPrize implements IPrize{
         //Empty behaviour needed 
     }
 
+     public String getType(){
+        return "Empty";
+    }
+
 }

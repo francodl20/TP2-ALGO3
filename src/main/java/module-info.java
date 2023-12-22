@@ -1,8 +1,9 @@
 module edu.fiuba.algo3 {
     requires javafx.controls;
+    requires javafx.media; 
     requires json.simple;
     requires org.apache.commons.lang3;
-    
+
     exports edu.fiuba.algo3;
     exports edu.fiuba.algo3.modelo;
     exports edu.fiuba.algo3.modelo.board.squares;
