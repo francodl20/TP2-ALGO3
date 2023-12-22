@@ -52,6 +52,11 @@ public class OutputController {
         GameInfo.setMoveInfo(message);
     }
 
+    public static void gameTied(String message) {
+        Log.getInstance().info(message);
+        GameInfo.setMoveInfo(message);
+    }
+
     public static void actualPosition(Integer position) {
         GameInfo.setPosition(position);
     }
