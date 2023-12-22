@@ -137,6 +137,7 @@ public class MapViewController implements Initializable{
     @FXML
     private void returnToMenu() throws IOException{
         MenuBarController.returnToMenu();
+        GameInfo.resetTurnData();
     }
 
     @FXML

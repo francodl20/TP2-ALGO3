@@ -47,6 +47,17 @@ public final class GameInfo {
     private static String seniority = "Novato";
     private static Integer position = 1;
 
+    public static void resetTurnData() {
+        moveInfo = "";
+        prizeInfo = "";
+        obstacleInfo = "";
+
+        name = "";
+        energy = "20";
+        equipment = "nada";
+        seniority = "Novato";
+        position = 1;
+    }
 
     public static void setMoveInfo(String message) {
         moveInfo = message;
