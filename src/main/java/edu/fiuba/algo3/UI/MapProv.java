@@ -150,7 +150,6 @@ public class MapProv extends BorderPane {
             }
         }    
         if(mainPlayerPosition > 0){
-            System.out.println(mainPlayerPosition);
             controller.showSquareInfo(walkableSquares.get(mainPlayerPosition - 1).getObstacleType(),walkableSquares.get(mainPlayerPosition - 1).getPrizeType());
         }
     }
