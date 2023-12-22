@@ -3,10 +3,9 @@ package edu.fiuba.algo3.controller;
 import java.util.List;
 
 import edu.fiuba.algo3.UI.HomeScreen;
-import edu.fiuba.algo3.UI.MapProv;
+import edu.fiuba.algo3.UI.MapDisplay;
 import edu.fiuba.algo3.UI.CreditsScreen;
 import edu.fiuba.algo3.UI.FinishScreen;
-import edu.fiuba.algo3.UI.MapView;
 import edu.fiuba.algo3.UI.PrizeView;
 import edu.fiuba.algo3.UI.ObstacleView;
 import edu.fiuba.algo3.modelo.GameController;
@@ -40,7 +39,7 @@ public class Controller {
     private Stage primaryStage;
     private HomeScreen homeScreen;
     private GridPane mapGrid;
-    private MapProv mapProv;
+    private MapDisplay mapDisplay;
     private PrizeView prizeView;
     private ObstacleView obstacleView;
 
@@ -75,7 +74,7 @@ public class Controller {
     
     public void showMap(){
         musicController.playMainMusic();
-        this.mapProv = new MapProv(game.getSquares(), game.getMapSize(), this);
+        this.mapDisplay = new MapDisplay(game.getSquares(), game.getMapSize(), this);
  
         Color backgroundColor = Color.BLACK; 
         BackgroundFill backgroundFill = new BackgroundFill(backgroundColor, null, null);
@@ -83,7 +82,7 @@ public class Controller {
 
         StackPane root = new StackPane();
         root.setBackground(background);
-        root.getChildren().add(mapProv);
+        root.getChildren().add(mapDisplay);
         
         Scene mapScene = new Scene(root);
         
@@ -100,7 +99,7 @@ public class Controller {
 
         gameState = game.playTurn(dice);
 
-        mapProv.drawGame(mapGrid,currentPlayer.getPosition(), this.currentPlayer);
+        mapDisplay.drawGame(mapGrid,currentPlayer.getPosition(), this.currentPlayer, game.getLastDiceRoll());
 
         if (gameState.hasEnded()){
             waitFor(this.primaryStage, 2);

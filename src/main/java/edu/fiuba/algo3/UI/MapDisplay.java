@@ -21,7 +21,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.control.ScrollPane;
 
-public class MapProv extends BorderPane {
+public class MapDisplay extends BorderPane {
 
     private Integer mapWidth;
     private Integer mapHeight;
@@ -34,7 +34,7 @@ public class MapProv extends BorderPane {
     private Image walkableImage;
     private Image nonWalkableImage;
 
-    public MapProv(LinkedList<ISquare> squares, Coordinate mapSize, Controller controller) {
+    public MapDisplay(LinkedList<ISquare> squares, Coordinate mapSize, Controller controller) {
 
         this.mapWidth = mapSize.getXValue();
         this.mapHeight = mapSize.getYValue();
@@ -54,10 +54,11 @@ public class MapProv extends BorderPane {
         
 
         setPlayersAvatars();
-        drawGame(new GridPane(), 0, controller.getPlayers().get(0));
+        Gladiator gladiator = new Gladiator(" ");
+        drawGame(new GridPane(), 0, gladiator, 0);
     }
 
-    public void drawGame(GridPane mapPane, Integer mainPlayerPosition, Gladiator currentPlayer) {
+    public void drawGame(GridPane mapPane, Integer mainPlayerPosition, Gladiator currentPlayer, Integer lastDiceRoll) {
         
         ImageView currentProfile =playerProfileFactory(controller.getPlayers().indexOf(currentPlayer) + 1);
         currentProfile.setFitWidth(70);
@@ -77,6 +78,11 @@ public class MapProv extends BorderPane {
 
         Label playerNameLabel = new Label("Jugador actual: " + currentPlayer.getName());
         playerNameLabel.setStyle("-fx-font-family: 'Press Start 2P'; -fx-font-size: 12; -fx-text-fill: #ffffff;");
+        /*
+         
+        */
+        Label playersDiceRoll = new Label("Resultado del dado: " + lastDiceRoll);
+        playersDiceRoll.setStyle("-fx-font-family: 'Press Start 2P'; -fx-font-size: 12; -fx-text-fill: #ffffff;");
         Label seniorityLabel = new Label("Seniority: " + currentPlayer.getSeniority());
         seniorityLabel.setStyle("-fx-font-family: 'Press Start 2P'; -fx-font-size: 12; -fx-text-fill: #ffffff;");
         Label energyLabel = new Label("Energía: " + currentPlayer.getEnergy());
@@ -103,7 +109,7 @@ public class MapProv extends BorderPane {
             screen.requestPreferedDice(controller.getStage());
         });
         borderBox.setAlignment(Pos.CENTER);
-        borderBox.getChildren().addAll(currentProfile,playerNameLabel, seniorityLabel,energyLabel,equipmentLabel, stateLabel, diceButton, goBackButton);
+        borderBox.getChildren().addAll(currentProfile,playerNameLabel, playersDiceRoll,seniorityLabel,energyLabel,equipmentLabel, stateLabel, diceButton, goBackButton);
         
         drawMap(mapPane, mainPlayerPosition);
        
@@ -256,6 +262,11 @@ public class MapProv extends BorderPane {
         sixthGladiator.setFitWidth(60);
         sixthGladiator.setFitHeight(60);
 
+        ImageView blankGladiator = new ImageView("file:src/main/resources/images/blankGladiator.png");
+        blankGladiator.setFitWidth(60);
+        blankGladiator.setFitHeight(60);
+
+        gladiators.put(0, blankGladiator);
         gladiators.put(1, firstGladiator);
         gladiators.put(2, secondGladiator);
         gladiators.put(3, thirdGladiator);
