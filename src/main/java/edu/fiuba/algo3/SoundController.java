@@ -37,11 +37,12 @@ public class SoundController{
         //set up the player
         volume = 0.1;
         setSong("0-gameIntro");
-
     }
 
     public void play() {
         mediaPlayer.play();
+        mediaPlayer.setAutoPlay(true);
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
     }
 
     public void pause() {

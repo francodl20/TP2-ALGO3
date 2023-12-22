@@ -75,13 +75,13 @@
             <RowConstraints maxHeight="421.5999938964844" minHeight="10.0" prefHeight="306.8" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label id="text" fx:id="labelOne" stylesheets="@css/textFormat.css" text="Nombre del jugador #1:" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label id="text" fx:id="labelTwo" layoutX="45.0" layoutY="73.0" stylesheets="@css/textFormat.css" text="Nombre del jugador #2:" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label id="text" fx:id="labelThree" layoutX="10.0" layoutY="23.0" stylesheets="@css/textFormat.css" text="Nombre del jugador #3:" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label id="text" fx:id="labelFour" layoutX="10.0" layoutY="23.0" stylesheets="@css/textFormat.css" text="Nombre del jugador #4:" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Label id="text" fx:id="labelFive" layoutX="45.0" layoutY="252.0" stylesheets="@css/textFormat.css" text="Nombre del jugador #5:" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Label id="text" fx:id="labelSix" layoutX="45.0" layoutY="273.0" stylesheets="@css/textFormat.css" text="Nombre del jugador #6:" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <TextField id="textField" fx:id="nameOne" editable="false" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <Label id="creditsText" fx:id="labelOne" stylesheets="@css/textFormat.css" text="Nombre del jugador #1:" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label id="creditsText" fx:id="labelTwo" layoutX="45.0" layoutY="73.0" stylesheets="@css/textFormat.css" text="Nombre del jugador #2:" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label id="creditsText" fx:id="labelThree" layoutX="10.0" layoutY="23.0" stylesheets="@css/textFormat.css" text="Nombre del jugador #3:" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label id="creditsText" fx:id="labelFour" layoutX="10.0" layoutY="23.0" stylesheets="@css/textFormat.css" text="Nombre del jugador #4:" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label id="creditsText" fx:id="labelFive" layoutX="45.0" layoutY="252.0" stylesheets="@css/textFormat.css" text="Nombre del jugador #5:" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label id="creditsText" fx:id="labelSix" layoutX="45.0" layoutY="273.0" stylesheets="@css/textFormat.css" text="Nombre del jugador #6:" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField id="textField" fx:id="nameOne" editable="false" stylesheets="@css/textFormat.css" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="30.0" right="30.0" />
                </GridPane.margin>
@@ -89,7 +89,7 @@
                   <Font name="Press Start 2P" size="12.0" />
                </font>
             </TextField>
-            <TextField id="textField" fx:id="nameTwo" editable="false" layoutX="400.0" layoutY="73.0" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="2">
+            <TextField id="textField" fx:id="nameTwo" editable="false" layoutX="400.0" layoutY="73.0" stylesheets="@css/textFormat.css" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="30.0" right="30.0" />
                </GridPane.margin>
@@ -97,7 +97,7 @@
                   <Font name="Press Start 2P" size="12.0" />
                </font>
             </TextField>
-            <TextField id="textField" fx:id="nameThree" editable="false" layoutX="10.0" layoutY="24.0" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="3">
+            <TextField id="textField" fx:id="nameThree" editable="false" layoutX="10.0" layoutY="24.0" stylesheets="@css/textFormat.css" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets left="30.0" right="30.0" />
                </GridPane.margin>
@@ -105,7 +105,7 @@
                   <Font name="Press Start 2P" size="12.0" />
                </font>
             </TextField>
-            <TextField id="textField" fx:id="nameFour" editable="false" layoutX="10.0" layoutY="24.0" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="4">
+            <TextField id="textField" fx:id="nameFour" editable="false" layoutX="10.0" layoutY="24.0" stylesheets="@css/textFormat.css" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets left="30.0" right="30.0" />
                </GridPane.margin>
@@ -113,7 +113,7 @@
                   <Font name="Press Start 2P" size="12.0" />
                </font>
             </TextField>
-            <TextField id="textField" fx:id="nameFive" editable="false" layoutX="10.0" layoutY="24.0" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="5">
+            <TextField id="textField" fx:id="nameFive" editable="false" layoutX="10.0" layoutY="24.0" stylesheets="@css/textFormat.css" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="5">
                <GridPane.margin>
                   <Insets left="30.0" right="30.0" />
                </GridPane.margin>
@@ -121,7 +121,7 @@
                   <Font name="Press Start 2P" size="12.0" />
                </font>
             </TextField>
-            <TextField id="textField" fx:id="nameSix" editable="false" layoutX="400.0" layoutY="73.0" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="6">
+            <TextField id="textField" fx:id="nameSix" editable="false" layoutX="400.0" layoutY="73.0" stylesheets="@css/textFormat.css" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="6">
                <GridPane.margin>
                   <Insets left="30.0" right="30.0" />
                </GridPane.margin>
