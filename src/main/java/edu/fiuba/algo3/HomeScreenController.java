@@ -59,7 +59,7 @@ public class HomeScreenController implements Initializable{
     }   
     
     @FXML
-    private void about() {
+    private void about() throws IOException {
        MenuBarController.about(); 
     }
 }

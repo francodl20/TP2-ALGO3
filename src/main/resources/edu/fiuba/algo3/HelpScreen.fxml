@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-image: url(file:src/main/resources/images/landscapeBackground.png); -fx-background-size: cover;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox id="textBackground" prefHeight="100.0" prefWidth="200.0" stylesheets="@css/textFormat.css" />
+      <Label id="text" stylesheets="@css/textFormat.css" text="Algo roma es un juego donde el objetivo es &#10;tirar los dados y llegar a pompeya.&#10;&#10;1- Los gladiadores comienzan con &#10;rango novato, sin equipamiento y &#10;con 20 de energía.&#10;2- Al comienzo de elegirá un &#10;jugador al azar tirando los dados.&#10;3- Cada turno  los jugadores avanzan eligiendo &#10;uno de los dados y caen en casillas con &#10;premio y obstáculos&#10;&#9;3.1-Los premios pueden ser comida o &#10;&#9;    mejora de equipamiento&#10;&#9;3.2-Los obstáculos pueden ser bestias&#10;&#9;    salvajes, piedras en el camino o &#10; &#9;    bacanales&#10;4-Al llegar a pompeya debes contar con una &#10;llave, sino no podrás abrir las puertas de tu &#10;nuevo hogar y volveras a la mitad del camino&#10;" StackPane.alignment="TOP_LEFT">
+         <StackPane.margin>
+            <Insets left="50.0" top="50.0" />
+         </StackPane.margin>
+      </Label>
+      <Button id="button" fx:id="close" mnemonicParsing="false" scaleX="1.5" scaleY="1.5" stylesheets="@css/textFormat.css" text="Volver al juego" StackPane.alignment="BOTTOM_CENTER">
+         <StackPane.margin>
+            <Insets bottom="100.0" />
+         </StackPane.margin>
+      </Button>
+   </children>
+</StackPane>

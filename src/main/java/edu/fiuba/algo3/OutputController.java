@@ -7,6 +7,7 @@ public class OutputController {
         String message = "La partida comenzará con el jugador: " + name;
         Log.getInstance().info(message);
         GameInfo.setMoveInfo(message);
+        GameInfo.setName(name);
     }
 
     public static void playerPlayed(String name, Integer diceRoll, Integer energy) {
@@ -15,6 +16,7 @@ public class OutputController {
         Log.getInstance().info(message);
         GameInfo.setMoveInfo(message);
         GameInfo.setEnergy(energy);
+        GameInfo.setName(name);
     }
 
     public static void playerNotPlayed(String name, Integer energy) {
@@ -23,6 +25,7 @@ public class OutputController {
         Log.getInstance().info(message);
         GameInfo.setMoveInfo(message);
         GameInfo.setEnergy(energy);
+        GameInfo.setName(name);
     }
 
     public static void playerOutOfEnergy(String name, Integer energy) {
@@ -32,6 +35,7 @@ public class OutputController {
         Log.getInstance().info(message);
         GameInfo.setMoveInfo(message);
         GameInfo.setEnergy(energy);
+        GameInfo.setName(name);
     }
 
     public static void reachedPompeii(String name) {

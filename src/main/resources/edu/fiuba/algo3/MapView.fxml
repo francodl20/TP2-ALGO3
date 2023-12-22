@@ -36,8 +36,8 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Ayuda">
             <items>
-              <MenuItem mnemonicParsing="false" text="Instrucciones" />
-                  <MenuItem mnemonicParsing="false" text="Acerca de" />
+              <MenuItem mnemonicParsing="false" onAction="#help" text="Instrucciones" />
+                  <MenuItem mnemonicParsing="false" onAction="#about" text="Acerca de" />
             </items>
           </Menu>
         </menus>
@@ -47,7 +47,7 @@
       <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" pannable="true" prefHeight="500.0" prefWidth="500.0" style="-fx-background: transparent; -fx-background-image: url(file:src/main/resources/images/landscapeBackground.png); -fx-background-size: cover;" vbarPolicy="NEVER" />
    </center>
    <bottom>
-      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxHeight="250.0" maxWidth="1.7976931348623157E308" minHeight="150.0" minWidth="200.0" style="-fx-background-image: url(file:src/main/resources/images/dungeonBackground.jpg); -fx-background-size: cover; -fx-background: transparent;" BorderPane.alignment="CENTER">
+      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxWidth="1.7976931348623157E308" minHeight="150.0" minWidth="200.0" style="-fx-background-image: url(file:src/main/resources/images/dungeonBackground.jpg); -fx-background-size: cover; -fx-background: transparent;" BorderPane.alignment="CENTER">
          <content>
             <VBox prefHeight="200.0" prefWidth="620.0">
                <children>

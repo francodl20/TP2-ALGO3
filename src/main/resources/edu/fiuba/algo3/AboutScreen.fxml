@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url(file:src/main/resources/images/OutroImage.png); -fx-background-size: cover;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label id="text" style="-fx-background-color: rgba(0, 0, 0, 0.7); -fx-padding: 24px;" stylesheets="@css/textFormat.css" text="¡GRACIAS POR JUGAR!" StackPane.alignment="TOP_CENTER">
+         <font>
+            <Font size="24.0" />
+         </font>
+         <StackPane.margin>
+            <Insets top="40.0" />
+         </StackPane.margin>
+      </Label>
+      <Label id="creditsText" style="-fx-background-color: rgba(0, 0, 0, 0.7); -fx-padding: 12px;" stylesheets="@css/textFormat.css" text="&quot;Modelado y Diseñado por:&#10;*Brando, Hernan&#10;*De Leon, Franco&#10;*Fanti, Gerónimo&#10;*Romero, Fabiola&#10;*Valle, Valentino&quot;" StackPane.alignment="BOTTOM_RIGHT" />
+      <Label id="creditsText" style="-fx-background-color: rgba(0, 0, 0, 0.7); -fx-padding: 10;" stylesheets="@css/textFormat.css" text="Este es un juego creado como entrega del &#10;trabajo práctido grupal N°2 de Algoritmos y &#10;Programación III de la facultad de Ingeniería &#10;de Buenos Aires" textAlignment="JUSTIFY" />
+   </children>
+</StackPane>

@@ -28,6 +28,13 @@
     -fx-font-size: 15;
 }
 
+#creditsText {
+    -fx-font-family: 'Press Start 2P';
+    font-family: 'Press Start 2P';
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 12;
+}
+
 #button {
     -fx-font-family: 'Press Start 2P';
     font-family: 'Press Start 2P';

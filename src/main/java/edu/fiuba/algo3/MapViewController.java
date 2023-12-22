@@ -72,6 +72,7 @@ public class MapViewController implements Initializable{
 
     @FXML
     private void playWithD6() {
+        setPfp();
         gameController.playTurn(new D6());
         setMoveInfo();
         setPrizeInfo();
@@ -83,6 +84,7 @@ public class MapViewController implements Initializable{
 
     @FXML
     private void playWithD10() {
+        setPfp();
         gameController.playTurn(new D10());
         setMoveInfo();
         setPrizeInfo();
@@ -94,6 +96,7 @@ public class MapViewController implements Initializable{
 
     @FXML
     private void playWithD20() {
+        setPfp();
         gameController.playTurn(new D20());
         setMoveInfo();
         setPrizeInfo();
@@ -166,7 +169,7 @@ public class MapViewController implements Initializable{
     }   
     
     @FXML
-    private void about() {
+    private void about() throws IOException {
        MenuBarController.about(); 
     }
     
@@ -184,7 +187,7 @@ public class MapViewController implements Initializable{
     }
 
     public void setStats() {
-        setPfp();
+        //setPfp();
         nameLabel.setText(GameInfo.getName());
         seniorityLabel.setText(GameInfo.getSeniority());
         energyLabel.setText(GameInfo.getEnergy());
@@ -373,6 +376,7 @@ public class MapViewController implements Initializable{
         pickRandomPlayer();
         setMoveInfo();
         setStats();
+        setPfp();
 
         MenuBarController.setUp(soundMenu);
         MenuBarController.setUp(volumeSlider);
