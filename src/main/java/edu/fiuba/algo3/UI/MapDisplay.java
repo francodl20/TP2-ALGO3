@@ -78,9 +78,7 @@ public class MapDisplay extends BorderPane {
 
         Label playerNameLabel = new Label("Jugador actual: " + currentPlayer.getName());
         playerNameLabel.setStyle("-fx-font-family: 'Press Start 2P'; -fx-font-size: 12; -fx-text-fill: #ffffff;");
-        /*
-         
-        */
+    
         Label playersDiceRoll = new Label("Resultado del dado: " + lastDiceRoll);
         playersDiceRoll.setStyle("-fx-font-family: 'Press Start 2P'; -fx-font-size: 12; -fx-text-fill: #ffffff;");
         Label seniorityLabel = new Label("Seniority: " + currentPlayer.getSeniority());

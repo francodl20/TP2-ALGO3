@@ -62,7 +62,7 @@ public class HomeScreen {
 
           Scene scene = new Scene(stackPane, 600, 600);
   
-          stage.setTitle("Escape del Coliseo");
+          stage.setTitle("Odisea a Pompeya");
           stage.setScene(scene);
           stage.show();
         
