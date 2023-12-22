@@ -19,12 +19,13 @@ public class GameMenuBar{
         
         Menu gameMenu = new Menu("Opciones del Juego");;
         MenuItem exitItem = new MenuItem("Salir");
-        MenuItem maximizeStageItem = new MenuItem("Maxizar");
+        MenuItem maximizeStageItem = new MenuItem("Maximizar");
+        MenuItem minimizeStageItem = new MenuItem("Minimizar");
         
         Menu musicMenu = new Menu("Musica");
         MenuItem pauseMusictItem = new MenuItem("Pausar música");
         MenuItem resumeMusictItem = new MenuItem("Reanudar música");
-        
+    
         Menu changeMusictMenu = new Menu("Cambiar canción");
         MenuItem mulanMusictItem = new MenuItem("Hombres de Acción");
         MenuItem chillingMusictItem = new MenuItem("Chilling");
@@ -39,7 +40,9 @@ public class GameMenuBar{
         MenuItem readAboutItem = new MenuItem("Leer concepto");
 
         exitItem.setOnAction(e -> System.exit(0));
+        
         maximizeStageItem.setOnAction(e -> stage.setMaximized(true));
+        minimizeStageItem.setOnAction(e -> stage.setMaximized(false));
 
         mulanMusictItem.setOnAction(e -> {
             controller.getMusicController().playMulanMusic();
@@ -71,7 +74,7 @@ public class GameMenuBar{
         });
 
         
-        gameMenu.getItems().addAll(maximizeStageItem,exitItem);
+        gameMenu.getItems().addAll(maximizeStageItem, minimizeStageItem,exitItem);
         musicMenu.getItems().addAll(pauseMusictItem, resumeMusictItem, changeMusictMenu);
         helpMenu.getItems().addAll(instructionsItem);
         aboutGameMenu.getItems().addAll(readAboutItem);

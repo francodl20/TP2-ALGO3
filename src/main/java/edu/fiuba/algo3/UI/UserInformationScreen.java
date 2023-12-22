@@ -17,6 +17,7 @@ import javafx.scene.text.Font;
 import javafx.scene.paint.Color;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.CornerRadii;
 import javafx.collections.ObservableList;
@@ -113,12 +114,9 @@ public class UserInformationScreen extends GridPane {
         BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
         Background backgroundObject = new Background(background);
 
-        GridPane grid = new GridPane();
+        StackPane grid = new StackPane();
         grid.setPrefSize(600, 600);
         grid.setBackground(backgroundObject);
-
-        grid.setVgap(10);
-     
 
         GridPane specificGrid = new GridPane();
         specificGrid.setAlignment(Pos.CENTER);
@@ -146,24 +144,32 @@ public class UserInformationScreen extends GridPane {
             specificGrid.add(label, 0, i);
             specificGrid.add(textField, 7, i);
         }
-
-        grid.add(specificGrid, 0, 5);
+        specificGrid.setMaxHeight(100);
+        grid.setAlignment(specificGrid, Pos.TOP_CENTER);
+        specificGrid.setTranslateY(50);
+        grid.getChildren().add(specificGrid);//add(specificGrid, 0, 5);
        
         Button buttonSubmitNames = new Button("Enviar");
         buttonSubmitNames.setStyle("-fx-font-family: 'Press Start 2P'; -fx-background-color: beige; -fx-font-size: 20px;");
         buttonSubmitNames.setPrefSize(150, 40);
         buttonSubmitNames.setFont(customFont);
-        grid.setHalignment(buttonSubmitNames, HPos.RIGHT);
-        grid.add(buttonSubmitNames, 0, 25);
+        grid.setAlignment(buttonSubmitNames, Pos.BOTTOM_RIGHT);
+        buttonSubmitNames.setTranslateY(-50);
+        buttonSubmitNames.setTranslateX(-20);
+        grid.getChildren().add(buttonSubmitNames);//, 0, 25);
+       
         Button buttonGoBack = new Button("Volver");
         buttonGoBack.setStyle("-fx-font-family: 'Press Start 2P'; -fx-background-color: beige; -fx-font-size: 20px;");
         buttonGoBack.setPrefSize(150, 40);
         buttonGoBack.setFont(customFont);
-        grid.setHalignment(buttonGoBack, HPos.LEFT);
-        grid.add(buttonGoBack, 0, 25);
+        grid.setAlignment(buttonGoBack, Pos.BOTTOM_LEFT);
+        buttonGoBack.setTranslateY(-50);
+        buttonGoBack.setTranslateX(20);
+        grid.getChildren().add(buttonGoBack);//, 0, 25);
 
         MenuBar menuBar = GameMenuBar.createMenuBar(stage, controller);
-        grid.add(menuBar, 0,0);
+        grid.setAlignment(menuBar, Pos.TOP_CENTER);
+        grid.getChildren().add(menuBar);//, 0,0);
  
 
         buttonSubmitNames.setOnAction(event -> {   
